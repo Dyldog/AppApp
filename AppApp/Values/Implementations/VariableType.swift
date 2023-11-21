@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum VariableType: Int, VariableValue, CaseIterable {
+enum VariableType: Int, VariableValue, CaseIterable, Equatable {
     case type
     case value
     case string
@@ -15,6 +15,7 @@ enum VariableType: Int, VariableValue, CaseIterable {
     case variable
     case action
     case list
+    case dictionary
     
     var protoString: String {
         switch self {
@@ -25,6 +26,7 @@ enum VariableType: Int, VariableValue, CaseIterable {
         case .variable: return "Variable"
         case .action: return "Action"
         case .list: return "List"
+        case .dictionary: return "Dictionary"
         }
     }
     
@@ -37,6 +39,7 @@ enum VariableType: Int, VariableValue, CaseIterable {
         case .action: return ActionValue(steps: [])
         case .value: return "TEXT" as Value
         case .list:  return ArrayValue(type: .string, elements: [])
+        case .dictionary: return DictionaryValue(type: .string, elements: [:])
         }
     }
     
@@ -59,6 +62,6 @@ enum VariableType: Int, VariableValue, CaseIterable {
             ForEach(VariableType.allCases) {
                 Text($0.protoString).tag($0)
             }
-        }.pickerStyle(.segmented).any
+        }.pickerStyle(.inline).any
     }
 }

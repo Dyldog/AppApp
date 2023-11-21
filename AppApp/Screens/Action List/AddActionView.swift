@@ -15,6 +15,8 @@ struct AddActionView: View {
         case staticValue
         case getVariable
         case getFromAPI
+        case decodeJSON
+        case getDictValue
         
         var title: String {
             switch self {
@@ -24,6 +26,8 @@ struct AddActionView: View {
             case .staticValue: return StaticValueStep.title
             case .getVariable: return VariableStep.title
             case .getFromAPI: return APIValueStep.title
+            case .decodeJSON: return DecodeDictionaryStep.title
+            case .getDictValue: return DictionaryValueForKeyStep.title
             }
         }
         
@@ -34,7 +38,13 @@ struct AddActionView: View {
             case .addToVariable: AddToVarStep(varName: "VAR", value: "VALUE")
             case .staticValue: StaticValueStep(value: "VALUE", type: .string)
             case .getVariable: VariableStep(varName: "VAR", type: .string)
-            case .getFromAPI: APIValueStep(url: "https://google.com")
+            case .getFromAPI: APIValueStep(url: "https://swapi.dev/api/people/1")
+            case .decodeJSON: 
+                DecodeDictionaryStep(value: Value(value: Variable(name: StringValue(value: "$0"))))
+            case .getDictValue:
+                DictionaryValueForKeyStep(
+                    dictionary: Value(value: DictionaryValue(type: .string, elements: [:])),
+                    key: "TEXT" as Value)
             }
         }
     }

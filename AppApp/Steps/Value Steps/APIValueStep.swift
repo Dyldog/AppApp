@@ -15,7 +15,7 @@ final class  APIValueStep: ValueStep {
         self.url = url
     }
     
-    var protoString: String { "{ $\(url) }" }
+    var protoString: String { "{ $\(url.valueString) }" }
     
     func run(with variables: inout Variables) throws -> VariableValue {
         guard
@@ -49,7 +49,7 @@ final class  APIValueStep: ValueStep {
         
         var defaultValue: VariableValue {
             switch self {
-            case .url: return StringValue(value: "https://google.com")
+            case .url: return StringValue(value: "https://swapi.dev/api/people/1")
             }
         }
     }

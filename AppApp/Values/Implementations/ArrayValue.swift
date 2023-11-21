@@ -20,7 +20,13 @@ final class ArrayValue: VariableValue, ObservableObject {
         self.elements = elements
     }
     
-    var valueString: String { elements.map { $0.valueString }.joined(separator: ", ") }
+    var valueString: String { 
+        return """
+        [
+        \t\(elements.map { $0.valueString }.joined(separator: ", "))
+        ]
+        """
+    }
     
     func value(with variables: inout Variables) throws -> VariableValue? {
         return ArrayValue(

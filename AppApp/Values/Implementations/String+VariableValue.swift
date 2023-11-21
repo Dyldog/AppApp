@@ -29,6 +29,7 @@ import SwiftUI
 //}
 
 final class StringValue: VariableValue {
+    
     static var type: VariableType { .string }
     var value: String
     
@@ -51,5 +52,16 @@ final class StringValue: VariableValue {
             self.value = $0
             onUpdate(self)
         })).any
+    }
+    
+    static func == (lhs: StringValue, rhs: StringValue) -> Bool {
+        return lhs.value == rhs.value
+    }
+    
+}
+
+extension StringValue: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(value)
     }
 }

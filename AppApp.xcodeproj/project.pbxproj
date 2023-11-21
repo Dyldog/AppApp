@@ -30,6 +30,11 @@
 		FC4C15D32B0C97CC0010BB1A /* SheetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15D22B0C97CC0010BB1A /* SheetButton.swift */; };
 		FC4C2C242B0C9B7F008217AC /* ArrayValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C232B0C9B7F008217AC /* ArrayValue.swift */; };
 		FC4C2C272B0CA872008217AC /* ListEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C262B0CA872008217AC /* ListEditView.swift */; };
+		FC4C2C292B0CBCF1008217AC /* DecodeDictionaryStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C282B0CBCF1008217AC /* DecodeDictionaryStep.swift */; };
+		FC4C2C2B2B0CBD01008217AC /* DictionaryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C2A2B0CBD01008217AC /* DictionaryValue.swift */; };
+		FC4C2C2E2B0CBE76008217AC /* DictionaryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C2D2B0CBE76008217AC /* DictionaryEditView.swift */; };
+		FC4C2C302B0CCBE0008217AC /* DictionaryValueForKeyStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C2F2B0CCBE0008217AC /* DictionaryValueForKeyStep.swift */; };
+		FC4C2C322B0CD657008217AC /* MakeableField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C312B0CD657008217AC /* MakeableField.swift */; };
 		FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B1E82B0B584B0054371B /* AppAppApp.swift */; };
 		FCD3B1ED2B0B584D0054371B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD3B1EC2B0B584D0054371B /* Assets.xcassets */; };
 		FCD3B1F12B0B584D0054371B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD3B1F02B0B584D0054371B /* Preview Assets.xcassets */; };
@@ -113,6 +118,11 @@
 		FC4C15D22B0C97CC0010BB1A /* SheetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetButton.swift; sourceTree = "<group>"; };
 		FC4C2C232B0C9B7F008217AC /* ArrayValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayValue.swift; sourceTree = "<group>"; };
 		FC4C2C262B0CA872008217AC /* ListEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEditView.swift; sourceTree = "<group>"; };
+		FC4C2C282B0CBCF1008217AC /* DecodeDictionaryStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeDictionaryStep.swift; sourceTree = "<group>"; };
+		FC4C2C2A2B0CBD01008217AC /* DictionaryValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryValue.swift; sourceTree = "<group>"; };
+		FC4C2C2D2B0CBE76008217AC /* DictionaryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEditView.swift; sourceTree = "<group>"; };
+		FC4C2C2F2B0CCBE0008217AC /* DictionaryValueForKeyStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryValueForKeyStep.swift; sourceTree = "<group>"; };
+		FC4C2C312B0CD657008217AC /* MakeableField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableField.swift; sourceTree = "<group>"; };
 		FCD3B1E52B0B584B0054371B /* AppApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD3B1E82B0B584B0054371B /* AppAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppApp.swift; sourceTree = "<group>"; };
 		FCD3B1EC2B0B584D0054371B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -191,6 +201,8 @@
 				FC4635092B0C982E00B8DCBE /* VariableStep.swift */,
 				FC4635062B0C980A00B8DCBE /* StaticValueStep.swift */,
 				FC46350B2B0C983D00B8DCBE /* APIValueStep.swift */,
+				FC4C2C282B0CBCF1008217AC /* DecodeDictionaryStep.swift */,
+				FC4C2C2F2B0CCBE0008217AC /* DictionaryValueForKeyStep.swift */,
 			);
 			path = "Value Steps";
 			sourceTree = "<group>";
@@ -234,6 +246,7 @@
 				FCD3B2302B0B9FCB0054371B /* MakeableStack.swift */,
 				FCD3B22E2B0B9FBA0054371B /* MakeableLabel.swift */,
 				FCD3B22C2B0B9FA70054371B /* MakeableButton.swift */,
+				FC4C2C312B0CD657008217AC /* MakeableField.swift */,
 			);
 			path = "UI Elements";
 			sourceTree = "<group>";
@@ -244,6 +257,7 @@
 				FC4635182B0C98EE00B8DCBE /* Value.swift */,
 				FC4C15C02B0C96E60010BB1A /* ActionValue.swift */,
 				FC4C2C232B0C9B7F008217AC /* ArrayValue.swift */,
+				FC4C2C2A2B0CBD01008217AC /* DictionaryValue.swift */,
 				FC4635162B0C98C000B8DCBE /* Variable+VariableValue.swift */,
 				FC4635142B0C98A300B8DCBE /* Int+VariableValue.swift */,
 				FCD3B23C2B0BB2020054371B /* String+VariableValue.swift */,
@@ -255,7 +269,8 @@
 		FC4635242B0C9B0900B8DCBE /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				FC4C2C252B0CA869008217AC /* ListEditView */,
+				FC4C2C2C2B0CBE5E008217AC /* Dictionary Edit */,
+				FC4C2C252B0CA869008217AC /* List Edit */,
 				FCD3B2472B0C68D50054371B /* Edit Variable */,
 				FCD3B2392B0BA8440054371B /* Action List */,
 				FCD3B2362B0BA0010054371B /* View Maker */,
@@ -300,12 +315,20 @@
 			path = Steps;
 			sourceTree = "<group>";
 		};
-		FC4C2C252B0CA869008217AC /* ListEditView */ = {
+		FC4C2C252B0CA869008217AC /* List Edit */ = {
 			isa = PBXGroup;
 			children = (
 				FC4C2C262B0CA872008217AC /* ListEditView.swift */,
 			);
-			path = ListEditView;
+			path = "List Edit";
+			sourceTree = "<group>";
+		};
+		FC4C2C2C2B0CBE5E008217AC /* Dictionary Edit */ = {
+			isa = PBXGroup;
+			children = (
+				FC4C2C2D2B0CBE76008217AC /* DictionaryEditView.swift */,
+			);
+			path = "Dictionary Edit";
 			sourceTree = "<group>";
 		};
 		FCD3B1DC2B0B584B0054371B = {
@@ -610,6 +633,7 @@
 				FCD3B25F2B0C96790054371B /* MakeableConstructor.swift in Sources */,
 				FC4C15D12B0C97B20010BB1A /* Array_StepType+VariableValue.swift in Sources */,
 				FC4635132B0C989000B8DCBE /* VariableValue+EditView.swift in Sources */,
+				FC4C2C302B0CCBE0008217AC /* DictionaryValueForKeyStep.swift in Sources */,
 				FC46350C2B0C983D00B8DCBE /* APIValueStep.swift in Sources */,
 				FCD3B2182B0B63110054371B /* Step.swift in Sources */,
 				FCD3B2252B0B7C9F0054371B /* EditViewView.swift in Sources */,
@@ -618,6 +642,7 @@
 				FCD3B2312B0B9FCB0054371B /* MakeableStack.swift in Sources */,
 				FC4635202B0C998B00B8DCBE /* PrintVarStep.swift in Sources */,
 				FCD3B2532B0C95360054371B /* MakableView+MakeableConstructor.swift in Sources */,
+				FC4C2C2B2B0CBD01008217AC /* DictionaryValue.swift in Sources */,
 				FC4635072B0C980A00B8DCBE /* StaticValueStep.swift in Sources */,
 				FCD3B2332B0B9FE90054371B /* MakeableView.swift in Sources */,
 				FCD3B24D2B0C94A10054371B /* Array+Ing.swift in Sources */,
@@ -628,14 +653,17 @@
 				FC4C15C32B0C97020010BB1A /* ViewEditable.swift in Sources */,
 				FCD3B2282B0B9F650054371B /* AddViewViewModel.swift in Sources */,
 				FC46351C2B0C993600B8DCBE /* SetVarStep.swift in Sources */,
+				FC4C2C322B0CD657008217AC /* MakeableField.swift in Sources */,
 				FCD3B2572B0C95B30054371B /* View+OnEdit.swift in Sources */,
 				FCD3B22F2B0B9FBA0054371B /* MakeableLabel.swift in Sources */,
 				FCD3B23B2B0BA8580054371B /* ActionListView.swift in Sources */,
 				FCD3B2422B0BB3360054371B /* Int+Identifiable.swift in Sources */,
 				FC4C15CF2B0C97830010BB1A /* StepType+EditView.swift in Sources */,
+				FC4C2C292B0CBCF1008217AC /* DecodeDictionaryStep.swift in Sources */,
 				FCD3B23F2B0BB31F0054371B /* AddActionView.swift in Sources */,
 				FC46350F2B0C987100B8DCBE /* VariableType.swift in Sources */,
 				FCD3B22D2B0B9FA70054371B /* MakeableButton.swift in Sources */,
+				FC4C2C2E2B0CBE76008217AC /* DictionaryEditView.swift in Sources */,
 				FC4C15C12B0C96E60010BB1A /* ActionValue.swift in Sources */,
 				FC4635172B0C98C000B8DCBE /* Variable+VariableValue.swift in Sources */,
 				FCD3B2382B0BA01D0054371B /* ViewMakerViewModel.swift in Sources */,

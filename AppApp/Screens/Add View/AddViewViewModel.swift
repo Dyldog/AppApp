@@ -28,6 +28,11 @@ class AddViewViewModel: ObservableObject {
                     )
                 )
             }),
+            .init(title: "Textfield", onTap: {
+                onSelect(
+                    MakeableField(text: .init(value: "TEXT" as Value))
+                )
+            })
         ]
     }
 }
