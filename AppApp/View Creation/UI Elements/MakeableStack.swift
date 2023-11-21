@@ -78,27 +78,3 @@ struct MakeableStack: MakeableView {
         })
     }
 }
-
-
-struct DoView<Content: View, Data>: View {
-//    let tryer: () throws -> Data
-//    let content: (Data) -> Content
-//    let onError: (Error) -> Content
-    let view: Content!
-    
-    init(tryer: @escaping () throws -> Data, content: @escaping (Data) -> Content, onError: @escaping (Error) -> Content) {
-//        self.tryer = tryer
-//        self.content = content
-//        self.onError = onError
-        
-        do {
-            view = content(try tryer())
-        } catch {
-            view = onError(error)
-        }
-    }
-    
-    var body: some View {
-        view
-    }
-}

@@ -8,10 +8,6 @@
 import SwiftUI
 import DylKit
 
-struct Screen {
-    var initActions: [any StepType]
-    var content: [any MakeableView]
-}
 class ViewMakerViewModel: ObservableObject {
     @Published var content: [any MakeableView] = []
     @Published private(set) var initActions: [any StepType] = []

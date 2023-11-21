@@ -7,8 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC4635072B0C980A00B8DCBE /* StaticValueStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635062B0C980A00B8DCBE /* StaticValueStep.swift */; };
+		FC46350A2B0C982E00B8DCBE /* VariableStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635092B0C982E00B8DCBE /* VariableStep.swift */; };
+		FC46350C2B0C983D00B8DCBE /* APIValueStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC46350B2B0C983D00B8DCBE /* APIValueStep.swift */; };
+		FC46350F2B0C987100B8DCBE /* VariableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC46350E2B0C987100B8DCBE /* VariableType.swift */; };
+		FC4635112B0C988000B8DCBE /* VariableValueError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635102B0C988000B8DCBE /* VariableValueError.swift */; };
+		FC4635132B0C989000B8DCBE /* VariableValue+EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635122B0C989000B8DCBE /* VariableValue+EditView.swift */; };
+		FC4635152B0C98A300B8DCBE /* Int+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635142B0C98A300B8DCBE /* Int+VariableValue.swift */; };
+		FC4635172B0C98C000B8DCBE /* Variable+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635162B0C98C000B8DCBE /* Variable+VariableValue.swift */; };
+		FC4635192B0C98EE00B8DCBE /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635182B0C98EE00B8DCBE /* Value.swift */; };
+		FC46351C2B0C993600B8DCBE /* SetVarStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC46351B2B0C993600B8DCBE /* SetVarStep.swift */; };
+		FC46351E2B0C997700B8DCBE /* AddToVarStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC46351D2B0C997700B8DCBE /* AddToVarStep.swift */; };
+		FC4635202B0C998B00B8DCBE /* PrintVarStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC46351F2B0C998B00B8DCBE /* PrintVarStep.swift */; };
+		FC4C15C12B0C96E60010BB1A /* ActionValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15C02B0C96E60010BB1A /* ActionValue.swift */; };
+		FC4C15C32B0C97020010BB1A /* ViewEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15C22B0C97020010BB1A /* ViewEditable.swift */; };
+		FC4C15C72B0C97390010BB1A /* ViewEditable+Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15C62B0C97390010BB1A /* ViewEditable+Constructor.swift */; };
+		FC4C15C92B0C974E0010BB1A /* StepType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15C82B0C974E0010BB1A /* StepType.swift */; };
+		FC4C15CB2B0C975F0010BB1A /* StepType+Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15CA2B0C975F0010BB1A /* StepType+Run.swift */; };
+		FC4C15CD2B0C97700010BB1A /* StepError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15CC2B0C97700010BB1A /* StepError.swift */; };
+		FC4C15CF2B0C97830010BB1A /* StepType+EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15CE2B0C97830010BB1A /* StepType+EditView.swift */; };
+		FC4C15D12B0C97B20010BB1A /* Array_StepType+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15D02B0C97B20010BB1A /* Array_StepType+VariableValue.swift */; };
+		FC4C15D32B0C97CC0010BB1A /* SheetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15D22B0C97CC0010BB1A /* SheetButton.swift */; };
 		FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B1E82B0B584B0054371B /* AppAppApp.swift */; };
-		FCD3B1EB2B0B584B0054371B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B1EA2B0B584B0054371B /* ContentView.swift */; };
 		FCD3B1ED2B0B584D0054371B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD3B1EC2B0B584D0054371B /* Assets.xcassets */; };
 		FCD3B1F12B0B584D0054371B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD3B1F02B0B584D0054371B /* Preview Assets.xcassets */; };
 		FCD3B1FB2B0B584E0054371B /* AppAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B1FA2B0B584E0054371B /* AppAppTests.swift */; };
@@ -17,8 +37,7 @@
 		FCD3B2142B0B62F40054371B /* VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2132B0B62F40054371B /* VariableValue.swift */; };
 		FCD3B2162B0B63010054371B /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2152B0B63010054371B /* Variables.swift */; };
 		FCD3B2182B0B63110054371B /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2172B0B63110054371B /* Step.swift */; };
-		FCD3B21A2B0B63240054371B /* VarSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2192B0B63240054371B /* VarSteps.swift */; };
-		FCD3B21C2B0B639F0054371B /* Button+Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B21B2B0B639F0054371B /* Button+Step.swift */; };
+		FCD3B21C2B0B639F0054371B /* StepButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B21B2B0B639F0054371B /* StepButton.swift */; };
 		FCD3B21F2B0B67060054371B /* DylKit in Frameworks */ = {isa = PBXBuildFile; productRef = FCD3B21E2B0B67060054371B /* DylKit */; };
 		FCD3B2212B0B6FCB0054371B /* ViewMakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2202B0B6FCB0054371B /* ViewMakerView.swift */; };
 		FCD3B2232B0B77C50054371B /* AddViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2222B0B77C50054371B /* AddViewView.swift */; };
@@ -38,6 +57,17 @@
 		FCD3B2442B0C31C40054371B /* ValueStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2432B0C31C40054371B /* ValueStep.swift */; };
 		FCD3B2462B0C50090054371B /* VHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2452B0C50090054371B /* VHStack.swift */; };
 		FCD3B2492B0C69070054371B /* EditVariableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2482B0C69070054371B /* EditVariableView.swift */; };
+		FCD3B24B2B0C948C0054371B /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B24A2B0C948C0054371B /* Array+Safe.swift */; };
+		FCD3B24D2B0C94A10054371B /* Array+Ing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B24C2B0C94A10054371B /* Array+Ing.swift */; };
+		FCD3B24F2B0C94C10054371B /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B24E2B0C94C10054371B /* Screen.swift */; };
+		FCD3B2512B0C94E80054371B /* MakeableView+Prototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2502B0C94E80054371B /* MakeableView+Prototype.swift */; };
+		FCD3B2532B0C95360054371B /* MakableView+MakeableConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2522B0C95360054371B /* MakableView+MakeableConstructor.swift */; };
+		FCD3B2552B0C956E0054371B /* MakeableView+EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2542B0C956E0054371B /* MakeableView+EditView.swift */; };
+		FCD3B2572B0C95B30054371B /* View+OnEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2562B0C95B30054371B /* View+OnEdit.swift */; };
+		FCD3B25B2B0C96170054371B /* DoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B25A2B0C96170054371B /* DoView.swift */; };
+		FCD3B25D2B0C964D0054371B /* ViewContructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B25C2B0C964D0054371B /* ViewContructor.swift */; };
+		FCD3B25F2B0C96790054371B /* MakeableConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B25E2B0C96790054371B /* MakeableConstructor.swift */; };
+		FCD3B2612B0C96890054371B /* EditableViewConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2602B0C96890054371B /* EditableViewConstructor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,9 +88,29 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC4635062B0C980A00B8DCBE /* StaticValueStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticValueStep.swift; sourceTree = "<group>"; };
+		FC4635092B0C982E00B8DCBE /* VariableStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableStep.swift; sourceTree = "<group>"; };
+		FC46350B2B0C983D00B8DCBE /* APIValueStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIValueStep.swift; sourceTree = "<group>"; };
+		FC46350E2B0C987100B8DCBE /* VariableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableType.swift; sourceTree = "<group>"; };
+		FC4635102B0C988000B8DCBE /* VariableValueError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableValueError.swift; sourceTree = "<group>"; };
+		FC4635122B0C989000B8DCBE /* VariableValue+EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VariableValue+EditView.swift"; sourceTree = "<group>"; };
+		FC4635142B0C98A300B8DCBE /* Int+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+VariableValue.swift"; sourceTree = "<group>"; };
+		FC4635162B0C98C000B8DCBE /* Variable+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Variable+VariableValue.swift"; sourceTree = "<group>"; };
+		FC4635182B0C98EE00B8DCBE /* Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
+		FC46351B2B0C993600B8DCBE /* SetVarStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVarStep.swift; sourceTree = "<group>"; };
+		FC46351D2B0C997700B8DCBE /* AddToVarStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToVarStep.swift; sourceTree = "<group>"; };
+		FC46351F2B0C998B00B8DCBE /* PrintVarStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintVarStep.swift; sourceTree = "<group>"; };
+		FC4C15C02B0C96E60010BB1A /* ActionValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionValue.swift; sourceTree = "<group>"; };
+		FC4C15C22B0C97020010BB1A /* ViewEditable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEditable.swift; sourceTree = "<group>"; };
+		FC4C15C62B0C97390010BB1A /* ViewEditable+Constructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewEditable+Constructor.swift"; sourceTree = "<group>"; };
+		FC4C15C82B0C974E0010BB1A /* StepType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepType.swift; sourceTree = "<group>"; };
+		FC4C15CA2B0C975F0010BB1A /* StepType+Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepType+Run.swift"; sourceTree = "<group>"; };
+		FC4C15CC2B0C97700010BB1A /* StepError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepError.swift; sourceTree = "<group>"; };
+		FC4C15CE2B0C97830010BB1A /* StepType+EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepType+EditView.swift"; sourceTree = "<group>"; };
+		FC4C15D02B0C97B20010BB1A /* Array_StepType+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array_StepType+VariableValue.swift"; sourceTree = "<group>"; };
+		FC4C15D22B0C97CC0010BB1A /* SheetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetButton.swift; sourceTree = "<group>"; };
 		FCD3B1E52B0B584B0054371B /* AppApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD3B1E82B0B584B0054371B /* AppAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppApp.swift; sourceTree = "<group>"; };
-		FCD3B1EA2B0B584B0054371B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FCD3B1EC2B0B584D0054371B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCD3B1EE2B0B584D0054371B /* AppApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppApp.entitlements; sourceTree = "<group>"; };
 		FCD3B1F02B0B584D0054371B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -72,8 +122,7 @@
 		FCD3B2132B0B62F40054371B /* VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableValue.swift; sourceTree = "<group>"; };
 		FCD3B2152B0B63010054371B /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		FCD3B2172B0B63110054371B /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
-		FCD3B2192B0B63240054371B /* VarSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VarSteps.swift; sourceTree = "<group>"; };
-		FCD3B21B2B0B639F0054371B /* Button+Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Step.swift"; sourceTree = "<group>"; };
+		FCD3B21B2B0B639F0054371B /* StepButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepButton.swift; sourceTree = "<group>"; };
 		FCD3B2202B0B6FCB0054371B /* ViewMakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMakerView.swift; sourceTree = "<group>"; };
 		FCD3B2222B0B77C50054371B /* AddViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewView.swift; sourceTree = "<group>"; };
 		FCD3B2242B0B7C9F0054371B /* EditViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewView.swift; sourceTree = "<group>"; };
@@ -92,6 +141,17 @@
 		FCD3B2432B0C31C40054371B /* ValueStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStep.swift; sourceTree = "<group>"; };
 		FCD3B2452B0C50090054371B /* VHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHStack.swift; sourceTree = "<group>"; };
 		FCD3B2482B0C69070054371B /* EditVariableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVariableView.swift; sourceTree = "<group>"; };
+		FCD3B24A2B0C948C0054371B /* Array+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Safe.swift"; sourceTree = "<group>"; };
+		FCD3B24C2B0C94A10054371B /* Array+Ing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ing.swift"; sourceTree = "<group>"; };
+		FCD3B24E2B0C94C10054371B /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		FCD3B2502B0C94E80054371B /* MakeableView+Prototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MakeableView+Prototype.swift"; sourceTree = "<group>"; };
+		FCD3B2522B0C95360054371B /* MakableView+MakeableConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MakableView+MakeableConstructor.swift"; sourceTree = "<group>"; };
+		FCD3B2542B0C956E0054371B /* MakeableView+EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MakeableView+EditView.swift"; sourceTree = "<group>"; };
+		FCD3B2562B0C95B30054371B /* View+OnEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+OnEdit.swift"; sourceTree = "<group>"; };
+		FCD3B25A2B0C96170054371B /* DoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoView.swift; sourceTree = "<group>"; };
+		FCD3B25C2B0C964D0054371B /* ViewContructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewContructor.swift; sourceTree = "<group>"; };
+		FCD3B25E2B0C96790054371B /* MakeableConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableConstructor.swift; sourceTree = "<group>"; };
+		FCD3B2602B0C96890054371B /* EditableViewConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableViewConstructor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +180,120 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC4635082B0C981600B8DCBE /* Value Steps */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B2432B0C31C40054371B /* ValueStep.swift */,
+				FC4635092B0C982E00B8DCBE /* VariableStep.swift */,
+				FC4635062B0C980A00B8DCBE /* StaticValueStep.swift */,
+				FC46350B2B0C983D00B8DCBE /* APIValueStep.swift */,
+			);
+			path = "Value Steps";
+			sourceTree = "<group>";
+		};
+		FC46350D2B0C985E00B8DCBE /* Values */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B2152B0B63010054371B /* Variables.swift */,
+				FCD3B2132B0B62F40054371B /* VariableValue.swift */,
+				FC4635102B0C988000B8DCBE /* VariableValueError.swift */,
+				FC4635232B0C9ACD00B8DCBE /* Implementations */,
+			);
+			path = Values;
+			sourceTree = "<group>";
+		};
+		FC46351A2B0C992000B8DCBE /* Void Steps */ = {
+			isa = PBXGroup;
+			children = (
+				FC46351B2B0C993600B8DCBE /* SetVarStep.swift */,
+				FC46351D2B0C997700B8DCBE /* AddToVarStep.swift */,
+				FC46351F2B0C998B00B8DCBE /* PrintVarStep.swift */,
+			);
+			path = "Void Steps";
+			sourceTree = "<group>";
+		};
+		FC4635212B0C99CF00B8DCBE /* Makeable View */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B2322B0B9FE90054371B /* MakeableView.swift */,
+				FCD3B2522B0C95360054371B /* MakableView+MakeableConstructor.swift */,
+				FCD3B2502B0C94E80054371B /* MakeableView+Prototype.swift */,
+				FCD3B2542B0C956E0054371B /* MakeableView+EditView.swift */,
+			);
+			path = "Makeable View";
+			sourceTree = "<group>";
+		};
+		FC4635222B0C9A3200B8DCBE /* UI Elements */ = {
+			isa = PBXGroup;
+			children = (
+				FC4635212B0C99CF00B8DCBE /* Makeable View */,
+				FCD3B2302B0B9FCB0054371B /* MakeableStack.swift */,
+				FCD3B22E2B0B9FBA0054371B /* MakeableLabel.swift */,
+				FCD3B22C2B0B9FA70054371B /* MakeableButton.swift */,
+			);
+			path = "UI Elements";
+			sourceTree = "<group>";
+		};
+		FC4635232B0C9ACD00B8DCBE /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				FC4635182B0C98EE00B8DCBE /* Value.swift */,
+				FC4C15C02B0C96E60010BB1A /* ActionValue.swift */,
+				FC4635162B0C98C000B8DCBE /* Variable+VariableValue.swift */,
+				FC4635142B0C98A300B8DCBE /* Int+VariableValue.swift */,
+				FCD3B23C2B0BB2020054371B /* String+VariableValue.swift */,
+				FC46350E2B0C987100B8DCBE /* VariableType.swift */,
+			);
+			path = Implementations;
+			sourceTree = "<group>";
+		};
+		FC4635242B0C9B0900B8DCBE /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B2472B0C68D50054371B /* Edit Variable */,
+				FCD3B2392B0BA8440054371B /* Action List */,
+				FCD3B2362B0BA0010054371B /* View Maker */,
+				FCD3B2262B0B9F510054371B /* Add View */,
+				FCD3B22B2B0B9F840054371B /* Edit View */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		FC4C15C42B0C970C0010BB1A /* Editing */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B2342B0B9FF90054371B /* ViewProperty.swift */,
+				FC4C15C22B0C97020010BB1A /* ViewEditable.swift */,
+				FC4C15CE2B0C97830010BB1A /* StepType+EditView.swift */,
+				FC4635122B0C989000B8DCBE /* VariableValue+EditView.swift */,
+			);
+			path = Editing;
+			sourceTree = "<group>";
+		};
+		FC4C15C52B0C97150010BB1A /* View Creation */ = {
+			isa = PBXGroup;
+			children = (
+				FC4635222B0C9A3200B8DCBE /* UI Elements */,
+				FCD3B2622B0C96980054371B /* View Constructor */,
+				FC4C15C42B0C970C0010BB1A /* Editing */,
+			);
+			path = "View Creation";
+			sourceTree = "<group>";
+		};
+		FC4C15D42B0C97DA0010BB1A /* Steps */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B2172B0B63110054371B /* Step.swift */,
+				FC4C15CC2B0C97700010BB1A /* StepError.swift */,
+				FC4C15C82B0C974E0010BB1A /* StepType.swift */,
+				FC4C15CA2B0C975F0010BB1A /* StepType+Run.swift */,
+				FC4C15D02B0C97B20010BB1A /* Array_StepType+VariableValue.swift */,
+				FC46351A2B0C992000B8DCBE /* Void Steps */,
+				FC4635082B0C981600B8DCBE /* Value Steps */,
+			);
+			path = Steps;
+			sourceTree = "<group>";
+		};
 		FCD3B1DC2B0B584B0054371B = {
 			isa = PBXGroup;
 			children = (
@@ -144,20 +318,12 @@
 			isa = PBXGroup;
 			children = (
 				FCD3B1E82B0B584B0054371B /* AppAppApp.swift */,
-				FCD3B2472B0C68D50054371B /* Edit Variable */,
-				FCD3B2392B0BA8440054371B /* Action List */,
-				FCD3B2362B0BA0010054371B /* View Maker */,
-				FCD3B2262B0B9F510054371B /* Add View */,
-				FCD3B22B2B0B9F840054371B /* Edit View */,
-				FCD3B1EA2B0B584B0054371B /* ContentView.swift */,
-				FCD3B2172B0B63110054371B /* Step.swift */,
-				FCD3B2432B0C31C40054371B /* ValueStep.swift */,
-				FCD3B2152B0B63010054371B /* Variables.swift */,
-				FCD3B2132B0B62F40054371B /* VariableValue.swift */,
-				FCD3B2192B0B63240054371B /* VarSteps.swift */,
-				FCD3B21B2B0B639F0054371B /* Button+Step.swift */,
-				FCD3B2452B0C50090054371B /* VHStack.swift */,
-				FCD3B2402B0BB32E0054371B /* Extensions */,
+				FCD3B24E2B0C94C10054371B /* Screen.swift */,
+				FC4635242B0C9B0900B8DCBE /* Screens */,
+				FC4C15D42B0C97DA0010BB1A /* Steps */,
+				FC4C15C52B0C97150010BB1A /* View Creation */,
+				FC46350D2B0C985E00B8DCBE /* Values */,
+				FCD3B2582B0C960D0054371B /* Helpers */,
 				FCD3B1EC2B0B584D0054371B /* Assets.xcassets */,
 				FCD3B1EE2B0B584D0054371B /* AppApp.entitlements */,
 				FCD3B1EF2B0B584D0054371B /* Preview Content */,
@@ -204,7 +370,6 @@
 			children = (
 				FCD3B2242B0B7C9F0054371B /* EditViewView.swift */,
 				FCD3B2292B0B9F7C0054371B /* EditViewViewModel.swift */,
-				FCD3B23C2B0BB2020054371B /* String+VariableValue.swift */,
 			);
 			path = "Edit View";
 			sourceTree = "<group>";
@@ -214,11 +379,6 @@
 			children = (
 				FCD3B2202B0B6FCB0054371B /* ViewMakerView.swift */,
 				FCD3B2372B0BA01D0054371B /* ViewMakerViewModel.swift */,
-				FCD3B2322B0B9FE90054371B /* MakeableView.swift */,
-				FCD3B2302B0B9FCB0054371B /* MakeableStack.swift */,
-				FCD3B22E2B0B9FBA0054371B /* MakeableLabel.swift */,
-				FCD3B22C2B0B9FA70054371B /* MakeableButton.swift */,
-				FCD3B2342B0B9FF90054371B /* ViewProperty.swift */,
 			);
 			path = "View Maker";
 			sourceTree = "<group>";
@@ -235,7 +395,10 @@
 		FCD3B2402B0BB32E0054371B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FCD3B2562B0C95B30054371B /* View+OnEdit.swift */,
 				FCD3B2412B0BB3360054371B /* Int+Identifiable.swift */,
+				FCD3B24A2B0C948C0054371B /* Array+Safe.swift */,
+				FCD3B24C2B0C94A10054371B /* Array+Ing.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -246,6 +409,37 @@
 				FCD3B2482B0C69070054371B /* EditVariableView.swift */,
 			);
 			path = "Edit Variable";
+			sourceTree = "<group>";
+		};
+		FCD3B2582B0C960D0054371B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B2402B0BB32E0054371B /* Extensions */,
+				FCD3B2592B0C96110054371B /* Views */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		FCD3B2592B0C96110054371B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B2452B0C50090054371B /* VHStack.swift */,
+				FCD3B25A2B0C96170054371B /* DoView.swift */,
+				FC4C15D22B0C97CC0010BB1A /* SheetButton.swift */,
+				FCD3B21B2B0B639F0054371B /* StepButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FCD3B2622B0C96980054371B /* View Constructor */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B2602B0C96890054371B /* EditableViewConstructor.swift */,
+				FCD3B25E2B0C96790054371B /* MakeableConstructor.swift */,
+				FCD3B25C2B0C964D0054371B /* ViewContructor.swift */,
+				FC4C15C62B0C97390010BB1A /* ViewEditable+Constructor.swift */,
+			);
+			path = "View Constructor";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -385,30 +579,60 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCD3B2492B0C69070054371B /* EditVariableView.swift in Sources */,
-				FCD3B21C2B0B639F0054371B /* Button+Step.swift in Sources */,
+				FCD3B25B2B0C96170054371B /* DoView.swift in Sources */,
+				FCD3B21C2B0B639F0054371B /* StepButton.swift in Sources */,
+				FCD3B2612B0C96890054371B /* EditableViewConstructor.swift in Sources */,
 				FCD3B2232B0B77C50054371B /* AddViewView.swift in Sources */,
+				FC4635192B0C98EE00B8DCBE /* Value.swift in Sources */,
 				FCD3B23D2B0BB2020054371B /* String+VariableValue.swift in Sources */,
+				FCD3B24B2B0C948C0054371B /* Array+Safe.swift in Sources */,
+				FC4C15C92B0C974E0010BB1A /* StepType.swift in Sources */,
+				FC4635112B0C988000B8DCBE /* VariableValueError.swift in Sources */,
+				FC4C15CB2B0C975F0010BB1A /* StepType+Run.swift in Sources */,
 				FCD3B2142B0B62F40054371B /* VariableValue.swift in Sources */,
-				FCD3B1EB2B0B584B0054371B /* ContentView.swift in Sources */,
+				FCD3B2552B0C956E0054371B /* MakeableView+EditView.swift in Sources */,
+				FCD3B2512B0C94E80054371B /* MakeableView+Prototype.swift in Sources */,
+				FCD3B24F2B0C94C10054371B /* Screen.swift in Sources */,
+				FCD3B25F2B0C96790054371B /* MakeableConstructor.swift in Sources */,
+				FC4C15D12B0C97B20010BB1A /* Array_StepType+VariableValue.swift in Sources */,
+				FC4635132B0C989000B8DCBE /* VariableValue+EditView.swift in Sources */,
+				FC46350C2B0C983D00B8DCBE /* APIValueStep.swift in Sources */,
 				FCD3B2182B0B63110054371B /* Step.swift in Sources */,
 				FCD3B2252B0B7C9F0054371B /* EditViewView.swift in Sources */,
 				FCD3B2212B0B6FCB0054371B /* ViewMakerView.swift in Sources */,
 				FCD3B22A2B0B9F7D0054371B /* EditViewViewModel.swift in Sources */,
-				FCD3B21A2B0B63240054371B /* VarSteps.swift in Sources */,
 				FCD3B2312B0B9FCB0054371B /* MakeableStack.swift in Sources */,
+				FC4635202B0C998B00B8DCBE /* PrintVarStep.swift in Sources */,
+				FCD3B2532B0C95360054371B /* MakableView+MakeableConstructor.swift in Sources */,
+				FC4635072B0C980A00B8DCBE /* StaticValueStep.swift in Sources */,
 				FCD3B2332B0B9FE90054371B /* MakeableView.swift in Sources */,
+				FCD3B24D2B0C94A10054371B /* Array+Ing.swift in Sources */,
+				FC4C15D32B0C97CC0010BB1A /* SheetButton.swift in Sources */,
 				FCD3B2462B0C50090054371B /* VHStack.swift in Sources */,
+				FC4635152B0C98A300B8DCBE /* Int+VariableValue.swift in Sources */,
+				FCD3B25D2B0C964D0054371B /* ViewContructor.swift in Sources */,
+				FC4C15C32B0C97020010BB1A /* ViewEditable.swift in Sources */,
 				FCD3B2282B0B9F650054371B /* AddViewViewModel.swift in Sources */,
+				FC46351C2B0C993600B8DCBE /* SetVarStep.swift in Sources */,
+				FCD3B2572B0C95B30054371B /* View+OnEdit.swift in Sources */,
 				FCD3B22F2B0B9FBA0054371B /* MakeableLabel.swift in Sources */,
 				FCD3B23B2B0BA8580054371B /* ActionListView.swift in Sources */,
 				FCD3B2422B0BB3360054371B /* Int+Identifiable.swift in Sources */,
+				FC4C15CF2B0C97830010BB1A /* StepType+EditView.swift in Sources */,
 				FCD3B23F2B0BB31F0054371B /* AddActionView.swift in Sources */,
+				FC46350F2B0C987100B8DCBE /* VariableType.swift in Sources */,
 				FCD3B22D2B0B9FA70054371B /* MakeableButton.swift in Sources */,
+				FC4C15C12B0C96E60010BB1A /* ActionValue.swift in Sources */,
+				FC4635172B0C98C000B8DCBE /* Variable+VariableValue.swift in Sources */,
 				FCD3B2382B0BA01D0054371B /* ViewMakerViewModel.swift in Sources */,
 				FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */,
 				FCD3B2162B0B63010054371B /* Variables.swift in Sources */,
+				FC4C15CD2B0C97700010BB1A /* StepError.swift in Sources */,
+				FC4C15C72B0C97390010BB1A /* ViewEditable+Constructor.swift in Sources */,
 				FCD3B2442B0C31C40054371B /* ValueStep.swift in Sources */,
 				FCD3B2352B0B9FF90054371B /* ViewProperty.swift in Sources */,
+				FC46351E2B0C997700B8DCBE /* AddToVarStep.swift in Sources */,
+				FC46350A2B0C982E00B8DCBE /* VariableStep.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

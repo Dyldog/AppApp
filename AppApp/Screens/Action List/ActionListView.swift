@@ -7,22 +7,6 @@
 
 import SwiftUI
 
-extension Array {
-    subscript(safe index: Index) -> Element? {
-        get {
-            if self.indices.contains(index) {
-                return self[index]
-            } else {
-                return nil
-            }
-        }
-        set {
-            if index <= endIndex, let newValue = newValue {
-                self.insert(newValue, at: index)
-            }
-        }
-    }
-}
 struct ActionListView: View {
     @State var showAddIndex: Int?
     var steps: [any StepType]
@@ -53,25 +37,5 @@ struct ActionListView: View {
         SwiftUI.Button("+") {
             showAddIndex = index
         }
-    }
-}
-
-extension Array where Index == Int {
-    func removing(at index: Int) -> Self {
-        var val = self
-        val.remove(at: index)
-        return val
-    }
-    
-    func inserting(_ value: Element, at index: Int) -> Self {
-        var val = self
-        val.insert(value, at: index)
-        return val
-    }
-    
-    func replacing(_ value: Element, at index: Int) -> Self {
-        var val = self
-        val[index] = value
-        return val
     }
 }
