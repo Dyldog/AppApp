@@ -20,7 +20,7 @@ final class StaticValueStep: ValueStep {
     var protoString: String { value.protoString }
     
     func run(with variables: inout Variables) throws -> VariableValue {
-        guard let typedValue = type.value(from: try value.string(with: &variables))
+        guard let typedValue = try value.value(with: &variables)
         else { throw VariableValueError.wrongTypeForOperation }
         return typedValue
     }
@@ -52,7 +52,7 @@ final class StaticValueStep: ValueStep {
         
         var defaultValue: VariableValue {
             switch self {
-            case .value: return "TITLE"
+            case .value: return StringValue(value: "TITLE")
             case .type: return VariableType.string
             }
         }

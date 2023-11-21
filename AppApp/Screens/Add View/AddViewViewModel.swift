@@ -18,12 +18,12 @@ class AddViewViewModel: ObservableObject {
     init(onSelect: @escaping (any MakeableView) -> Void) {
         rows = [
             .init(title: "Label", onTap: {
-                onSelect(MakeableLabel(text: Value(value: "TEXT")))
+                onSelect(MakeableLabel(text: "TEXT" as Value))
             }),
             .init(title: "Button", onTap: {
                 onSelect(
                     MakeableButton(
-                        title: Value(value: "Text"),
+                        title: Value(value: "Text" as Value),
                         action: []
                     )
                 )

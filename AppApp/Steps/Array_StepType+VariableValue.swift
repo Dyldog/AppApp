@@ -16,23 +16,30 @@ extension Array: VariableValue where Element == any StepType {
     }
     
     var protoString: String {
-        map {
-            $0.protoString
-        }
+        map { $0.protoString }
         .joined(separator: "\n")
     }
-    func string(with variables: inout Variables) throws -> String {
+    
+    var valueString: String {
+        map { $0.protoString }
+        .joined(separator: "\n")
+    }
+    
+    func value(with variables: inout Variables) throws -> VariableValue? {
         var variables = try reduce(into: variables, { variables, step in
             try step.run(with: &variables)
         })
-        return try variables.value(for: "$0")!.string(with: &variables)
+        return try variables.value(for: "$0")!.value(with: &variables)
     }
     
     func editView(title: String, onUpdate: @escaping (Array<any StepType>) -> Void) -> AnyView {
-        return SheetButton(title: {
-            Text(title)
-        }) {
-            ActionListView(steps: self, onUpdate: onUpdate)
+        HStack {
+            Text(protoString)
+            SheetButton(title: {
+                Text(title)
+            }) {
+                ActionListView(steps: self, onUpdate: onUpdate)
+            }
         }.any
     }
 }

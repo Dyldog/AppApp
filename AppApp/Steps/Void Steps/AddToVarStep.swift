@@ -10,38 +10,32 @@ import Foundation
 final class AddToVarStep: Step, ObservableObject {
     
     static var title: String { "Add to variable" }
-    @Published var varName: String
-    @Published var value: VariableValue
-    @Published var type: VariableType
+    @Published var varName: Value
+    @Published var value: Value
     
-    required init(varName: String, value: VariableValue, type: VariableType) {
+    required init(varName: Value, value: Value) {
         self.varName = varName
         self.value = value
-        self.type = type
     }
     
-    var protoString: String { "{ $\(varName) += \(value.protoString) }"
+    var protoString: String { "{ $\(varName.protoString) += \(value.protoString) }"
         
     }
     
     func run(with variables: inout Variables) throws {
-        guard let variable = variables.value(for: varName) else { throw Error.cantAddToUnsetVariable }
         guard
-            let typedValue = type.value(from: try value.string(with: &variables)),
-            let typedVariable = type.value(from: try variable.string(with: &variables)),
-            Swift.type(of: typedValue) == Swift.type(of: typedVariable)
-        else {
-            throw VariableValueError.wrongTypeForOperation
-        }
-            
-        variables.set(try typedVariable.add(typedValue), for: varName)
+            let name = try varName.value(with: &variables),
+            let oldValue = variables.value(for: name.valueString) ,
+            let extraValue = try value.value(with: &variables)
+        else { throw Error.cantAddToUnsetVariable }
+        
+        variables.set(try oldValue.add(extraValue), for: varName.valueString)
     }
     
     static func make(factory: (Properties) -> VariableValue) -> Self {
         .init(
-            varName: factory(.name) as! String,
-            value: factory(.value),
-            type: factory(.type) as! VariableType
+            varName: factory(.name) as! Value,
+            value: factory(.value) as! Value
         )
     }
     
@@ -49,28 +43,24 @@ final class AddToVarStep: Step, ObservableObject {
         switch property {
         case .name: varName
         case .value: value
-        case .type: type
         }
     }
     
     func set(_ value: VariableValue, for property: Properties) {
         switch property {
-        case .name: varName = value.protoString
-        case .value: self.value = value
-        case .type: type = value as! VariableType
+        case .name: varName = value as! Value
+        case .value: self.value = value as! Value
         }
     }
     
     enum Properties: String, ViewProperty {
         case name
         case value
-        case type
         
         var defaultValue: VariableValue {
             switch self {
-            case .name: return "Text"
-            case .value: return "VariableValue"
-            case .type: return VariableType.string
+            case .name: return "Text" as Value
+            case .value: return "VariableValue" as Value
             }
         }
     }

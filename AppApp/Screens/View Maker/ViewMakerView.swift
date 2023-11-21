@@ -13,7 +13,19 @@ struct ViewMakerView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            ZStack {
+            VStack {
+                HStack {
+                    Spacer()
+                    
+                    if viewModel.makeMode {
+                        viewModel.initActions.editView(title: "Init Actions") {
+                            viewModel.updateInitActions($0)
+                        }
+                    }
+                    
+                    Toggle("Edit", isOn: $viewModel.makeMode)
+                        .fixedSize()
+                }
                 ScrollView {
                     CenterStack {
                         MakeableStack(content: viewModel.content, makeMode: viewModel.makeMode) {
@@ -32,19 +44,6 @@ struct ViewMakerView: View {
                             })
                     }
                     .frame(minHeight: geometry.size.height)
-                }
-                
-                CornerStack(corner: .topRight) {
-                    HStack {
-                        Spacer()
-                        
-                        viewModel.initActions.editView(title: "Init Actions") {
-                            viewModel.updateInitActions($0)
-                        }
-                        
-                        Toggle("Edit", isOn: $viewModel.makeMode)
-                            .fixedSize()
-                    }
                 }
             }.alert($viewModel.alert)
         }

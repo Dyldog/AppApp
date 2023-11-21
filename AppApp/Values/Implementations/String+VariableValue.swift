@@ -7,22 +7,49 @@
 
 import SwiftUI
 
-extension String: VariableValue {
+//extension String: VariableValue {
+//    static var type: VariableType { .string }
+//    
+//    func add(_ other: VariableValue) throws -> VariableValue {
+//        guard let other = other as? String else { throw VariableValueError.wrongTypeForOperation }
+//        return self + other
+//    }
+//    
+//    var protoString: String { self }
+//    var valueString: String { self }
+//    func value(with variables: inout Variables) throws -> VariableValue? { self }
+//    
+//    func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView {
+//        TextField("", text: .init(get: {
+//            self
+//        }, set: {
+//            onUpdate($0)
+//        })).any
+//    }
+//}
+
+final class StringValue: VariableValue {
     static var type: VariableType { .string }
+    var value: String
     
-    func add(_ other: VariableValue) throws -> VariableValue {
-        guard let other = other as? String else { throw VariableValueError.wrongTypeForOperation }
-        return self + other
+    init(value: String) {
+        self.value = value
     }
     
-    var protoString: String { self }
-    func string(with variables: inout Variables) -> String { protoString }
+    func add(_ other: VariableValue) throws -> VariableValue {
+        return StringValue(value: value + other.valueString)
+    }
     
-    func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView {
+    var protoString: String { value }
+    var valueString: String { value }
+    func value(with variables: inout Variables) throws -> VariableValue? { self }
+    
+    func editView(title: String, onUpdate: @escaping (StringValue) -> Void) -> AnyView {
         TextField("", text: .init(get: {
-            self
+            self.value
         }, set: {
-            onUpdate($0)
+            self.value = $0
+            onUpdate(self)
         })).any
     }
 }

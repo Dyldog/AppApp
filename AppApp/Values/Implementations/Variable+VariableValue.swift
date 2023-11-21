@@ -17,10 +17,17 @@ struct Variable: VariableValue {
         return try name.add(other)
     }
     
-    var protoString: String { name.protoString }
+    var protoString: String { "{ \(name.protoString) }" }
+    var valueString: String { "\(name.valueString)" }
     
-    func string(with variables: inout Variables) throws -> String {
-        try variables.value(for: try name.string(with: &variables))?.string(with: &variables) ?? "ERROR"
+    func value(with variables: inout Variables) throws -> VariableValue? {
+        guard
+            let nameValue = try name.value(with: &variables),
+            let value = variables.value(for: nameValue.valueString)
+        else {
+            throw VariableValueError.valueNotFoundForVariable
+        }
+        return try value.value(with: &variables)
     }
     
     func editView(title: String, onUpdate: @escaping (Variable) -> Void) -> AnyView {

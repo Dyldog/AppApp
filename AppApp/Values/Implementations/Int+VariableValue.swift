@@ -24,5 +24,10 @@ extension Int: VariableValue {
     }
     
     var protoString: String { "\(self)" }
-    func string(with variables: inout Variables) -> String { protoString }
+    
+    var valueString: String { "\(self)"}
+    
+    func value(with variables: inout Variables) throws -> VariableValue? {
+        self
+    }
 }

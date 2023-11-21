@@ -20,7 +20,10 @@ struct MakeableButton: MakeableView {
     func view(variables: Binding<Variables>?, alert: Binding<Alert?>?) throws -> AnyView {
         let titleString: String
         if var variables = variables?.wrappedValue {
-            titleString = try title.string(with: &variables)
+            guard let value = try title.value(with: &variables) else {
+                throw VariableValueError.valueNotFoundForVariable
+            }
+            titleString = value.valueString
         } else {
             titleString = title.protoString
         }
@@ -61,7 +64,7 @@ struct MakeableButton: MakeableView {
         
         var defaultValue: VariableValue {
             switch self {
-            case .title: return "TITLE"
+            case .title: return "TITLE" as Value
             case .action: return [any StepType]()
             }
         }

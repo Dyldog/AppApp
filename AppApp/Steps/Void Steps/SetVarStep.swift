@@ -19,10 +19,15 @@ final class SetVarStep: Step, ObservableObject {
 //        self.type = type
     }
     
-    var protoString: String { "{ $\(varName) = \(value.protoString) }" }
+    var protoString: String { "{ $\(varName.protoString) = \(value.protoString) }" }
     
     func run(with variables: inout Variables) throws {
-        variables.set(try value.string(with: &variables), for: try varName.string(with: &variables))
+        guard
+            let varValue = try varName.value(with: &variables),
+            let valueValue = try value.value(with: &variables)
+        else { throw VariableValueError.valueNotFoundForVariable }
+            
+        variables.set(valueValue, for: varValue.valueString)
     }
     
     static func make(factory: (Properties) -> VariableValue) -> Self {
@@ -57,8 +62,8 @@ final class SetVarStep: Step, ObservableObject {
         
         var defaultValue: VariableValue {
             switch self {
-            case .name: return "Text"
-            case .value: return Variable(name: "$0")
+            case .name: return Variable(name: "VAR" as Value)
+            case .value: return Variable(name: "$0" as Value)
 //            case .type: return VariableType.string
             }
         }

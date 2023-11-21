@@ -28,6 +28,8 @@
 		FC4C15CF2B0C97830010BB1A /* StepType+EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15CE2B0C97830010BB1A /* StepType+EditView.swift */; };
 		FC4C15D12B0C97B20010BB1A /* Array_StepType+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15D02B0C97B20010BB1A /* Array_StepType+VariableValue.swift */; };
 		FC4C15D32B0C97CC0010BB1A /* SheetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15D22B0C97CC0010BB1A /* SheetButton.swift */; };
+		FC4C2C242B0C9B7F008217AC /* ArrayValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C232B0C9B7F008217AC /* ArrayValue.swift */; };
+		FC4C2C272B0CA872008217AC /* ListEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C262B0CA872008217AC /* ListEditView.swift */; };
 		FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B1E82B0B584B0054371B /* AppAppApp.swift */; };
 		FCD3B1ED2B0B584D0054371B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD3B1EC2B0B584D0054371B /* Assets.xcassets */; };
 		FCD3B1F12B0B584D0054371B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD3B1F02B0B584D0054371B /* Preview Assets.xcassets */; };
@@ -109,6 +111,8 @@
 		FC4C15CE2B0C97830010BB1A /* StepType+EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepType+EditView.swift"; sourceTree = "<group>"; };
 		FC4C15D02B0C97B20010BB1A /* Array_StepType+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array_StepType+VariableValue.swift"; sourceTree = "<group>"; };
 		FC4C15D22B0C97CC0010BB1A /* SheetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetButton.swift; sourceTree = "<group>"; };
+		FC4C2C232B0C9B7F008217AC /* ArrayValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayValue.swift; sourceTree = "<group>"; };
+		FC4C2C262B0CA872008217AC /* ListEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEditView.swift; sourceTree = "<group>"; };
 		FCD3B1E52B0B584B0054371B /* AppApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD3B1E82B0B584B0054371B /* AppAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppApp.swift; sourceTree = "<group>"; };
 		FCD3B1EC2B0B584D0054371B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 			children = (
 				FC4635182B0C98EE00B8DCBE /* Value.swift */,
 				FC4C15C02B0C96E60010BB1A /* ActionValue.swift */,
+				FC4C2C232B0C9B7F008217AC /* ArrayValue.swift */,
 				FC4635162B0C98C000B8DCBE /* Variable+VariableValue.swift */,
 				FC4635142B0C98A300B8DCBE /* Int+VariableValue.swift */,
 				FCD3B23C2B0BB2020054371B /* String+VariableValue.swift */,
@@ -250,6 +255,7 @@
 		FC4635242B0C9B0900B8DCBE /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				FC4C2C252B0CA869008217AC /* ListEditView */,
 				FCD3B2472B0C68D50054371B /* Edit Variable */,
 				FCD3B2392B0BA8440054371B /* Action List */,
 				FCD3B2362B0BA0010054371B /* View Maker */,
@@ -292,6 +298,14 @@
 				FC4635082B0C981600B8DCBE /* Value Steps */,
 			);
 			path = Steps;
+			sourceTree = "<group>";
+		};
+		FC4C2C252B0CA869008217AC /* ListEditView */ = {
+			isa = PBXGroup;
+			children = (
+				FC4C2C262B0CA872008217AC /* ListEditView.swift */,
+			);
+			path = ListEditView;
 			sourceTree = "<group>";
 		};
 		FCD3B1DC2B0B584B0054371B = {
@@ -625,12 +639,14 @@
 				FC4C15C12B0C96E60010BB1A /* ActionValue.swift in Sources */,
 				FC4635172B0C98C000B8DCBE /* Variable+VariableValue.swift in Sources */,
 				FCD3B2382B0BA01D0054371B /* ViewMakerViewModel.swift in Sources */,
+				FC4C2C242B0C9B7F008217AC /* ArrayValue.swift in Sources */,
 				FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */,
 				FCD3B2162B0B63010054371B /* Variables.swift in Sources */,
 				FC4C15CD2B0C97700010BB1A /* StepError.swift in Sources */,
 				FC4C15C72B0C97390010BB1A /* ViewEditable+Constructor.swift in Sources */,
 				FCD3B2442B0C31C40054371B /* ValueStep.swift in Sources */,
 				FCD3B2352B0B9FF90054371B /* ViewProperty.swift in Sources */,
+				FC4C2C272B0CA872008217AC /* ListEditView.swift in Sources */,
 				FC46351E2B0C997700B8DCBE /* AddToVarStep.swift in Sources */,
 				FC46350A2B0C982E00B8DCBE /* VariableStep.swift in Sources */,
 			);

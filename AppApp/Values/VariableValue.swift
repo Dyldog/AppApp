@@ -13,6 +13,7 @@ protocol VariableValue {
     static var type: VariableType { get }
     func add(_ other: VariableValue) throws -> VariableValue
     var protoString: String { get }
-    func string(with variables: inout Variables) throws -> String
+    var valueString: String { get }
+    func value(with variables: inout Variables) throws -> VariableValue?
     func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView
 }

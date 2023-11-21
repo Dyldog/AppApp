@@ -18,8 +18,14 @@ final class ActionValue: VariableValue, ObservableObject {
         self.steps = steps
     }
     
-    func string(with variables: inout Variables) throws -> String {
-        try steps.string(with: &variables)
+    var valueString: String { steps.map { $0.protoString }.joined(separator: "\n") }
+    
+    func value(with variables: inout Variables) throws -> VariableValue? {
+        try steps.forEach {
+            try $0.run(with: &variables)
+        }
+        
+        return variables.value(for: "$0")
     }
     
     func add(_ other: VariableValue) throws -> VariableValue {
@@ -27,10 +33,13 @@ final class ActionValue: VariableValue, ObservableObject {
     }
     
     func editView(title: String, onUpdate: @escaping (ActionValue) -> Void) -> AnyView {
-        return SheetButton(title: { Text(title) }) {
-            ActionListView(steps: self.steps) {
-                self.steps = $0
-                onUpdate(self)
+        HStack {
+            Text(protoString)
+            SheetButton(title: { Text(title) }) {
+                ActionListView(steps: self.steps) {
+                    self.steps = $0
+                    onUpdate(self)
+                }
             }
         }.any
     }

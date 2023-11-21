@@ -12,7 +12,7 @@ struct MakeableStack: MakeableView {
     enum Properties: String, CaseIterable, ViewProperty {
         case content
         
-        var defaultValue: VariableValue { "" }
+        var defaultValue: VariableValue { [] }
     }
     
     let content: [any MakeableView]
@@ -60,10 +60,10 @@ struct MakeableStack: MakeableView {
                             makeButton(at: index + 1)
                         }
                     }.any
-                } onError: {
-                    alert?.wrappedValue = .init(title: "ERROR", message: $0.localizedDescription)
+                } onError: { error in
+//                    alert?.wrappedValue = .init(title: "ERROR", message: $0.localizedDescription)
                     return VStack {
-                        Text("ERROR")
+                        Text("ERROR: \(error.localizedDescription)")
                     }.any
                 }
             }

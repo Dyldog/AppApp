@@ -9,10 +9,10 @@ import Foundation
 
 final class VariableStep: ValueStep {
     static var title: String { "Get variable" }
-    @Published var varName: String
+    @Published var varName: Value
     @Published var type: VariableType
     
-    init(varName: String, type: VariableType) {
+    init(varName: Value, type: VariableType) {
         self.varName = varName
         self.type = type
     }
@@ -20,10 +20,12 @@ final class VariableStep: ValueStep {
     var protoString: String { "{ $\(varName) }" }
     
     func run(with variables: inout Variables) throws -> VariableValue {
-        guard let value = variables.value(for: varName)
+        guard
+            let nameValue = try varName.value(with: &variables),
+            let value = variables.value(for: nameValue.valueString)
         else { throw VariableValueError.valueNotFoundForVariable }
         
-        guard let typedValue = type.value(from: try value.string(with: &variables))
+        guard let typedValue = try value.value(with: &variables)
         else { throw VariableValueError.wrongTypeForOperation }
         
         
@@ -32,7 +34,7 @@ final class VariableStep: ValueStep {
     
     static func make(factory: (Properties) -> VariableValue) -> VariableStep {
         return VariableStep(
-            varName: factory(.varName).protoString,
+            varName: factory(.varName) as! Value,
             type: factory(.type) as! VariableType
         )
     }
@@ -46,7 +48,7 @@ final class VariableStep: ValueStep {
     
     func set(_ value: VariableValue, for property: Properties) {
         switch property {
-        case .varName: self.varName = value.protoString
+        case .varName: self.varName = value as! Value
         case .type: self.type = value as! VariableType
         }
     }
@@ -57,7 +59,7 @@ final class VariableStep: ValueStep {
         
         var defaultValue: VariableValue {
             switch self {
-            case .varName: return "VAR"
+            case .varName: return Variable(name: "VAR" as Value)
             case .type: return VariableType.string
             }
         }

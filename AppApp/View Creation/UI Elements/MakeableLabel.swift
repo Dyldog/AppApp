@@ -13,7 +13,9 @@ struct MakeableLabel: MakeableView {
     
     func view(variables: Binding<Variables>?, alert: Binding<Alert?>?) throws -> AnyView {
         if var variables = variables?.wrappedValue {
-            return Text(try text.string(with: &variables)).any
+            guard let value = try text.value(with: &variables)?.valueString
+            else { throw VariableValueError.valueNotFoundForVariable }
+            return Text(value).any
         } else {
             return Text(text.protoString).any
         }
@@ -34,7 +36,7 @@ struct MakeableLabel: MakeableView {
         
         var defaultValue: VariableValue {
             switch self {
-            case .value: return "TEXT"
+            case .value: return "TEXT" as Value
             }
         }
     }

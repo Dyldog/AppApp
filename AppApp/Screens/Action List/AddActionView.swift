@@ -31,7 +31,7 @@ struct AddActionView: View {
             switch self {
             case .printVariable: PrintVarStep(varName: "VAR")
             case .setVariable: SetVarStep(varName: "VAR", value: "VALUE")
-            case .addToVariable: AddToVarStep(varName: "VAR", value: "VALUE", type: .string)
+            case .addToVariable: AddToVarStep(varName: "VAR", value: "VALUE")
             case .staticValue: StaticValueStep(value: "VALUE", type: .string)
             case .getVariable: VariableStep(varName: "VAR", type: .string)
             case .getFromAPI: APIValueStep(url: "https://google.com")

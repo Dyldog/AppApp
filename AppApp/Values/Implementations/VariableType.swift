@@ -14,6 +14,7 @@ enum VariableType: Int, VariableValue, CaseIterable {
     case int
     case variable
     case action
+    case list
     
     var protoString: String {
         switch self {
@@ -23,31 +24,26 @@ enum VariableType: Int, VariableValue, CaseIterable {
         case .int: return "Int"
         case .variable: return "Variable"
         case .action: return "Action"
+        case .list: return "List"
         }
     }
     
     var defautltView: VariableValue {
         switch self {
         case .type: return VariableType.string
-        case .string: return "TEXT"
+        case .string: return StringValue(value: "TEXT")
         case .int: return 69
-        case .variable: return Variable(name: "VAR")
+        case .variable: return Variable(name: StringValue(value: "VAR"))
         case .action: return ActionValue(steps: [])
-        case .value: return Value(value: "TEXT")
+        case .value: return "TEXT" as Value
+        case .list:  return ArrayValue(type: .string, elements: [])
         }
     }
     
-    func string(with variables: inout Variables) -> String { protoString }
+    var valueString: String { protoString }
     
-    func value(from string: String) -> VariableValue? {
-        switch self {
-        case .type: fatalError()
-        case .int: return Int(string)
-        case .string: return string
-        case .variable: return Variable(name: string)
-        case .action: fatalError()
-        case .value: fatalError()
-        }
+    func value(with variables: inout Variables) throws -> VariableValue? {
+        self
     }
     
     func add(_ other: VariableValue) throws -> VariableValue {

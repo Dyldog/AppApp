@@ -12,30 +12,34 @@ class ViewMakerViewModel: ObservableObject {
     @Published var content: [any MakeableView] = []
     @Published private(set) var initActions: [any StepType] = []
     
+    @Published var alert: Alert?
+    
     @Published var makeMode: Bool = true
     
     @Published var showAddIndex: Int?
     @Published var showEditIndex: EditRow?
     
-    @Published var alert: Alert?
-    
     @Published var variables: Variables!
     
-    private var newVariables: Variables {
+    private func newVariables() -> Variables {
         var vars = Variables()
-        initActions.forEach {
-            try! $0.run(with: &vars)
+        do {
+            try initActions.forEach {
+                try $0.run(with: &vars)
+            }
+        } catch {
+            alert = .init(title: "Error", message: error.localizedDescription)
         }
         return vars
     }
     
     init() {
-        variables = newVariables
+        variables = newVariables()
     }
     
     func updateInitActions(_ newValue: [any StepType]) {
         initActions = newValue
-        variables = newVariables
+        variables = newVariables()
     }
     
     func addTapped(at index: Int) {

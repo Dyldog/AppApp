@@ -17,7 +17,7 @@ struct Value: VariableValue, ExpressibleByStringLiteral {
     }
     
     init(stringLiteral value: String) {
-        self.init(value: value)
+        self.init(value: StringValue(value: value))
     }
     
     func add(_ other: VariableValue) throws -> VariableValue {
@@ -25,9 +25,10 @@ struct Value: VariableValue, ExpressibleByStringLiteral {
     }
     
     var protoString: String { value.protoString }
+    var valueString: String { value.valueString }
     
-    func string(with variables: inout Variables) throws -> String {
-        try value.string(with: &variables)
+    func value(with variables: inout Variables) throws -> VariableValue? {
+        try value.value(with: &variables)
     }
     
     func editView(title: String, onUpdate: @escaping (Value) -> Void) -> AnyView {

@@ -9,21 +9,24 @@ import SwiftUI
 
 final class PrintVarStep: Step {
     static var title: String { "Print variable" }
-    var varName: String
+    var varName: Value
     
-    required init(varName: String) {
+    required init(varName: Value) {
         self.varName = varName
     }
     
     var protoString: String { "{ print($\(varName)) }"}
     
     func run(with variables: inout Variables) throws {
-        print("\(varName): \(variables.value(for: varName) as Any)")
+        guard let nameValue = try varName.value(with: &variables) else {
+            throw VariableValueError.valueNotFoundForVariable
+        }
+        print("\(varName): \(variables.value(for: nameValue.valueString) as Any)")
     }
     
     static func make(factory: (Properties) -> VariableValue) -> Self {
         .init(
-            varName: factory(.name) as! String
+            varName: factory(.name) as! Value
         )
     }
     
@@ -35,7 +38,7 @@ final class PrintVarStep: Step {
     
     func set(_ value: VariableValue, for property: Properties) {
         switch property {
-        case .name: varName = value.protoString
+        case .name: varName = value as! Value
         }
     }
     
@@ -44,7 +47,7 @@ final class PrintVarStep: Step {
         
         var defaultValue: VariableValue {
             switch self {
-            case .name: return "Text"
+            case .name: return StringValue(value: "Text")
             }
         }
     }

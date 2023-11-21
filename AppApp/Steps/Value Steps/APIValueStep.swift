@@ -9,24 +9,26 @@ import Foundation
 
 final class  APIValueStep: ValueStep {
     static var title: String { "Get value from API" }
-    @Published var url: VariableValue
+    @Published var url: Value
     
-    init(url: VariableValue) {
+    init(url: Value) {
         self.url = url
     }
     
     var protoString: String { "{ $\(url) }" }
     
     func run(with variables: inout Variables) throws -> VariableValue {
-        guard let url = URL(string: try url.string(with: &variables))
+        guard
+            let value = try url.value(with: &variables),
+            let url = URL(string: value.valueString)
         else { throw VariableValueError.wrongTypeForOperation }
         
-        return try String(contentsOf: url)
+        return StringValue(value: try String(contentsOf: url))
     }
     
     static func make(factory: (Properties) -> VariableValue) -> APIValueStep {
         return APIValueStep(
-            url: factory(.url)
+            url: factory(.url) as! Value
         )
     }
     
@@ -38,7 +40,7 @@ final class  APIValueStep: ValueStep {
     
     func set(_ value: VariableValue, for property: Properties) {
         switch property {
-        case .url: self.url = value as! VariableType
+        case .url: self.url = value as! Value
         }
     }
     
@@ -47,7 +49,7 @@ final class  APIValueStep: ValueStep {
         
         var defaultValue: VariableValue {
             switch self {
-            case .url: return "https://google.com"
+            case .url: return StringValue(value: "https://google.com")
             }
         }
     }
