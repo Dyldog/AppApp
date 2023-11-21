@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,30 @@
 		FCD3B1FB2B0B584E0054371B /* AppAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B1FA2B0B584E0054371B /* AppAppTests.swift */; };
 		FCD3B2052B0B584E0054371B /* AppAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2042B0B584E0054371B /* AppAppUITests.swift */; };
 		FCD3B2072B0B584E0054371B /* AppAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2062B0B584E0054371B /* AppAppUITestsLaunchTests.swift */; };
+		FCD3B2142B0B62F40054371B /* VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2132B0B62F40054371B /* VariableValue.swift */; };
+		FCD3B2162B0B63010054371B /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2152B0B63010054371B /* Variables.swift */; };
+		FCD3B2182B0B63110054371B /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2172B0B63110054371B /* Step.swift */; };
+		FCD3B21A2B0B63240054371B /* VarSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2192B0B63240054371B /* VarSteps.swift */; };
+		FCD3B21C2B0B639F0054371B /* Button+Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B21B2B0B639F0054371B /* Button+Step.swift */; };
+		FCD3B21F2B0B67060054371B /* DylKit in Frameworks */ = {isa = PBXBuildFile; productRef = FCD3B21E2B0B67060054371B /* DylKit */; };
+		FCD3B2212B0B6FCB0054371B /* ViewMakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2202B0B6FCB0054371B /* ViewMakerView.swift */; };
+		FCD3B2232B0B77C50054371B /* AddViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2222B0B77C50054371B /* AddViewView.swift */; };
+		FCD3B2252B0B7C9F0054371B /* EditViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2242B0B7C9F0054371B /* EditViewView.swift */; };
+		FCD3B2282B0B9F650054371B /* AddViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2272B0B9F650054371B /* AddViewViewModel.swift */; };
+		FCD3B22A2B0B9F7D0054371B /* EditViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2292B0B9F7C0054371B /* EditViewViewModel.swift */; };
+		FCD3B22D2B0B9FA70054371B /* MakeableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B22C2B0B9FA70054371B /* MakeableButton.swift */; };
+		FCD3B22F2B0B9FBA0054371B /* MakeableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B22E2B0B9FBA0054371B /* MakeableLabel.swift */; };
+		FCD3B2312B0B9FCB0054371B /* MakeableStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2302B0B9FCB0054371B /* MakeableStack.swift */; };
+		FCD3B2332B0B9FE90054371B /* MakeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2322B0B9FE90054371B /* MakeableView.swift */; };
+		FCD3B2352B0B9FF90054371B /* ViewProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2342B0B9FF90054371B /* ViewProperty.swift */; };
+		FCD3B2382B0BA01D0054371B /* ViewMakerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2372B0BA01D0054371B /* ViewMakerViewModel.swift */; };
+		FCD3B23B2B0BA8580054371B /* ActionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B23A2B0BA8580054371B /* ActionListView.swift */; };
+		FCD3B23D2B0BB2020054371B /* String+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B23C2B0BB2020054371B /* String+VariableValue.swift */; };
+		FCD3B23F2B0BB31F0054371B /* AddActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B23E2B0BB31F0054371B /* AddActionView.swift */; };
+		FCD3B2422B0BB3360054371B /* Int+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2412B0BB3360054371B /* Int+Identifiable.swift */; };
+		FCD3B2442B0C31C40054371B /* ValueStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2432B0C31C40054371B /* ValueStep.swift */; };
+		FCD3B2462B0C50090054371B /* VHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2452B0C50090054371B /* VHStack.swift */; };
+		FCD3B2492B0C69070054371B /* EditVariableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2482B0C69070054371B /* EditVariableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +69,29 @@
 		FCD3B2002B0B584E0054371B /* AppAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD3B2042B0B584E0054371B /* AppAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppUITests.swift; sourceTree = "<group>"; };
 		FCD3B2062B0B584E0054371B /* AppAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FCD3B2132B0B62F40054371B /* VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableValue.swift; sourceTree = "<group>"; };
+		FCD3B2152B0B63010054371B /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
+		FCD3B2172B0B63110054371B /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
+		FCD3B2192B0B63240054371B /* VarSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VarSteps.swift; sourceTree = "<group>"; };
+		FCD3B21B2B0B639F0054371B /* Button+Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Step.swift"; sourceTree = "<group>"; };
+		FCD3B2202B0B6FCB0054371B /* ViewMakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMakerView.swift; sourceTree = "<group>"; };
+		FCD3B2222B0B77C50054371B /* AddViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewView.swift; sourceTree = "<group>"; };
+		FCD3B2242B0B7C9F0054371B /* EditViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewView.swift; sourceTree = "<group>"; };
+		FCD3B2272B0B9F650054371B /* AddViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewViewModel.swift; sourceTree = "<group>"; };
+		FCD3B2292B0B9F7C0054371B /* EditViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewViewModel.swift; sourceTree = "<group>"; };
+		FCD3B22C2B0B9FA70054371B /* MakeableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableButton.swift; sourceTree = "<group>"; };
+		FCD3B22E2B0B9FBA0054371B /* MakeableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableLabel.swift; sourceTree = "<group>"; };
+		FCD3B2302B0B9FCB0054371B /* MakeableStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableStack.swift; sourceTree = "<group>"; };
+		FCD3B2322B0B9FE90054371B /* MakeableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableView.swift; sourceTree = "<group>"; };
+		FCD3B2342B0B9FF90054371B /* ViewProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProperty.swift; sourceTree = "<group>"; };
+		FCD3B2372B0BA01D0054371B /* ViewMakerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMakerViewModel.swift; sourceTree = "<group>"; };
+		FCD3B23A2B0BA8580054371B /* ActionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionListView.swift; sourceTree = "<group>"; };
+		FCD3B23C2B0BB2020054371B /* String+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+VariableValue.swift"; sourceTree = "<group>"; };
+		FCD3B23E2B0BB31F0054371B /* AddActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActionView.swift; sourceTree = "<group>"; };
+		FCD3B2412B0BB3360054371B /* Int+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Identifiable.swift"; sourceTree = "<group>"; };
+		FCD3B2432B0C31C40054371B /* ValueStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStep.swift; sourceTree = "<group>"; };
+		FCD3B2452B0C50090054371B /* VHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHStack.swift; sourceTree = "<group>"; };
+		FCD3B2482B0C69070054371B /* EditVariableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVariableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCD3B21F2B0B67060054371B /* DylKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +144,20 @@
 			isa = PBXGroup;
 			children = (
 				FCD3B1E82B0B584B0054371B /* AppAppApp.swift */,
+				FCD3B2472B0C68D50054371B /* Edit Variable */,
+				FCD3B2392B0BA8440054371B /* Action List */,
+				FCD3B2362B0BA0010054371B /* View Maker */,
+				FCD3B2262B0B9F510054371B /* Add View */,
+				FCD3B22B2B0B9F840054371B /* Edit View */,
 				FCD3B1EA2B0B584B0054371B /* ContentView.swift */,
+				FCD3B2172B0B63110054371B /* Step.swift */,
+				FCD3B2432B0C31C40054371B /* ValueStep.swift */,
+				FCD3B2152B0B63010054371B /* Variables.swift */,
+				FCD3B2132B0B62F40054371B /* VariableValue.swift */,
+				FCD3B2192B0B63240054371B /* VarSteps.swift */,
+				FCD3B21B2B0B639F0054371B /* Button+Step.swift */,
+				FCD3B2452B0C50090054371B /* VHStack.swift */,
+				FCD3B2402B0BB32E0054371B /* Extensions */,
 				FCD3B1EC2B0B584D0054371B /* Assets.xcassets */,
 				FCD3B1EE2B0B584D0054371B /* AppApp.entitlements */,
 				FCD3B1EF2B0B584D0054371B /* Preview Content */,
@@ -129,6 +190,64 @@
 			path = AppAppUITests;
 			sourceTree = "<group>";
 		};
+		FCD3B2262B0B9F510054371B /* Add View */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B2222B0B77C50054371B /* AddViewView.swift */,
+				FCD3B2272B0B9F650054371B /* AddViewViewModel.swift */,
+			);
+			path = "Add View";
+			sourceTree = "<group>";
+		};
+		FCD3B22B2B0B9F840054371B /* Edit View */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B2242B0B7C9F0054371B /* EditViewView.swift */,
+				FCD3B2292B0B9F7C0054371B /* EditViewViewModel.swift */,
+				FCD3B23C2B0BB2020054371B /* String+VariableValue.swift */,
+			);
+			path = "Edit View";
+			sourceTree = "<group>";
+		};
+		FCD3B2362B0BA0010054371B /* View Maker */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B2202B0B6FCB0054371B /* ViewMakerView.swift */,
+				FCD3B2372B0BA01D0054371B /* ViewMakerViewModel.swift */,
+				FCD3B2322B0B9FE90054371B /* MakeableView.swift */,
+				FCD3B2302B0B9FCB0054371B /* MakeableStack.swift */,
+				FCD3B22E2B0B9FBA0054371B /* MakeableLabel.swift */,
+				FCD3B22C2B0B9FA70054371B /* MakeableButton.swift */,
+				FCD3B2342B0B9FF90054371B /* ViewProperty.swift */,
+			);
+			path = "View Maker";
+			sourceTree = "<group>";
+		};
+		FCD3B2392B0BA8440054371B /* Action List */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B23A2B0BA8580054371B /* ActionListView.swift */,
+				FCD3B23E2B0BB31F0054371B /* AddActionView.swift */,
+			);
+			path = "Action List";
+			sourceTree = "<group>";
+		};
+		FCD3B2402B0BB32E0054371B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B2412B0BB3360054371B /* Int+Identifiable.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FCD3B2472B0C68D50054371B /* Edit Variable */ = {
+			isa = PBXGroup;
+			children = (
+				FCD3B2482B0C69070054371B /* EditVariableView.swift */,
+			);
+			path = "Edit Variable";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -145,6 +264,9 @@
 			dependencies = (
 			);
 			name = AppApp;
+			packageProductDependencies = (
+				FCD3B21E2B0B67060054371B /* DylKit */,
+			);
 			productName = AppApp;
 			productReference = FCD3B1E52B0B584B0054371B /* AppApp.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +339,9 @@
 				Base,
 			);
 			mainGroup = FCD3B1DC2B0B584B0054371B;
+			packageReferences = (
+				FCD3B21D2B0B67060054371B /* XCLocalSwiftPackageReference "../DylKit" */,
+			);
 			productRefGroup = FCD3B1E62B0B584B0054371B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -259,8 +384,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCD3B2492B0C69070054371B /* EditVariableView.swift in Sources */,
+				FCD3B21C2B0B639F0054371B /* Button+Step.swift in Sources */,
+				FCD3B2232B0B77C50054371B /* AddViewView.swift in Sources */,
+				FCD3B23D2B0BB2020054371B /* String+VariableValue.swift in Sources */,
+				FCD3B2142B0B62F40054371B /* VariableValue.swift in Sources */,
 				FCD3B1EB2B0B584B0054371B /* ContentView.swift in Sources */,
+				FCD3B2182B0B63110054371B /* Step.swift in Sources */,
+				FCD3B2252B0B7C9F0054371B /* EditViewView.swift in Sources */,
+				FCD3B2212B0B6FCB0054371B /* ViewMakerView.swift in Sources */,
+				FCD3B22A2B0B9F7D0054371B /* EditViewViewModel.swift in Sources */,
+				FCD3B21A2B0B63240054371B /* VarSteps.swift in Sources */,
+				FCD3B2312B0B9FCB0054371B /* MakeableStack.swift in Sources */,
+				FCD3B2332B0B9FE90054371B /* MakeableView.swift in Sources */,
+				FCD3B2462B0C50090054371B /* VHStack.swift in Sources */,
+				FCD3B2282B0B9F650054371B /* AddViewViewModel.swift in Sources */,
+				FCD3B22F2B0B9FBA0054371B /* MakeableLabel.swift in Sources */,
+				FCD3B23B2B0BA8580054371B /* ActionListView.swift in Sources */,
+				FCD3B2422B0BB3360054371B /* Int+Identifiable.swift in Sources */,
+				FCD3B23F2B0BB31F0054371B /* AddActionView.swift in Sources */,
+				FCD3B22D2B0B9FA70054371B /* MakeableButton.swift in Sources */,
+				FCD3B2382B0BA01D0054371B /* ViewMakerViewModel.swift in Sources */,
 				FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */,
+				FCD3B2162B0B63010054371B /* Variables.swift in Sources */,
+				FCD3B2442B0C31C40054371B /* ValueStep.swift in Sources */,
+				FCD3B2352B0B9FF90054371B /* ViewProperty.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,7 +582,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.6;
@@ -472,7 +620,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.6;
@@ -617,6 +765,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		FCD3B21D2B0B67060054371B /* XCLocalSwiftPackageReference "../DylKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../DylKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FCD3B21E2B0B67060054371B /* DylKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DylKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FCD3B1DD2B0B584B0054371B /* Project object */;
 }

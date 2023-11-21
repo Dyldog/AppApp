@@ -6,19 +6,34 @@
 //
 
 import SwiftUI
+import DylKit
 
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+struct ContentView<Content: View>: View {
+    @Binding var variables: Variables
+    @State var error: Error?
+    @State var view: Content
+//    let initSteps: [Step]
+    
+    init(variables: Binding<Variables>, initSteps: [any Step], content: Content) throws {
+        self._view = .init(initialValue: content)
+        self._variables = variables
+        
+        onMain {
+            do {
+                try initSteps.forEach {
+                    try $0.run(with: &variables.wrappedValue)
+                }
+            } catch {
+                //
+            }
         }
-        .padding()
+    }
+    
+    var body: some View {
+        view
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}
