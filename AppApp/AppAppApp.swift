@@ -14,8 +14,9 @@ struct AppAppApp: App {
     @State var alert: Alert?
     var body: some Scene {
         WindowGroup {
-            ViewMakerView()
-            .padding()
+            NavigationView {
+                ScreenListView()
+            }
         }
     }
 }

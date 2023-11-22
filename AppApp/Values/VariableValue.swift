@@ -17,3 +17,15 @@ protocol VariableValue {
     func value(with variables: inout Variables) throws -> VariableValue?
     func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView
 }
+
+extension Encodable {
+    func encoded() -> Data { try! JSONEncoder().encode(self) }
+}
+
+extension Array where Element: Encodable {
+    func encoded() -> Data { try! JSONEncoder().encode(self) }
+}
+
+extension VariableValue {
+    
+}

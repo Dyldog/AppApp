@@ -62,3 +62,25 @@ final class ArrayValue: VariableValue, ObservableObject {
         }.any
     }
 }
+
+extension ArrayValue: Codable {
+    enum CodingKeys: String, CodingKey {
+        case type
+        case elements
+    }
+    
+    convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            type: try container.decode(VariableType.self, forKey: .type),
+            elements: try container.decode(CodableVariableList.self, forKey: .elements).values
+        )
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(CodableVariableList(variables: elements), forKey: .elements)
+        try container.encode(type, forKey: .type)
+    }
+}
+

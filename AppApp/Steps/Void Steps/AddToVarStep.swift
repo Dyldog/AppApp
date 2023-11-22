@@ -7,20 +7,18 @@
 
 import Foundation
 
-final class AddToVarStep: Step, ObservableObject {
+final class AddToVarStep: Step, ObservableObject, Codable {
     
     static var title: String { "Add to variable" }
-    @Published var varName: Value
-    @Published var value: Value
+    var varName: Value
+    var value: Value
     
     required init(varName: Value, value: Value) {
         self.varName = varName
         self.value = value
     }
     
-    var protoString: String { "{ $\(varName.protoString) += \(value.protoString) }"
-        
-    }
+    var protoString: String { "{ $\(varName.protoString) += \(value.protoString) }" }
     
     func run(with variables: inout Variables) throws {
         guard

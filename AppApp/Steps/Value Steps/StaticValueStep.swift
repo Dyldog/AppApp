@@ -58,3 +58,24 @@ final class StaticValueStep: ValueStep {
         }
     }
 }
+
+extension StaticValueStep: Codable {
+    enum CodingKeys: String, CodingKey {
+        case type
+        case value
+    }
+    
+    convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            value: try container.decode(Value.self, forKey: .value),
+            type: try container.decode(VariableType.self, forKey: .type)
+        )
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(type, forKey: .type)
+        try container.encode(value, forKey: .value)
+    }
+}

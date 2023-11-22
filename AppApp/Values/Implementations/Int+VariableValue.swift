@@ -14,7 +14,7 @@ extension Int: VariableValue {
         TextField("", text: .init(get: {
             self.protoString.components(separatedBy: .decimalDigits.inverted).joined()
         }, set: {
-            onUpdate(Int($0)!)
+            onUpdate(Int($0) ?? 0)
         })).any
     }
     

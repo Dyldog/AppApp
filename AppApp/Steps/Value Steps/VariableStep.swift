@@ -65,3 +65,24 @@ final class VariableStep: ValueStep {
         }
     }
 }
+
+extension VariableStep: Codable {
+    enum CodingKeys: String, CodingKey {
+        case varName
+        case type
+    }
+    
+    convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            varName: try container.decode(Value.self, forKey: .varName),
+            type: try container.decode(VariableType.self, forKey: .type)
+        )
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(varName, forKey: .varName)
+        try container.encode(type, forKey: .type)
+    }
+}

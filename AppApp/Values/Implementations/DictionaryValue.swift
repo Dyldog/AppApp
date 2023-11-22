@@ -69,3 +69,25 @@ final class DictionaryValue: VariableValue, ObservableObject {
         }.any
     }
 }
+
+extension DictionaryValue: Codable {
+    enum CodingKeys: String, CodingKey {
+        case type
+        case elements
+    }
+    
+    convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            type: try container.decode(VariableType.self, forKey: .type),
+            elements: try container.decode(CodableVariableDictionary.self, forKey: .elements).values
+        )
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(CodableVariableDictionary(variables: elements), forKey: .elements)
+        try container.encode(type, forKey: .type)
+    }
+}
+

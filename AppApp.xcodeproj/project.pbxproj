@@ -75,6 +75,7 @@
 		FCD3B25D2B0C964D0054371B /* ViewContructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B25C2B0C964D0054371B /* ViewContructor.swift */; };
 		FCD3B25F2B0C96790054371B /* MakeableConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B25E2B0C96790054371B /* MakeableConstructor.swift */; };
 		FCD3B2612B0C96890054371B /* EditableViewConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2602B0C96890054371B /* EditableViewConstructor.swift */; };
+		FCE36F4C2B0D752200E247D8 /* ScreenListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE36F4B2B0D752200E247D8 /* ScreenListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,6 +167,7 @@
 		FCD3B25C2B0C964D0054371B /* ViewContructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewContructor.swift; sourceTree = "<group>"; };
 		FCD3B25E2B0C96790054371B /* MakeableConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableConstructor.swift; sourceTree = "<group>"; };
 		FCD3B2602B0C96890054371B /* EditableViewConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableViewConstructor.swift; sourceTree = "<group>"; };
+		FCE36F4B2B0D752200E247D8 /* ScreenListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +271,7 @@
 		FC4635242B0C9B0900B8DCBE /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				FCE36F4A2B0D751800E247D8 /* Screen List */,
 				FC4C2C2C2B0CBE5E008217AC /* Dictionary Edit */,
 				FC4C2C252B0CA869008217AC /* List Edit */,
 				FCD3B2472B0C68D50054371B /* Edit Variable */,
@@ -479,6 +482,14 @@
 			path = "View Constructor";
 			sourceTree = "<group>";
 		};
+		FCE36F4A2B0D751800E247D8 /* Screen List */ = {
+			isa = PBXGroup;
+			children = (
+				FCE36F4B2B0D752200E247D8 /* ScreenListView.swift */,
+			);
+			path = "Screen List";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -669,6 +680,7 @@
 				FCD3B2382B0BA01D0054371B /* ViewMakerViewModel.swift in Sources */,
 				FC4C2C242B0C9B7F008217AC /* ArrayValue.swift in Sources */,
 				FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */,
+				FCE36F4C2B0D752200E247D8 /* ScreenListView.swift in Sources */,
 				FCD3B2162B0B63010054371B /* Variables.swift in Sources */,
 				FC4C15CD2B0C97700010BB1A /* StepError.swift in Sources */,
 				FC4C15C72B0C97390010BB1A /* ViewEditable+Constructor.swift in Sources */,

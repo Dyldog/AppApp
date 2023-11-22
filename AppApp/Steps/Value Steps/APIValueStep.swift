@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class  APIValueStep: ValueStep {
+final class APIValueStep: ValueStep {
     static var title: String { "Get value from API" }
     @Published var url: Value
     
@@ -52,5 +52,21 @@ final class  APIValueStep: ValueStep {
             case .url: return StringValue(value: "https://swapi.dev/api/people/1")
             }
         }
+    }
+}
+
+extension APIValueStep: Codable {
+    enum CodingKeys: String, CodingKey {
+        case url
+    }
+    
+    convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(url: try container.decode(Value.self, forKey: .url))
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(url, forKey: .url)
     }
 }

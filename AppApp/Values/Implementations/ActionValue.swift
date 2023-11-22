@@ -44,3 +44,19 @@ final class ActionValue: VariableValue, ObservableObject {
         }.any
     }
 }
+
+extension ActionValue: Codable {
+    enum CodingKeys: String, CodingKey {
+        case steps
+    }
+    
+    convenience init(from decoder: Decoder) throws {
+        var container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(steps: try container.decode(CodableStepList.self, forKey: .steps).steps)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(CodableStepList(steps: steps), forKey: .steps)
+    }
+}

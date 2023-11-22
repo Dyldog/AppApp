@@ -65,3 +65,24 @@ final class  DictionaryValueForKeyStep: ValueStep {
         }
     }
 }
+
+extension DictionaryValueForKeyStep: Codable {
+    enum CodingKeys: String, CodingKey {
+        case dictionary
+        case key
+    }
+    
+    convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            dictionary: try container.decode(Value.self, forKey: .dictionary),
+            key: try container.decode(Value.self, forKey: .key)
+        )
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(dictionary, forKey: .dictionary)
+        try container.encode(key, forKey: .key)
+    }
+}

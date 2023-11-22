@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum VariableType: Int, VariableValue, CaseIterable, Equatable {
+enum VariableType: Int, VariableValue, CaseIterable, Equatable, Codable {
     case type
     case value
     case string

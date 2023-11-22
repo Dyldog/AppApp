@@ -7,6 +7,6 @@
 
 import SwiftUI
 
-protocol MakeableView: ViewEditable {
+protocol MakeableView: ViewEditable/*, Codable*/ {
     func view(variables: Binding<Variables>?, alert: Binding<Alert?>?) throws -> AnyView
 }

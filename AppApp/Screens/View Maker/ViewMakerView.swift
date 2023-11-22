@@ -9,30 +9,21 @@ import SwiftUI
 import DylKit
                         
 struct ViewMakerView: View {
-    @StateObject var viewModel: ViewMakerViewModel = .init()
+    @StateObject var viewModel: ViewMakerViewModel
     
     var body: some View {
-        GeometryReader { geometry in
+        Self._printChanges()
+        return GeometryReader { geometry in
             VStack {
-                HStack {
-                    Spacer()
-                    
-                    if viewModel.makeMode {
-                        viewModel.initActions.editView(title: "Init Actions") {
-                            viewModel.updateInitActions($0)
-                        }
-                    }
-                    
-                    Toggle("Edit", isOn: $viewModel.makeMode)
-                        .fixedSize()
-                }
                 ScrollView {
                     CenterStack {
                         MakeableStack(content: viewModel.content, makeMode: viewModel.makeMode) {
                             viewModel.addTapped(at: $0)
                         } editTapped: {
                             viewModel.editView(at: $0)
-                        }.view(variables: $viewModel.variables, alert: $viewModel.alert)
+                        } removedTapped: {
+                            viewModel.removeView(at: $0)
+                        }.view(variables: viewModel.variables, alert: $viewModel.alert)
                             .sheet(item: $viewModel.showAddIndex, content: { index in
                                 AddViewView(viewModel: .init(onSelect: { view in
                                     viewModel.onAdd(view, at: index)
@@ -45,7 +36,22 @@ struct ViewMakerView: View {
                     }
                     .frame(minHeight: geometry.size.height)
                 }
-            }.alert($viewModel.alert)
+            }
+            .navigationTitle(viewModel.name)
+            .alert($viewModel.alert)
+            .toolbar {
+                HStack {
+                    if viewModel.makeMode {
+                        viewModel.initActions.editView(title: "Init Actions") {
+                            viewModel.updateInitActions($0)
+                        }
+                    }
+                    
+                    Toggle("Edit", isOn: $viewModel.makeMode)
+                        .toggleStyle(.switch)
+                        .fixedSize()
+                }
+            }
         }
     }
 }

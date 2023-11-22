@@ -69,3 +69,24 @@ final class SetVarStep: Step, ObservableObject {
         }
     }
 }
+
+extension SetVarStep: Codable {
+    enum CodingKeys: String, CodingKey {
+        case varName
+        case value
+    }
+    
+    convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            varName: try container.decode(Value.self, forKey: .varName),
+            value: try container.decode(Value.self, forKey: .value)
+        )
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(varName, forKey: .varName)
+        try container.encode(value, forKey: .value)
+    }
+}

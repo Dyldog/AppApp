@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class PrintVarStep: Step {
+final class PrintVarStep: Step, Codable {
     static var title: String { "Print variable" }
     var varName: Value
     
