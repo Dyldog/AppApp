@@ -18,24 +18,16 @@ class AddViewViewModel: ObservableObject {
     init(onSelect: @escaping (any MakeableView) -> Void) {
         rows = [
             .init(title: "Label", onTap: {
-                onSelect(MakeableLabel(text: "TEXT" as Value, fontSize: 18))
+                onSelect(MakeableLabel.makeableConstructor.makeableView)
             }),
             .init(title: "Button", onTap: {
                 onSelect(
-                    MakeableButton(
-                        title: Value(value: "Text" as Value), 
-                        fontSize: 18,
-                        action: StepArray(values: [])
-                    )
+                    MakeableButton.makeableConstructor.makeableView
                 )
             }),
             .init(title: "Textfield", onTap: {
                 onSelect(
-                    MakeableField(
-                        text: .init(initial: "TEXT" as Value, output: .init(name: StringValue(value: "FIELDTEXT"))), 
-                        fontSize: 18,
-                        onTextUpdate: StepArray(values: [])
-                    )
+                    MakeableField.makeableConstructor.makeableView
                 )
             })
         ]

@@ -43,6 +43,8 @@ struct CodableStep: Codable {
             self.value = try valueContainer.decode(DecodeDictionaryStep.self, forKey: .value)
         case typeString(DictionaryValueForKeyStep.self):
             self.value = try valueContainer.decode(DictionaryValueForKeyStep.self, forKey: .value)
+        case typeString(ArrayValueStep.self):
+            self.value = try valueContainer.decode(ArrayValueStep.self, forKey: .value)
         default:
             fatalError(type)
         }
@@ -69,6 +71,8 @@ struct CodableStep: Codable {
         case let value as DecodeDictionaryStep:
             try container.encode(value, forKey: .value)
         case let value as DictionaryValueForKeyStep:
+            try container.encode(value, forKey: .value)
+        case let value as ArrayValueStep:
             try container.encode(value, forKey: .value)
         default: fatalError()
         }

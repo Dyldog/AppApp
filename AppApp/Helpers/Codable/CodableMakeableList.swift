@@ -30,7 +30,7 @@ struct CodableMakeableList: Codable {
                 content.append(value)
             } else {
 //                fatalError()
-                self.init(elements: [MakeableLabel(text: Value(value: StringValue(value: "ERROR")), fontSize: 18)])
+                self.init(elements: [MakeableLabel.withText("ERROR")])
                 return
             }
         }

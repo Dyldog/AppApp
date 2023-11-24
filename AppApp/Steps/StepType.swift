@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol StepType: AnyObject, ViewEditable {
+protocol StepType: ViewEditable {
     static var title: String { get }
     func set(_ value: VariableValue, for property: Properties)
 }

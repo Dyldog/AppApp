@@ -17,6 +17,8 @@ enum VariableType: Int, VariableValue, CaseIterable, Equatable, Codable {
     case list
     case dictionary
     case temporary
+    case fontWeight
+    case boolean
     
     var protoString: String {
         switch self {
@@ -29,9 +31,12 @@ enum VariableType: Int, VariableValue, CaseIterable, Equatable, Codable {
         case .list: return "List"
         case .dictionary: return "Dictionary"
         case .temporary: return "Temporary"
+        case .fontWeight: return "Font Weight"
+        case .boolean: return "Boolean"
         }
     }
     
+    // TODO: Move to each implementation
     var defautltView: VariableValue {
         switch self {
         case .type: return VariableType.string
@@ -43,6 +48,8 @@ enum VariableType: Int, VariableValue, CaseIterable, Equatable, Codable {
         case .list:  return ArrayValue(type: .string, elements: [])
         case .dictionary: return DictionaryValue(type: .string, elements: [:])
         case .temporary: return TemporaryValue(initial: StringValue(value: "TEXT"), output: .init(name: StringValue(value: "FIELDTEXT")))
+        case .fontWeight: return Font.Weight.regular
+        case .boolean: return false
         }
     }
     
@@ -65,6 +72,6 @@ enum VariableType: Int, VariableValue, CaseIterable, Equatable, Codable {
             ForEach(VariableType.allCases) {
                 Text($0.protoString).tag($0)
             }
-        }.pickerStyle(.inline).any
+        }.pickerStyle(.menu).any
     }
 }

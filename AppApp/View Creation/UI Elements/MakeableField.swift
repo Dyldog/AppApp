@@ -91,6 +91,22 @@ final class MakeableField: MakeableView, Codable {
         }
     }
     
+    enum Properties: String, CaseIterable, ViewProperty, CodingKey {
+        case text
+        case fontSize
+        case onTextUpdate
+        
+        var defaultValue: VariableValue {
+            switch self {
+            case .text: return TemporaryValue(initial: StringValue(value: "TEXT"), output: .init(name: StringValue(value: "FIELDTEXT")))
+            case .fontSize: return 18
+            case .onTextUpdate: return StepArray(values: [])
+            }
+        }
+    }
+}
+
+extension MakeableField {
     func value(for property: Properties) -> (VariableValue)? {
         switch property {
         case .text: return text
@@ -105,19 +121,5 @@ final class MakeableField: MakeableView, Codable {
             fontSize: factory(.fontSize) as! Int,
             onTextUpdate: factory(.onTextUpdate) as! StepArray
         )
-    }
-    
-    enum Properties: String, CaseIterable, ViewProperty, CodingKey {
-        case text
-        case fontSize
-        case onTextUpdate
-        
-        var defaultValue: VariableValue {
-            switch self {
-            case .text: return TemporaryValue(initial: StringValue(value: "TEXT"), output: .init(name: StringValue(value: "FIELDTEXT")))
-            case .fontSize: return 18
-            case .onTextUpdate: return [any StepType]()
-            }
-        }
     }
 }

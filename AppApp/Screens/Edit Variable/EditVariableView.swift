@@ -24,7 +24,7 @@ struct EditVariableView: View {
                 ForEach(VariableType.allCases) {
                     Text($0.protoString).tag($0)
                 }
-            }.pickerStyle(.segmented)
+            }.pickerStyle(.menu)
             
             value.editView(onUpdate: {
                 self.value = $0

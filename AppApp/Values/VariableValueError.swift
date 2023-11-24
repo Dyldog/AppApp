@@ -11,6 +11,7 @@ enum VariableValueError: LocalizedError, Identifiable {
     var id: String { localizedDescription }
     case wrongTypeForOperation
     case valueNotFoundForVariable(String)
+    case variableCannotPerformOperation(VariableType, String)
     
     var localizedDescription: String {
         switch self {
@@ -18,6 +19,8 @@ enum VariableValueError: LocalizedError, Identifiable {
             return "Wrong type for operation"
         case let .valueNotFoundForVariable(variable):
             return "Value not found for variable '\(variable)'"
+        case let .variableCannotPerformOperation(variable, operation):
+            return "Variable \(variable) cannot perform step \(operation)"
         }
     }
 }

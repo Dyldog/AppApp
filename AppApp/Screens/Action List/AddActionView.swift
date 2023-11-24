@@ -17,6 +17,7 @@ struct AddActionView: View {
         case getFromAPI
         case decodeJSON
         case getDictValue
+        case getArrayValue
         
         var title: String {
             switch self {
@@ -28,6 +29,7 @@ struct AddActionView: View {
             case .getFromAPI: return APIValueStep.title
             case .decodeJSON: return DecodeDictionaryStep.title
             case .getDictValue: return DictionaryValueForKeyStep.title
+            case .getArrayValue: return ArrayValueStep.title
             }
         }
         
@@ -45,6 +47,8 @@ struct AddActionView: View {
                 DictionaryValueForKeyStep(
                     dictionary: Value(value: DictionaryValue(type: .string, elements: [:])),
                     key: "TEXT" as Value)
+            case .getArrayValue:
+                ArrayValueStep(array: Value(value: ArrayValue(type: .string, elements: [])), index: Value(value: 0))
             }
         }
     }

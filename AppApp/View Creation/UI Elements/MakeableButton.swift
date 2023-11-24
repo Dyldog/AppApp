@@ -50,10 +50,12 @@ struct MakeableButtonView: View {
             runAction()
         }, label: {
             Text(text)
-                .font(.system(size: CGFloat(button.fontSize)))
+                .font(.system(size: CGFloat(button.fontSize)).weight(button.fontWeight))
+                .if(button.italic) { $0.italic() }
+                .fixedSize()
         }).task(id: variables) {
             self.text = await titleString()
-        }.any
+        }.fixedSize().any
     }
     
     func runAction() {
@@ -80,11 +82,15 @@ struct MakeableButton: MakeableView, Codable {
     let title: Value
     let action: StepArray
     let fontSize: Int
+    let fontWeight: Font.Weight
+    let italic: Bool
     
-    init(title: Value, fontSize: Int, action: StepArray) {
+    init(title: Value, action: StepArray, fontSize: Int, fontWeight: Font.Weight, italic: Bool) {
         self.title = title
         self.action = action
         self.fontSize = fontSize
+        self.fontWeight = fontWeight
+        self.italic = italic
     }
     
     var protoString: String { title.protoString }
@@ -93,33 +99,42 @@ struct MakeableButton: MakeableView, Codable {
         //
     }
     
+    enum Properties: String, CaseIterable, ViewProperty {
+        case title
+        case fontSize
+        case action
+        case fontWeight
+        case italic
+        
+        var defaultValue: VariableValue {
+            switch self {
+            case .title: return "TITLE" as Value
+            case .fontSize: return 12
+            case .action: return StepArray(values: [])
+            case .fontWeight: return Font.Weight.regular
+            case .italic: return false
+            }
+        }
+    }
+}
+
+extension MakeableButton {
     func value(for property: Properties) -> (VariableValue)? {
         switch property {
         case .title: return title //(&variables)
         case .fontSize: return fontSize
         case .action: return action
+        case .fontWeight: return fontWeight
+        case .italic: return italic
         }
     }
     
     static func make(factory: (Properties) -> VariableValue) -> MakeableButton {
         return .init(
             title: factory(.title) as! Value,
-            fontSize: factory(.fontSize) as! Int,
-            action: factory(.action) as! StepArray
+            action: factory(.action) as! StepArray, fontSize: factory(.fontSize) as! Int,
+            fontWeight: factory(.fontWeight) as! Font.Weight,
+            italic: factory(.italic) as! Bool
         )
-    }
-    
-    enum Properties: String, CaseIterable, ViewProperty {
-        case title
-        case fontSize
-        case action
-        
-        var defaultValue: VariableValue {
-            switch self {
-            case .title: return "TITLE" as Value
-            case .fontSize: return 12
-            case .action: return [any StepType]()
-            }
-        }
     }
 }

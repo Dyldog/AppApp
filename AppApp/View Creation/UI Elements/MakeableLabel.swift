@@ -37,7 +37,8 @@ struct MakeableLabelView: View {
     
     var body: some View {
         Text(text)
-            .font(.system(size: CGFloat(label.fontSize)))
+            .font(.system(size: CGFloat(label.fontSize)).weight(label.fontWeight))
+            .if(label.italic) { $0.italic() }
             .task(id: variables) {
                 self.text = await self.labelText()
             }
@@ -49,34 +50,55 @@ struct MakeableLabel: MakeableView, Codable {
     let id: UUID = .init()
     let text: Value
     let fontSize: Int
+    let fontWeight: Font.Weight
+    let italic: Bool
+    
+    static func withText(_ string: String) -> MakeableLabel {
+        .init(
+            text: Value(value: StringValue(value: string)),
+            fontSize: 18,
+            fontWeight: .regular,
+            italic: true
+        )
+    }
     
     func insertValues(into variables: Binding<Variables>) throws { }
     
     var protoString: String { text.protoString }
     
+    enum Properties: String, CaseIterable, ViewProperty {
+        case value
+        case fontSize
+        case fontWeight
+        case italic
+        
+        var defaultValue: VariableValue {
+            switch self {
+            case .value: return "TEXT" as Value
+            case .fontSize: return 18
+            case .fontWeight: return Font.Weight.regular
+            case .italic: return false
+            }
+        }
+    }
+}
+
+extension MakeableLabel {
     func value(for property: Properties) -> (VariableValue)? {
         switch property {
         case .value: return text
         case .fontSize: return fontSize
+        case .fontWeight: return fontWeight
+        case .italic: return italic
         }
     }
     
     static func make(factory: (Properties) -> VariableValue) -> MakeableLabel {
         .init(
             text: factory(.value) as! Value,
-            fontSize: factory(.fontSize) as! Int
+            fontSize: factory(.fontSize) as! Int,
+            fontWeight: factory(.fontWeight) as! Font.Weight,
+            italic: factory(.italic) as! Bool
         )
-    }
-    
-    enum Properties: String, CaseIterable, ViewProperty {
-        case value
-        case fontSize
-        
-        var defaultValue: VariableValue {
-            switch self {
-            case .value: return "TEXT" as Value
-            case .fontSize: return 18
-            }
-        }
     }
 }

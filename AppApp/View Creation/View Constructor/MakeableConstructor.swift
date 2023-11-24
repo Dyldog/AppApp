@@ -16,7 +16,11 @@ struct MakeableViewConstructor: ViewConstructor {
         self.factory = factory
     }
     
-    var view: any ViewEditable {
+    var makeableView: any MakeableView {
         factory(properties)
+    }
+    
+    var view: any ViewEditable {
+        makeableView
     }
 }

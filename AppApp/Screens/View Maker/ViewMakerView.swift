@@ -58,19 +58,21 @@ struct ViewMakerView: View {
                             viewModel.updateInitActions($0)
                         }
                         
-                        VStack {
+                        VStack(spacing: 0) {
                             Text("Errors").font(.footnote)
                             Toggle("Errors", isOn: $viewModel.showErrors)
                                 .toggleStyle(.switch)
                                 .fixedSize()
+                                .labelsHidden()
                         }
                     }
                     
-                    VStack {
+                    VStack(spacing: 0) {
                         Text("Edit").font(.footnote)
                         Toggle("Edit", isOn: $viewModel.makeMode)
                             .toggleStyle(.switch)
                             .fixedSize()
+                            .labelsHidden()
                     }
                 }
             }
