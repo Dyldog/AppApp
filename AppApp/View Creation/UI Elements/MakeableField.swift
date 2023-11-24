@@ -68,10 +68,10 @@ struct MakeableFieldView: View {
 }
 
 final class MakeableField: MakeableView, Codable {
-    let id: UUID = .init()
-    let text: TemporaryValue
-    let fontSize: Int
-    let onTextUpdate: StepArray
+    var id: UUID = .init()
+    var text: TemporaryValue
+    var fontSize: Int
+    var onTextUpdate: StepArray
     
     init(text: TemporaryValue, fontSize: Int, onTextUpdate: StepArray) {
         self.text = text
@@ -96,7 +96,7 @@ final class MakeableField: MakeableView, Codable {
         case fontSize
         case onTextUpdate
         
-        var defaultValue: VariableValue {
+        var defaultValue: any VariableValue {
             switch self {
             case .text: return TemporaryValue(initial: StringValue(value: "TEXT"), output: .init(name: StringValue(value: "FIELDTEXT")))
             case .fontSize: return 18
@@ -107,7 +107,7 @@ final class MakeableField: MakeableView, Codable {
 }
 
 extension MakeableField {
-    func value(for property: Properties) -> (VariableValue)? {
+    func value(for property: Properties) -> (any VariableValue)? {
         switch property {
         case .text: return text
         case .fontSize: return fontSize
@@ -115,11 +115,19 @@ extension MakeableField {
         }
     }
     
-    static func make(factory: (Properties) -> VariableValue) -> MakeableField {
+    static func make(factory: (Properties) -> any VariableValue) -> MakeableField {
         .init(
             text: factory(.text) as! TemporaryValue,
             fontSize: factory(.fontSize) as! Int,
             onTextUpdate: factory(.onTextUpdate) as! StepArray
         )
+    }
+    
+    func set(_ value: any VariableValue, for property: Properties) {
+        switch property {
+        case .text: self.text = value as! TemporaryValue
+        case .fontSize: self.fontSize = value as! Int
+        case .onTextUpdate: self.onTextUpdate = value as! StepArray
+        }
     }
 }

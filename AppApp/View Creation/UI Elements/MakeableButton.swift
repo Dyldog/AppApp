@@ -77,13 +77,13 @@ struct MakeableButtonView: View {
     }
 }
 
-struct MakeableButton: MakeableView, Codable {
-    let id: UUID = .init()
-    let title: Value
-    let action: StepArray
-    let fontSize: Int
-    let fontWeight: Font.Weight
-    let italic: Bool
+final class MakeableButton: MakeableView, Codable {
+    var id: UUID = .init()
+    var title: Value
+    var action: StepArray
+    var fontSize: Int
+    var fontWeight: Font.Weight
+    var italic: Bool
     
     init(title: Value, action: StepArray, fontSize: Int, fontWeight: Font.Weight, italic: Bool) {
         self.title = title
@@ -106,7 +106,7 @@ struct MakeableButton: MakeableView, Codable {
         case fontWeight
         case italic
         
-        var defaultValue: VariableValue {
+        var defaultValue: any VariableValue {
             switch self {
             case .title: return "TITLE" as Value
             case .fontSize: return 12
@@ -119,7 +119,7 @@ struct MakeableButton: MakeableView, Codable {
 }
 
 extension MakeableButton {
-    func value(for property: Properties) -> (VariableValue)? {
+    func value(for property: Properties) -> (any VariableValue)? {
         switch property {
         case .title: return title //(&variables)
         case .fontSize: return fontSize
@@ -129,12 +129,22 @@ extension MakeableButton {
         }
     }
     
-    static func make(factory: (Properties) -> VariableValue) -> MakeableButton {
+    static func make(factory: (Properties) -> any VariableValue) -> MakeableButton {
         return .init(
             title: factory(.title) as! Value,
             action: factory(.action) as! StepArray, fontSize: factory(.fontSize) as! Int,
             fontWeight: factory(.fontWeight) as! Font.Weight,
             italic: factory(.italic) as! Bool
         )
+    }
+    
+    func set(_ value: any VariableValue, for property: Properties) {
+        switch property {
+        case .title: self.title = value as! Value //(&variables)
+        case .fontSize: self.fontSize = value as! Int
+        case .action: self.action = value as! StepArray
+        case .fontWeight: self.fontWeight = value as! Font.Weight
+        case .italic: self.italic = value as! Bool
+        }
     }
 }

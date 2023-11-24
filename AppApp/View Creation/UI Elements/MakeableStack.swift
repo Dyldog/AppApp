@@ -76,7 +76,7 @@ struct MakeableStackView: View {
     }
 }
 
-struct MakeableStack: MakeableView, Codable {
+final class MakeableStack: MakeableView, Codable {
     enum Properties: String, CaseIterable, ViewProperty {
         case content
         
@@ -98,13 +98,19 @@ struct MakeableStack: MakeableView, Codable {
         }
     }
     
-    func value(for property: Properties) -> (VariableValue)? {
+    func value(for property: Properties) -> (any VariableValue)? {
         switch property {
-        case .content: return nil
+        case .content: return nil // TODO: Conform MakeableArray to VariableValue
         }
     }
     
     static func make(factory: (Properties) -> any VariableValue) -> MakeableStack {
         .init(content: factory(.content) as! MakeableArray)
+    }
+    
+    func set(_ value: any VariableValue, for property: Properties) {
+        switch property {
+        case .content: break
+        }
     }
 }

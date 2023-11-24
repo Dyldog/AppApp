@@ -12,4 +12,6 @@ protocol ViewEditable {
     static func make(factory: (Properties) -> any VariableValue) -> Self
     func value(for property: Properties) -> (any VariableValue)?
     var protoString: String { get }
+    
+    func set(_ value: any VariableValue, for property: Properties)
 }
