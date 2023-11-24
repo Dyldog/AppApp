@@ -25,16 +25,17 @@ extension Array: VariableValue where Element == any StepType {
         .joined(separator: "\n")
     }
     
-    func value(with variables: inout Variables) throws -> VariableValue? {
-        var variables = try reduce(into: variables, { variables, step in
-            try step.run(with: &variables)
-        })
-        return try variables.value(for: "$0")!.value(with: &variables)
+    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+        for step in self {
+            try await step.run(with: variables)
+        }
+        return try await variables.wrappedValue.value(for: "$0")!.value(with: variables)
     }
     
     func editView(title: String, onUpdate: @escaping (Array<any StepType>) -> Void) -> AnyView {
         HStack {
             Text(protoString)
+                .fixedSize()
             SheetButton(title: {
                 Text(title)
             }) {

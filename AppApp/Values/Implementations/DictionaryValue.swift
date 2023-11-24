@@ -9,7 +9,7 @@ import SwiftUI
 
 final class DictionaryValue: VariableValue, ObservableObject {
     
-    static var type: VariableType { .list }
+    static var type: VariableType { .dictionary }
     
     @Published var type: VariableType
     @Published var elements: [StringValue: any VariableValue]
@@ -31,10 +31,15 @@ final class DictionaryValue: VariableValue, ObservableObject {
         elements.map { "\($0.key.valueString): \($0.value.valueString)" }.joined(separator: ", ")
     }
     
-    func value(with variables: inout Variables) throws -> VariableValue? {
+    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+        var mapped: [StringValue: (any VariableValue)?] = [:]
+        for (key, value) in elements {
+            mapped[key] = try await value.value(with: variables)
+        }
+        
         return DictionaryValue(
             type: type,
-            elements: try elements.compactMapValues { try $0.value(with: &variables) }
+            elements: elements.compactMapValues { $0 }
         )
     }
     
@@ -48,7 +53,7 @@ final class DictionaryValue: VariableValue, ObservableObject {
     }
     
     func update(oldKey: StringValue, to newKey: StringValue) throws -> VariableValue {
-        guard let value = elements[oldKey] else { throw VariableValueError.valueNotFoundForVariable }
+        guard let value = elements[oldKey] else { throw VariableValueError.valueNotFoundForVariable(oldKey.protoString) }
         elements.removeValue(forKey: oldKey)
         elements[newKey] = value
         return self

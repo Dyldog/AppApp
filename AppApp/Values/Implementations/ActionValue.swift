@@ -20,12 +20,12 @@ final class ActionValue: VariableValue, ObservableObject {
     
     var valueString: String { steps.map { $0.protoString }.joined(separator: "\n") }
     
-    func value(with variables: inout Variables) throws -> VariableValue? {
-        try steps.forEach {
-            try $0.run(with: &variables)
+    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+        for step in steps {
+            try await step.run(with: variables)
         }
         
-        return variables.value(for: "$0")
+        return variables.wrappedValue.value(for: "$0")
     }
     
     func add(_ other: VariableValue) throws -> VariableValue {
@@ -51,8 +51,8 @@ extension ActionValue: Codable {
     }
     
     convenience init(from decoder: Decoder) throws {
-        var container = try decoder.container(keyedBy: CodingKeys.self)
-        self.init(steps: try container.decode(CodableStepList.self, forKey: .steps).steps)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(steps: try container.decode(CodableStepList.self, forKey: .steps).values)
     }
     
     func encode(to encoder: Encoder) throws {

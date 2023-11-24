@@ -7,49 +7,87 @@
 
 import SwiftUI
 
-final class MakeableField: MakeableView, Codable {
-    var text: Value
-    var fontSize: Int
-    var onTextUpdate: [any StepType]
-    var onEdit: (() -> Void)?
+struct MakeableFieldView: View {
+    let makeMode: Bool
+    let field: MakeableField
+    let onContentUpdate: (MakeableField) -> Void
+    let onRuntimeUpdate: () -> Void
+    @Binding var variables: Variables!
+    @Binding var error: VariableValueError?
+    @State var text: String = ""
     
-    init(text: Value, fontSize: Int, onTextUpdate: [any StepType], onEdit: (() -> Void)? = nil) {
+    var body: some View {
+        VStack {
+            if variables != nil {
+                TextField("", text: .init(get: {
+                    text
+                }, set: {
+                    onTextUpdate($0)
+                })).font(.system(size: CGFloat(field.fontSize))).any
+            } else {
+                Text(field.protoString)
+                    .font(.system(size: CGFloat(field.fontSize)))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .any
+            }
+        }.task(id: variables) {
+            do {
+                if variables != nil {
+                    guard let value = try await field.text.value(with: $variables.unwrapped())?.valueString
+                    else { throw VariableValueError.valueNotFoundForVariable(field.text.protoString) }
+                    return self.text = value
+                }
+            } catch let error as VariableValueError {
+                self.error = error
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
+    
+    func onTextUpdate(_ string: String) {
+        self.text = string
+        
+        Task { @MainActor in
+            do {
+                if variables != nil, let outputVar = try await field.text.output.name.value(with: $variables.unwrapped()) {
+                    variables.set(Value(stringLiteral: string), for: outputVar.valueString)
+                    for step in field.onTextUpdate {
+                        try await step.run(with: $variables.unwrapped())
+                    }
+                }
+            } catch let error as VariableValueError {
+                self.error = error
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+            
+            onRuntimeUpdate()
+        }
+    }
+}
+
+final class MakeableField: MakeableView, Codable {
+    let id: UUID = .init()
+    let text: TemporaryValue
+    let fontSize: Int
+    let onTextUpdate: StepArray
+    
+    init(text: TemporaryValue, fontSize: Int, onTextUpdate: StepArray) {
         self.text = text
         self.fontSize = fontSize
         self.onTextUpdate = onTextUpdate
-        self.onEdit = onEdit
     }
     
-    func view(variables: Binding<Variables>?, alert: Binding<Alert?>?) throws -> AnyView {
-        func field(_ text: String, variables: Binding<Variables>) -> AnyView {
-            return TextField("", text: .init(get: {
-                text
-            }, set: {
-                do {
-                    self.text = Value(stringLiteral: $0)
-//
-//                    var variables = variables.wrappedValue
-                    variables.wrappedValue.set(Value(stringLiteral: $0), for: "$0")
-                    try self.onTextUpdate.forEach {
-                        try $0.run(with: &variables.wrappedValue)
-                    }
-                    
-//                    onEdit?()
-                } catch {
-//                    alert?.wrappedValue = .init(title: "Error", message: error.localizedDescription)
-                }
-            })).font(.system(size: CGFloat(fontSize))).any
+    var protoString: String { text.protoString }
+    
+    func insertValues(into variables: Binding<Variables>) async throws {
+        if let outputVarName = try await text.value(with: variables)?.valueString {
+            variables.wrappedValue.set(text, for: outputVarName)
         }
-        if var variables = variables {
-            guard let value = try text.value(with: &variables.wrappedValue)?.valueString
-            else { throw VariableValueError.valueNotFoundForVariable }
-            return field(value, variables: variables)
-        } else {
-//            return field(text.protoString)
-            return Text(text.protoString)
-                .font(.system(size: CGFloat(fontSize)))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .any
+        
+        for step in onTextUpdate {
+            try await step.run(with: variables)
         }
     }
     
@@ -63,43 +101,23 @@ final class MakeableField: MakeableView, Codable {
     
     static func make(factory: (Properties) -> VariableValue) -> MakeableField {
         .init(
-            text: .init(value: factory(.text)),
+            text: factory(.text) as! TemporaryValue,
             fontSize: factory(.fontSize) as! Int,
-            onTextUpdate: factory(.onTextUpdate) as! [any StepType]
+            onTextUpdate: factory(.onTextUpdate) as! StepArray
         )
     }
     
-    enum Properties: String, CaseIterable, ViewProperty {
+    enum Properties: String, CaseIterable, ViewProperty, CodingKey {
         case text
         case fontSize
         case onTextUpdate
         
         var defaultValue: VariableValue {
             switch self {
-            case .text: return "TEXT" as Value
+            case .text: return TemporaryValue(initial: StringValue(value: "TEXT"), output: .init(name: StringValue(value: "FIELDTEXT")))
             case .fontSize: return 18
             case .onTextUpdate: return [any StepType]()
             }
         }
-    }
-
-    enum CodingKeys: String, CodingKey {
-        case text
-        case fontSize
-        case onTextUpdate
-    }
-    
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.text = try container.decode(Value.self, forKey: .text)
-        self.fontSize = try container.decode(Int.self, forKey: .fontSize)
-        self.onTextUpdate = try container.decode(CodableStepList.self, forKey: .onTextUpdate).steps
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(text, forKey: .text)
-        try container.encode(fontSize, forKey: .fontSize)
-        try container.encode(CodableStepList(steps: onTextUpdate), forKey: .onTextUpdate)
     }
 }

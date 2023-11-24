@@ -5,7 +5,7 @@
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import Foundation
+import SwiftUI
 
 final class VariableStep: ValueStep {
     static var title: String { "Get variable" }
@@ -19,13 +19,13 @@ final class VariableStep: ValueStep {
     
     var protoString: String { "{ $\(varName) }" }
     
-    func run(with variables: inout Variables) throws -> VariableValue {
+    func run(with variables: Binding<Variables>) async throws -> VariableValue {
         guard
-            let nameValue = try varName.value(with: &variables),
-            let value = variables.value(for: nameValue.valueString)
-        else { throw VariableValueError.valueNotFoundForVariable }
+            let nameValue = try await varName.value(with: variables),
+            let value = variables.wrappedValue.value(for: nameValue.valueString)
+        else { throw VariableValueError.valueNotFoundForVariable(varName.protoString) }
         
-        guard let typedValue = try value.value(with: &variables)
+        guard let typedValue = try await value.value(with: variables)
         else { throw VariableValueError.wrongTypeForOperation }
         
         

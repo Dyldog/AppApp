@@ -20,8 +20,8 @@ struct ScreenListView: View {
             ForEach(enumerated: viewModel.screens) { (index, screen) in
                 NavigationLink {
                     ViewMakerView(viewModel: .init(screen: screen, onUpdate: {
-                        viewModel.screens[index] = $0
                         viewModel.objectWillChange.send()
+                        viewModel.screens[index] = $0
                     }))
                 } label: {
                     Text(screen.name).font(.largeTitle)
@@ -34,13 +34,15 @@ struct ScreenListView: View {
         }
         .navigationTitle("Screens")
         .toolbar {
-            SwiftUI.Button("Add") {
-                viewModel.screens.append(Screen(
-                    name: randomString(length: 5).uppercased(),
-                    initActions: [],
-                    content: []
-                ))
-                viewModel.objectWillChange.send()
+            ToolbarItem(placement: .navigation) {
+                SwiftUI.Button("Add") {
+                    viewModel.screens.append(Screen(
+                        name: randomString(length: 5).uppercased(),
+                        initActions: .init(values: []),
+                        content: .init(elements: [])
+                    ))
+                    viewModel.objectWillChange.send()
+                }
             }
         }
     }

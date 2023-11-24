@@ -25,16 +25,16 @@ class AddViewViewModel: ObservableObject {
                     MakeableButton(
                         title: Value(value: "Text" as Value), 
                         fontSize: 18,
-                        action: []
+                        action: StepArray(values: [])
                     )
                 )
             }),
             .init(title: "Textfield", onTap: {
                 onSelect(
                     MakeableField(
-                        text: .init(value: "TEXT" as Value),
-                        fontSize: 18, 
-                        onTextUpdate: []
+                        text: .init(initial: "TEXT" as Value, output: .init(name: StringValue(value: "FIELDTEXT"))), 
+                        fontSize: 18,
+                        onTextUpdate: StepArray(values: [])
                     )
                 )
             })

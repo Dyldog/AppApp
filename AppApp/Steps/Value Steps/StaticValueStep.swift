@@ -5,7 +5,7 @@
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import Foundation
+import SwiftUI
 
 final class StaticValueStep: ValueStep {
     static var title: String { "Static value" }
@@ -19,8 +19,8 @@ final class StaticValueStep: ValueStep {
     
     var protoString: String { value.protoString }
     
-    func run(with variables: inout Variables) throws -> VariableValue {
-        guard let typedValue = try value.value(with: &variables)
+    func run(with variables: Binding<Variables>) async throws -> VariableValue {
+        guard let typedValue = try await value.value(with: variables)
         else { throw VariableValueError.wrongTypeForOperation }
         return typedValue
     }

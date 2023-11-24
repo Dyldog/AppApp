@@ -17,7 +17,7 @@ import SwiftUI
 //    
 //    var protoString: String { self }
 //    var valueString: String { self }
-//    func value(with variables: inout Variables) throws -> VariableValue? { self }
+//    func value(with variables: Binding<Variables>) throws -> VariableValue? { self }
 //    
 //    func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView {
 //        TextField("", text: .init(get: {
@@ -43,7 +43,7 @@ final class StringValue: VariableValue {
     
     var protoString: String { value }
     var valueString: String { value }
-    func value(with variables: inout Variables) throws -> VariableValue? { self }
+    func value(with variables: Binding<Variables>) throws -> VariableValue? { self }
     
     func editView(title: String, onUpdate: @escaping (StringValue) -> Void) -> AnyView {
         TextField("", text: .init(get: {

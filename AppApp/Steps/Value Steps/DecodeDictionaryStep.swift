@@ -5,7 +5,7 @@
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import Foundation
+import SwiftUI
 
 final class DecodeDictionaryStep: ValueStep {
     static var title: String { "Decode a dictionary from JSON" }
@@ -17,9 +17,9 @@ final class DecodeDictionaryStep: ValueStep {
     
     var protoString: String { "{ DECODE($\(value.protoString)) }" }
     
-    func run(with variables: inout Variables) throws -> VariableValue {
+    func run(with variables: Binding<Variables>) async throws -> VariableValue {
         guard
-            let value = try value.value(with: &variables)
+            let value = try await value.value(with: variables)
         else { throw VariableValueError.wrongTypeForOperation }
         
         return DictionaryValue(type: .string, elements: (try JSONSerialization.jsonObject(

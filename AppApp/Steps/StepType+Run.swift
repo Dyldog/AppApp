@@ -5,15 +5,15 @@
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import Foundation
+import SwiftUI
 
 extension StepType {
-    func run(with variables: inout Variables) throws {
+    func run(with variables: Binding<Variables>) async throws {
         switch self {
         case let step as any ValueStep:
-            try variables.set(step.run(with: &variables), for: "$0")
+            try await variables.wrappedValue.set(step.run(with: variables), for: "$0")
         case let step as any Step:
-            try step.run(with: &variables)
+            try await step.run(with: variables)
         default:
             fatalError()
         }

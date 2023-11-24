@@ -27,7 +27,7 @@ extension Int: VariableValue {
     
     var valueString: String { "\(self)"}
     
-    func value(with variables: inout Variables) throws -> VariableValue? {
+    func value(with variables: Binding<Variables>) throws -> VariableValue? {
         self
     }
 }

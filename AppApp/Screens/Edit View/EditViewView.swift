@@ -25,18 +25,18 @@ struct EditViewView: View {
             }
             .frame(minWidth: 300, minHeight: 300)
             
-            DoView {
-                try viewModel.view.prototypeView()
-            } content: {
-                $0
-                    .padding(20)
-                    .border(.black)
-                    .padding()
-                    .any
-            } onError: {
-                viewModel.alert = .init(title: "Error", message: $0.localizedDescription)
-                return Text("ERROR").any
-            }
+//            DoView {
+//                try viewModel.view.prototypeView()
+//            } content: {
+//                $0
+//                    .padding(20)
+//                    .border(.black)
+//                    .padding()
+//                    .any
+//            } onError: {
+//                viewModel.alert = .init(title: "Error", message: $0.localizedDescription)
+//                return Text("ERROR").any
+//            }
         }
 //        .alert($viewModel.alert)
     }

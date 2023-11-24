@@ -20,14 +20,14 @@ struct Variable: VariableValue {
     var protoString: String { "{ \(name.protoString) }" }
     var valueString: String { "\(name.valueString)" }
     
-    func value(with variables: inout Variables) throws -> VariableValue? {
+    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
         guard
-            let nameValue = try name.value(with: &variables),
-            let value = variables.value(for: nameValue.valueString)
+            let nameValue = try await name.value(with: variables),
+            let value = variables.wrappedValue.value(for: nameValue.valueString)
         else {
-            throw VariableValueError.valueNotFoundForVariable
+            throw VariableValueError.valueNotFoundForVariable(name.protoString)
         }
-        return try value.value(with: &variables)
+        return try await value.value(with: variables)
     }
     
     func editView(title: String, onUpdate: @escaping (Variable) -> Void) -> AnyView {

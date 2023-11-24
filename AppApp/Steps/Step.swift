@@ -9,5 +9,5 @@ import Foundation
 import SwiftUI
 
 protocol Step: StepType {
-    func run(with variables: inout Variables) throws
+    func run(with variables: Binding<Variables>) async throws
 }

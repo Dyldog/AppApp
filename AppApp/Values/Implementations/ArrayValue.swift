@@ -28,12 +28,14 @@ final class ArrayValue: VariableValue, ObservableObject {
         """
     }
     
-    func value(with variables: inout Variables) throws -> VariableValue? {
+    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+        var mapped: [VariableValue?] = []
+        for element in elements {
+            mapped.append(try await element.value(with: variables))
+        }
         return ArrayValue(
             type: type,
-            elements: try elements.compactMap { (value: (any VariableValue)?) -> (any VariableValue)? in
-                return try  value?.value(with: &variables)
-            }
+            elements: mapped.compactMap { $0 }
         )
     }
     

@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */; };
+		FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */; };
+		FC2B8A892B108F3F003FAB86 /* CodableMakeableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */; };
+		FC2B8A8B2B108F6B003FAB86 /* CodableVariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A8A2B108F6B003FAB86 /* CodableVariableValue.swift */; };
+		FC2B8A8D2B108F7C003FAB86 /* CodableVariableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A8C2B108F7C003FAB86 /* CodableVariableList.swift */; };
+		FC2B8A8F2B108F90003FAB86 /* CodableVariableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A8E2B108F90003FAB86 /* CodableVariableDictionary.swift */; };
+		FC2B8A912B108FA0003FAB86 /* CodableStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A902B108FA0003FAB86 /* CodableStep.swift */; };
+		FC2B8A932B108FAE003FAB86 /* CodableStepList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A922B108FAE003FAB86 /* CodableStepList.swift */; };
+		FC2B8A952B108FC0003FAB86 /* CodableTypeString.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A942B108FC0003FAB86 /* CodableTypeString.swift */; };
+		FC2B8A972B10900C003FAB86 /* StepArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A962B10900C003FAB86 /* StepArray.swift */; };
+		FC2B8A992B109038003FAB86 /* MakeableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A982B109038003FAB86 /* MakeableArray.swift */; };
 		FC4635072B0C980A00B8DCBE /* StaticValueStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635062B0C980A00B8DCBE /* StaticValueStep.swift */; };
 		FC46350A2B0C982E00B8DCBE /* VariableStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635092B0C982E00B8DCBE /* VariableStep.swift */; };
 		FC46350C2B0C983D00B8DCBE /* APIValueStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC46350B2B0C983D00B8DCBE /* APIValueStep.swift */; };
@@ -96,6 +107,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableWrapperView.swift; sourceTree = "<group>"; };
+		FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryValue.swift; sourceTree = "<group>"; };
+		FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMakeableList.swift; sourceTree = "<group>"; };
+		FC2B8A8A2B108F6B003FAB86 /* CodableVariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableVariableValue.swift; sourceTree = "<group>"; };
+		FC2B8A8C2B108F7C003FAB86 /* CodableVariableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableVariableList.swift; sourceTree = "<group>"; };
+		FC2B8A8E2B108F90003FAB86 /* CodableVariableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableVariableDictionary.swift; sourceTree = "<group>"; };
+		FC2B8A902B108FA0003FAB86 /* CodableStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableStep.swift; sourceTree = "<group>"; };
+		FC2B8A922B108FAE003FAB86 /* CodableStepList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableStepList.swift; sourceTree = "<group>"; };
+		FC2B8A942B108FC0003FAB86 /* CodableTypeString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableTypeString.swift; sourceTree = "<group>"; };
+		FC2B8A962B10900C003FAB86 /* StepArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepArray.swift; sourceTree = "<group>"; };
+		FC2B8A982B109038003FAB86 /* MakeableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableArray.swift; sourceTree = "<group>"; };
 		FC4635062B0C980A00B8DCBE /* StaticValueStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticValueStep.swift; sourceTree = "<group>"; };
 		FC4635092B0C982E00B8DCBE /* VariableStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableStep.swift; sourceTree = "<group>"; };
 		FC46350B2B0C983D00B8DCBE /* APIValueStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIValueStep.swift; sourceTree = "<group>"; };
@@ -196,6 +218,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC2B8A872B108F2E003FAB86 /* Codable */ = {
+			isa = PBXGroup;
+			children = (
+				FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */,
+				FC2B8A942B108FC0003FAB86 /* CodableTypeString.swift */,
+				FC2B8A8A2B108F6B003FAB86 /* CodableVariableValue.swift */,
+				FC2B8A8C2B108F7C003FAB86 /* CodableVariableList.swift */,
+				FC2B8A8E2B108F90003FAB86 /* CodableVariableDictionary.swift */,
+			);
+			path = Codable;
+			sourceTree = "<group>";
+		};
 		FC4635082B0C981600B8DCBE /* Value Steps */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +271,7 @@
 				FCD3B2522B0C95360054371B /* MakableView+MakeableConstructor.swift */,
 				FCD3B2502B0C94E80054371B /* MakeableView+Prototype.swift */,
 				FCD3B2542B0C956E0054371B /* MakeableView+EditView.swift */,
+				FC2B8A982B109038003FAB86 /* MakeableArray.swift */,
 			);
 			path = "Makeable View";
 			sourceTree = "<group>";
@@ -246,6 +281,7 @@
 			children = (
 				FC4635212B0C99CF00B8DCBE /* Makeable View */,
 				FCD3B2302B0B9FCB0054371B /* MakeableStack.swift */,
+				FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */,
 				FCD3B22E2B0B9FBA0054371B /* MakeableLabel.swift */,
 				FCD3B22C2B0B9FA70054371B /* MakeableButton.swift */,
 				FC4C2C312B0CD657008217AC /* MakeableField.swift */,
@@ -257,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				FC4635182B0C98EE00B8DCBE /* Value.swift */,
+				FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */,
 				FC4C15C02B0C96E60010BB1A /* ActionValue.swift */,
 				FC4C2C232B0C9B7F008217AC /* ArrayValue.swift */,
 				FC4C2C2A2B0CBD01008217AC /* DictionaryValue.swift */,
@@ -308,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				FCD3B2172B0B63110054371B /* Step.swift */,
+				FC2B8A962B10900C003FAB86 /* StepArray.swift */,
 				FC4C15CC2B0C97700010BB1A /* StepError.swift */,
 				FC4C15C82B0C974E0010BB1A /* StepType.swift */,
 				FC4C15CA2B0C975F0010BB1A /* StepType+Run.swift */,
@@ -337,6 +375,8 @@
 		FCD3B1DC2B0B584B0054371B = {
 			isa = PBXGroup;
 			children = (
+				FC2B8A922B108FAE003FAB86 /* CodableStepList.swift */,
+				FC2B8A902B108FA0003FAB86 /* CodableStep.swift */,
 				FCD3B1E72B0B584B0054371B /* AppApp */,
 				FCD3B1F92B0B584E0054371B /* AppAppTests */,
 				FCD3B2032B0B584E0054371B /* AppAppUITests */,
@@ -454,6 +494,7 @@
 		FCD3B2582B0C960D0054371B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				FC2B8A872B108F2E003FAB86 /* Codable */,
 				FCD3B2402B0BB32E0054371B /* Extensions */,
 				FCD3B2592B0C96110054371B /* Views */,
 			);
@@ -626,8 +667,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC2B8A912B108FA0003FAB86 /* CodableStep.swift in Sources */,
 				FCD3B2492B0C69070054371B /* EditVariableView.swift in Sources */,
 				FCD3B25B2B0C96170054371B /* DoView.swift in Sources */,
+				FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */,
 				FCD3B21C2B0B639F0054371B /* StepButton.swift in Sources */,
 				FCD3B2612B0C96890054371B /* EditableViewConstructor.swift in Sources */,
 				FCD3B2232B0B77C50054371B /* AddViewView.swift in Sources */,
@@ -635,6 +678,7 @@
 				FCD3B23D2B0BB2020054371B /* String+VariableValue.swift in Sources */,
 				FCD3B24B2B0C948C0054371B /* Array+Safe.swift in Sources */,
 				FC4C15C92B0C974E0010BB1A /* StepType.swift in Sources */,
+				FC2B8A8B2B108F6B003FAB86 /* CodableVariableValue.swift in Sources */,
 				FC4635112B0C988000B8DCBE /* VariableValueError.swift in Sources */,
 				FC4C15CB2B0C975F0010BB1A /* StepType+Run.swift in Sources */,
 				FCD3B2142B0B62F40054371B /* VariableValue.swift in Sources */,
@@ -642,15 +686,18 @@
 				FCD3B2512B0C94E80054371B /* MakeableView+Prototype.swift in Sources */,
 				FCD3B24F2B0C94C10054371B /* Screen.swift in Sources */,
 				FCD3B25F2B0C96790054371B /* MakeableConstructor.swift in Sources */,
+				FC2B8A992B109038003FAB86 /* MakeableArray.swift in Sources */,
 				FC4C15D12B0C97B20010BB1A /* Array_StepType+VariableValue.swift in Sources */,
 				FC4635132B0C989000B8DCBE /* VariableValue+EditView.swift in Sources */,
 				FC4C2C302B0CCBE0008217AC /* DictionaryValueForKeyStep.swift in Sources */,
 				FC46350C2B0C983D00B8DCBE /* APIValueStep.swift in Sources */,
 				FCD3B2182B0B63110054371B /* Step.swift in Sources */,
+				FC2B8A892B108F3F003FAB86 /* CodableMakeableList.swift in Sources */,
 				FCD3B2252B0B7C9F0054371B /* EditViewView.swift in Sources */,
 				FCD3B2212B0B6FCB0054371B /* ViewMakerView.swift in Sources */,
 				FCD3B22A2B0B9F7D0054371B /* EditViewViewModel.swift in Sources */,
 				FCD3B2312B0B9FCB0054371B /* MakeableStack.swift in Sources */,
+				FC2B8A952B108FC0003FAB86 /* CodableTypeString.swift in Sources */,
 				FC4635202B0C998B00B8DCBE /* PrintVarStep.swift in Sources */,
 				FCD3B2532B0C95360054371B /* MakableView+MakeableConstructor.swift in Sources */,
 				FC4C2C2B2B0CBD01008217AC /* DictionaryValue.swift in Sources */,
@@ -664,11 +711,13 @@
 				FC4C15C32B0C97020010BB1A /* ViewEditable.swift in Sources */,
 				FCD3B2282B0B9F650054371B /* AddViewViewModel.swift in Sources */,
 				FC46351C2B0C993600B8DCBE /* SetVarStep.swift in Sources */,
+				FC2B8A932B108FAE003FAB86 /* CodableStepList.swift in Sources */,
 				FC4C2C322B0CD657008217AC /* MakeableField.swift in Sources */,
 				FCD3B2572B0C95B30054371B /* View+OnEdit.swift in Sources */,
 				FCD3B22F2B0B9FBA0054371B /* MakeableLabel.swift in Sources */,
 				FCD3B23B2B0BA8580054371B /* ActionListView.swift in Sources */,
 				FCD3B2422B0BB3360054371B /* Int+Identifiable.swift in Sources */,
+				FC2B8A972B10900C003FAB86 /* StepArray.swift in Sources */,
 				FC4C15CF2B0C97830010BB1A /* StepType+EditView.swift in Sources */,
 				FC4C2C292B0CBCF1008217AC /* DecodeDictionaryStep.swift in Sources */,
 				FCD3B23F2B0BB31F0054371B /* AddActionView.swift in Sources */,
@@ -678,12 +727,15 @@
 				FC4C15C12B0C96E60010BB1A /* ActionValue.swift in Sources */,
 				FC4635172B0C98C000B8DCBE /* Variable+VariableValue.swift in Sources */,
 				FCD3B2382B0BA01D0054371B /* ViewMakerViewModel.swift in Sources */,
+				FC2B8A8F2B108F90003FAB86 /* CodableVariableDictionary.swift in Sources */,
 				FC4C2C242B0C9B7F008217AC /* ArrayValue.swift in Sources */,
+				FC2B8A8D2B108F7C003FAB86 /* CodableVariableList.swift in Sources */,
 				FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */,
 				FCE36F4C2B0D752200E247D8 /* ScreenListView.swift in Sources */,
 				FCD3B2162B0B63010054371B /* Variables.swift in Sources */,
 				FC4C15CD2B0C97700010BB1A /* StepError.swift in Sources */,
 				FC4C15C72B0C97390010BB1A /* ViewEditable+Constructor.swift in Sources */,
+				FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */,
 				FCD3B2442B0C31C40054371B /* ValueStep.swift in Sources */,
 				FCD3B2352B0B9FF90054371B /* ViewProperty.swift in Sources */,
 				FC4C2C272B0CA872008217AC /* ListEditView.swift in Sources */,
@@ -849,7 +901,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AppApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 6CW3378X23;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -887,7 +939,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AppApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 6CW3378X23;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;

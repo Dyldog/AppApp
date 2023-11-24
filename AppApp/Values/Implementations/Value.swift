@@ -27,8 +27,8 @@ struct Value: VariableValue, ExpressibleByStringLiteral {
     var protoString: String { value.protoString }
     var valueString: String { value.valueString }
     
-    func value(with variables: inout Variables) throws -> VariableValue? {
-        try value.value(with: &variables)
+    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+        try await value.value(with: variables)
     }
     
     func editView(title: String, onUpdate: @escaping (Value) -> Void) -> AnyView {

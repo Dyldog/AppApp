@@ -7,7 +7,17 @@
 
 import Foundation
 
-enum VariableValueError: Error {
+enum VariableValueError: LocalizedError, Identifiable {
+    var id: String { localizedDescription }
     case wrongTypeForOperation
-    case valueNotFoundForVariable
+    case valueNotFoundForVariable(String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .wrongTypeForOperation:
+            return "Wrong type for operation"
+        case let .valueNotFoundForVariable(variable):
+            return "Value not found for variable '\(variable)'"
+        }
+    }
 }

@@ -5,7 +5,7 @@
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import Foundation
+import SwiftUI
 
 final class  DictionaryValueForKeyStep: ValueStep {
     static var title: String { "Get a value from a dictionary" }
@@ -19,14 +19,14 @@ final class  DictionaryValueForKeyStep: ValueStep {
     
     var protoString: String { "{ \(dictionary.protoString)[\(key.protoString)] }" }
     
-    func run(with variables: inout Variables) throws -> VariableValue {
+    func run(with variables: Binding<Variables>) async throws -> VariableValue {
         guard
-            let key = try key.value(with: &variables),
-            let dictionary = try dictionary.value(with: &variables) as? DictionaryValue
+            let key = try await key.value(with: variables),
+            let dictionary = try await dictionary.value(with: variables) as? DictionaryValue
         else { throw VariableValueError.wrongTypeForOperation }
         
         guard let value = dictionary.elements[StringValue(value: key.valueString)] else {
-            throw VariableValueError.valueNotFoundForVariable
+            throw VariableValueError.valueNotFoundForVariable(key.protoString)
         }
         
         return value

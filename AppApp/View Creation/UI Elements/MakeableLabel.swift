@@ -7,20 +7,52 @@
 
 import SwiftUI
 
-struct MakeableLabel: MakeableView {
-    let text: VariableValue
-    let fontSize: Int
-    var onEdit: (() -> Void)?
+struct MakeableLabelView: View {
+    let makeMode: Bool
+    let label: MakeableLabel
     
-    func view(variables: Binding<Variables>?, alert: Binding<Alert?>?) throws -> AnyView {
-        if var variables = variables?.wrappedValue {
-            guard let value = try text.value(with: &variables)?.valueString
-            else { throw VariableValueError.valueNotFoundForVariable }
-            return Text(value).font(.system(size: CGFloat(fontSize))).any
-        } else {
-            return Text(text.protoString).font(.system(size: CGFloat(fontSize))).any
+    let onContentUpdate: (MakeableLabel) -> Void
+    let onRuntimeUpdate: () -> Void
+    
+    @Binding var variables: Variables!
+    @Binding var error: VariableValueError?
+    @State var text: String = ""
+    
+    func labelText() async -> String {
+        do {
+            if variables != nil {
+                guard let value = try await label.text.value(with: $variables.unwrapped())?.valueString
+                else { throw VariableValueError.valueNotFoundForVariable(label.text.protoString) }
+                return value
+            } else {
+                return label.protoString
+            }
+        } catch let error as VariableValueError {
+            self.error = error
+            return "Error"
+        } catch {
+            fatalError(error.localizedDescription)
         }
     }
+    
+    var body: some View {
+        Text(text)
+            .font(.system(size: CGFloat(label.fontSize)))
+            .task(id: variables) {
+                self.text = await self.labelText()
+            }
+            .any
+    }
+}
+
+struct MakeableLabel: MakeableView, Codable {
+    let id: UUID = .init()
+    let text: Value
+    let fontSize: Int
+    
+    func insertValues(into variables: Binding<Variables>) throws { }
+    
+    var protoString: String { text.protoString }
     
     func value(for property: Properties) -> (VariableValue)? {
         switch property {
@@ -31,7 +63,7 @@ struct MakeableLabel: MakeableView {
     
     static func make(factory: (Properties) -> VariableValue) -> MakeableLabel {
         .init(
-            text: factory(.value),
+            text: factory(.value) as! Value,
             fontSize: factory(.fontSize) as! Int
         )
     }
@@ -46,24 +78,5 @@ struct MakeableLabel: MakeableView {
             case .fontSize: return 18
             }
         }
-    }
-}
-
-extension MakeableLabel: Codable {
-    enum CodingKeys: String, CodingKey {
-        case text
-        case fontSize
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decode(CodableVariableValue.self, forKey: .text).value
-        fontSize = try container.decode(Int.self, forKey: .fontSize)
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(CodableVariableValue(value: text), forKey: .text)
-        try container.encode(fontSize, forKey: .fontSize)
     }
 }

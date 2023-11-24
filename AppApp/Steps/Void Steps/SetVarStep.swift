@@ -5,7 +5,7 @@
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import Foundation
+import SwiftUI
 
 final class SetVarStep: Step, ObservableObject {
     
@@ -21,13 +21,13 @@ final class SetVarStep: Step, ObservableObject {
     
     var protoString: String { "{ $\(varName.protoString) = \(value.protoString) }" }
     
-    func run(with variables: inout Variables) throws {
+    func run(with variables: Binding<Variables>) async throws {
         guard
-            let varValue = try varName.value(with: &variables),
-            let valueValue = try value.value(with: &variables)
-        else { throw VariableValueError.valueNotFoundForVariable }
+            let varValue = try await varName.value(with: variables),
+            let valueValue = try await value.value(with: variables)
+        else { throw VariableValueError.valueNotFoundForVariable(varName.protoString) }
             
-        variables.set(valueValue, for: varValue.valueString)
+        variables.wrappedValue.set(valueValue, for: varValue.valueString)
     }
     
     static func make(factory: (Properties) -> VariableValue) -> Self {

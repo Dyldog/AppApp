@@ -17,11 +17,11 @@ final class PrintVarStep: Step, Codable {
     
     var protoString: String { "{ print($\(varName)) }"}
     
-    func run(with variables: inout Variables) throws {
-        guard let nameValue = try varName.value(with: &variables) else {
-            throw VariableValueError.valueNotFoundForVariable
+    func run(with variables: Binding<Variables>) async throws {
+        guard let nameValue = try await varName.value(with: variables) else {
+            throw VariableValueError.valueNotFoundForVariable(varName.protoString)
         }
-        print("\(varName): \(variables.value(for: nameValue.valueString) as Any)")
+        print("\(varName): \(variables.wrappedValue.value(for: nameValue.valueString) as Any)")
     }
     
     static func make(factory: (Properties) -> VariableValue) -> Self {

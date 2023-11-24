@@ -5,7 +5,7 @@
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import Foundation
+import SwiftUI
 
 final class APIValueStep: ValueStep {
     static var title: String { "Get value from API" }
@@ -17,9 +17,9 @@ final class APIValueStep: ValueStep {
     
     var protoString: String { "{ $\(url.valueString) }" }
     
-    func run(with variables: inout Variables) throws -> VariableValue {
+    func run(with variables: Binding<Variables>) async throws -> VariableValue {
         guard
-            let value = try url.value(with: &variables),
+            let value = try await url.value(with: variables),
             let url = URL(string: value.valueString)
         else { throw VariableValueError.wrongTypeForOperation }
         

@@ -7,43 +7,90 @@
 
 import SwiftUI
 
-struct MakeableButton: MakeableView {
-    let title: Value
-    let action: [any StepType]
-    let fontSize: Int
-    var onEdit: (() -> Void)?
+extension Binding {
+    func unwrapped<T>() -> Binding<T> where Value == Optional<T> {
+        .init {
+            wrappedValue!
+        } set: {
+            wrappedValue = $0
+        }
+
+    }
+}
+
+struct MakeableButtonView: View {
+    let makeMode: Bool
+    let button: MakeableButton
+    let onContentUpdate: (MakeableButton) -> Void
+    let onRuntimeUpdate: () -> Void
+    @Binding var variables: Variables?
+    @Binding var error: VariableValueError?
+    @State var text: String = ""
     
-    init(title: Value, fontSize: Int, action: [any StepType]) {
+    func titleString() async -> String {
+        if variables != nil {
+            do {
+                guard let value = try await button.title.value(with: $variables.unwrapped()) else {
+                    throw VariableValueError.valueNotFoundForVariable(button.title.protoString)
+                }
+                return value.valueString
+            } catch let error as VariableValueError {
+                self.error = error
+                return "Error"
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+        } else {
+            return button.title.protoString
+        }
+    }
+    
+    var body: some View {
+        return SwiftUI.Button(action: {
+            runAction()
+        }, label: {
+            Text(text)
+                .font(.system(size: CGFloat(button.fontSize)))
+        }).task(id: variables) {
+            self.text = await titleString()
+        }.any
+    }
+    
+    func runAction() {
+        Task { @MainActor in
+            if variables != nil {
+                do {
+                    for action in button.action {
+                        try await action.run(with: $variables.unwrapped())
+                    }
+                    
+                    onRuntimeUpdate()
+                } catch let error as VariableValueError {
+                    self.error = error
+                } catch {
+                    fatalError(error.localizedDescription)
+                }
+            }
+        }
+    }
+}
+
+struct MakeableButton: MakeableView, Codable {
+    let id: UUID = .init()
+    let title: Value
+    let action: StepArray
+    let fontSize: Int
+    
+    init(title: Value, fontSize: Int, action: StepArray) {
         self.title = title
         self.action = action
         self.fontSize = fontSize
     }
     
-    func view(variables: Binding<Variables>?, alert: Binding<Alert?>?) throws -> AnyView {
-        let titleString: String
-        if var variables = variables?.wrappedValue {
-            guard let value = try title.value(with: &variables) else {
-                throw VariableValueError.valueNotFoundForVariable
-            }
-            titleString = value.valueString
-        } else {
-            titleString = title.protoString
-        }
-        
-        return SwiftUI.Button(action: {
-            if let variables = variables {
-                do {
-                    try action.forEach {
-                        try $0.run(with: &variables.wrappedValue)
-                    }
-                } catch {
-                    alert?.wrappedValue = .init(title: "Error", message: error.localizedDescription)
-                }
-            }
-        }, label: {
-            Text(titleString)
-                .font(.system(size: CGFloat(fontSize)))
-        }).any
+    var protoString: String { title.protoString }
+    
+    func insertValues(into variables: Binding<Variables>) throws {
+        //
     }
     
     func value(for property: Properties) -> (VariableValue)? {
@@ -58,7 +105,7 @@ struct MakeableButton: MakeableView {
         return .init(
             title: factory(.title) as! Value,
             fontSize: factory(.fontSize) as! Int,
-            action: factory(.action) as! [any StepType]
+            action: factory(.action) as! StepArray
         )
     }
     
@@ -74,27 +121,5 @@ struct MakeableButton: MakeableView {
             case .action: return [any StepType]()
             }
         }
-    }
-}
-    
-extension MakeableButton: Codable {
-    enum CodingKeys: String, CodingKey {
-        case title
-        case fontSize
-        case action
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        title = try container.decode(Value.self, forKey: .title)
-        fontSize = try container.decode(Int.self, forKey: .fontSize)
-        action = try container.decode(CodableStepList.self, forKey: .action).steps
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(title, forKey: .title)
-        try container.encode(CodableStepList(steps: action), forKey: .action)
-        try container.encode(fontSize, forKey: .fontSize)
     }
 }

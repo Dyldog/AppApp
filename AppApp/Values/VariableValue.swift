@@ -14,7 +14,7 @@ protocol VariableValue {
     func add(_ other: VariableValue) throws -> VariableValue
     var protoString: String { get }
     var valueString: String { get }
-    func value(with variables: inout Variables) throws -> VariableValue?
+    func value(with variables: Binding<Variables>) async throws -> VariableValue?
     func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView
 }
 

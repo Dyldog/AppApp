@@ -5,7 +5,7 @@
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import Foundation
+import SwiftUI
 
 final class AddToVarStep: Step, ObservableObject, Codable {
     
@@ -20,14 +20,14 @@ final class AddToVarStep: Step, ObservableObject, Codable {
     
     var protoString: String { "{ $\(varName.protoString) += \(value.protoString) }" }
     
-    func run(with variables: inout Variables) throws {
+    func run(with variables: Binding<Variables>) async throws {
         guard
-            let name = try varName.value(with: &variables),
-            let oldValue = variables.value(for: name.valueString) ,
-            let extraValue = try value.value(with: &variables)
+            let name = try await varName.value(with: variables),
+            let oldValue = variables.wrappedValue.value(for: name.valueString) ,
+            let extraValue = try await value.value(with: variables)
         else { throw Error.cantAddToUnsetVariable }
         
-        variables.set(try oldValue.add(extraValue), for: varName.valueString)
+        variables.wrappedValue.set(try oldValue.add(extraValue), for: varName.valueString)
     }
     
     static func make(factory: (Properties) -> VariableValue) -> Self {

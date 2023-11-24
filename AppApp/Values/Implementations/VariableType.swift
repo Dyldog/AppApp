@@ -16,6 +16,7 @@ enum VariableType: Int, VariableValue, CaseIterable, Equatable, Codable {
     case action
     case list
     case dictionary
+    case temporary
     
     var protoString: String {
         switch self {
@@ -27,6 +28,7 @@ enum VariableType: Int, VariableValue, CaseIterable, Equatable, Codable {
         case .action: return "Action"
         case .list: return "List"
         case .dictionary: return "Dictionary"
+        case .temporary: return "Temporary"
         }
     }
     
@@ -40,12 +42,13 @@ enum VariableType: Int, VariableValue, CaseIterable, Equatable, Codable {
         case .value: return "TEXT" as Value
         case .list:  return ArrayValue(type: .string, elements: [])
         case .dictionary: return DictionaryValue(type: .string, elements: [:])
+        case .temporary: return TemporaryValue(initial: StringValue(value: "TEXT"), output: .init(name: StringValue(value: "FIELDTEXT")))
         }
     }
     
     var valueString: String { protoString }
     
-    func value(with variables: inout Variables) throws -> VariableValue? {
+    func value(with variables: Binding<Variables>) throws -> VariableValue? {
         self
     }
     
