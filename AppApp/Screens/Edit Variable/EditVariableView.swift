@@ -9,10 +9,10 @@ import SwiftUI
 
 struct EditVariableView: View {
     @State var selectedType: VariableType
-    @State var value: any VariableValue
-    let onUpdate: (any VariableValue) -> Void
+    @State var value: any EditableVariableValue
+    let onUpdate: (any EditableVariableValue) -> Void
     
-    init(value: any VariableValue, onUpdate: @escaping (any VariableValue) -> Void) {
+    init(value: any EditableVariableValue, onUpdate: @escaping (any EditableVariableValue) -> Void) {
         self._value = .init(initialValue: value)
         self.onUpdate = onUpdate
         self._selectedType = .init(initialValue: type(of: value).type)
@@ -26,12 +26,12 @@ struct EditVariableView: View {
                 }
             }.pickerStyle(.menu)
             
-//            value.editView(onUpdate: {
-//                self.value = $0
-//                onUpdate($0)
-//            })
+            value.editView(onUpdate: {
+                self.value = $0
+                onUpdate($0)
+            })
         }.onChange(of: selectedType, perform: { value in
-            self.value = value.defautltView
+            self.value = value.defaultView
             onUpdate(self.value)
         })
     }

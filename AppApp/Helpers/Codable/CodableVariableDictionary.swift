@@ -9,13 +9,13 @@ import Foundation
 
 struct CodableVariableDictionary: Codable {
     let variables: [StringValue: CodableVariableValue]
-    var values: [StringValue: any VariableValue] { variables.mapValues { $0.value } }
+    var values: [StringValue: any EditableVariableValue] { variables.mapValues { $0.value } }
     
     init(variables: [StringValue: CodableVariableValue]) {
         self.variables = variables
     }
     
-    init(variables: [StringValue: any VariableValue]) {
+    init(variables: [StringValue: any EditableVariableValue]) {
         self.variables = variables.mapValues { .init(value: $0) }
     }
 }

@@ -18,13 +18,11 @@ class AddViewViewModel: ObservableObject {
     init(onSelect: @escaping (any MakeableView) -> Void) {
         rows = [
             .init(title: "Label", onTap: {
-                onSelect(MakeableLabel.makeableConstructor.makeableView)
+                onSelect(MakeableLabel.makeDefault())
             }),
-//            .init(title: "Button", onTap: {
-//                onSelect(
-//                    MakeableButton.makeableConstructor.makeableView
-//                )
-//            }),
+            .init(title: "Button", onTap: {
+                onSelect(MakeableButton.makeDefault())
+            }),
 //            .init(title: "Textfield", onTap: {
 //                onSelect(
 //                    MakeableField.makeableConstructor.makeableView

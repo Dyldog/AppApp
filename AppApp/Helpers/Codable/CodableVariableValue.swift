@@ -14,9 +14,9 @@ struct CodableVariableValue: Codable {
     }
     
     let type: String
-    let value: VariableValue
+    let value: any EditableVariableValue
     
-    init(value: VariableValue) {
+    init(value: any EditableVariableValue) {
         self.value = value
         self.type = typeString(Swift.type(of: value))
     }
@@ -37,8 +37,8 @@ struct CodableVariableValue: Codable {
 //            self.value = try valueContainer.decode(DictionaryValue.self, forKey: .value)
         case typeString(Variable.self):
             self.value = try valueContainer.decode(Variable.self, forKey: .value)
-        case typeString(VariableType.self):
-            self.value = try valueContainer.decode(VariableType.self, forKey: .value)
+        case typeString(VariableTypeValue.self):
+            self.value = try valueContainer.decode(VariableTypeValue.self, forKey: .value)
         case typeString(IntValue.self):
             self.value = try valueContainer.decode(IntValue.self, forKey: .value)
         case typeString(StringValue.self):
@@ -64,9 +64,9 @@ struct CodableVariableValue: Codable {
 //            try container.encode(value, forKey: .value)
         case let value as Variable:
             try container.encode(value, forKey: .value)
-        case let value as VariableType:
+        case let value as VariableTypeValue:
             try container.encode(value, forKey: .value)
-        case let value as Int:
+        case let value as IntValue:
             try container.encode(value, forKey: .value)
         case let value as StringValue:
             try container.encode(value, forKey: .value)

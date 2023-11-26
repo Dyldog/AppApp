@@ -11,35 +11,10 @@ final class IntValue: PrimitiveEditableVariableValue, Codable {
     
     static var type: VariableType { .int }
     var value: Int
-    
-    enum Properties: String, PrimitiveViewProperty {
-        case value
-        
-        var defaultValue: Any {
-            switch self {
-            case .value: return 69
-            }
-        }
-    }
+    static var defaultValue: Int = 69
     
     init(value: Int) {
         self.value = value
-    }
-    
-    static func make(factory: (Properties) -> Any) -> IntValue {
-        .init(value: factory(.value) as! Int)
-    }
-    
-    func value(for property: Properties) -> Any? {
-        switch property {
-        case .value: return value
-        }
-    }
-    
-    func set(_ value: Any, for property: Properties) {
-        switch property {
-        case .value: self.value = value as! Int
-        }
     }
     
     func editView(onUpdate: @escaping (IntValue) -> Void) -> AnyView {

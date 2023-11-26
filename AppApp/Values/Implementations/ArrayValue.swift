@@ -7,17 +7,25 @@
 
 import SwiftUI
 
-final class ArrayValue: VariableValue, ObservableObject {
+final class ArrayValue: CompositeEditableVariableValue, ObservableObject {
     
     static var type: VariableType { .list }
     
-    @Published var type: VariableType
-    @Published var elements: [any VariableValue]
+    var type: VariableType
+    var elements: [any VariableValue]
+    
     var protoString: String { elements.map { $0.protoString }.joined(separator: ", ") }
     
     init(type: VariableType, elements: [any VariableValue]) {
         self.type = type
         self.elements = elements
+    }
+    
+    static func defaultValue(for property: Properties) -> Any {
+        switch property {
+        case .type: return VariableType.string
+        case .elements: return [any VariableValue]()
+        }
     }
     
     var valueString: String { 

@@ -8,34 +8,40 @@
 import SwiftUI
 
 /// A value that provides a value from the variables
-struct Variable: VariableValue {
+final class Variable: PrimitiveEditableVariableValue {
     static var type: VariableType { .variable }
-    var name: VariableValue
+    var value: any EditableVariableValue
+    static var defaultValue: any EditableVariableValue { StringValue(value: "VAR") }
+    
+    init(value: any EditableVariableValue) {
+        self.value = value
+    }
     
     func add(_ other: VariableValue) throws -> VariableValue {
 //        guard let name = name else { throw VariableValueError.valueNotFoundForVariable }
-        return try name.add(other)
+        return try value.add(other)
     }
     
-    var protoString: String { "{ \(name.protoString) }" }
-    var valueString: String { "\(name.valueString)" }
+    var protoString: String { "{ \(value.protoString) }" }
+    var valueString: String { "\(value.valueString)" }
     
     func value(with variables: Binding<Variables>) async throws -> VariableValue? {
         guard
-            let nameValue = try await name.value(with: variables),
+            let nameValue = try await value.value(with: variables),
             let value = variables.wrappedValue.value(for: nameValue.valueString)
         else {
-            throw VariableValueError.valueNotFoundForVariable(name.protoString)
+            throw VariableValueError.valueNotFoundForVariable(value.protoString)
         }
         return try await value.value(with: variables)
     }
     
-    func editView(title: String, onUpdate: @escaping (Variable) -> Void) -> AnyView {
+    func editView(onUpdate: @escaping (Variable) -> Void) -> AnyView {
         HStack {
-            Text(protoString)
+            Text("Name")
+            Text(value.protoString)
             SheetButton(title: { Text("Edit") }) {
-                EditVariableView(value: name) {
-                    onUpdate(.init(name: $0))
+                EditVariableView(value: self.value) {
+                    onUpdate(.init(value: $0))
                 }
             }
         }.any
@@ -47,13 +53,13 @@ extension Variable: Codable {
         case name
     }
     
-    init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(CodableVariableValue.self, forKey: .name).value
+        self.init(value: try container.decode(CodableVariableValue.self, forKey: .name).value)
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(CodableVariableValue(value: name), forKey: .name)
+        try container.encode(CodableVariableValue(value: value), forKey: .name)
     }
 }

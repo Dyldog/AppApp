@@ -8,31 +8,54 @@
 import SwiftUI
 
 protocol PrimitiveEditableVariableValue: EditableVariableValue where Properties: PrimitiveViewProperty {
-    
+    associatedtype PrimitiveValue
+    var value: PrimitiveValue { get set }
+    static var defaultValue: PrimitiveValue { get }
 }
 
 extension PrimitiveEditableVariableValue {
-    var propertyRows: [(String, any PrimitiveEditableVariableValue)] {
-        [(Properties.value.rawValue, self)]
+    static func defaultValue(for property: Properties) -> Any {
+        switch property {
+        case .value: return Self.defaultValue
+        default: fatalError()
+        }
+    }
+}
+
+extension PrimitiveEditableVariableValue {
+    func propertyRow(title: String, onUpdate: @escaping (Self) -> Void) -> [(String, any PrimitiveEditableVariableValue, VariableUpdater)] {
+        [(title, self, {
+            self.set(($0 as! any PrimitiveEditableVariableValue).value, for: .value)
+            onUpdate(self)
+        })]
     }
 }
 
 protocol EditableVariableValue: VariableValue, ViewEditable {
     func editView(onUpdate: @escaping (Self) -> Void) -> AnyView
-    var propertyRows: [(String, any PrimitiveEditableVariableValue)] { get }
+    static func defaultValue(for property: Properties) -> Any
 }
 
 protocol CompositeEditableVariableValue: EditableVariableValue {
-    
+    func propertyRows(onUpdate: @escaping (Self) -> Void) -> [(String, any PrimitiveEditableVariableValue, VariableUpdater)]
 }
 
+typealias VariableUpdater = (any EditableVariableValue) -> Void
 extension CompositeEditableVariableValue {
-    var propertyRows: [(String, any PrimitiveEditableVariableValue)] {
-        properties.flatMap {
-            if let composite = $0.value as? any CompositeEditableVariableValue {
-                return composite.propertyRows
-            } else if let primitive = $0.value as? any PrimitiveEditableVariableValue {
-                return [($0.key.rawValue, primitive)]
+    func propertyRows(
+        onUpdate: @escaping (Self) -> Void
+    ) -> [(String, any PrimitiveEditableVariableValue, VariableUpdater)] {
+        properties.flatMap { (key, value) in
+            if let composite = value as? any CompositeEditableVariableValue {
+                return composite.propertyRows(onUpdate: { value in
+                    self.set(value, for: key)
+                    onUpdate(self)
+                })
+            } else if let primitive = value as? any PrimitiveEditableVariableValue {
+                return primitive.propertyRow(title: key.rawValue) {
+                    self.set($0, for: key)
+                    onUpdate(self)
+                }
             } else {
                 fatalError()
             }
@@ -43,12 +66,11 @@ extension CompositeEditableVariableValue {
 extension CompositeEditableVariableValue {
     func editView(onUpdate: @escaping (Self) -> Void) -> AnyView {
         List {
-            ForEach(propertyRows.map { ($0.0, $0.1) }, id: \.0) { row in
+            ForEach(enumerated: propertyRows(onUpdate: onUpdate).map { ($0.0, $0.1, $0.2) }) { (index, row) in
                 HStack {
                     Text(row.0)
                     row.1.editView { value in
-                        guard let property = Properties(rawValue: row.0) else { return }
-                        self.set(value, for: property)
+                        row.2(value)
                         onUpdate(self)
                     }
                 }

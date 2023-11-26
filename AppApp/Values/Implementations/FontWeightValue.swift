@@ -32,17 +32,8 @@ extension Font.Weight {
 
 final class FontWeightValue: PrimitiveEditableVariableValue, Codable {
 
-    enum Properties: String, PrimitiveViewProperty {
-        case value
-        
-        var defaultValue: Any {
-            switch self {
-            case .value: return Font.Weight.regular
-            }
-        }
-    }
-    
     static var type: VariableType { .fontWeight }
+    static var defaultValue: Font.Weight { .regular}
     var value: Font.Weight
     
     init(value: Font.Weight) {
@@ -71,22 +62,6 @@ final class FontWeightValue: PrimitiveEditableVariableValue, Codable {
                 Text($0.title).tag($0)
             }
         }.pickerStyle(.menu).any
-    }
-    
-    static func make(factory: (Properties) -> Any) -> FontWeightValue {
-        .init(value: factory(.value) as! Font.Weight)
-    }
-    
-    func value(for property: Properties) -> Any? {
-        switch property {
-        case .value: return value
-        }
-    }
-    
-    func set(_ value: Any, for property: Properties) {
-        switch property {
-        case .value: self.value = value as! Font.Weight
-        }
     }
 }
     

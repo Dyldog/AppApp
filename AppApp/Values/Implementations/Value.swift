@@ -7,23 +7,19 @@
 
 import SwiftUI
 
-final class Value: VariableValue, CompositeEditableVariableValue {
-    
-    enum Properties: String, PrimitiveViewProperty {
-        case value
-        
-        var defaultValue: Any {
-            switch self {
-            case .value: return StringValue(value: "TEXT")
-            }
-        }
-    }
+final class Value: PrimitiveEditableVariableValue {
     
     static var type: VariableType { .value }
-    var value: VariableValue
-    
-    init(value: VariableValue) {
+    var value: any EditableVariableValue
+    static var defaultValue: any EditableVariableValue { StringValue(value: "TEXT") }
+    init(value: any EditableVariableValue) {
         self.value = value
+    }
+    
+    static func defaultValue(for property: Properties) -> Any {
+        switch property {
+        case .value: return StringValue.defaultValue
+        }
     }
     
     func add(_ other: VariableValue) throws -> VariableValue {
@@ -37,9 +33,9 @@ final class Value: VariableValue, CompositeEditableVariableValue {
         try await value.value(with: variables)
     }
     
-    func editView(title: String, onUpdate: @escaping (Value) -> Void) -> AnyView {
+    func editView(onUpdate: @escaping (Value) -> Void) -> AnyView {
         HStack {
-            Text(protoString)
+            Text(value.protoString)
             SheetButton(title: { Text("Edit") }) {
                 EditVariableView(value: self.value) {
                     onUpdate(.init(value: $0))
@@ -47,32 +43,19 @@ final class Value: VariableValue, CompositeEditableVariableValue {
             }
         }.any
     }
-    
-    static func make(factory: (Properties) -> Any) -> Value {
-        .init(value: factory(.value) as! any VariableValue)
-    }
-    
-    func value(for property: Properties) -> Any? {
-        switch property {
-        case .value: return value
-        }
-    }
-    
-    func set(_ value: Any, for property: Properties) {
-        switch property {
-        case .value: self.value = value as! any VariableValue
-        }
-    }
 }
 
 extension Value: Codable {
     enum CodingKeys: String, CodingKey {
+        case type
         case value
     }
     
     convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.init(value: try container.decode(CodableVariableValue.self, forKey: .value).value)
+        self.init(
+            value: try container.decode(CodableVariableValue.self, forKey: .value).value
+        )
     }
     
     func encode(to encoder: Encoder) throws {

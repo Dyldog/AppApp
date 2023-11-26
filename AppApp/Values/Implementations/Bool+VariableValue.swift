@@ -9,19 +9,10 @@ import SwiftUI
 
 final class BoolValue: PrimitiveEditableVariableValue, Codable {
     
-    enum Properties: String, PrimitiveViewProperty {
-        case value
-        
-        var defaultValue: Any {
-            switch self {
-            case .value: return false
-            }
-        }
-    }
-    
     static var type: VariableType { .boolean }
     
     var value: Bool
+    static let defaultValue: Bool = false
     
     init(value: Bool) {
         self.value = value
@@ -45,21 +36,5 @@ final class BoolValue: PrimitiveEditableVariableValue, Codable {
         }, set: {
             onUpdate(.init(value: $0))
         })).any
-    }
-    
-    static func make(factory: (Properties) -> Any) -> BoolValue {
-        .init(value: factory(.value) as! Bool)
-    }
-    
-    func value(for property: Properties) -> Any? {
-        switch property {
-        case .value: return value
-        }
-    }
-    
-    func set(_ value: Any, for property: Properties) {
-        switch property {
-        case .value: self.value = value as! Bool
-        }
     }
 }

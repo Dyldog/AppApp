@@ -26,7 +26,7 @@ struct MakeableStackView: View {
                 makeButton(at: 0)
             }
             
-            ForEach(enumerated: stack.content.elements) { (index, element) in
+            ForEach(enumerated: stack.content.value) { (index, element) in
 //                DoView {
                 VStack {
                     HStack {
@@ -54,7 +54,7 @@ struct MakeableStackView: View {
                 self.showAddIndex = nil
             }))
         }).sheet(item: $showEditIndex, content: { index in
-            EditViewView(viewModel: .init(editable: stack.content.elements[index]) {
+            EditViewView(viewModel: .init(editable: stack.content.value[index]) {
                 onUpdate(at: index, with: $0)
             })
         })
@@ -64,9 +64,9 @@ struct MakeableStackView: View {
         onContentUpdate(.init(content: stack.content.removing(at: index)))
     }
     private func onUpdate(at index: Int, with value: any MakeableView) {
-        var existingContent = stack.content.elements
+        var existingContent = stack.content.value
         existingContent[index] = value
-        onContentUpdate(MakeableStack(content: .init(elements: existingContent)))
+        onContentUpdate(MakeableStack(content: .init(value: existingContent)))
     }
     
     func makeButton(at index: Int) -> some View {
@@ -85,16 +85,6 @@ final class MakeableStack: MakeableView, Codable {
     
     func value(with variables: Binding<Variables>) async throws -> VariableValue? { self }
     
-    enum Properties: String, CaseIterable, ViewProperty {
-        case content
-        
-        var defaultValue: Any {
-            switch self {
-            case .content: return MakeableArray(elements: [])
-            }
-        }
-    }
-    
     let id: UUID = .init()
     var content: MakeableArray
     
@@ -104,25 +94,15 @@ final class MakeableStack: MakeableView, Codable {
         self.content = content
     }
     
+    static func defaultValue(for property: Properties) -> Any {
+        switch property {
+        case .content: return MakeableArray(value: [])
+        }
+    }
+    
     func insertValues(into variables: Binding<Variables>) async throws {
         for element in content {
             try await element.insertValues(into: variables)
-        }
-    }
-    
-    func value(for property: Properties) -> Any? {
-        switch property {
-        case .content: return nil // TODO: Conform MakeableArray to VariableValue
-        }
-    }
-    
-    static func make(factory: (Properties) -> Any) -> MakeableStack {
-        .init(content: factory(.content) as! MakeableArray)
-    }
-    
-    func set(_ value: Any, for property: Properties) {
-        switch property {
-        case .content: break
         }
     }
 }

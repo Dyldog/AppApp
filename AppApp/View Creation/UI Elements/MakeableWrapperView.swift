@@ -30,8 +30,8 @@ struct MakeableWrapperView: View {
             MakeableStackView(makeMode: makeMode, stack: stack, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error)
         case let label as MakeableLabel:
             MakeableLabelView(makeMode: makeMode, label: label, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error)
-//        case let button as MakeableButton:
-//            MakeableButtonView(makeMode: makeMode, button: button, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error)
+        case let button as MakeableButton:
+            MakeableButtonView(makeMode: makeMode, button: button, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error)
 //        case let field as MakeableField:
 //            MakeableFieldView(makeMode: makeMode, field: field, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error)
         default:

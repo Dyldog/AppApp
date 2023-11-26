@@ -26,8 +26,8 @@ struct CodableMakeableList: Codable {
 //                content.append(value)
             } else if let value = try? contentContainer.decode(MakeableLabel.self) {
                 content.append(value)
-//            } else if let value = try? contentContainer.decode(MakeableButton.self) {
-//                content.append(value)
+            } else if let value = try? contentContainer.decode(MakeableButton.self) {
+                content.append(value)
             } else {
 //                fatalError()
                 self.init(elements: [MakeableLabel.withText("ERROR")])
@@ -47,8 +47,8 @@ struct CodableMakeableList: Codable {
                 try contentContainer.encode(stack)
             case let label as MakeableLabel:
                 try contentContainer.encode(label)
-//            case let button as MakeableButton:
-//                try contentContainer.encode(button)
+            case let button as MakeableButton:
+                try contentContainer.encode(button)
 //            case let field as MakeableField:
 //                try contentContainer.encode(field)
             default:

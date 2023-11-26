@@ -7,7 +7,37 @@
 
 import SwiftUI
 
-enum VariableType: Int, VariableValue, CaseIterable, Equatable, Codable {
+final class VariableTypeValue: PrimitiveEditableVariableValue {
+    
+    static var type: VariableType { .type }
+    static var defaultValue: VariableType { .string }
+    var value: VariableType
+    
+    var protoString: String { value.protoString }
+    
+    var valueString: String { value.valueString }
+    
+    init(value: VariableType) {
+        self.value = value
+    }
+    
+    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+        self
+    }
+    
+    func add(_ other: VariableValue) throws -> VariableValue {
+        fatalError()
+    }
+    
+    func editView(onUpdate: @escaping (VariableTypeValue) -> Void) -> AnyView {
+        value.editView {
+            onUpdate(.init(value: $0))
+        }
+    }
+    
+}
+enum VariableType: String, CaseIterable, Equatable, Codable {
+    
     case type
     case value
     case string
@@ -22,61 +52,33 @@ enum VariableType: Int, VariableValue, CaseIterable, Equatable, Codable {
     
     case label
     case stack
+    case button
     
-    var protoString: String {
-        switch self {
-        case .type: return "Type"
-        case .value: return "Value"
-        case .string: return "String"
-        case .int: return "Int"
-        case .variable: return "Variable"
-//        case .action: return "Action"
-        case .list: return "List"
-//        case .dictionary: return "Dictionary"
-//        case .temporary: return "Temporary"
-        case .fontWeight: return "Font Weight"
-        case .boolean: return "Boolean"
-        case .label: return "Label"
-        case .stack: return "Stack"
-        }
-    }
+    var protoString: String { rawValue.capitalized }
     
-    // TODO: Move to each implementation
-    var defautltView: VariableValue {
+    var defaultView: any EditableVariableValue {
         switch self {
-        case .type: return VariableType.string
-        case .string: return StringValue(value: "TEXT")
-        case .int: return IntValue(value: 69)
-        case .variable: return Variable(name: StringValue(value: "VAR"))
+        case .type: return VariableTypeValue.makeDefault()
+        case .string: return StringValue.makeDefault()
+        case .int: return IntValue.makeDefault()
+        case .variable: return Variable.makeDefault()
 //        case .action: return ActionValue(steps: [])
-        case .value: return Value(value: StringValue(value: "TEXT"))
-        case .list:  return ArrayValue(type: .string, elements: [])
+        case .value: return Value.makeDefault()
+        case .list:  return ArrayValue.makeDefault()
 //        case .dictionary: return DictionaryValue(type: .string, elements: [:])
 //        case .temporary: return TemporaryValue(initial: StringValue(value: "TEXT"), output: .init(name: StringValue(value: "FIELDTEXT")))
-        case .fontWeight: return FontWeightValue(value: .regular)
-        case .boolean: return BoolValue(value: false)
-        case .label: return MakeableLabel(
-            text: .init(value: StringValue(value: "TEXT")),
-            fontSize: .init(value: 18),
-            fontWeight: .init(value: .regular),
-            italic: .init(value: false)
-        )
-        case .stack: return MakeableStack(content: .init(elements: []))
+        case .fontWeight: return FontWeightValue.makeDefault()
+        case .boolean: return BoolValue.makeDefault()
+        case .label: return MakeableLabel.makeDefault()
+        case .stack: return MakeableStack.makeDefault()
+        case .button: return MakeableButton.makeDefault()
         }
     }
-    
+
     var valueString: String { protoString }
     
-    func value(with variables: Binding<Variables>) throws -> VariableValue? {
-        self
-    }
-    
-    func add(_ other: VariableValue) throws -> VariableValue {
-        throw VariableValueError.wrongTypeForOperation
-    }
-    
-    func editView(title: String, onUpdate: @escaping (VariableType) -> Void) -> AnyView {
-        Picker("Type", selection: .init(get: {
+    func editView(onUpdate: @escaping (VariableType) -> Void) -> AnyView {
+        Picker("", selection: .init(get: {
             self
         }, set: { new in
             onUpdate(new)

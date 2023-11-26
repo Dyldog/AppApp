@@ -15,7 +15,6 @@ struct ListEditView: View {
     var body: some View {
         List {
             value.type.editView(
-                title: "Type",
                 onUpdate: { self.value.type = $0 }
             )
             
@@ -34,7 +33,7 @@ struct ListEditView: View {
     
     func addButton(index: Int) -> some View {
         SwiftUI.Button("+") {
-            let view = value.type.defautltView
+            let view = value.type.defaultView
             if index <= value.elements.count {
                 value.elements.append(view)
             } else {

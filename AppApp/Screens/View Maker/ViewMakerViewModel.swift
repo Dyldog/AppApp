@@ -12,13 +12,13 @@ import Combine
 @MainActor
 class ViewMakerViewModel: ObservableObject {
     let name: String
-    var content: MakeableArray = .init(elements: []) {
+    var content: MakeableArray = .init(value: []) {
         didSet {
             objectWillChange.send()
             onUpdate(.init(name: self.name, initActions: self.initActions, content: content))
         }
     }
-    @Published private(set) var initActions: StepArray = .init(values: [])
+    @Published private(set) var initActions: StepArray = .init(value: [])
     private let onUpdate: (Screen) -> Void
     
     @Published var showErrors: Bool = false

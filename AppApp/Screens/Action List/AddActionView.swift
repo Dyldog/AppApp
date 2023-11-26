@@ -35,7 +35,7 @@ struct AddActionView: View {
         
         func make() -> any StepType {
             switch self {
-            case .printVariable: PrintVarStep(varName: .init(value: StringValue(value: "VAR")))
+            case .printVariable: PrintVarStep(varName: .init(value: Variable(value: StringValue(value: "VAR"))))
 //            case .setVariable: SetVarStep(varName: "VAR", value: "VALUE")
 //            case .addToVariable: AddToVarStep(varName: "VAR", value: "VALUE")
 //            case .staticValue: StaticValueStep(value: "VALUE", type: .string)

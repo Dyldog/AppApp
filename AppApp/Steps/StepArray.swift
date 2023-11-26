@@ -7,43 +7,53 @@
 
 import SwiftUI
 
-struct StepArray: Codable, VariableValue {
+final class StepArray: Codable, PrimitiveEditableVariableValue {
     
     static var type: VariableType { .list }
+    static var defaultValue: [any StepType] { .init() }
     
-    let values: [any StepType]
+    var value: [any StepType]
     
-    init(values: [any StepType]) {
-        self.values = values
+    init(value: [any StepType]) {
+        self.value = value
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.values = try container.decode(CodableStepList.self).values
+        self.value = try container.decode(CodableStepList.self).values
     }
     
     func add(_ other: VariableValue) throws -> VariableValue {
-        try values.add(other)
+        fatalError()
     }
     
-    var protoString: String { values.protoString }
+    var protoString: String { value.map { $0.protoString }.joined(separator: ", ") }
     
-    var valueString: String { values.valueString }
+    var valueString: String { value.map { $0.protoString }.joined(separator: ", ") }
     
     func value(with variables: Binding<Variables>) async throws -> VariableValue? {
-        try await values.value(with: variables)
+//        try await values.value(with: variables)
+        fatalError()
     }
     
-    func editView(title: String, onUpdate: @escaping (StepArray) -> Void) -> AnyView {
-        values.editView(title: title, onUpdate: {
-            onUpdate(.init(values: $0))
-        })
+    func editView(onUpdate: @escaping (StepArray) -> Void) -> AnyView {
+        return HStack {
+            Text(protoString)
+                .fixedSize()
+            SheetButton(title: {
+                Text("Edit")
+            }) {
+                ActionListView(steps: self.value, onUpdate: {
+                    onUpdate(.init(value: $0))
+                })
+            }
+        }.any
     }
     
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
-        try container.encode(CodableStepList(steps: values))
+        try container.encode(CodableStepList(steps: value))
     }
 }
 
@@ -59,6 +69,6 @@ extension StepArray: Sequence {
     }
     
     func makeIterator() -> Iterator {
-        .init(values: values)
+        .init(values: value)
     }
 }

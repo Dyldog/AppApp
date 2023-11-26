@@ -54,7 +54,7 @@ struct ViewMakerView: View {
             .toolbar {
                 HStack {
                     if viewModel.makeMode {
-                        viewModel.initActions.editView(title: "Init Actions") {
+                        viewModel.initActions.editView {
                             viewModel.updateInitActions($0)
                         }
                         

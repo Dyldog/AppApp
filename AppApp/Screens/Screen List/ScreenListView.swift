@@ -38,8 +38,8 @@ struct ScreenListView: View {
                 SwiftUI.Button("Add") {
                     viewModel.screens.append(Screen(
                         name: randomString(length: 5).uppercased(),
-                        initActions: .init(values: []),
-                        content: .init(elements: [])
+                        initActions: .init(value: []),
+                        content: .init(value: [])
                     ))
                     viewModel.objectWillChange.send()
                 }

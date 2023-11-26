@@ -30,18 +30,9 @@ import SwiftUI
 
 final class StringValue: PrimitiveEditableVariableValue {
     
-    enum Properties: String, PrimitiveViewProperty {
-        case value
-        
-        var defaultValue: Any {
-            switch self {
-            case .value: return "TEXT"
-            }
-        }
-    }
-    
     static var type: VariableType { .string }
     var value: String
+    static let defaultValue: String = "TEXT"
     
     init(value: String) {
         self.value = value
@@ -67,23 +58,6 @@ final class StringValue: PrimitiveEditableVariableValue {
     static func == (lhs: StringValue, rhs: StringValue) -> Bool {
         return lhs.value == rhs.value
     }
-    
-    static func make(factory: (Properties) -> Any) -> StringValue {
-        .init(value: factory(.value) as! String)
-    }
-    
-    func value(for property: Properties) -> Any? {
-        switch property {
-        case .value: return value
-        }
-    }
-    
-    func set(_ value: Any, for property: Properties) {
-        switch property {
-        case .value: self.value = value as! String
-        }
-    }
-    
 }
 
 extension StringValue: Hashable {
