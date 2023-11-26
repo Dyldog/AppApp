@@ -25,7 +25,7 @@ final class SetVarStep: Step {
     static func defaultValue(for property: Properties) -> Any {
         switch property {
         case .value: return Value(value: StringValue(value: "TEXT"))
-        case .varName: return Value(value: Variable(value: StringValue(value: "VAR")))
+        case .varName: return Value(value: StringValue(value: "VAR"))
         }
     }
     

@@ -17,15 +17,6 @@ struct ViewMakerView: View {
             VStack {
                 ScrollView {
                     CenterStack {
-//                        MakeableStack(content: viewModel.content, makeMode: viewModel.makeMode) {
-//                            viewModel.addTapped(at: $0)
-//                        } editTapped: {
-//                            viewModel.editView(at: $0)
-//                        } removedTapped: {
-//                            viewModel.removeView(at: $0)
-//                        }.view(variables: viewModel.variables, alert: $viewModel.alert, onEdit: {
-//                            viewModel.viewUpdated()
-//                        })
                         MakeableStackView(
                             makeMode: viewModel.makeMode,
                             stack: .init(content: viewModel.content),

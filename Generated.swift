@@ -3,6 +3,78 @@
 
 import SwiftUI
 
+extension APIValueStep {
+	 enum Properties: String, ViewProperty {
+        case url
+        var defaultValue: Any {
+            switch self {
+            case .url: return APIValueStep.defaultValue(for: .url)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> APIValueStep {
+        .init(
+            url: factory(.url) as! Value
+        )
+    }
+
+    static func makeDefault() -> APIValueStep {
+        .init(
+            url: Properties.url.defaultValue as! Value
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .url: return url
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .url: self.url = value as! Value
+	    }
+	}
+}
+
+extension AddToVarStep {
+	 enum Properties: String, ViewProperty {
+        case varName
+        case value
+        var defaultValue: Any {
+            switch self {
+            case .varName: return AddToVarStep.defaultValue(for: .varName)
+            case .value: return AddToVarStep.defaultValue(for: .value)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> AddToVarStep {
+        .init(
+            varName: factory(.varName) as! Value,
+            value: factory(.value) as! Value
+        )
+    }
+
+    static func makeDefault() -> AddToVarStep {
+        .init(
+            varName: Properties.varName.defaultValue as! Value,
+            value: Properties.value.defaultValue as! Value
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .varName: return varName
+	        case .value: return value
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .varName: self.varName = value as! Value
+	        case .value: self.value = value as! Value
+	    }
+	}
+}
+
 extension ArrayValue {
 	 enum Properties: String, ViewProperty {
         case type
@@ -17,14 +89,14 @@ extension ArrayValue {
     static func make(factory: (Properties) -> Any) -> ArrayValue {
         .init(
             type: factory(.type) as! VariableType,
-            elements: factory(.elements) as! [any VariableValue]
+            elements: factory(.elements) as! [any EditableVariableValue]
         )
     }
 
     static func makeDefault() -> ArrayValue {
         .init(
             type: Properties.type.defaultValue as! VariableType,
-            elements: Properties.elements.defaultValue as! [any VariableValue]
+            elements: Properties.elements.defaultValue as! [any EditableVariableValue]
 		)
     }
     func value(for property: Properties) -> Any? {
@@ -37,7 +109,46 @@ extension ArrayValue {
 	func set(_ value: Any, for property: Properties) {
 		switch property {
 	        case .type: self.type = value as! VariableType
-	        case .elements: self.elements = value as! [any VariableValue]
+	        case .elements: self.elements = value as! [any EditableVariableValue]
+	    }
+	}
+}
+
+extension ArrayValueStep {
+	 enum Properties: String, ViewProperty {
+        case array
+        case index
+        var defaultValue: Any {
+            switch self {
+            case .array: return ArrayValueStep.defaultValue(for: .array)
+            case .index: return ArrayValueStep.defaultValue(for: .index)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> ArrayValueStep {
+        .init(
+            array: factory(.array) as! Value,
+            index: factory(.index) as! Value
+        )
+    }
+
+    static func makeDefault() -> ArrayValueStep {
+        .init(
+            array: Properties.array.defaultValue as! Value,
+            index: Properties.index.defaultValue as! Value
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .array: return array
+	        case .index: return index
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .array: self.array = value as! Value
+	        case .index: self.index = value as! Value
 	    }
 	}
 }
@@ -71,6 +182,78 @@ extension BoolValue {
 	func set(_ value: Any, for property: Properties) {
 		switch property {
 	        case .value: self.value = value as! Bool
+	    }
+	}
+}
+
+extension DecodeDictionaryStep {
+	 enum Properties: String, ViewProperty {
+        case value
+        var defaultValue: Any {
+            switch self {
+            case .value: return DecodeDictionaryStep.defaultValue(for: .value)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> DecodeDictionaryStep {
+        .init(
+            value: factory(.value) as! Value
+        )
+    }
+
+    static func makeDefault() -> DecodeDictionaryStep {
+        .init(
+            value: Properties.value.defaultValue as! Value
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .value: return value
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .value: self.value = value as! Value
+	    }
+	}
+}
+
+extension DictionaryValue {
+	 enum Properties: String, ViewProperty {
+        case type
+        case elements
+        var defaultValue: Any {
+            switch self {
+            case .type: return DictionaryValue.defaultValue(for: .type)
+            case .elements: return DictionaryValue.defaultValue(for: .elements)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> DictionaryValue {
+        .init(
+            type: factory(.type) as! VariableTypeValue,
+            elements: factory(.elements) as! [StringValue: any EditableVariableValue]
+        )
+    }
+
+    static func makeDefault() -> DictionaryValue {
+        .init(
+            type: Properties.type.defaultValue as! VariableTypeValue,
+            elements: Properties.elements.defaultValue as! [StringValue: any EditableVariableValue]
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .type: return type
+	        case .elements: return elements
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .type: self.type = value as! VariableTypeValue
+	        case .elements: self.elements = value as! [StringValue: any EditableVariableValue]
 	    }
 	}
 }
@@ -414,6 +597,45 @@ extension SetVarStep {
 	}
 }
 
+extension StaticValueStep {
+	 enum Properties: String, ViewProperty {
+        case value
+        case type
+        var defaultValue: Any {
+            switch self {
+            case .value: return StaticValueStep.defaultValue(for: .value)
+            case .type: return StaticValueStep.defaultValue(for: .type)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> StaticValueStep {
+        .init(
+            value: factory(.value) as! Value,
+            type: factory(.type) as! VariableTypeValue
+        )
+    }
+
+    static func makeDefault() -> StaticValueStep {
+        .init(
+            value: Properties.value.defaultValue as! Value,
+            type: Properties.type.defaultValue as! VariableTypeValue
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .value: return value
+	        case .type: return type
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .value: self.value = value as! Value
+	        case .type: self.type = value as! VariableTypeValue
+	    }
+	}
+}
+
 extension StepArray {
 	enum Properties: String, PrimitiveViewProperty {
         case value
@@ -585,6 +807,45 @@ extension Variable {
 	}
 }
 
+extension VariableStep {
+	 enum Properties: String, ViewProperty {
+        case varName
+        case type
+        var defaultValue: Any {
+            switch self {
+            case .varName: return VariableStep.defaultValue(for: .varName)
+            case .type: return VariableStep.defaultValue(for: .type)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> VariableStep {
+        .init(
+            varName: factory(.varName) as! Value,
+            type: factory(.type) as! VariableTypeValue
+        )
+    }
+
+    static func makeDefault() -> VariableStep {
+        .init(
+            varName: Properties.varName.defaultValue as! Value,
+            type: Properties.type.defaultValue as! VariableTypeValue
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .varName: return varName
+	        case .type: return type
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .varName: self.varName = value as! Value
+	        case .type: self.type = value as! VariableTypeValue
+	    }
+	}
+}
+
 extension VariableTypeValue {
 	enum Properties: String, PrimitiveViewProperty {
         case value
@@ -672,10 +933,20 @@ extension CodableVariableValue: Codable {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.type = try valueContainer.decode(String.self, forKey: .type)
         switch type {
+        case typeString(APIValueStep.self):
+            self.value = try valueContainer.decode(APIValueStep.self, forKey: .value)
+        case typeString(AddToVarStep.self):
+            self.value = try valueContainer.decode(AddToVarStep.self, forKey: .value)
         case typeString(ArrayValue.self):
             self.value = try valueContainer.decode(ArrayValue.self, forKey: .value)
+        case typeString(ArrayValueStep.self):
+            self.value = try valueContainer.decode(ArrayValueStep.self, forKey: .value)
         case typeString(BoolValue.self):
             self.value = try valueContainer.decode(BoolValue.self, forKey: .value)
+        case typeString(DecodeDictionaryStep.self):
+            self.value = try valueContainer.decode(DecodeDictionaryStep.self, forKey: .value)
+        case typeString(DictionaryValue.self):
+            self.value = try valueContainer.decode(DictionaryValue.self, forKey: .value)
         case typeString(FontWeightValue.self):
             self.value = try valueContainer.decode(FontWeightValue.self, forKey: .value)
         case typeString(IntValue.self):
@@ -694,6 +965,8 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(PrintVarStep.self, forKey: .value)
         case typeString(SetVarStep.self):
             self.value = try valueContainer.decode(SetVarStep.self, forKey: .value)
+        case typeString(StaticValueStep.self):
+            self.value = try valueContainer.decode(StaticValueStep.self, forKey: .value)
         case typeString(StepArray.self):
             self.value = try valueContainer.decode(StepArray.self, forKey: .value)
         case typeString(StringValue.self):
@@ -704,6 +977,8 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(Value.self, forKey: .value)
         case typeString(Variable.self):
             self.value = try valueContainer.decode(Variable.self, forKey: .value)
+        case typeString(VariableStep.self):
+            self.value = try valueContainer.decode(VariableStep.self, forKey: .value)
         case typeString(VariableTypeValue.self):
             self.value = try valueContainer.decode(VariableTypeValue.self, forKey: .value)
         default:
@@ -714,9 +989,19 @@ extension CodableVariableValue: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type, forKey: .type)
         switch self.value {
+        case let value as APIValueStep:
+            try container.encode(value, forKey: .value)
+        case let value as AddToVarStep:
+            try container.encode(value, forKey: .value)
         case let value as ArrayValue:
             try container.encode(value, forKey: .value)
+        case let value as ArrayValueStep:
+            try container.encode(value, forKey: .value)
         case let value as BoolValue:
+            try container.encode(value, forKey: .value)
+        case let value as DecodeDictionaryStep:
+            try container.encode(value, forKey: .value)
+        case let value as DictionaryValue:
             try container.encode(value, forKey: .value)
         case let value as FontWeightValue:
             try container.encode(value, forKey: .value)
@@ -736,6 +1021,8 @@ extension CodableVariableValue: Codable {
             try container.encode(value, forKey: .value)
         case let value as SetVarStep:
             try container.encode(value, forKey: .value)
+        case let value as StaticValueStep:
+            try container.encode(value, forKey: .value)
         case let value as StepArray:
             try container.encode(value, forKey: .value)
         case let value as StringValue:
@@ -745,6 +1032,8 @@ extension CodableVariableValue: Codable {
         case let value as Value:
             try container.encode(value, forKey: .value)
         case let value as Variable:
+            try container.encode(value, forKey: .value)
+        case let value as VariableStep:
             try container.encode(value, forKey: .value)
         case let value as VariableTypeValue:
             try container.encode(value, forKey: .value)
@@ -776,6 +1065,7 @@ extension AddViewViewModel {
 enum VariableType: String, CaseIterable, Equatable, Codable {   
 	case list // ArrayValue
 	case boolean // BoolValue
+	case dictionary // DictionaryValue
 	case fontWeight // FontWeightValue
 	case int // IntValue
 	case makeableArray // MakeableArray
@@ -783,8 +1073,6 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
 	case field // MakeableField
 	case label // MakeableLabel
 	case stack // MakeableStack
-	case printVarStep // PrintVarStep
-	case setVarStep // SetVarStep
 	case stepArray // StepArray
 	case string // StringValue
 	case temporary // TemporaryValue
@@ -796,6 +1084,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
         switch self {
         case .list: return ArrayValue.makeDefault()
         case .boolean: return BoolValue.makeDefault()
+        case .dictionary: return DictionaryValue.makeDefault()
         case .fontWeight: return FontWeightValue.makeDefault()
         case .int: return IntValue.makeDefault()
         case .makeableArray: return MakeableArray.makeDefault()
@@ -803,8 +1092,6 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
         case .field: return MakeableField.makeDefault()
         case .label: return MakeableLabel.makeDefault()
         case .stack: return MakeableStack.makeDefault()
-        case .printVarStep: return PrintVarStep.makeDefault()
-        case .setVarStep: return SetVarStep.makeDefault()
         case .stepArray: return StepArray.makeDefault()
         case .string: return StringValue.makeDefault()
         case .temporary: return TemporaryValue.makeDefault()
@@ -835,18 +1122,36 @@ extension MakeableWrapperView {
 
 extension AddActionView {
 	enum Actions: Int, CaseIterable {
+		case APIValue
+		case AddToVar
+		case ArrayValue
+		case DecodeDictionary
 		case PrintVar
 		case SetVar
+		case StaticValue
+		case Variable
         var title: String {
             switch self {
+            case .APIValue: return APIValueStep.title
+            case .AddToVar: return AddToVarStep.title
+            case .ArrayValue: return ArrayValueStep.title
+            case .DecodeDictionary: return DecodeDictionaryStep.title
             case .PrintVar: return PrintVarStep.title
             case .SetVar: return SetVarStep.title
+            case .StaticValue: return StaticValueStep.title
+            case .Variable: return VariableStep.title
             }
         }
         func make() -> any StepType {
             switch self {
+            case .APIValue: APIValueStep.makeDefault()
+            case .AddToVar: AddToVarStep.makeDefault()
+            case .ArrayValue: ArrayValueStep.makeDefault()
+            case .DecodeDictionary: DecodeDictionaryStep.makeDefault()
             case .PrintVar: PrintVarStep.makeDefault()
             case .SetVar: SetVarStep.makeDefault()
+            case .StaticValue: StaticValueStep.makeDefault()
+            case .Variable: VariableStep.makeDefault()
             }
         }
     }
@@ -857,10 +1162,22 @@ extension CodableStep: Codable {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.type = try valueContainer.decode(String.self, forKey: .type)
         switch type {
+        case typeString(APIValueStep.self):
+			self.value = try valueContainer.decode(APIValueStep.self, forKey: .value)
+        case typeString(AddToVarStep.self):
+			self.value = try valueContainer.decode(AddToVarStep.self, forKey: .value)
+        case typeString(ArrayValueStep.self):
+			self.value = try valueContainer.decode(ArrayValueStep.self, forKey: .value)
+        case typeString(DecodeDictionaryStep.self):
+			self.value = try valueContainer.decode(DecodeDictionaryStep.self, forKey: .value)
         case typeString(PrintVarStep.self):
 			self.value = try valueContainer.decode(PrintVarStep.self, forKey: .value)
         case typeString(SetVarStep.self):
 			self.value = try valueContainer.decode(SetVarStep.self, forKey: .value)
+        case typeString(StaticValueStep.self):
+			self.value = try valueContainer.decode(StaticValueStep.self, forKey: .value)
+        case typeString(VariableStep.self):
+			self.value = try valueContainer.decode(VariableStep.self, forKey: .value)
         default:
             fatalError(type)
         }
@@ -869,9 +1186,21 @@ extension CodableStep: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type, forKey: .type)
         switch self.value {
+		case let value as APIValueStep:
+			try container.encode(value, forKey: .value)
+		case let value as AddToVarStep:
+			try container.encode(value, forKey: .value)
+		case let value as ArrayValueStep:
+			try container.encode(value, forKey: .value)
+		case let value as DecodeDictionaryStep:
+			try container.encode(value, forKey: .value)
 		case let value as PrintVarStep:
 			try container.encode(value, forKey: .value)
 		case let value as SetVarStep:
+			try container.encode(value, forKey: .value)
+		case let value as StaticValueStep:
+			try container.encode(value, forKey: .value)
+		case let value as VariableStep:
 			try container.encode(value, forKey: .value)
         default: fatalError()
         }

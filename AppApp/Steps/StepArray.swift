@@ -32,7 +32,6 @@ final class StepArray: Codable, PrimitiveEditableVariableValue {
     var valueString: String { value.map { $0.protoString }.joined(separator: ", ") }
     
     func value(with variables: Binding<Variables>) async throws -> VariableValue? {
-//        try await values.value(with: variables)
         fatalError()
     }
     

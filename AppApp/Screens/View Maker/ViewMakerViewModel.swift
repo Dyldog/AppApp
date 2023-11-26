@@ -31,7 +31,7 @@ class ViewMakerViewModel: ObservableObject {
     
     @Published private var updater: Int = 0
     
-    @MainActor private var _variables: Variables! {
+    @MainActor private var _variables: Variables? {
         willSet { onMain { self.objectWillChange.send() } }
     }
     
@@ -44,13 +44,13 @@ class ViewMakerViewModel: ObservableObject {
         }
         set {
             guard !self.makeMode, let newValue = newValue else { return }
-            self._variables.set(from: newValue)
+            self._variables?.set(from: newValue)
         }
     }
     
     private var variablesBinding: Binding<Variables> {
         .init {
-            self._variables
+            self._variables!
         } set: { new in
             onMain {
                 self._variables = new
@@ -67,7 +67,7 @@ class ViewMakerViewModel: ObservableObject {
         self._variables = .init()
         
         Task { @MainActor in
-            _variables = await makeVariables()
+//            _variables = await makeVariables()
         }
         
 //        $content.dropFirst().sink { content in

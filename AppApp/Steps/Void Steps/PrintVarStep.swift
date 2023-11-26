@@ -14,7 +14,6 @@ final class PrintVarStep: Step, Codable {
     var varName: Value
     
     var protoString: String { "{ print($\(varName)) }"}
-    var valueString: String { protoString }
     
     required init(varName: Value) {
         self.varName = varName
@@ -31,13 +30,5 @@ final class PrintVarStep: Step, Codable {
         switch property {
         case .varName: return Value(value: Variable(value: StringValue(value: "$0")))
         }
-    }
-    
-    func add(_ other: VariableValue) throws -> VariableValue {
-        fatalError()
-    }
-    
-    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
-        self
     }
 }

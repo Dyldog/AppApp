@@ -7,29 +7,41 @@
 
 import SwiftUI
 
-//final class AddToVarStep: Step, ObservableObject, Codable {
-//    
-//    static var title: String { "Add to variable" }
-//    var varName: Value
-//    var value: Value
-//    
-//    required init(varName: Value, value: Value) {
-//        self.varName = varName
-//        self.value = value
-//    }
-//    
-//    var protoString: String { "{ $\(varName.protoString) += \(value.protoString) }" }
-//    
-//    func run(with variables: Binding<Variables>) async throws {
-//        guard
-//            let name = try await varName.value(with: variables),
-//            let oldValue = variables.wrappedValue.value(for: name.valueString) ,
-//            let extraValue = try await value.value(with: variables)
-//        else { throw Error.cantAddToUnsetVariable }
-//        
-//        variables.wrappedValue.set(try oldValue.add(extraValue), for: varName.valueString)
-//    }
-//    
+final class AddToVarStep: Step, ObservableObject {
+    
+    static var title: String { "Add to variable" }
+    var varName: Value
+    var value: Value
+    
+    var protoString: String { "{ $\(varName.protoString) += \(value.protoString) }" }
+    
+    init(varName: Value, value: Value) {
+        self.varName = varName
+        self.value = value
+    }
+    
+    static func defaultValue(for property: Properties) -> Any {
+        switch property {
+        case .value: return Value(value: IntValue(value: 1))
+        case .varName: return Value(value: Variable(value: StringValue(value: "VAR")))
+        }
+    }
+    
+    func run(with variables: Binding<Variables>) async throws {
+        guard
+            let name = try await varName.value(with: variables),
+            let oldValue = variables.wrappedValue.value(for: name.valueString) ,
+            let extraValue = try await value.value(with: variables)
+        else { throw Error.cantAddToUnsetVariable }
+        
+        variables.wrappedValue.set(try oldValue.add(extraValue), for: varName.valueString)
+    }
+    
+    enum Error: StepError, Swift.Error {
+        case cantAddToUnsetVariable
+    }
+}
+//
 //    static func make(factory: (Properties) -> VariableValue) -> Self {
 //        .init(
 //            varName: factory(.name) as! Value,
@@ -62,8 +74,5 @@ import SwiftUI
 //            }
 //        }
 //    }
-//    
-//    enum Error: StepError, Swift.Error {
-//        case cantAddToUnsetVariable
-//    }
+//
 //}

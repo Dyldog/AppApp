@@ -167,13 +167,17 @@ extension AddViewViewModel {
 
 enum VariableType: String, CaseIterable, Equatable, Codable {   
 {% for type in types.implementing.VariableValue|!protocol %}
+{% if not type.implements.StepType %}
 	case {%+ call VariableTypeName type +%} // {{ type.name }}
+{% endif %}
 {% endfor %}
 
 	var defaultView: any EditableVariableValue {
         switch self {
 {% for type in types.implementing.VariableValue|!protocol %}
+{% if not type.implements.StepType %}
         case .{%+ call VariableTypeName type +%}: return {{ type.name }}.makeDefault()
+{% endif %}
 {% endfor %}
         }
     }

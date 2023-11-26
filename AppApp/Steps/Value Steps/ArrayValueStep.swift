@@ -7,32 +7,38 @@
 
 import SwiftUI
 
-//final class ArrayValueStep: ValueStep, Codable {
-//    
-//    static var title: String { "Get value from array" }
-//    var protoString: String { "\(array.protoString)[\(index.protoString)]"}
-//        
-//    var array: Value
-//    var index: Value
-//    
-//    init(array: Value, index: Value) {
-//        self.array = array
-//        self.index = index
-//    }
-//    
-//    func run(with variables: Binding<Variables>) async throws -> VariableValue {
-//        guard
-//            let index = try await index.value(with: variables) as? Int,
-//            let array = try await array.value(with: variables) as? ArrayValue
-//        else { throw VariableValueError.wrongTypeForOperation }
-//        
-//        guard let value = array.elements[safe: index] else {
-//            throw VariableValueError.valueNotFoundForVariable(index.protoString)
-//        }
-//        
-//        return value
-//    }
-//}
+final class ArrayValueStep: ValueStep {
+    static var title: String { "Get value from array" }
+    var protoString: String { "\(array.protoString)[\(index.protoString)]"}
+      
+    var array: Value
+    var index: Value
+    
+    init(array: Value, index: Value) {
+        self.array = array
+        self.index = index
+    }
+    
+    static func defaultValue(for property: Properties) -> Any {
+        switch property {
+        case .array: return Value(value: Variable(value: StringValue(value: "$0")))
+        case .index: return Value(value: IntValue(value: 0))
+        }
+    }
+    
+    func run(with variables: Binding<Variables>) async throws -> VariableValue {
+        guard
+            let index = try await index.value(with: variables) as? IntValue,
+            let array = try await array.value(with: variables) as? ArrayValue
+        else { throw VariableValueError.wrongTypeForOperation }
+        
+        guard let value = array.elements[safe: index.value] else {
+            throw VariableValueError.valueNotFoundForVariable(index.protoString)
+        }
+        
+        return value
+    }
+}
 //
 //extension ArrayValueStep {
 //    func set(_ value: VariableValue, for property: Properties) {
