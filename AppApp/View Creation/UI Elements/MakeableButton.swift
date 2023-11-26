@@ -49,10 +49,11 @@ struct MakeableButtonView: View {
         return SwiftUI.Button(action: {
             runAction()
         }, label: {
-            Text(text)
-                .font(.system(size: CGFloat(button.fontSize.value)).weight(button.fontWeight.value))
-                .if(button.italic.value) { $0.italic() }
-                .fixedSize()
+            MakeableLabelView(makeMode: makeMode, label: button.title, onContentUpdate: {
+                onContentUpdate(.init(title: $0, action: button.action))
+            }, onRuntimeUpdate: {
+                onRuntimeUpdate()
+            }, variables: $variables, error: $error)
         }).task(id: variables) {
             self.text = await titleString()
         }.fixedSize().any
@@ -92,27 +93,17 @@ final class MakeableButton: MakeableView, Codable {
     
     static func defaultValue(for property: Properties) -> Any {
         switch property {
-        case .title: return Value(value: StringValue(value: "TEXT"))
+        case .title: return MakeableLabel.makeDefault()
         case .action: return StepArray(value: [])
-        case .fontSize: return IntValue(value: 18)
-        case .fontWeight: return FontWeightValue(value: .regular)
-        case .italic: return BoolValue(value: false)
         }
     }
     var id: UUID = .init()
-    var title: Value
+    var title: MakeableLabel
     var action: StepArray
-    var fontSize: IntValue
-    var fontWeight: FontWeightValue
-    var italic: BoolValue
     
-    
-    init(title: Value, action: StepArray, fontSize: IntValue, fontWeight: FontWeightValue, italic: BoolValue) {
+    init(title: MakeableLabel, action: StepArray) {
         self.title = title
         self.action = action
-        self.fontSize = fontSize
-        self.fontWeight = fontWeight
-        self.italic = italic
     }
     
     var protoString: String { title.protoString }

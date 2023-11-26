@@ -178,55 +178,37 @@ extension MakeableButton {
 	 enum Properties: String, ViewProperty {
         case title
         case action
-        case fontSize
-        case fontWeight
-        case italic
         var defaultValue: Any {
             switch self {
             case .title: return MakeableButton.defaultValue(for: .title)
             case .action: return MakeableButton.defaultValue(for: .action)
-            case .fontSize: return MakeableButton.defaultValue(for: .fontSize)
-            case .fontWeight: return MakeableButton.defaultValue(for: .fontWeight)
-            case .italic: return MakeableButton.defaultValue(for: .italic)
             }
         }
     }
     static func make(factory: (Properties) -> Any) -> MakeableButton {
         .init(
-            title: factory(.title) as! Value,
-            action: factory(.action) as! StepArray,
-            fontSize: factory(.fontSize) as! IntValue,
-            fontWeight: factory(.fontWeight) as! FontWeightValue,
-            italic: factory(.italic) as! BoolValue
+            title: factory(.title) as! MakeableLabel,
+            action: factory(.action) as! StepArray
         )
     }
 
     static func makeDefault() -> MakeableButton {
         .init(
-            title: Properties.title.defaultValue as! Value,
-            action: Properties.action.defaultValue as! StepArray,
-            fontSize: Properties.fontSize.defaultValue as! IntValue,
-            fontWeight: Properties.fontWeight.defaultValue as! FontWeightValue,
-            italic: Properties.italic.defaultValue as! BoolValue
+            title: Properties.title.defaultValue as! MakeableLabel,
+            action: Properties.action.defaultValue as! StepArray
 		)
     }
     func value(for property: Properties) -> Any? {
 		switch property {
 	        case .title: return title
 	        case .action: return action
-	        case .fontSize: return fontSize
-	        case .fontWeight: return fontWeight
-	        case .italic: return italic
         }
     }
 
 	func set(_ value: Any, for property: Properties) {
 		switch property {
-	        case .title: self.title = value as! Value
+	        case .title: self.title = value as! MakeableLabel
 	        case .action: self.action = value as! StepArray
-	        case .fontSize: self.fontSize = value as! IntValue
-	        case .fontWeight: self.fontWeight = value as! FontWeightValue
-	        case .italic: self.italic = value as! BoolValue
 	    }
 	}
 }
