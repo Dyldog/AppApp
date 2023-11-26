@@ -29,18 +29,18 @@ struct CodableVariableValue: Codable {
         switch type {
         case typeString(Value.self):
             self.value = try valueContainer.decode(Value.self, forKey: .value)
-        case typeString(ActionValue.self):
-            self.value = try valueContainer.decode(ActionValue.self, forKey: .value)
+//        case typeString(ActionValue.self):
+//            self.value = try valueContainer.decode(ActionValue.self, forKey: .value)
         case typeString(ArrayValue.self):
             self.value = try valueContainer.decode(ArrayValue.self, forKey: .value)
-        case typeString(DictionaryValue.self):
-            self.value = try valueContainer.decode(DictionaryValue.self, forKey: .value)
+//        case typeString(DictionaryValue.self):
+//            self.value = try valueContainer.decode(DictionaryValue.self, forKey: .value)
         case typeString(Variable.self):
             self.value = try valueContainer.decode(Variable.self, forKey: .value)
         case typeString(VariableType.self):
             self.value = try valueContainer.decode(VariableType.self, forKey: .value)
-        case typeString(Int.self):
-            self.value = try valueContainer.decode(Int.self, forKey: .value)
+        case typeString(IntValue.self):
+            self.value = try valueContainer.decode(IntValue.self, forKey: .value)
         case typeString(StringValue.self):
             self.value = try valueContainer.decode(StringValue.self, forKey: .value)
         default:
@@ -56,12 +56,12 @@ struct CodableVariableValue: Codable {
         switch self.value {
         case let value as Value:
             try container.encode(value, forKey: .value)
-        case let value as ActionValue:
-            try container.encode(value, forKey: .value)
+//        case let value as ActionValue:
+//            try container.encode(value, forKey: .value)
         case let value as ArrayValue:
             try container.encode(value, forKey: .value)
-        case let value as DictionaryValue:
-            try container.encode(value, forKey: .value)
+//        case let value as DictionaryValue:
+//            try container.encode(value, forKey: .value)
         case let value as Variable:
             try container.encode(value, forKey: .value)
         case let value as VariableType:

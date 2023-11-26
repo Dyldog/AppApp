@@ -8,7 +8,7 @@
 import Foundation
 
 extension ViewEditable {
-    var properties: [Properties: any VariableValue] {
+    var properties: [Properties: Any] {
         Properties.allCases.reduce(into: [:], {
             $0[$1] = value(for: $1) ?? $1.defaultValue
         })

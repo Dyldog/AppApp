@@ -24,19 +24,19 @@ final class PrintVarStep: Step, Codable {
         print("\(varName): \(variables.wrappedValue.value(for: nameValue.valueString) as Any)")
     }
     
-    static func make(factory: (Properties) -> VariableValue) -> Self {
+    static func make(factory: (Properties) -> Any) -> Self {
         .init(
             varName: factory(.name) as! Value
         )
     }
     
-    func value(for property: Properties) -> (VariableValue)? {
+    func value(for property: Properties) -> Any? {
         switch property {
         case .name: varName
         }
     }
     
-    func set(_ value: VariableValue, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
         case .name: varName = value as! Value
         }
@@ -45,20 +45,9 @@ final class PrintVarStep: Step, Codable {
     enum Properties: String, ViewProperty {
         case name
         
-        var defaultValue: VariableValue {
+        var defaultValue: Any {
             switch self {
             case .name: return StringValue(value: "Text")
-            }
-        }
-    }
-    
-    func editView(onUpdate: @escaping (PrintVarStep) -> Void) -> any View {
-        VStack {
-            Text("Set variable")
-            HStack {
-                varName.editView {
-                    self.varName = $0
-                }
             }
         }
     }

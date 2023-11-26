@@ -7,7 +7,10 @@
 
 import Foundation
 
-protocol ViewProperty: CaseIterable, Hashable {
-    var rawValue: String { get }
-    var defaultValue: any VariableValue { get }
+protocol ViewProperty: RawRepresentable, CaseIterable, Hashable where RawValue == String {
+    var defaultValue: Any { get }
+}
+
+protocol PrimitiveViewProperty: ViewProperty {
+    static var value: Self { get }
 }

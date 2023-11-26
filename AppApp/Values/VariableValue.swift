@@ -15,7 +15,7 @@ protocol VariableValue {
     var protoString: String { get }
     var valueString: String { get }
     func value(with variables: Binding<Variables>) async throws -> VariableValue?
-    func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView
+//    func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView
 }
 
 extension Encodable {
@@ -24,8 +24,4 @@ extension Encodable {
 
 extension Array where Element: Encodable {
     func encoded() -> Data { try! JSONEncoder().encode(self) }
-}
-
-extension VariableValue {
-    
 }

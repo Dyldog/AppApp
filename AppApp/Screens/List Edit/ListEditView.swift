@@ -22,10 +22,10 @@ struct ListEditView: View {
             addButton(index: 0)
             
             ForEach(enumerated: value.elements) { (index, element) in
-                element.editView(title: "\(index)", onUpdate: { editedElement in
-                    value.elements[index] = editedElement
-                    onUpdate(value)
-                })
+//                element.editView(title: "\(index)", onUpdate: { editedElement in
+//                    value.elements[index] = editedElement
+//                    onUpdate(value)
+//                })
                 
                 addButton(index: index + 1)
             }

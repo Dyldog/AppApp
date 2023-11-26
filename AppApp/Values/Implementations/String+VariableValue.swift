@@ -28,7 +28,17 @@ import SwiftUI
 //    }
 //}
 
-final class StringValue: VariableValue {
+final class StringValue: PrimitiveEditableVariableValue {
+    
+    enum Properties: String, PrimitiveViewProperty {
+        case value
+        
+        var defaultValue: Any {
+            switch self {
+            case .value: return "TEXT"
+            }
+        }
+    }
     
     static var type: VariableType { .string }
     var value: String
@@ -45,7 +55,7 @@ final class StringValue: VariableValue {
     var valueString: String { value }
     func value(with variables: Binding<Variables>) throws -> VariableValue? { self }
     
-    func editView(title: String, onUpdate: @escaping (StringValue) -> Void) -> AnyView {
+    func editView(onUpdate: @escaping (StringValue) -> Void) -> AnyView {
         TextField("", text: .init(get: {
             self.value
         }, set: {
@@ -56,6 +66,22 @@ final class StringValue: VariableValue {
     
     static func == (lhs: StringValue, rhs: StringValue) -> Bool {
         return lhs.value == rhs.value
+    }
+    
+    static func make(factory: (Properties) -> Any) -> StringValue {
+        .init(value: factory(.value) as! String)
+    }
+    
+    func value(for property: Properties) -> Any? {
+        switch property {
+        case .value: return value
+        }
+    }
+    
+    func set(_ value: Any, for property: Properties) {
+        switch property {
+        case .value: self.value = value as! String
+        }
     }
     
 }

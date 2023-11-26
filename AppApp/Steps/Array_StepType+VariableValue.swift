@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Array: VariableValue where Element == any StepType {
-    static var type: VariableType { .action }
+    static var type: VariableType { fatalError() }
     
     func add(_ other: VariableValue) throws -> VariableValue {
         guard let other = other as? Array<any Step> else { throw VariableValueError.wrongTypeForOperation }

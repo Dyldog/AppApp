@@ -37,8 +37,8 @@ struct MakeableLabelView: View {
     
     var body: some View {
         Text(text)
-            .font(.system(size: CGFloat(label.fontSize)).weight(label.fontWeight))
-            .if(label.italic) { $0.italic() }
+            .font(.system(size: CGFloat(label.fontSize.value)).weight(label.fontWeight.value))
+            .if(label.italic.value) { $0.italic() }
             .task(id: variables) {
                 self.text = await self.labelText()
             }
@@ -47,13 +47,16 @@ struct MakeableLabelView: View {
 }
 
 final class MakeableLabel: MakeableView, Codable {
+    
+    static var type: VariableType { .label }
+        
     var id: UUID = .init()
     var text: Value
-    var fontSize: Int
-    var fontWeight: Font.Weight
-    var italic: Bool
+    var fontSize: IntValue
+    var fontWeight: FontWeightValue
+    var italic: BoolValue
     
-    init(text: Value, fontSize: Int, fontWeight: Font.Weight, italic: Bool) {
+    init(text: Value, fontSize: IntValue, fontWeight: FontWeightValue, italic: BoolValue) {
         self.text = text
         self.fontSize = fontSize
         self.fontWeight = fontWeight
@@ -63,9 +66,9 @@ final class MakeableLabel: MakeableView, Codable {
     static func withText(_ string: String) -> MakeableLabel {
         .init(
             text: Value(value: StringValue(value: string)),
-            fontSize: 18,
-            fontWeight: .regular,
-            italic: true
+            fontSize: IntValue(value: 18),
+            fontWeight: .init(value: .regular),
+            italic: .init(value: false)
         )
     }
     
@@ -73,25 +76,32 @@ final class MakeableLabel: MakeableView, Codable {
     
     var protoString: String { text.protoString }
     
+    func add(_ other: VariableValue) throws -> VariableValue { fatalError() }
+    
+    var valueString: String { text.valueString }
+
+    func value(with variables: Binding<Variables>) async throws -> VariableValue? { self }
+
+    
     enum Properties: String, CaseIterable, ViewProperty {
         case value
         case fontSize
         case fontWeight
         case italic
         
-        var defaultValue: any VariableValue {
+        var defaultValue: Any {
             switch self {
-            case .value: return "TEXT" as Value
-            case .fontSize: return 18
-            case .fontWeight: return Font.Weight.regular
-            case .italic: return false
+            case .value: return Value(value: StringValue(value: "TEXT"))
+            case .fontSize: return IntValue(value: 18)
+            case .fontWeight: return FontWeightValue(value: .regular)
+            case .italic: return BoolValue(value: false)
             }
         }
     }
 }
 
 extension MakeableLabel {
-    func value(for property: Properties) -> (any VariableValue)? {
+    func value(for property: Properties) -> Any? {
         switch property {
         case .value: return text
         case .fontSize: return fontSize
@@ -100,21 +110,21 @@ extension MakeableLabel {
         }
     }
     
-    static func make(factory: (Properties) -> any VariableValue) -> MakeableLabel {
+    static func make(factory: (Properties) -> Any) -> MakeableLabel {
         .init(
             text: factory(.value) as! Value,
-            fontSize: factory(.fontSize) as! Int,
-            fontWeight: factory(.fontWeight) as! Font.Weight,
-            italic: factory(.italic) as! Bool
+            fontSize: factory(.fontSize) as! IntValue,
+            fontWeight: factory(.fontWeight) as! FontWeightValue,
+            italic: factory(.italic) as! BoolValue
         )
     }
     
-    func set(_ value: any VariableValue, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
         case .value: self.text = value as! Value
-        case .fontSize: self.fontSize = value as! Int
-        case .fontWeight: self.fontWeight = value as! Font.Weight
-        case .italic: self.italic = value as! Bool
+        case .fontSize: self.fontSize = value as! IntValue
+        case .fontWeight: self.fontWeight = value as! FontWeightValue
+        case .italic: self.italic = value as! BoolValue
         }
     }
 }

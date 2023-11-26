@@ -27,24 +27,24 @@ struct CodableStep: Codable {
         self.type = try valueContainer.decode(String.self, forKey: .type)
         
         switch type {
-        case typeString(SetVarStep.self):
-            self.value = try valueContainer.decode(SetVarStep.self, forKey: .value)
-        case typeString(AddToVarStep.self):
-            self.value = try valueContainer.decode(AddToVarStep.self, forKey: .value)
-        case typeString(PrintVarStep.self):
-            self.value = try valueContainer.decode(PrintVarStep.self, forKey: .value)
-        case typeString(StaticValueStep.self):
-            self.value = try valueContainer.decode(StaticValueStep.self, forKey: .value)
-        case typeString(VariableStep.self):
-            self.value = try valueContainer.decode(VariableStep.self, forKey: .value)
-        case typeString(APIValueStep.self):
-            self.value = try valueContainer.decode(APIValueStep.self, forKey: .value)
-        case typeString(DecodeDictionaryStep.self):
-            self.value = try valueContainer.decode(DecodeDictionaryStep.self, forKey: .value)
-        case typeString(DictionaryValueForKeyStep.self):
-            self.value = try valueContainer.decode(DictionaryValueForKeyStep.self, forKey: .value)
-        case typeString(ArrayValueStep.self):
-            self.value = try valueContainer.decode(ArrayValueStep.self, forKey: .value)
+//        case typeString(SetVarStep.self):
+//            self.value = try valueContainer.decode(SetVarStep.self, forKey: .value)
+//        case typeString(AddToVarStep.self):
+//            self.value = try valueContainer.decode(AddToVarStep.self, forKey: .value)
+//        case typeString(PrintVarStep.self):
+//            self.value = try valueContainer.decode(PrintVarStep.self, forKey: .value)
+//        case typeString(StaticValueStep.self):
+//            self.value = try valueContainer.decode(StaticValueStep.self, forKey: .value)
+//        case typeString(VariableStep.self):
+//            self.value = try valueContainer.decode(VariableStep.self, forKey: .value)
+//        case typeString(APIValueStep.self):
+//            self.value = try valueContainer.decode(APIValueStep.self, forKey: .value)
+//        case typeString(DecodeDictionaryStep.self):
+//            self.value = try valueContainer.decode(DecodeDictionaryStep.self, forKey: .value)
+//        case typeString(DictionaryValueForKeyStep.self):
+//            self.value = try valueContainer.decode(DictionaryValueForKeyStep.self, forKey: .value)
+//        case typeString(ArrayValueStep.self):
+//            self.value = try valueContainer.decode(ArrayValueStep.self, forKey: .value)
         default:
             fatalError(type)
         }
@@ -56,24 +56,24 @@ struct CodableStep: Codable {
         try container.encode(type, forKey: .type)
         
         switch self.value {
-        case let value as SetVarStep:
-            try container.encode(value, forKey: .value)
-        case let value as AddToVarStep:
-            try container.encode(value, forKey: .value)
+//        case let value as SetVarStep:
+//            try container.encode(value, forKey: .value)
+//        case let value as AddToVarStep:
+//            try container.encode(value, forKey: .value)
         case let value as PrintVarStep:
             try container.encode(value, forKey: .value)
-        case let value as StaticValueStep:
-            try container.encode(value, forKey: .value)
-        case let value as VariableStep:
-            try container.encode(value, forKey: .value)
-        case let value as APIValueStep:
-            try container.encode(value, forKey: .value)
-        case let value as DecodeDictionaryStep:
-            try container.encode(value, forKey: .value)
-        case let value as DictionaryValueForKeyStep:
-            try container.encode(value, forKey: .value)
-        case let value as ArrayValueStep:
-            try container.encode(value, forKey: .value)
+//        case let value as StaticValueStep:
+//            try container.encode(value, forKey: .value)
+//        case let value as VariableStep:
+//            try container.encode(value, forKey: .value)
+//        case let value as APIValueStep:
+//            try container.encode(value, forKey: .value)
+//        case let value as DecodeDictionaryStep:
+//            try container.encode(value, forKey: .value)
+//        case let value as DictionaryValueForKeyStep:
+//            try container.encode(value, forKey: .value)
+//        case let value as ArrayValueStep:
+//            try container.encode(value, forKey: .value)
         default: fatalError()
         }
     }

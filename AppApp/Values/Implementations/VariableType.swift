@@ -13,12 +13,15 @@ enum VariableType: Int, VariableValue, CaseIterable, Equatable, Codable {
     case string
     case int
     case variable
-    case action
+//    case action
     case list
-    case dictionary
-    case temporary
+//    case dictionary
+//    case temporary
     case fontWeight
     case boolean
+    
+    case label
+    case stack
     
     var protoString: String {
         switch self {
@@ -27,12 +30,14 @@ enum VariableType: Int, VariableValue, CaseIterable, Equatable, Codable {
         case .string: return "String"
         case .int: return "Int"
         case .variable: return "Variable"
-        case .action: return "Action"
+//        case .action: return "Action"
         case .list: return "List"
-        case .dictionary: return "Dictionary"
-        case .temporary: return "Temporary"
+//        case .dictionary: return "Dictionary"
+//        case .temporary: return "Temporary"
         case .fontWeight: return "Font Weight"
         case .boolean: return "Boolean"
+        case .label: return "Label"
+        case .stack: return "Stack"
         }
     }
     
@@ -41,15 +46,22 @@ enum VariableType: Int, VariableValue, CaseIterable, Equatable, Codable {
         switch self {
         case .type: return VariableType.string
         case .string: return StringValue(value: "TEXT")
-        case .int: return 69
+        case .int: return IntValue(value: 69)
         case .variable: return Variable(name: StringValue(value: "VAR"))
-        case .action: return ActionValue(steps: [])
-        case .value: return "TEXT" as Value
+//        case .action: return ActionValue(steps: [])
+        case .value: return Value(value: StringValue(value: "TEXT"))
         case .list:  return ArrayValue(type: .string, elements: [])
-        case .dictionary: return DictionaryValue(type: .string, elements: [:])
-        case .temporary: return TemporaryValue(initial: StringValue(value: "TEXT"), output: .init(name: StringValue(value: "FIELDTEXT")))
-        case .fontWeight: return Font.Weight.regular
-        case .boolean: return false
+//        case .dictionary: return DictionaryValue(type: .string, elements: [:])
+//        case .temporary: return TemporaryValue(initial: StringValue(value: "TEXT"), output: .init(name: StringValue(value: "FIELDTEXT")))
+        case .fontWeight: return FontWeightValue(value: .regular)
+        case .boolean: return BoolValue(value: false)
+        case .label: return MakeableLabel(
+            text: .init(value: StringValue(value: "TEXT")),
+            fontSize: .init(value: 18),
+            fontWeight: .init(value: .regular),
+            italic: .init(value: false)
+        )
+        case .stack: return MakeableStack(content: .init(elements: []))
         }
     }
     

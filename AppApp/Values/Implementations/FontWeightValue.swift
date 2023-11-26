@@ -30,15 +30,30 @@ extension Font.Weight {
     }
 }
 
-extension Font.Weight: VariableValue {
+final class FontWeightValue: PrimitiveEditableVariableValue, Codable {
 
+    enum Properties: String, PrimitiveViewProperty {
+        case value
+        
+        var defaultValue: Any {
+            switch self {
+            case .value: return Font.Weight.regular
+            }
+        }
+    }
+    
     static var type: VariableType { .fontWeight }
+    var value: Font.Weight
+    
+    init(value: Font.Weight) {
+        self.value = value
+    }
     
     func add(_ other: VariableValue) throws -> VariableValue {
         throw VariableValueError.variableCannotPerformOperation(Self.type, "add")
     }
     
-    var protoString: String { "\(title)" }
+    var protoString: String { "\(value.title)" }
     
     var valueString: String { protoString }
     
@@ -46,16 +61,32 @@ extension Font.Weight: VariableValue {
         self
     }
     
-    func editView(title: String, onUpdate: @escaping (Font.Weight) -> Void) -> AnyView {
-        Picker("Weight", selection: .init(get: {
-            self
+    func editView(onUpdate: @escaping (FontWeightValue) -> Void) -> AnyView {
+        Picker("", selection: .init(get: {
+            self.value
         }, set: { new in
-            onUpdate(new)
+            onUpdate(.init(value: new))
         })) {
-            ForEach(Self.allCases) {
-                Text($0.protoString).tag($0)
+            ForEach(Font.Weight.allCases) {
+                Text($0.title).tag($0)
             }
         }.pickerStyle(.menu).any
+    }
+    
+    static func make(factory: (Properties) -> Any) -> FontWeightValue {
+        .init(value: factory(.value) as! Font.Weight)
+    }
+    
+    func value(for property: Properties) -> Any? {
+        switch property {
+        case .value: return value
+        }
+    }
+    
+    func set(_ value: Any, for property: Properties) {
+        switch property {
+        case .value: self.value = value as! Font.Weight
+        }
     }
 }
     

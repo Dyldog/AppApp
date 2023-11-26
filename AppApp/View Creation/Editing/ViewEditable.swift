@@ -9,9 +9,9 @@ import Foundation
 
 protocol ViewEditable {
     associatedtype Properties: ViewProperty
-    static func make(factory: (Properties) -> any VariableValue) -> Self
-    func value(for property: Properties) -> (any VariableValue)?
+    static func make(factory: (Properties) -> Any) -> Self
+    func value(for property: Properties) -> Any?
     var protoString: String { get }
     
-    func set(_ value: any VariableValue, for property: Properties)
+    func set(_ value: Any, for property: Properties)
 }

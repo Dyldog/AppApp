@@ -20,16 +20,16 @@ class AddViewViewModel: ObservableObject {
             .init(title: "Label", onTap: {
                 onSelect(MakeableLabel.makeableConstructor.makeableView)
             }),
-            .init(title: "Button", onTap: {
-                onSelect(
-                    MakeableButton.makeableConstructor.makeableView
-                )
-            }),
-            .init(title: "Textfield", onTap: {
-                onSelect(
-                    MakeableField.makeableConstructor.makeableView
-                )
-            })
+//            .init(title: "Button", onTap: {
+//                onSelect(
+//                    MakeableButton.makeableConstructor.makeableView
+//                )
+//            }),
+//            .init(title: "Textfield", onTap: {
+//                onSelect(
+//                    MakeableField.makeableConstructor.makeableView
+//                )
+//            })
         ]
     }
 }

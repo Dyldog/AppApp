@@ -13,13 +13,13 @@ extension StepType {
             Text(Self.title)
             HStack {
                 VHStack {
-                    ForEach(self.properties.map { ($0.key, $0.value)}, id: \.0) { property in
+                    ForEach(self.properties.map { ($0.key, $0.value) }, id: \.0) { property in
                         HStack {
-                            Text(property.0.rawValue)
-                            property.1.editView { value in
-                                self.set(value, for: property.0)
-                                onUpdate(self)
-                            }
+                            Text("HELLO")
+//                            property.1.editView { value in
+//                                self.set(value, for: property.0)
+//                                onUpdate(self)
+//                            }
                         }
                     }
                 }

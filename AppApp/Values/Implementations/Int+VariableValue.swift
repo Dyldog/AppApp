@@ -7,25 +7,57 @@
 
 import SwiftUI
 
-extension Int: VariableValue {
-    static var type: VariableType { .int }
+final class IntValue: PrimitiveEditableVariableValue, Codable {
     
-    func editView(title: String, onUpdate: @escaping (Int) -> Void) -> AnyView {
+    static var type: VariableType { .int }
+    var value: Int
+    
+    enum Properties: String, PrimitiveViewProperty {
+        case value
+        
+        var defaultValue: Any {
+            switch self {
+            case .value: return 69
+            }
+        }
+    }
+    
+    init(value: Int) {
+        self.value = value
+    }
+    
+    static func make(factory: (Properties) -> Any) -> IntValue {
+        .init(value: factory(.value) as! Int)
+    }
+    
+    func value(for property: Properties) -> Any? {
+        switch property {
+        case .value: return value
+        }
+    }
+    
+    func set(_ value: Any, for property: Properties) {
+        switch property {
+        case .value: self.value = value as! Int
+        }
+    }
+    
+    func editView(onUpdate: @escaping (IntValue) -> Void) -> AnyView {
         TextField("", text: .init(get: {
             self.protoString.components(separatedBy: .decimalDigits.inverted).joined()
         }, set: {
-            onUpdate(Int($0) ?? 0)
+            onUpdate(.init(value: Int($0) ?? 0))
         })).any
     }
     
     func add(_ other: VariableValue) throws -> VariableValue {
-        guard let other = other as? Int else { throw VariableValueError.wrongTypeForOperation }
-        return self + other
+        guard let other = other as? IntValue else { throw VariableValueError.wrongTypeForOperation }
+        return IntValue(value: self.value + other.value)
     }
     
-    var protoString: String { "\(self)" }
+    var protoString: String { "\(value)" }
     
-    var valueString: String { "\(self)"}
+    var valueString: String { "\(value)"}
     
     func value(with variables: Binding<Variables>) throws -> VariableValue? {
         self

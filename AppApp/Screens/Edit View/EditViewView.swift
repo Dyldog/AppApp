@@ -13,22 +13,15 @@ struct EditViewView: View {
     
     var body: some View {
         VStack {
-            List {
-                ForEach(viewModel.rows, id: \.0) { (key, value) in
-                    HStack {
-                        Text(key)
-                        value.wrappedValue.editView {
-                            viewModel.propertyUpdated(key, to: $0)
-                        }
-                    }
-                }
+            viewModel.editable.editView {
+                viewModel.onUpdate($0)
             }
             .frame(minWidth: 300, minHeight: 300)
             
 //            DoView {
             MakeableWrapperView(
                 makeMode: true,
-                view: viewModel.view.makeableConstructor.makeableView,
+                view: viewModel.editable.makeableConstructor.makeableView,
                 onContentUpdate: { _ in },
                 onRuntimeUpdate: { },
                 variables: .nil(),

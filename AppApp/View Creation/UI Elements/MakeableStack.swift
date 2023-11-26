@@ -54,9 +54,9 @@ struct MakeableStackView: View {
                 self.showAddIndex = nil
             }))
         }).sheet(item: $showEditIndex, content: { index in
-            EditViewView(viewModel: .init(constructor: stack.content.elements[index].makeableConstructor, onSave: { view in
-                onUpdate(at: index, with: view)
-            }))
+            EditViewView(viewModel: .init(editable: stack.content.elements[index]) {
+                onUpdate(at: index, with: $0)
+            })
         })
     }
     
@@ -77,10 +77,22 @@ struct MakeableStackView: View {
 }
 
 final class MakeableStack: MakeableView, Codable {
+    static var type: VariableType { .stack }
+    
+    func add(_ other: VariableValue) throws -> VariableValue { fatalError() }
+    
+    var valueString: String { "STACK" }
+    
+    func value(with variables: Binding<Variables>) async throws -> VariableValue? { self }
+    
     enum Properties: String, CaseIterable, ViewProperty {
         case content
         
-        var defaultValue: VariableValue { [] }
+        var defaultValue: Any {
+            switch self {
+            case .content: return MakeableArray(elements: [])
+            }
+        }
     }
     
     let id: UUID = .init()
@@ -98,17 +110,17 @@ final class MakeableStack: MakeableView, Codable {
         }
     }
     
-    func value(for property: Properties) -> (any VariableValue)? {
+    func value(for property: Properties) -> Any? {
         switch property {
         case .content: return nil // TODO: Conform MakeableArray to VariableValue
         }
     }
     
-    static func make(factory: (Properties) -> any VariableValue) -> MakeableStack {
+    static func make(factory: (Properties) -> Any) -> MakeableStack {
         .init(content: factory(.content) as! MakeableArray)
     }
     
-    func set(_ value: any VariableValue, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
         case .content: break
         }

@@ -50,6 +50,7 @@
 		FC4C2C2E2B0CBE76008217AC /* DictionaryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C2D2B0CBE76008217AC /* DictionaryEditView.swift */; };
 		FC4C2C302B0CCBE0008217AC /* DictionaryValueForKeyStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C2F2B0CCBE0008217AC /* DictionaryValueForKeyStep.swift */; };
 		FC4C2C322B0CD657008217AC /* MakeableField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C312B0CD657008217AC /* MakeableField.swift */; };
+		FC9C41C92B12AC3300E51957 /* EditableVariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */; };
 		FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B1E82B0B584B0054371B /* AppAppApp.swift */; };
 		FCD3B1ED2B0B584D0054371B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD3B1EC2B0B584D0054371B /* Assets.xcassets */; };
 		FCD3B1F12B0B584D0054371B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD3B1F02B0B584D0054371B /* Preview Assets.xcassets */; };
@@ -154,6 +155,7 @@
 		FC4C2C2D2B0CBE76008217AC /* DictionaryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEditView.swift; sourceTree = "<group>"; };
 		FC4C2C2F2B0CCBE0008217AC /* DictionaryValueForKeyStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryValueForKeyStep.swift; sourceTree = "<group>"; };
 		FC4C2C312B0CD657008217AC /* MakeableField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableField.swift; sourceTree = "<group>"; };
+		FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableVariableValue.swift; sourceTree = "<group>"; };
 		FCD3B1E52B0B584B0054371B /* AppApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD3B1E82B0B584B0054371B /* AppAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppApp.swift; sourceTree = "<group>"; };
 		FCD3B1EC2B0B584D0054371B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				FCD3B2152B0B63010054371B /* Variables.swift */,
+				FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */,
 				FCD3B2132B0B62F40054371B /* VariableValue.swift */,
 				FC4635102B0C988000B8DCBE /* VariableValueError.swift */,
 				FC4635232B0C9ACD00B8DCBE /* Implementations */,
@@ -748,6 +751,7 @@
 				FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */,
 				FCE36F4C2B0D752200E247D8 /* ScreenListView.swift in Sources */,
 				FCD3B2162B0B63010054371B /* Variables.swift in Sources */,
+				FC9C41C92B12AC3300E51957 /* EditableVariableValue.swift in Sources */,
 				FC4C15CD2B0C97700010BB1A /* StepError.swift in Sources */,
 				FC4C15C72B0C97390010BB1A /* ViewEditable+Constructor.swift in Sources */,
 				FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */,

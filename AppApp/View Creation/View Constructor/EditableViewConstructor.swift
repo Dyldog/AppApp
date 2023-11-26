@@ -8,10 +8,10 @@
 import Foundation
 
 struct EditableViewConstructor<T: ViewEditable>: ViewConstructor {
-    let properties: [T.Properties: any VariableValue]
-    let factory: ([T.Properties: any VariableValue]) -> any ViewEditable
+    let properties: [T.Properties: Any]
+    let factory: ([T.Properties: Any]) -> any ViewEditable
     
-    init(properties: [T.Properties : any VariableValue], factory: @escaping ([T.Properties : any VariableValue]) -> any ViewEditable) {
+    init(properties: [T.Properties : Any], factory: @escaping ([T.Properties : Any]) -> any ViewEditable) {
         self.properties = properties
         self.factory = factory
     }

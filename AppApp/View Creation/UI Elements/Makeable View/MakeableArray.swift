@@ -5,13 +5,57 @@
 //  Created by Dylan Elliott on 24/11/2023.
 //
 
-import Foundation
+import SwiftUI
 
-struct MakeableArray: Codable {
-    let elements: [any MakeableView]
+final class MakeableArray: Codable, PrimitiveEditableVariableValue {
+    func editView(onUpdate: @escaping (MakeableArray) -> Void) -> AnyView {
+        Text("Hello").any
+    }
+    
+    static var type: VariableType { .list }
+    
+    func add(_ other: VariableValue) throws -> VariableValue {
+        fatalError()
+    }
+    
+    var protoString: String { "TODO" }
+    
+    var valueString: String { "TODO" }
+    
+    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+        self
+    }
+    
+    static func make(factory: (Properties) -> Any) -> MakeableArray {
+        .init(elements: factory(.value) as! [any MakeableView])
+    }
+    
+    func value(for property: Properties) -> Any? {
+        switch property {
+        case .value: return elements
+        }
+    }
+    
+    func set(_ value: Any, for property: Properties) {
+        switch property {
+        case .value: self.elements = value as! [any MakeableView]
+        }
+    }
+    
+    var elements: [any MakeableView]
     
     init(elements: [any MakeableView]) {
         self.elements = elements
+    }
+    
+    enum Properties: String, PrimitiveViewProperty {
+        case value
+        
+        var defaultValue: Any {
+            switch self {
+            case .value: return [any MakeableView]()
+            }
+        }
     }
     
     init(from decoder: Decoder) throws {

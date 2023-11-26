@@ -26,10 +26,10 @@ struct EditVariableView: View {
                 }
             }.pickerStyle(.menu)
             
-            value.editView(onUpdate: {
-                self.value = $0
-                onUpdate($0)
-            })
+//            value.editView(onUpdate: {
+//                self.value = $0
+//                onUpdate($0)
+//            })
         }.onChange(of: selectedType, perform: { value in
             self.value = value.defautltView
             onUpdate(self.value)
