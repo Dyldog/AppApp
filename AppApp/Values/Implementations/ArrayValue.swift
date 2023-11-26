@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// sourcery: variableTypeName = "list"
 final class ArrayValue: CompositeEditableVariableValue, ObservableObject {
     
     static var type: VariableType { .list }

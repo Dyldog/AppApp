@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// sourcery: variableTypeName = "type"
 final class VariableTypeValue: PrimitiveEditableVariableValue {
     
     static var type: VariableType { .type }
@@ -36,44 +37,8 @@ final class VariableTypeValue: PrimitiveEditableVariableValue {
     }
     
 }
-enum VariableType: String, CaseIterable, Equatable, Codable {
-    
-    case type
-    case value
-    case string
-    case int
-    case variable
-//    case action
-    case list
-//    case dictionary
-//    case temporary
-    case fontWeight
-    case boolean
-    
-    case label
-    case stack
-    case button
-    
+extension VariableType {
     var protoString: String { rawValue.capitalized }
-    
-    var defaultView: any EditableVariableValue {
-        switch self {
-        case .type: return VariableTypeValue.makeDefault()
-        case .string: return StringValue.makeDefault()
-        case .int: return IntValue.makeDefault()
-        case .variable: return Variable.makeDefault()
-//        case .action: return ActionValue(steps: [])
-        case .value: return Value.makeDefault()
-        case .list:  return ArrayValue.makeDefault()
-//        case .dictionary: return DictionaryValue(type: .string, elements: [:])
-//        case .temporary: return TemporaryValue(initial: StringValue(value: "TEXT"), output: .init(name: StringValue(value: "FIELDTEXT")))
-        case .fontWeight: return FontWeightValue.makeDefault()
-        case .boolean: return BoolValue.makeDefault()
-        case .label: return MakeableLabel.makeDefault()
-        case .stack: return MakeableStack.makeDefault()
-        case .button: return MakeableButton.makeDefault()
-        }
-    }
 
     var valueString: String { protoString }
     

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// sourcery: variableTypeName = "value"
 final class Value: PrimitiveEditableVariableValue {
     
     static var type: VariableType { .value }

@@ -15,19 +15,7 @@ struct AddViewRow {
 class AddViewViewModel: ObservableObject {
     let rows: [AddViewRow]
     
-    init(onSelect: @escaping (any MakeableView) -> Void) {
-        rows = [
-            .init(title: "Label", onTap: {
-                onSelect(MakeableLabel.makeDefault())
-            }),
-            .init(title: "Button", onTap: {
-                onSelect(MakeableButton.makeDefault())
-            }),
-//            .init(title: "Textfield", onTap: {
-//                onSelect(
-//                    MakeableField.makeableConstructor.makeableView
-//                )
-//            })
-        ]
+    init(rows: [AddViewRow]) {
+        self.rows = rows
     }
 }

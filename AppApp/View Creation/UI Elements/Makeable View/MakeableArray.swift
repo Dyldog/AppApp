@@ -7,12 +7,13 @@
 
 import SwiftUI
 
+// sourcery: variableTypeName = "makeableArray"
 final class MakeableArray: Codable, PrimitiveEditableVariableValue {
     func editView(onUpdate: @escaping (MakeableArray) -> Void) -> AnyView {
         Text("Hello").any
     }
     
-    static var type: VariableType { .list }
+    static var type: VariableType { .makeableArray }
     
     func add(_ other: VariableValue) throws -> VariableValue {
         fatalError()

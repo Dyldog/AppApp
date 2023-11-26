@@ -77,3 +77,81 @@ extension {{ type.name }} {
 }
 
 {% endfor %}
+
+extension CodableMakeableList: Codable {
+	init(from decoder: Decoder) throws {
+        var contentContainer = try decoder.unkeyedContainer()
+        
+        var content: [any MakeableView] = []
+        
+        while !contentContainer.isAtEnd {
+{% for type in types.implementing.MakeableView|!protocol %}
+            {{ 'else ' if not forloop.first }}if let value = try? contentContainer.decode({{ type.name }}.self) {
+                content.append(value)
+            }  
+{% endfor %}
+            else {
+                self.init(elements: [MakeableLabel.withText("ERROR")])
+                return
+            }
+        }
+        
+        self.init(elements: content)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var contentContainer = encoder.unkeyedContainer()
+        
+        for element in elements {
+            switch element {
+{% for type in types.implementing.MakeableView|!protocol %}
+            case let value as {{ type.name }}:
+                try contentContainer.encode(value)
+{% endfor %}
+            default:
+                fatalError()
+            }
+        }
+    }
+}
+
+extension AddViewViewModel {
+	convenience init(onSelect: @escaping (any MakeableView) -> Void) {
+		self.init(rows: [
+{% for type in types.implementing.MakeableView|!protocol %}
+            .init(title: "{{ type.name|replace:"Makeable","" }}", onTap: {
+                onSelect({{ type.name }}.makeDefault())
+            }){{ ',' if not forloop.last }}
+{% endfor %}
+        ])
+	}
+}
+
+{% macro VariableTypeName type %}{% if type|annotated:"variableTypeName" %}{{ type.annotations.variableTypeName }}{% else %}{{ type.name|replace:"Value",""|replace:"Makeable",""|lowerFirstLetter }}{% endif %}{% endmacro %}
+
+enum VariableType: String, CaseIterable, Equatable, Codable {   
+{% for type in types.implementing.VariableValue|!protocol %}
+	case {%+ call VariableTypeName type +%} // {{ type.name }}
+{% endfor %}
+
+	var defaultView: any EditableVariableValue {
+        switch self {
+{% for type in types.implementing.VariableValue|!protocol %}
+        case .{%+ call VariableTypeName type +%}: return {{ type.name }}.makeDefault()
+{% endfor %}
+        }
+    }
+}
+
+extension MakeableWrapperView {
+	var body: some View {
+        switch view {
+{% for type in types.implementing.MakeableView|!protocol %}
+        case let value as {{ type.name }}:
+            {{ type.name }}View(makeMode: makeMode, {%+ call VariableTypeName type +%}: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error).any
+{% endfor %}
+        default:
+            Text("UNKNOWN VIEW").any
+        }
+    }
+}

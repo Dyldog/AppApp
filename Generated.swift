@@ -213,6 +213,51 @@ extension MakeableButton {
 	}
 }
 
+extension MakeableField {
+	 enum Properties: String, ViewProperty {
+        case text
+        case fontSize
+        case onTextUpdate
+        var defaultValue: Any {
+            switch self {
+            case .text: return MakeableField.defaultValue(for: .text)
+            case .fontSize: return MakeableField.defaultValue(for: .fontSize)
+            case .onTextUpdate: return MakeableField.defaultValue(for: .onTextUpdate)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> MakeableField {
+        .init(
+            text: factory(.text) as! TemporaryValue,
+            fontSize: factory(.fontSize) as! IntValue,
+            onTextUpdate: factory(.onTextUpdate) as! StepArray
+        )
+    }
+
+    static func makeDefault() -> MakeableField {
+        .init(
+            text: Properties.text.defaultValue as! TemporaryValue,
+            fontSize: Properties.fontSize.defaultValue as! IntValue,
+            onTextUpdate: Properties.onTextUpdate.defaultValue as! StepArray
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .text: return text
+	        case .fontSize: return fontSize
+	        case .onTextUpdate: return onTextUpdate
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .text: self.text = value as! TemporaryValue
+	        case .fontSize: self.fontSize = value as! IntValue
+	        case .onTextUpdate: self.onTextUpdate = value as! StepArray
+	    }
+	}
+}
+
 extension MakeableLabel {
 	 enum Properties: String, ViewProperty {
         case text
@@ -363,6 +408,45 @@ extension StringValue {
 	}
 }
 
+extension TemporaryValue {
+	 enum Properties: String, ViewProperty {
+        case initial
+        case output
+        var defaultValue: Any {
+            switch self {
+            case .initial: return TemporaryValue.defaultValue(for: .initial)
+            case .output: return TemporaryValue.defaultValue(for: .output)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> TemporaryValue {
+        .init(
+            initial: factory(.initial) as! Value,
+            output: factory(.output) as! Variable
+        )
+    }
+
+    static func makeDefault() -> TemporaryValue {
+        .init(
+            initial: Properties.initial.defaultValue as! Value,
+            output: Properties.output.defaultValue as! Variable
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .initial: return initial
+	        case .output: return output
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .initial: self.initial = value as! Value
+	        case .output: self.output = value as! Variable
+	    }
+	}
+}
+
 extension Value {
 	enum Properties: String, PrimitiveViewProperty {
         case value
@@ -462,3 +546,121 @@ extension VariableTypeValue {
 	}
 }
 
+
+extension CodableMakeableList: Codable {
+	init(from decoder: Decoder) throws {
+        var contentContainer = try decoder.unkeyedContainer()
+        var content: [any MakeableView] = []
+        while !contentContainer.isAtEnd {
+            if let value = try? contentContainer.decode(MakeableButton.self) {
+                content.append(value)
+            }  
+            else if let value = try? contentContainer.decode(MakeableField.self) {
+                content.append(value)
+            }  
+            else if let value = try? contentContainer.decode(MakeableLabel.self) {
+                content.append(value)
+            }  
+            else if let value = try? contentContainer.decode(MakeableStack.self) {
+                content.append(value)
+            }  
+            else {
+                self.init(elements: [MakeableLabel.withText("ERROR")])
+                return
+            }
+        }
+        self.init(elements: content)
+    }
+    func encode(to encoder: Encoder) throws {
+        var contentContainer = encoder.unkeyedContainer()
+        for element in elements {
+            switch element {
+            case let value as MakeableButton:
+                try contentContainer.encode(value)
+            case let value as MakeableField:
+                try contentContainer.encode(value)
+            case let value as MakeableLabel:
+                try contentContainer.encode(value)
+            case let value as MakeableStack:
+                try contentContainer.encode(value)
+            default:
+                fatalError()
+            }
+        }
+    }
+}
+
+extension AddViewViewModel {
+	convenience init(onSelect: @escaping (any MakeableView) -> Void) {
+		self.init(rows: [
+            .init(title: "Button", onTap: {
+                onSelect(MakeableButton.makeDefault())
+            }),
+            .init(title: "Field", onTap: {
+                onSelect(MakeableField.makeDefault())
+            }),
+            .init(title: "Label", onTap: {
+                onSelect(MakeableLabel.makeDefault())
+            }),
+            .init(title: "Stack", onTap: {
+                onSelect(MakeableStack.makeDefault())
+            })
+        ])
+	}
+}
+
+
+enum VariableType: String, CaseIterable, Equatable, Codable {   
+	case list // ArrayValue
+	case boolean // BoolValue
+	case fontWeight // FontWeightValue
+	case int // IntValue
+	case makeableArray // MakeableArray
+	case button // MakeableButton
+	case field // MakeableField
+	case label // MakeableLabel
+	case stack // MakeableStack
+	case stepArray // StepArray
+	case string // StringValue
+	case temporary // TemporaryValue
+	case value // Value
+	case variable // Variable
+	case type // VariableTypeValue
+
+	var defaultView: any EditableVariableValue {
+        switch self {
+        case .list: return ArrayValue.makeDefault()
+        case .boolean: return BoolValue.makeDefault()
+        case .fontWeight: return FontWeightValue.makeDefault()
+        case .int: return IntValue.makeDefault()
+        case .makeableArray: return MakeableArray.makeDefault()
+        case .button: return MakeableButton.makeDefault()
+        case .field: return MakeableField.makeDefault()
+        case .label: return MakeableLabel.makeDefault()
+        case .stack: return MakeableStack.makeDefault()
+        case .stepArray: return StepArray.makeDefault()
+        case .string: return StringValue.makeDefault()
+        case .temporary: return TemporaryValue.makeDefault()
+        case .value: return Value.makeDefault()
+        case .variable: return Variable.makeDefault()
+        case .type: return VariableTypeValue.makeDefault()
+        }
+    }
+}
+
+extension MakeableWrapperView {
+	var body: some View {
+        switch view {
+        case let value as MakeableButton:
+            MakeableButtonView(makeMode: makeMode, button: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error).any
+        case let value as MakeableField:
+            MakeableFieldView(makeMode: makeMode, field: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error).any
+        case let value as MakeableLabel:
+            MakeableLabelView(makeMode: makeMode, label: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error).any
+        case let value as MakeableStack:
+            MakeableStackView(makeMode: makeMode, stack: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error).any
+        default:
+            Text("UNKNOWN VIEW").any
+        }
+    }
+}

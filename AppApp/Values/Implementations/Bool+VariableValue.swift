@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// sourcery: variableTypeName = "boolean"
 final class BoolValue: PrimitiveEditableVariableValue, Codable {
     
     static var type: VariableType { .boolean }
