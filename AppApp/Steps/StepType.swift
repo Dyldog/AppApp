@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol StepType: ViewEditable {
+protocol StepType: ViewEditable, EditableVariableValue {
     static var title: String { get }
 }

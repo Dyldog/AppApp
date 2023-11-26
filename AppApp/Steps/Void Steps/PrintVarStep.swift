@@ -7,15 +7,18 @@
 
 import SwiftUI
 
-final class PrintVarStep: Step, Codable {
+final class PrintVarStep: Step, CompositeEditableVariableValue, Codable {
+    static var type: VariableType { fatalError() }
+
     static var title: String { "Print variable" }
     var varName: Value
+    
+    var protoString: String { "{ print($\(varName)) }"}
+    var valueString: String { protoString }
     
     required init(varName: Value) {
         self.varName = varName
     }
-    
-    var protoString: String { "{ print($\(varName)) }"}
     
     func run(with variables: Binding<Variables>) async throws {
         guard let nameValue = try await varName.value(with: variables) else {
@@ -24,31 +27,17 @@ final class PrintVarStep: Step, Codable {
         print("\(varName): \(variables.wrappedValue.value(for: nameValue.valueString) as Any)")
     }
     
-    static func make(factory: (Properties) -> Any) -> Self {
-        .init(
-            varName: factory(.name) as! Value
-        )
-    }
-    
-    func value(for property: Properties) -> Any? {
+    static func defaultValue(for property: Properties) -> Any {
         switch property {
-        case .name: varName
+        case .varName: return Value(value: Variable(value: StringValue(value: "$0")))
         }
     }
     
-    func set(_ value: Any, for property: Properties) {
-        switch property {
-        case .name: varName = value as! Value
-        }
+    func add(_ other: VariableValue) throws -> VariableValue {
+        fatalError()
     }
     
-    enum Properties: String, ViewProperty {
-        case name
-        
-        var defaultValue: Any {
-            switch self {
-            case .name: return StringValue(value: "Text")
-            }
-        }
+    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+        self
     }
 }

@@ -65,7 +65,7 @@ extension CompositeEditableVariableValue {
 
 extension CompositeEditableVariableValue {
     func editView(onUpdate: @escaping (Self) -> Void) -> AnyView {
-        List {
+        VStack(alignment: .leading) {
             ForEach(enumerated: propertyRows(onUpdate: onUpdate).map { ($0.0, $0.1, $0.2) }) { (index, row) in
                 HStack {
                     Text(row.0)
@@ -75,6 +75,7 @@ extension CompositeEditableVariableValue {
                     }
                 }
             }
+            .padding()
         }.any
     }
 }

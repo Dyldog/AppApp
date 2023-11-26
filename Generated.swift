@@ -342,6 +342,39 @@ extension MakeableStack {
 	}
 }
 
+extension PrintVarStep {
+	 enum Properties: String, ViewProperty {
+        case varName
+        var defaultValue: Any {
+            switch self {
+            case .varName: return PrintVarStep.defaultValue(for: .varName)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> PrintVarStep {
+        .init(
+            varName: factory(.varName) as! Value
+        )
+    }
+
+    static func makeDefault() -> PrintVarStep {
+        .init(
+            varName: Properties.varName.defaultValue as! Value
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .varName: return varName
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .varName: self.varName = value as! Value
+	    }
+	}
+}
+
 extension StepArray {
 	enum Properties: String, PrimitiveViewProperty {
         case value
@@ -590,6 +623,93 @@ extension CodableMakeableList: Codable {
     }
 }
 
+extension CodableVariableValue: Codable {
+	enum CodingKeys: String, CodingKey {
+        case type
+        case value
+    }
+
+    init(from decoder: Decoder) throws {
+        let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
+        self.type = try valueContainer.decode(String.self, forKey: .type)
+        switch type {
+        case typeString(ArrayValue.self):
+            self.value = try valueContainer.decode(ArrayValue.self, forKey: .value)
+        case typeString(BoolValue.self):
+            self.value = try valueContainer.decode(BoolValue.self, forKey: .value)
+        case typeString(FontWeightValue.self):
+            self.value = try valueContainer.decode(FontWeightValue.self, forKey: .value)
+        case typeString(IntValue.self):
+            self.value = try valueContainer.decode(IntValue.self, forKey: .value)
+        case typeString(MakeableArray.self):
+            self.value = try valueContainer.decode(MakeableArray.self, forKey: .value)
+        case typeString(MakeableButton.self):
+            self.value = try valueContainer.decode(MakeableButton.self, forKey: .value)
+        case typeString(MakeableField.self):
+            self.value = try valueContainer.decode(MakeableField.self, forKey: .value)
+        case typeString(MakeableLabel.self):
+            self.value = try valueContainer.decode(MakeableLabel.self, forKey: .value)
+        case typeString(MakeableStack.self):
+            self.value = try valueContainer.decode(MakeableStack.self, forKey: .value)
+        case typeString(PrintVarStep.self):
+            self.value = try valueContainer.decode(PrintVarStep.self, forKey: .value)
+        case typeString(StepArray.self):
+            self.value = try valueContainer.decode(StepArray.self, forKey: .value)
+        case typeString(StringValue.self):
+            self.value = try valueContainer.decode(StringValue.self, forKey: .value)
+        case typeString(TemporaryValue.self):
+            self.value = try valueContainer.decode(TemporaryValue.self, forKey: .value)
+        case typeString(Value.self):
+            self.value = try valueContainer.decode(Value.self, forKey: .value)
+        case typeString(Variable.self):
+            self.value = try valueContainer.decode(Variable.self, forKey: .value)
+        case typeString(VariableTypeValue.self):
+            self.value = try valueContainer.decode(VariableTypeValue.self, forKey: .value)
+        default:
+            fatalError(type)
+        }
+    }
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(type, forKey: .type)
+        switch self.value {
+        case let value as ArrayValue:
+            try container.encode(value, forKey: .value)
+        case let value as BoolValue:
+            try container.encode(value, forKey: .value)
+        case let value as FontWeightValue:
+            try container.encode(value, forKey: .value)
+        case let value as IntValue:
+            try container.encode(value, forKey: .value)
+        case let value as MakeableArray:
+            try container.encode(value, forKey: .value)
+        case let value as MakeableButton:
+            try container.encode(value, forKey: .value)
+        case let value as MakeableField:
+            try container.encode(value, forKey: .value)
+        case let value as MakeableLabel:
+            try container.encode(value, forKey: .value)
+        case let value as MakeableStack:
+            try container.encode(value, forKey: .value)
+        case let value as PrintVarStep:
+            try container.encode(value, forKey: .value)
+        case let value as StepArray:
+            try container.encode(value, forKey: .value)
+        case let value as StringValue:
+            try container.encode(value, forKey: .value)
+        case let value as TemporaryValue:
+            try container.encode(value, forKey: .value)
+        case let value as Value:
+            try container.encode(value, forKey: .value)
+        case let value as Variable:
+            try container.encode(value, forKey: .value)
+        case let value as VariableTypeValue:
+            try container.encode(value, forKey: .value)
+        default: fatalError()
+        }
+    }
+}
+
 extension AddViewViewModel {
 	convenience init(onSelect: @escaping (any MakeableView) -> Void) {
 		self.init(rows: [
@@ -620,6 +740,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
 	case field // MakeableField
 	case label // MakeableLabel
 	case stack // MakeableStack
+	case printVarStep // PrintVarStep
 	case stepArray // StepArray
 	case string // StringValue
 	case temporary // TemporaryValue
@@ -638,6 +759,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
         case .field: return MakeableField.makeDefault()
         case .label: return MakeableLabel.makeDefault()
         case .stack: return MakeableStack.makeDefault()
+        case .printVarStep: return PrintVarStep.makeDefault()
         case .stepArray: return StepArray.makeDefault()
         case .string: return StringValue.makeDefault()
         case .temporary: return TemporaryValue.makeDefault()

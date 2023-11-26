@@ -17,11 +17,15 @@ struct ActionListView: View {
             addButton(index: 0)
             
             ForEach(enumerated: steps) { (index, element) in
-                element.editView(onUpdate: {
-                    onUpdate(steps.replacing($0, at: index))
-                }, remove: {
-                    onUpdate(steps.removing(at: index))
-                }).buttonStyle(.plain).any
+                HStack {
+                    Text(type(of: element).title)
+                    element.editView { value in
+                        onUpdate(steps.replacing(value, at: index))
+                    }
+                    Button("X") {
+                        onUpdate(steps.removing(at: index))
+                    }
+                }
                 
                 addButton(index: index + 1)
             }

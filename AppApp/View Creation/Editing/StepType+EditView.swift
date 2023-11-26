@@ -7,27 +7,27 @@
 
 import SwiftUI
 
-extension StepType {
-    func editView(onUpdate: @escaping (Self) -> Void, remove: @escaping () -> Void) -> any View {
-        VStack {
-            Text(Self.title)
-            HStack {
-                VHStack {
-                    ForEach(self.properties.map { ($0.key, $0.value) }, id: \.0) { property in
-                        HStack {
-                            Text("HELLO")
-//                            property.1.editView { value in
-//                                self.set(value, for: property.0)
-//                                onUpdate(self)
-//                            }
-                        }
-                    }
-                }
-                
-                Spacer()
-                
-                SwiftUI.Button("X", action: remove)
-            }
-        }
-    }
-}
+//extension StepType {
+//    func editView(onUpdate: @escaping (Self) -> Void, remove: @escaping () -> Void) -> any View {
+//        VStack {
+//            Text(Self.title)
+//            HStack {
+//                VHStack {
+//                    ForEach(self.properties.map { ($0.key, $0.value) }, id: \.0) { property in
+//                        HStack {
+//                            Text("HELLO")
+////                            property.1.editView { value in
+////                                self.set(value, for: property.0)
+////                                onUpdate(self)
+////                            }
+//                        }
+//                    }
+//                }
+//                
+//                Spacer()
+//                
+//                SwiftUI.Button("X", action: remove)
+//            }
+//        }
+//    }
+//}

@@ -81,11 +81,21 @@ struct MakeableButtonView: View {
 final class MakeableButton: MakeableView, Codable {
     static var type: VariableType { .button }
     
+    var id: UUID = .init()
+    var title: MakeableLabel
+    var action: StepArray
+    
+    var protoString: String { title.protoString }
+    var valueString: String { title.valueString }
+    
+    init(title: MakeableLabel, action: StepArray) {
+        self.title = title
+        self.action = action
+    }
+    
     func add(_ other: VariableValue) throws -> VariableValue {
         fatalError()
     }
-    
-    var valueString: String { title.valueString }
     
     func value(with variables: Binding<Variables>) async throws -> VariableValue? {
         self
@@ -97,16 +107,6 @@ final class MakeableButton: MakeableView, Codable {
         case .action: return StepArray(value: [])
         }
     }
-    var id: UUID = .init()
-    var title: MakeableLabel
-    var action: StepArray
-    
-    init(title: MakeableLabel, action: StepArray) {
-        self.title = title
-        self.action = action
-    }
-    
-    var protoString: String { title.protoString }
     
     func insertValues(into variables: Binding<Variables>) throws {
         //

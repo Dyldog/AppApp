@@ -31,8 +31,8 @@ struct CodableStep: Codable {
 //            self.value = try valueContainer.decode(SetVarStep.self, forKey: .value)
 //        case typeString(AddToVarStep.self):
 //            self.value = try valueContainer.decode(AddToVarStep.self, forKey: .value)
-//        case typeString(PrintVarStep.self):
-//            self.value = try valueContainer.decode(PrintVarStep.self, forKey: .value)
+        case typeString(PrintVarStep.self):
+            self.value = try valueContainer.decode(PrintVarStep.self, forKey: .value)
 //        case typeString(StaticValueStep.self):
 //            self.value = try valueContainer.decode(StaticValueStep.self, forKey: .value)
 //        case typeString(VariableStep.self):
