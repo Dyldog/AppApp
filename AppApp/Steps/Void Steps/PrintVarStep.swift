@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class PrintVarStep: Step, CompositeEditableVariableValue, Codable {
+final class PrintVarStep: Step, Codable {
     static var type: VariableType { fatalError() }
 
     static var title: String { "Print variable" }

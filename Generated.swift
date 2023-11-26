@@ -375,6 +375,45 @@ extension PrintVarStep {
 	}
 }
 
+extension SetVarStep {
+	 enum Properties: String, ViewProperty {
+        case varName
+        case value
+        var defaultValue: Any {
+            switch self {
+            case .varName: return SetVarStep.defaultValue(for: .varName)
+            case .value: return SetVarStep.defaultValue(for: .value)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> SetVarStep {
+        .init(
+            varName: factory(.varName) as! Value,
+            value: factory(.value) as! Value
+        )
+    }
+
+    static func makeDefault() -> SetVarStep {
+        .init(
+            varName: Properties.varName.defaultValue as! Value,
+            value: Properties.value.defaultValue as! Value
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .varName: return varName
+	        case .value: return value
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .varName: self.varName = value as! Value
+	        case .value: self.value = value as! Value
+	    }
+	}
+}
+
 extension StepArray {
 	enum Properties: String, PrimitiveViewProperty {
         case value
@@ -653,6 +692,8 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(MakeableStack.self, forKey: .value)
         case typeString(PrintVarStep.self):
             self.value = try valueContainer.decode(PrintVarStep.self, forKey: .value)
+        case typeString(SetVarStep.self):
+            self.value = try valueContainer.decode(SetVarStep.self, forKey: .value)
         case typeString(StepArray.self):
             self.value = try valueContainer.decode(StepArray.self, forKey: .value)
         case typeString(StringValue.self):
@@ -692,6 +733,8 @@ extension CodableVariableValue: Codable {
         case let value as MakeableStack:
             try container.encode(value, forKey: .value)
         case let value as PrintVarStep:
+            try container.encode(value, forKey: .value)
+        case let value as SetVarStep:
             try container.encode(value, forKey: .value)
         case let value as StepArray:
             try container.encode(value, forKey: .value)
@@ -741,6 +784,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
 	case label // MakeableLabel
 	case stack // MakeableStack
 	case printVarStep // PrintVarStep
+	case setVarStep // SetVarStep
 	case stepArray // StepArray
 	case string // StringValue
 	case temporary // TemporaryValue
@@ -760,6 +804,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
         case .label: return MakeableLabel.makeDefault()
         case .stack: return MakeableStack.makeDefault()
         case .printVarStep: return PrintVarStep.makeDefault()
+        case .setVarStep: return SetVarStep.makeDefault()
         case .stepArray: return StepArray.makeDefault()
         case .string: return StringValue.makeDefault()
         case .temporary: return TemporaryValue.makeDefault()
@@ -783,6 +828,52 @@ extension MakeableWrapperView {
             MakeableStackView(makeMode: makeMode, stack: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error).any
         default:
             Text("UNKNOWN VIEW").any
+        }
+    }
+}
+
+
+extension AddActionView {
+	enum Actions: Int, CaseIterable {
+		case PrintVar
+		case SetVar
+        var title: String {
+            switch self {
+            case .PrintVar: return PrintVarStep.title
+            case .SetVar: return SetVarStep.title
+            }
+        }
+        func make() -> any StepType {
+            switch self {
+            case .PrintVar: PrintVarStep.makeDefault()
+            case .SetVar: SetVarStep.makeDefault()
+            }
+        }
+    }
+}
+
+extension CodableStep: Codable {
+	init(from decoder: Decoder) throws {
+        let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
+        self.type = try valueContainer.decode(String.self, forKey: .type)
+        switch type {
+        case typeString(PrintVarStep.self):
+			self.value = try valueContainer.decode(PrintVarStep.self, forKey: .value)
+        case typeString(SetVarStep.self):
+			self.value = try valueContainer.decode(SetVarStep.self, forKey: .value)
+        default:
+            fatalError(type)
+        }
+    }
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(type, forKey: .type)
+        switch self.value {
+		case let value as PrintVarStep:
+			try container.encode(value, forKey: .value)
+		case let value as SetVarStep:
+			try container.encode(value, forKey: .value)
+        default: fatalError()
         }
     }
 }

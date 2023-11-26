@@ -8,51 +8,6 @@
 import SwiftUI
 
 struct AddActionView: View {
-    enum Actions: Int, CaseIterable {
-//        case setVariable
-//        case addToVariable
-        case printVariable
-//        case staticValue
-//        case getVariable
-//        case getFromAPI
-//        case decodeJSON
-//        case getDictValue
-//        case getArrayValue
-        
-        var title: String {
-            switch self {
-            case .printVariable: return PrintVarStep.title
-//            case .setVariable: return SetVarStep.title
-//            case .addToVariable: return AddToVarStep.title
-//            case .staticValue: return StaticValueStep.title
-//            case .getVariable: return VariableStep.title
-//            case .getFromAPI: return APIValueStep.title
-//            case .decodeJSON: return DecodeDictionaryStep.title
-//            case .getDictValue: return DictionaryValueForKeyStep.title
-//            case .getArrayValue: return ArrayValueStep.title
-            }
-        }
-        
-        func make() -> any StepType {
-            switch self {
-            case .printVariable: PrintVarStep(varName: .init(value: Variable(value: StringValue(value: "VAR"))))
-//            case .setVariable: SetVarStep(varName: "VAR", value: "VALUE")
-//            case .addToVariable: AddToVarStep(varName: "VAR", value: "VALUE")
-//            case .staticValue: StaticValueStep(value: "VALUE", type: .string)
-//            case .getVariable: VariableStep(varName: "VAR", type: .string)
-//            case .getFromAPI: APIValueStep(url: "https://swapi.dev/api/people/1")
-//            case .decodeJSON: 
-//                DecodeDictionaryStep(value: Value(value: Variable(name: StringValue(value: "$0"))))
-//            case .getDictValue:
-//                DictionaryValueForKeyStep(
-//                    dictionary: Value(value: DictionaryValue(type: .string, elements: [:])),
-//                    key: "TEXT" as Value)
-//            case .getArrayValue:
-//                ArrayValueStep(array: Value(value: ArrayValue(type: .string, elements: [])), index: Value(value: 0))
-            }
-        }
-    }
-    
     let onSelect: (any StepType) -> Void
     
     var body: some View {

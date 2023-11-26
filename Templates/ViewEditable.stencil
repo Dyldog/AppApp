@@ -191,3 +191,62 @@ extension MakeableWrapperView {
         }
     }
 }
+
+{% macro StepCaseName step %}{{ type.name|replace:"Step", ""}}{% endmacro %}
+
+extension AddActionView {
+	enum Actions: Int, CaseIterable {
+{% for type in types.implementing.StepType|!protocol %}
+		case {% call StepCaseName type %}
+{% endfor %}
+        
+        var title: String {
+            switch self {
+{% for type in types.implementing.StepType|!protocol %}
+            case .{% call StepCaseName type %}: return {{ type.name }}.title
+{% endfor %}
+            }
+        }
+        
+        func make() -> any StepType {
+            switch self {
+{% for type in types.implementing.StepType|!protocol %}
+            case .{% call StepCaseName type %}: {{ type.name}}.makeDefault()
+{% endfor %}
+            }
+        }
+    }
+    
+    
+}
+
+extension CodableStep: Codable {
+	init(from decoder: Decoder) throws {
+        let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.type = try valueContainer.decode(String.self, forKey: .type)
+        
+        switch type {
+{% for type in types.implementing.StepType|!protocol %}
+        case typeString({{ type.name }}.self):
+			self.value = try valueContainer.decode({{ type.name }}.self, forKey: .value)
+{% endfor %}
+        default:
+            fatalError(type)
+        }
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(type, forKey: .type)
+        
+        switch self.value {
+{% for type in types.implementing.StepType|!protocol %}
+		case let value as {{ type.name }}:
+			try container.encode(value, forKey: .value)
+{% endfor %}
+        default: fatalError()
+        }
+    }
+}
