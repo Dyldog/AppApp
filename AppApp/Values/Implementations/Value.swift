@@ -17,12 +17,6 @@ final class Value: PrimitiveEditableVariableValue {
         self.value = value
     }
     
-    static func defaultValue(for property: Properties) -> Any {
-        switch property {
-        case .value: return StringValue.defaultValue
-        }
-    }
-    
     func add(_ other: VariableValue) throws -> VariableValue {
         return try value.add(other)
     }
@@ -41,8 +35,9 @@ final class Value: PrimitiveEditableVariableValue {
                 EditVariableView(value: value) { [weak self] in
                     guard let self = self else { return }
                     self.value = $0
-                    onUpdate(self)
                 }
+            } onDismiss: {
+                onUpdate(self)
             }
         }.any
     }

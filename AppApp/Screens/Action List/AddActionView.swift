@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct AddActionView: View {
+    @State var searchText: String = ""
     let onSelect: (any StepType) -> Void
     
+    var actions: [Actions] {
+        guard !searchText.isEmpty else { return Actions.allCases }
+        return Actions.allCases.filter { $0.title.lowercased().contains(searchText.lowercased()) }
+    }
+    
     var body: some View {
-        List(Actions.allCases, id: \.self) { item in
-            SwiftUI.Button(item.title) {
-                onSelect(item.make())
+        NavigationStack {
+            List(Actions.allCases, id: \.self) { item in
+                SwiftUI.Button(item.title) {
+                    onSelect(item.make())
+                }
             }
+            .navigationTitle("Add Action")
         }
+        .searchable(text: $searchText)
     }
 }

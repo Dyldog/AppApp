@@ -7,37 +7,20 @@
 
 import SwiftUI
 
-protocol PrimitiveEditableVariableValue: EditableVariableValue where Properties: PrimitiveViewProperty {
-    associatedtype PrimitiveValue
-    var value: PrimitiveValue { get set }
-    static var defaultValue: PrimitiveValue { get }
-}
-
-extension PrimitiveEditableVariableValue {
-    static func defaultValue(for property: Properties) -> Any {
-        switch property {
-        case .value: return Self.defaultValue
-        default: fatalError()
-        }
-    }
-}
-
-extension PrimitiveEditableVariableValue {
-    func propertyRow(title: String, onUpdate: @escaping (Self) -> Void) -> [(String, any PrimitiveEditableVariableValue, VariableUpdater)] {
-        [(title, self, {
-            self.set(($0 as! any PrimitiveEditableVariableValue).value, for: .value)
-            onUpdate(self)
-        })]
-    }
-}
-
 protocol EditableVariableValue: VariableValue, ViewEditable {
     func editView(onUpdate: @escaping (Self) -> Void) -> AnyView
-    static func defaultValue(for property: Properties) -> Any
 }
+
+protocol PrimitiveEditableVariableValue: EditableVariableValue { }
 
 protocol CompositeEditableVariableValue: EditableVariableValue {
     func propertyRows(onUpdate: @escaping (Self) -> Void) -> [(String, any PrimitiveEditableVariableValue, VariableUpdater)]
+    
+    associatedtype Properties: ViewProperty
+    static func make(factory: (Properties) -> Any) -> Self
+    func value(for property: Properties) -> Any?
+    func set(_ value: Any, for property: Properties)
+    static func defaultValue(for property: Properties) -> Any
 }
 
 typealias VariableUpdater = (any EditableVariableValue) -> Void
@@ -52,10 +35,10 @@ extension CompositeEditableVariableValue {
                     onUpdate(self)
                 })
             } else if let primitive = value as? any PrimitiveEditableVariableValue {
-                return primitive.propertyRow(title: key.rawValue) {
+                return [(key.rawValue, primitive, {
                     self.set($0, for: key)
                     onUpdate(self)
-                }
+                })]
             } else {
                 fatalError()
             }

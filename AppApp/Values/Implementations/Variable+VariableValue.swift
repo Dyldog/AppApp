@@ -43,8 +43,9 @@ final class Variable: PrimitiveEditableVariableValue {
                 EditVariableView(value: value) { [weak self] in
                     guard let self = self else { return }
                     self.value = $0
-                    onUpdate(self)
                 }
+            } onDismiss: {
+                onUpdate(self)
             }
         }.any
     }

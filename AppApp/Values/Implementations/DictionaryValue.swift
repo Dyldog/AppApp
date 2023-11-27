@@ -72,10 +72,12 @@ final class DictionaryValue: CompositeEditableVariableValue, ObservableObject {
                 DictionaryEditView(value: .init(get: {
                     self
                 }, set: {
-                    onUpdate($0)
+                    self.elements = $0.elements
                 }), onUpdate: {
-                    onUpdate($0)
+                    self.elements = $0.elements
                 })
+            } onDismiss: {
+                onUpdate(self)
             }.any
         }.any
     }

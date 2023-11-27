@@ -50,6 +50,8 @@
 		FC4C2C2E2B0CBE76008217AC /* DictionaryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C2D2B0CBE76008217AC /* DictionaryEditView.swift */; };
 		FC4C2C302B0CCBE0008217AC /* DictionaryValueForKeyStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C2F2B0CCBE0008217AC /* DictionaryValueForKeyStep.swift */; };
 		FC4C2C322B0CD657008217AC /* MakeableField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C312B0CD657008217AC /* MakeableField.swift */; };
+		FC9047B32B14806C00B599BE /* Templates in Resources */ = {isa = PBXBuildFile; fileRef = FC9047B22B14806C00B599BE /* Templates */; };
+		FC9047B52B14872B00B599BE /* AxisValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9047B42B14872B00B599BE /* AxisValue.swift */; };
 		FC9C41C92B12AC3300E51957 /* EditableVariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */; };
 		FC9C41CC2B12C69400E51957 /* Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C41CB2B12C69400E51957 /* Generated.swift */; };
 		FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B1E82B0B584B0054371B /* AppAppApp.swift */; };
@@ -156,6 +158,8 @@
 		FC4C2C2D2B0CBE76008217AC /* DictionaryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEditView.swift; sourceTree = "<group>"; };
 		FC4C2C2F2B0CCBE0008217AC /* DictionaryValueForKeyStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryValueForKeyStep.swift; sourceTree = "<group>"; };
 		FC4C2C312B0CD657008217AC /* MakeableField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableField.swift; sourceTree = "<group>"; };
+		FC9047B22B14806C00B599BE /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Templates; sourceTree = "<group>"; };
+		FC9047B42B14872B00B599BE /* AxisValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisValue.swift; sourceTree = "<group>"; };
 		FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableVariableValue.swift; sourceTree = "<group>"; };
 		FC9C41CB2B12C69400E51957 /* Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generated.swift; sourceTree = "<group>"; };
 		FCD3B1E52B0B584B0054371B /* AppApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -307,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				FC4635182B0C98EE00B8DCBE /* Value.swift */,
+				FC9047B42B14872B00B599BE /* AxisValue.swift */,
 				FC2B8A9C2B10A2CA003FAB86 /* FontWeightValue.swift */,
 				FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */,
 				FC4C15C02B0C96E60010BB1A /* ActionValue.swift */,
@@ -394,6 +399,7 @@
 				FC9C41CB2B12C69400E51957 /* Generated.swift */,
 				FC2B8A922B108FAE003FAB86 /* CodableStepList.swift */,
 				FC2B8A902B108FA0003FAB86 /* CodableStep.swift */,
+				FC9047B22B14806C00B599BE /* Templates */,
 				FCD3B1E72B0B584B0054371B /* AppApp */,
 				FCD3B1F92B0B584E0054371B /* AppAppTests */,
 				FCD3B2032B0B584E0054371B /* AppAppUITests */,
@@ -660,6 +666,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC9047B32B14806C00B599BE /* Templates in Resources */,
 				FCD3B1F12B0B584D0054371B /* Preview Assets.xcassets in Resources */,
 				FCD3B1ED2B0B584D0054371B /* Assets.xcassets in Resources */,
 			);
@@ -737,6 +744,7 @@
 				FC2B8A892B108F3F003FAB86 /* CodableMakeableList.swift in Sources */,
 				FCD3B2252B0B7C9F0054371B /* EditViewView.swift in Sources */,
 				FCD3B2212B0B6FCB0054371B /* ViewMakerView.swift in Sources */,
+				FC9047B52B14872B00B599BE /* AxisValue.swift in Sources */,
 				FCD3B22A2B0B9F7D0054371B /* EditViewViewModel.swift in Sources */,
 				FCD3B2312B0B9FCB0054371B /* MakeableStack.swift in Sources */,
 				FC2B8A952B108FC0003FAB86 /* CodableTypeString.swift in Sources */,

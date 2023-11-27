@@ -10,21 +10,25 @@ import DylKit
 
 struct EditViewView: View {
     @StateObject var viewModel: EditViewViewModel
+    @State var update: Int = 0
     
     var body: some View {
         VStack {
             viewModel.editable.editView {
                 viewModel.editable = $0
+                update += 1
             }
             .frame(minWidth: 300, minHeight: 300)
             
 //            DoView {
             MakeableWrapperView(
-                makeMode: true,
+                isRunning: false,
+                showEditControls: false,
                 view: viewModel.editable,
                 onContentUpdate: { _ in },
                 onRuntimeUpdate: { }
             )
+            .id(update)
             .padding(20)
             .border(.black)
             .padding()

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct MakeableLabelView: View {
-    let makeMode: Bool
+    let isRunning: Bool
+    let showEditControls: Bool
     let label: MakeableLabel
     
     let onContentUpdate: (MakeableLabel) -> Void
@@ -20,7 +21,7 @@ struct MakeableLabelView: View {
     
     func labelText() async -> String {
         do {
-            if !makeMode {
+            if !isRunning {
                 guard let value = try await label.text.value(with: variables)?.valueString
                 else { throw VariableValueError.valueNotFoundForVariable(label.text.protoString) }
                 return value

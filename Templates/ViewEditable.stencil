@@ -2,77 +2,66 @@ import SwiftUI
 
 {% for type in types.implementing.EditableVariableValue|!protocol %}
 extension {{ type.name }} {
-{% if type.implements.PrimitiveEditableVariableValue %}
-	enum Properties: String, PrimitiveViewProperty {
-        case value
-        
-        var defaultValue: Any {
-            switch self {
-            case .value: return {{ type.name }}.defaultValue
-            }
-        }
-    }
- {% else %}
 	 enum Properties: String, ViewProperty {
-{% for property in type.storedVariables %}
-{% if not property.defaultValue %}
+        {% for property in type.storedVariables %}
+            {% if not property.defaultValue %}
         case {{ property.name }}
-{% endif %}
-{% endfor %}
+            {% endif %}
+        {% endfor %}
         
         var defaultValue: Any {
             switch self {
-{% for property in type.storedVariables %}
-{% if not property.defaultValue %}
-            case .{{ property.name }}: return {{ type.name }}.defaultValue(for: .{{ property.name }})
-{% endif %}
-{% endfor %}
+        {% for property in type.storedVariables %}
+            {% if not property.defaultValue %}
+            case .{{ property.name }}: return {{ type.name }}.defaultValue{% if type.implements.CompositeEditableVariableValue %}(for: .{{ property.name }}){% endif %}
+            {% endif %}
+        {% endfor %}
             }
         }
     }
- {% endif %}
+     
     static func make(factory: (Properties) -> Any) -> {{ type.name }} {
         .init(
-{% for property in type.storedVariables %}
-{% if not property.defaultValue %}
+    {% for property in type.storedVariables %}
+        {% if not property.defaultValue %}
             {{ property.name }}: factory(.{{ property.name }}) as! {{ property.typeName }}{{ ',' if not forloop.last }}
-{% endif %}
-{% endfor %}
+        {% endif %}
+    {% endfor %}
         )
     }
 
     static func makeDefault() -> {{ type.name }} {
         .init(
-{% for property in type.storedVariables %}
-{% if not property.defaultValue %}
+    {% for property in type.storedVariables %}
+        {% if not property.defaultValue %}
             {{ property.name }}: Properties.{{ property.name }}.defaultValue as! {{ property.typeName }}{{ ',' if not forloop.last }}
-{% endif %}
-{% endfor %}
+        {% endif %}
+    {% endfor %}
 		)
     }
     
     func value(for property: Properties) -> Any? {
-{% for property in type.storedVariables where not property.defaultValue %}
-{% if forloop.first %}
+    {% for property in type.storedVariables where not property.defaultValue %}
+        {% if forloop.first %}
 		switch property {
-{% endif %}
+        {% endif %}
 	        case .{{ property.name }}: return {{ property.name }}
-{% if forloop.last %}
+        {% if forloop.last %}
         }
-{% endif %}
-{% endfor %}
+        {% endif %}
+    {% endfor %}
     }
 
 	func set(_ value: Any, for property: Properties) {
-{% for property in type.storedVariables where not property.defaultValue %}
-{% if forloop.first %}
+    {% for property in type.storedVariables where not property.defaultValue %}
+        {% if forloop.first %}
 		switch property {
-{% endif %}
+        {% endif %}
 	        case .{{ property.name }}: self.{{ property.name }} = value as! {{ property.typeName }}
-{% if forloop.last %}
+        {% if forloop.last %}
 	    }
-{% endif %}
-{% endfor %}
+        {% endif %}
+    {% endfor %}
 	}
 }
 
@@ -166,7 +155,7 @@ extension AddViewViewModel {
 {% macro VariableTypeName type %}{% if type|annotated:"variableTypeName" %}{{ type.annotations.variableTypeName }}{% else %}{{ type.name|replace:"Value",""|replace:"Makeable",""|lowerFirstLetter }}{% endif %}{% endmacro %}
 
 enum VariableType: String, CaseIterable, Equatable, Codable {   
-{% for type in types.implementing.VariableValue|!protocol %}
+{% for type in types.implementing.EditableVariableValue|!protocol %}
 {% if not type.implements.StepType %}
 	case {%+ call VariableTypeName type +%} // {{ type.name }}
 {% endif %}
@@ -174,7 +163,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
 
 	var defaultView: any EditableVariableValue {
         switch self {
-{% for type in types.implementing.VariableValue|!protocol %}
+{% for type in types.implementing.EditableVariableValue|!protocol %}
 {% if not type.implements.StepType %}
         case .{%+ call VariableTypeName type +%}: return {{ type.name }}.makeDefault()
 {% endif %}
@@ -188,7 +177,7 @@ extension MakeableWrapperView {
         switch view {
 {% for type in types.implementing.MakeableView|!protocol %}
         case let value as {{ type.name }}:
-            {{ type.name }}View(makeMode: makeMode, {%+ call VariableTypeName type +%}: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
+            {{ type.name }}View(isRunning: isRunning, showEditControls: showEditControls, {%+ call VariableTypeName type +%}: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
 {% endfor %}
         default:
             Text("UNKNOWN VIEW").any

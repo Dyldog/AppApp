@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EditableViewConstructor<T: ViewEditable>: ViewConstructor {
+struct EditableViewConstructor<T: CompositeEditableVariableValue>: ViewConstructor {
     let properties: [T.Properties: Any]
     let factory: ([T.Properties: Any]) -> any ViewEditable
     

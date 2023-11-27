@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct MakeableFieldView: View {
-    let makeMode: Bool
+    let isRunning: Bool
+    let showEditControls: Bool
     let field: MakeableField
     let onContentUpdate: (MakeableField) -> Void
     let onRuntimeUpdate: () -> Void
@@ -18,7 +19,7 @@ struct MakeableFieldView: View {
     
     var body: some View {
         VStack {
-            if !makeMode {
+            if !showEditControls {
                 TextField("", text: .init(get: {
                     text
                 }, set: {
@@ -48,7 +49,7 @@ struct MakeableFieldView: View {
         
         Task { @MainActor in
             do {
-                if !makeMode, let outputVar = try await field.text.output.value.value(with: variables) {
+                if !isRunning, let outputVar = try await field.text.output.value.value(with: variables) {
                     variables.set(Value(value: StringValue(value: string)), for: outputVar.valueString)
                     for step in field.onTextUpdate {
                         try await step.run(with: variables)

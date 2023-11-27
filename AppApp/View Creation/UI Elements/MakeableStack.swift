@@ -9,7 +9,8 @@ import SwiftUI
 import DylKit
 
 struct MakeableStackView: View {
-    let makeMode: Bool
+    let isRunning: Bool
+    let showEditControls: Bool
     let stack: MakeableStack
     
     let onContentUpdate: (MakeableStack) -> Void
@@ -21,31 +22,35 @@ struct MakeableStackView: View {
 //    @Binding var error: VariableValueError?
     
     var body: some View {
-        VStack {
-            if makeMode {
+        Stack(axis: stack.content.axis.value) {
+            if showEditControls {
                 makeButton(at: 0)
             }
             
-            ForEach(enumerated: stack.content.value) { (index, element) in
-//                DoView {
-                VStack {
-                    HStack {
-                        MakeableWrapperView(makeMode: makeMode, view: element, onContentUpdate: {
-                            self.onUpdate(at: index, with: $0)
-                        }, onRuntimeUpdate: onRuntimeUpdate)
-                        .onEdit(makeMode ? { self.showEditIndex = index } : nil)
-                        
-                        if makeMode {
-                            SwiftUI.Button("X", action: { onRemove(at: index) })
+            if stack.content.value.isEmpty, !showEditControls {
+                Text("STACK")
+            } else {
+                ForEach(enumerated: stack.content.value) { (index, element) in
+                    //                DoView {
+                    VStack {
+                        HStack {
+                            MakeableWrapperView(isRunning: isRunning, showEditControls: false, view: element, onContentUpdate: {
+                                self.onUpdate(at: index, with: $0)
+                            }, onRuntimeUpdate: onRuntimeUpdate)
+                            .onEdit(showEditControls ? { self.showEditIndex = index } : nil)
+                            
+                            if showEditControls {
+                                SwiftUI.Button("X", action: { onRemove(at: index) })
+                            }
                         }
-                    }
-                    
-                    if makeMode {
-                        makeButton(at: index + 1)
+                        
+                        if showEditControls {
+                            makeButton(at: index + 1)
+                        }
                     }
                 }
             }
-        }.if(makeMode) {
+        }.if(showEditControls) {
             $0.padding().border(.black, width: 2)
         }
         .sheet(item: $showAddIndex, content: { index in
@@ -96,7 +101,7 @@ final class MakeableStack: MakeableView, Codable {
     
     static func defaultValue(for property: Properties) -> Any {
         switch property {
-        case .content: return MakeableArray(value: [])
+        case .content: return MakeableArray(value: [], axis: .init(value: .vertical))
         }
     }
     

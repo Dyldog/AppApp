@@ -40,7 +40,7 @@ struct ScreenListView: View {
                         id: .init(), 
                         name: randomString(length: 5).uppercased(),
                         initActions: .init(value: []),
-                        content: .init(content: .init(value: []))
+                        content: .init(content: .init(value: [], axis: .init(value: .vertical)))
                     ))
                     viewModel.objectWillChange.send()
                 }

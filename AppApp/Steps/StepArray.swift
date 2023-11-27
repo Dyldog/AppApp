@@ -46,8 +46,9 @@ final class StepArray: Codable, PrimitiveEditableVariableValue {
                 return ActionListView(steps: self.value, onUpdate: { [weak self] in
                     guard let self = self else { return }
                     self.value = $0
-                    onUpdate(self)
                 }).any
+            } onDismiss: {
+                onUpdate(self)
             }
         }.any
     }

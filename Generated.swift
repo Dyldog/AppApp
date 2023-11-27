@@ -153,8 +153,41 @@ extension ArrayValueStep {
 	}
 }
 
+extension AxisValue {
+	 enum Properties: String, ViewProperty {
+        case value
+        var defaultValue: Any {
+            switch self {
+            case .value: return AxisValue.defaultValue
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> AxisValue {
+        .init(
+            value: factory(.value) as! Axis
+        )
+    }
+
+    static func makeDefault() -> AxisValue {
+        .init(
+            value: Properties.value.defaultValue as! Axis
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .value: return value
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .value: self.value = value as! Axis
+	    }
+	}
+}
+
 extension BoolValue {
-	enum Properties: String, PrimitiveViewProperty {
+	 enum Properties: String, ViewProperty {
         case value
         var defaultValue: Any {
             switch self {
@@ -259,7 +292,7 @@ extension DictionaryValue {
 }
 
 extension FontWeightValue {
-	enum Properties: String, PrimitiveViewProperty {
+	 enum Properties: String, ViewProperty {
         case value
         var defaultValue: Any {
             switch self {
@@ -292,7 +325,7 @@ extension FontWeightValue {
 }
 
 extension IntValue {
-	enum Properties: String, PrimitiveViewProperty {
+	 enum Properties: String, ViewProperty {
         case value
         var defaultValue: Any {
             switch self {
@@ -325,34 +358,40 @@ extension IntValue {
 }
 
 extension MakeableArray {
-	enum Properties: String, PrimitiveViewProperty {
+	 enum Properties: String, ViewProperty {
         case value
+        case axis
         var defaultValue: Any {
             switch self {
             case .value: return MakeableArray.defaultValue
+            case .axis: return MakeableArray.defaultValue
             }
         }
     }
     static func make(factory: (Properties) -> Any) -> MakeableArray {
         .init(
-            value: factory(.value) as! [any MakeableView]
+            value: factory(.value) as! [any MakeableView],
+            axis: factory(.axis) as! AxisValue
         )
     }
 
     static func makeDefault() -> MakeableArray {
         .init(
-            value: Properties.value.defaultValue as! [any MakeableView]
+            value: Properties.value.defaultValue as! [any MakeableView],
+            axis: Properties.axis.defaultValue as! AxisValue
 		)
     }
     func value(for property: Properties) -> Any? {
 		switch property {
 	        case .value: return value
+	        case .axis: return axis
         }
     }
 
 	func set(_ value: Any, for property: Properties) {
 		switch property {
 	        case .value: self.value = value as! [any MakeableView]
+	        case .axis: self.axis = value as! AxisValue
 	    }
 	}
 }
@@ -637,7 +676,7 @@ extension StaticValueStep {
 }
 
 extension StepArray {
-	enum Properties: String, PrimitiveViewProperty {
+	 enum Properties: String, ViewProperty {
         case value
         var defaultValue: Any {
             switch self {
@@ -670,7 +709,7 @@ extension StepArray {
 }
 
 extension StringValue {
-	enum Properties: String, PrimitiveViewProperty {
+	 enum Properties: String, ViewProperty {
         case value
         var defaultValue: Any {
             switch self {
@@ -742,7 +781,7 @@ extension TemporaryValue {
 }
 
 extension Value {
-	enum Properties: String, PrimitiveViewProperty {
+	 enum Properties: String, ViewProperty {
         case value
         var defaultValue: Any {
             switch self {
@@ -775,7 +814,7 @@ extension Value {
 }
 
 extension Variable {
-	enum Properties: String, PrimitiveViewProperty {
+	 enum Properties: String, ViewProperty {
         case value
         var defaultValue: Any {
             switch self {
@@ -847,7 +886,7 @@ extension VariableStep {
 }
 
 extension VariableTypeValue {
-	enum Properties: String, PrimitiveViewProperty {
+	 enum Properties: String, ViewProperty {
         case value
         var defaultValue: Any {
             switch self {
@@ -941,6 +980,8 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(ArrayValue.self, forKey: .value)
         case typeString(ArrayValueStep.self):
             self.value = try valueContainer.decode(ArrayValueStep.self, forKey: .value)
+        case typeString(AxisValue.self):
+            self.value = try valueContainer.decode(AxisValue.self, forKey: .value)
         case typeString(BoolValue.self):
             self.value = try valueContainer.decode(BoolValue.self, forKey: .value)
         case typeString(DecodeDictionaryStep.self):
@@ -996,6 +1037,8 @@ extension CodableVariableValue: Codable {
         case let value as ArrayValue:
             try container.encode(value, forKey: .value)
         case let value as ArrayValueStep:
+            try container.encode(value, forKey: .value)
+        case let value as AxisValue:
             try container.encode(value, forKey: .value)
         case let value as BoolValue:
             try container.encode(value, forKey: .value)
@@ -1064,6 +1107,7 @@ extension AddViewViewModel {
 
 enum VariableType: String, CaseIterable, Equatable, Codable {   
 	case list // ArrayValue
+	case axis // AxisValue
 	case boolean // BoolValue
 	case dictionary // DictionaryValue
 	case fontWeight // FontWeightValue
@@ -1083,6 +1127,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
 	var defaultView: any EditableVariableValue {
         switch self {
         case .list: return ArrayValue.makeDefault()
+        case .axis: return AxisValue.makeDefault()
         case .boolean: return BoolValue.makeDefault()
         case .dictionary: return DictionaryValue.makeDefault()
         case .fontWeight: return FontWeightValue.makeDefault()
@@ -1106,13 +1151,13 @@ extension MakeableWrapperView {
 	var body: some View {
         switch view {
         case let value as MakeableButton:
-            MakeableButtonView(makeMode: makeMode, button: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
+            MakeableButtonView(isRunning: isRunning, showEditControls: showEditControls, button: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
         case let value as MakeableField:
-            MakeableFieldView(makeMode: makeMode, field: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
+            MakeableFieldView(isRunning: isRunning, showEditControls: showEditControls, field: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
         case let value as MakeableLabel:
-            MakeableLabelView(makeMode: makeMode, label: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
+            MakeableLabelView(isRunning: isRunning, showEditControls: showEditControls, label: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
         case let value as MakeableStack:
-            MakeableStackView(makeMode: makeMode, stack: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
+            MakeableStackView(isRunning: isRunning, showEditControls: showEditControls, stack: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
         default:
             Text("UNKNOWN VIEW").any
         }

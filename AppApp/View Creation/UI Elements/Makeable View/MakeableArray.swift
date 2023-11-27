@@ -8,12 +8,10 @@
 import SwiftUI
 
 // sourcery: variableTypeName = "makeableArray"
-final class MakeableArray: Codable, PrimitiveEditableVariableValue {
-    func editView(onUpdate: @escaping (MakeableArray) -> Void) -> AnyView {
-        Text("Hello").any
-    }
-    
+final class MakeableArray: PrimitiveEditableVariableValue {
+
     static var type: VariableType { .makeableArray }
+    static var defaultValue: MakeableArray { .init(value: [], axis: .init(value: .vertical))}
     
     func add(_ other: VariableValue) throws -> VariableValue {
         fatalError()
@@ -28,28 +26,57 @@ final class MakeableArray: Codable, PrimitiveEditableVariableValue {
     }
     
     var value: [any MakeableView]
-    static let defaultValue: [any MakeableView] = .init()
+    var axis: AxisValue
     
-    init(value: [any MakeableView]) {
+    init(value: [any MakeableView], axis: AxisValue) {
         self.value = value
+        self.axis = axis
     }
     
-    init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.value = try container.decode(CodableMakeableList.self).elements
+    func editView(onUpdate: @escaping (MakeableArray) -> Void) -> AnyView {
+        VStack {
+            axis.editView {
+                self.axis = $0
+                onUpdate(self)
+            }
+            MakeableStackView(
+                isRunning: false,
+                showEditControls: true,
+                stack: .init(content: self),
+                onContentUpdate: {
+                    onUpdate($0.content)
+                },
+                onRuntimeUpdate: { }
+            )
+        }.any
+    }
+}
+
+extension MakeableArray: Codable {
+    enum CodingKeys: String, CodingKey {
+        case value
+        case axis
+    }
+    convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            value: try container.decode(CodableMakeableList.self, forKey: .value).elements,
+            axis: try container.decode(AxisValue.self, forKey: .axis)
+        )
     }
     
     func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(CodableMakeableList(elements: value))
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(CodableMakeableList(elements: value), forKey: .value)
+        try container.encode(axis, forKey: .axis)
     }
     
     func inserting(_ value: Element, at index: Int) -> Self {
-        .init(value: self.value.inserting(value, at: index))
+        .init(value: self.value.inserting(value, at: index), axis: axis)
     }
     
     func removing(at index: Int) -> Self {
-        .init(value: value.removing(at: index))
+        .init(value: value.removing(at: index), axis: axis)
     }
 }
 

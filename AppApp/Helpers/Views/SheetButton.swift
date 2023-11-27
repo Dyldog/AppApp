@@ -12,13 +12,14 @@ struct SheetButton<Title: View, Content: View>: View {
     
     let title: () -> Title
     @ViewBuilder var content: Content
+    let onDismiss: () -> Void
     
     var body: some View {
         SwiftUI.Button {
             showSheet = true
         } label: {
             title()
-        }.sheet(isPresented: $showSheet, content: {
+        }.sheet(isPresented: $showSheet, onDismiss: onDismiss, content: {
             content
         })
     }

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct MakeableButtonView: View {
-    let makeMode: Bool
+    let isRunning: Bool
+    let showEditControls: Bool
     let button: MakeableButton
     let onContentUpdate: (MakeableButton) -> Void
     let onRuntimeUpdate: () -> Void
@@ -19,7 +20,7 @@ struct MakeableButtonView: View {
         return SwiftUI.Button(action: {
             runAction()
         }, label: {
-            MakeableLabelView(makeMode: makeMode, label: button.title, onContentUpdate: {
+            MakeableLabelView(isRunning: isRunning, showEditControls: showEditControls, label: button.title, onContentUpdate: {
                 button.title = $0
                 onContentUpdate(button)
             }, onRuntimeUpdate: {
@@ -30,7 +31,7 @@ struct MakeableButtonView: View {
     
     func runAction() {
         Task { @MainActor in
-            if !makeMode {
+            if isRunning {
                 do {
                     for action in button.action {
                         try await action.run(with: variables)

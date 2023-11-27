@@ -17,7 +17,9 @@ extension View {
                 onEdit()
             } label: {
                 self.disabled(true)
-            }.buttonStyle(.plain).any
+            }
+            .buttonStyle(.plain)
+            .any
         } else {
             self.any
         }

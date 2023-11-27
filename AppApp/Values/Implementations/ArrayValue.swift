@@ -65,10 +65,12 @@ final class ArrayValue: CompositeEditableVariableValue, ObservableObject {
                 ListEditView(value: .init(get: { [weak self] in
                     self ?? .init(type: .int, elements: [IntValue(value: 666)])
                 }, set: {
-                    onUpdate($0)
+                    self.elements = $0.elements
                 }), onUpdate: {
-                    onUpdate($0)
+                    self.elements = $0.elements
                 })
+            } onDismiss: {
+                onUpdate(self)
             }.any
         }.any
     }

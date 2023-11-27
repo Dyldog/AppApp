@@ -18,8 +18,9 @@ struct ViewMakerView: View {
                 ScrollView {
                     CenterStack {
                         MakeableStackView(
-                            makeMode: viewModel.makeMode,
-                            stack: viewModel.content,
+                            isRunning: !viewModel.makeMode,
+                            showEditControls: viewModel.makeMode,
+                            stack: viewModel.content, 
                             onContentUpdate: { content in
                                 onMain {
                                     viewModel.content = content
@@ -49,6 +50,8 @@ struct ViewMakerView: View {
                             ActionListView(steps: viewModel.initActions.value, onUpdate: {
                                 viewModel.updateInitActions(.init(value: $0))
                             })
+                        } onDismiss: {
+                            //
                         }
                         
                         VStack(spacing: 0) {
