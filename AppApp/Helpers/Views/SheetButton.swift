@@ -11,7 +11,7 @@ struct SheetButton<Title: View, Content: View>: View {
     @State var showSheet: Bool = false
     
     let title: () -> Title
-    let content: () -> Content
+    @ViewBuilder var content: Content
     
     var body: some View {
         SwiftUI.Button {
@@ -19,7 +19,7 @@ struct SheetButton<Title: View, Content: View>: View {
         } label: {
             title()
         }.sheet(isPresented: $showSheet, content: {
-            content()
+            content
         })
     }
     

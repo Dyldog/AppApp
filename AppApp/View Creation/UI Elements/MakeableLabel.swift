@@ -14,21 +14,21 @@ struct MakeableLabelView: View {
     let onContentUpdate: (MakeableLabel) -> Void
     let onRuntimeUpdate: () -> Void
     
-    @Binding var variables: Variables!
-    @Binding var error: VariableValueError?
-    @State var text: String = ""
+    @EnvironmentObject var variables: Variables
+//    @Binding var error: VariableValueError?
+    @State var text: String = "LOADING"
     
     func labelText() async -> String {
         do {
-            if variables != nil {
-                guard let value = try await label.text.value(with: $variables.unwrapped())?.valueString
+            if !makeMode {
+                guard let value = try await label.text.value(with: variables)?.valueString
                 else { throw VariableValueError.valueNotFoundForVariable(label.text.protoString) }
                 return value
             } else {
                 return label.protoString
             }
         } catch let error as VariableValueError {
-            self.error = error
+//            self.error = error
             return "Error"
         } catch {
             fatalError(error.localizedDescription)
@@ -39,8 +39,8 @@ struct MakeableLabelView: View {
         Text(text)
             .font(.system(size: CGFloat(label.fontSize.value)).weight(label.fontWeight.value))
             .if(label.italic.value) { $0.italic() }
-            .task(id: variables) {
-                self.text = await self.labelText()
+            .task(id: variables.hashValue) {
+                self.text = await labelText()
             }
             .any
     }
@@ -50,7 +50,6 @@ final class MakeableLabel: MakeableView, Codable {
     
     static var type: VariableType { .label }
         
-    var id: UUID = .init()
     var text: Value
     var fontSize: IntValue
     var fontWeight: FontWeightValue
@@ -72,7 +71,7 @@ final class MakeableLabel: MakeableView, Codable {
         )
     }
     
-    func insertValues(into variables: Binding<Variables>) throws { }
+    func insertValues(into variables: Variables) throws { }
     
     var protoString: String { text.protoString }
     
@@ -80,7 +79,7 @@ final class MakeableLabel: MakeableView, Codable {
     
     var valueString: String { text.valueString }
 
-    func value(with variables: Binding<Variables>) async throws -> VariableValue? { self }
+    func value(with variables: Variables) async throws -> VariableValue? { self }
 
     static func defaultValue(for property: Properties) -> Any {
         switch property {

@@ -1106,13 +1106,13 @@ extension MakeableWrapperView {
 	var body: some View {
         switch view {
         case let value as MakeableButton:
-            MakeableButtonView(makeMode: makeMode, button: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error).any
+            MakeableButtonView(makeMode: makeMode, button: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
         case let value as MakeableField:
-            MakeableFieldView(makeMode: makeMode, field: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error).any
+            MakeableFieldView(makeMode: makeMode, field: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
         case let value as MakeableLabel:
-            MakeableLabelView(makeMode: makeMode, label: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error).any
+            MakeableLabelView(makeMode: makeMode, label: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
         case let value as MakeableStack:
-            MakeableStackView(makeMode: makeMode, stack: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error).any
+            MakeableStackView(makeMode: makeMode, stack: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
         default:
             Text("UNKNOWN VIEW").any
         }

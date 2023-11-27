@@ -12,16 +12,16 @@ struct MakeableWrapperView: View {
     let view: any MakeableView
     let onContentUpdate: (any MakeableView) -> Void
     let onRuntimeUpdate: () -> Void
-    @Binding var variables: Variables?
-    @Binding var error: VariableValueError?
+//    @Binding var variables: Variables?
+//    @Binding var error: VariableValueError?
     
-    init(makeMode: Bool, view: any MakeableView, onContentUpdate: @escaping (any MakeableView) -> Void, onRuntimeUpdate: @escaping () -> Void, variables: Binding<Variables?>, error: Binding<VariableValueError?>) {
+    init(makeMode: Bool, view: any MakeableView, onContentUpdate: @escaping (any MakeableView) -> Void, onRuntimeUpdate: @escaping () -> Void) {
         self.makeMode = makeMode
         self.view = view
         self.onContentUpdate = onContentUpdate
         self.onRuntimeUpdate = onRuntimeUpdate
-        self._variables = variables
-        self._error = error
+//        self._variables = variables
+//        self._error = error
     }
     
     

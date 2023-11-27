@@ -10,7 +10,6 @@ import DylKit
 
 @main
 struct AppAppApp: App {
-    @State var variables: Variables = .init()
     @State var alert: Alert?
     var body: some Scene {
         WindowGroup {

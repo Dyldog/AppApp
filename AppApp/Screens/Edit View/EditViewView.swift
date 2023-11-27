@@ -14,23 +14,23 @@ struct EditViewView: View {
     var body: some View {
         VStack {
             viewModel.editable.editView {
-                viewModel.onUpdate($0)
+                viewModel.editable = $0
             }
             .frame(minWidth: 300, minHeight: 300)
             
 //            DoView {
             MakeableWrapperView(
                 makeMode: true,
-                view: viewModel.editable.makeableConstructor.makeableView,
+                view: viewModel.editable,
                 onContentUpdate: { _ in },
-                onRuntimeUpdate: { },
-                variables: .nil(),
-                error: .nil()
+                onRuntimeUpdate: { }
             )
             .padding(20)
             .border(.black)
             .padding()
             .any
+        }.onDisappear {
+            viewModel.onUpdate(viewModel.editable)
         }
     }
     

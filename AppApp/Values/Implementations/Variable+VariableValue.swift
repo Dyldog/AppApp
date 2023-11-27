@@ -25,10 +25,10 @@ final class Variable: PrimitiveEditableVariableValue {
     var protoString: String { "{ \(value.protoString) }" }
     var valueString: String { "\(value.valueString)" }
     
-    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue? {
         guard
             let nameValue = try await value.value(with: variables),
-            let value = variables.wrappedValue.value(for: nameValue.valueString)
+            let value = await variables.value(for: nameValue.valueString)
         else {
             throw VariableValueError.valueNotFoundForVariable(value.protoString)
         }
@@ -40,8 +40,10 @@ final class Variable: PrimitiveEditableVariableValue {
             Text("Name")
             Text(value.protoString)
             SheetButton(title: { Text("Edit") }) {
-                EditVariableView(value: self.value) {
-                    onUpdate(.init(value: $0))
+                EditVariableView(value: value) { [weak self] in
+                    guard let self = self else { return }
+                    self.value = $0
+                    onUpdate(self)
                 }
             }
         }.any

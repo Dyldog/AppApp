@@ -26,7 +26,7 @@ final class ArrayValueStep: ValueStep {
         }
     }
     
-    func run(with variables: Binding<Variables>) async throws -> VariableValue {
+    func run(with variables: Variables) async throws -> VariableValue {
         guard
             let index = try await index.value(with: variables) as? IntValue,
             let array = try await array.value(with: variables) as? ArrayValue

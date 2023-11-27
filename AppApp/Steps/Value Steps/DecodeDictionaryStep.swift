@@ -23,7 +23,7 @@ final class DecodeDictionaryStep: ValueStep {
         }
     }
     
-    func run(with variables: Binding<Variables>) async throws -> VariableValue {
+    func run(with variables: Variables) async throws -> VariableValue {
         guard
             let value = try await value.value(with: variables)
         else { throw VariableValueError.wrongTypeForOperation }

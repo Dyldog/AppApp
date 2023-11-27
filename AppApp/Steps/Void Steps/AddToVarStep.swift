@@ -27,52 +27,16 @@ final class AddToVarStep: Step, ObservableObject {
         }
     }
     
-    func run(with variables: Binding<Variables>) async throws {
+    func run(with variables: Variables) async throws {
         guard
-            let name = try await varName.value(with: variables),
-            let oldValue = variables.wrappedValue.value(for: name.valueString) ,
+            let oldValue = try await varName.value(with: variables),
             let extraValue = try await value.value(with: variables)
         else { throw Error.cantAddToUnsetVariable }
         
-        variables.wrappedValue.set(try oldValue.add(extraValue), for: varName.valueString)
+        await variables.set(try oldValue.add(extraValue), for: varName.valueString)
     }
     
     enum Error: StepError, Swift.Error {
         case cantAddToUnsetVariable
     }
 }
-//
-//    static func make(factory: (Properties) -> VariableValue) -> Self {
-//        .init(
-//            varName: factory(.name) as! Value,
-//            value: factory(.value) as! Value
-//        )
-//    }
-//    
-//    func value(for property: Properties) -> (VariableValue)? {
-//        switch property {
-//        case .name: varName
-//        case .value: value
-//        }
-//    }
-//    
-//    func set(_ value: VariableValue, for property: Properties) {
-//        switch property {
-//        case .name: varName = value as! Value
-//        case .value: self.value = value as! Value
-//        }
-//    }
-//    
-//    enum Properties: String, ViewProperty {
-//        case name
-//        case value
-//        
-//        var defaultValue: VariableValue {
-//            switch self {
-//            case .name: return "Text" as Value
-//            case .value: return "VariableValue" as Value
-//            }
-//        }
-//    }
-//
-//}

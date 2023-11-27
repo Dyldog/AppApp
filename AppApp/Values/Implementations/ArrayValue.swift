@@ -37,7 +37,7 @@ final class ArrayValue: CompositeEditableVariableValue, ObservableObject {
         """
     }
     
-    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue? {
         var mapped: [(any EditableVariableValue)?] = []
         for element in elements {
             mapped.append(try await element.value(with: variables) as? (any EditableVariableValue))
@@ -62,8 +62,8 @@ final class ArrayValue: CompositeEditableVariableValue, ObservableObject {
         HStack {
             Text(protoString)
             SheetButton(title: { Text("Edit") }) {
-                ListEditView(value: .init(get: {
-                    self
+                ListEditView(value: .init(get: { [weak self] in
+                    self ?? .init(type: .int, elements: [IntValue(value: 666)])
                 }, set: {
                     onUpdate($0)
                 }), onUpdate: {

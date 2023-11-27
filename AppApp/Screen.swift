@@ -11,7 +11,7 @@ struct Screen: Codable, Identifiable {
     let id: UUID
     var name: String
     var initActions: StepArray
-    var content: MakeableArray
+    var content: MakeableStack
     
     enum CodingKeys: String, CodingKey {
         case initActions
@@ -20,7 +20,7 @@ struct Screen: Codable, Identifiable {
         case name
     }
     
-    init(id: UUID = .init(), name: String, initActions: StepArray, content: MakeableArray) {
+    init(id: UUID, name: String, initActions: StepArray, content: MakeableStack) {
         self.name = name
         self.id = id
         self.initActions = initActions
@@ -38,7 +38,7 @@ struct Screen: Codable, Identifiable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         initActions = try container.decode(StepArray.self, forKey: .initActions)
-        content = try container.decode(MakeableArray.self, forKey: .content)
+        content = try container.decode(MakeableStack.self, forKey: .content)
         id = try container.decode(UUID.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
     }

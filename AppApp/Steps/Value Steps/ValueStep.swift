@@ -8,5 +8,5 @@
 import SwiftUI
 
 protocol ValueStep: StepType {
-    func run(with variables: Binding<Variables>) async throws -> VariableValue
+    func run(with variables: Variables) async throws -> VariableValue
 }

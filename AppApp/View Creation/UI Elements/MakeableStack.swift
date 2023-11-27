@@ -17,8 +17,8 @@ struct MakeableStackView: View {
     
     @State var showAddIndex: Int?
     @State var showEditIndex: Int?
-    @Binding var variables: Variables?
-    @Binding var error: VariableValueError?
+    @EnvironmentObject var variables: Variables
+//    @Binding var error: VariableValueError?
     
     var body: some View {
         VStack {
@@ -32,7 +32,7 @@ struct MakeableStackView: View {
                     HStack {
                         MakeableWrapperView(makeMode: makeMode, view: element, onContentUpdate: {
                             self.onUpdate(at: index, with: $0)
-                        }, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error)
+                        }, onRuntimeUpdate: onRuntimeUpdate)
                         .onEdit(makeMode ? { self.showEditIndex = index } : nil)
                         
                         if makeMode {
@@ -58,15 +58,16 @@ struct MakeableStackView: View {
                 onUpdate(at: index, with: $0)
             })
         })
+        .id(variables)
     }
     
     private func onRemove(at index: Int) {
-        onContentUpdate(.init(content: stack.content.removing(at: index)))
+        stack.content.value.remove(at: index)
+        onContentUpdate(stack)
     }
     private func onUpdate(at index: Int, with value: any MakeableView) {
-        var existingContent = stack.content.value
-        existingContent[index] = value
-        onContentUpdate(MakeableStack(content: .init(value: existingContent)))
+        stack.content.value[index] = value
+        onContentUpdate(stack)
     }
     
     func makeButton(at index: Int) -> some View {
@@ -83,9 +84,8 @@ final class MakeableStack: MakeableView, Codable {
     
     var valueString: String { "STACK" }
     
-    func value(with variables: Binding<Variables>) async throws -> VariableValue? { self }
+    func value(with variables: Variables) async throws -> VariableValue? { self }
     
-    let id: UUID = .init()
     var content: MakeableArray
     
     var protoString: String { content.map { $0.protoString }.joined(separator: "\n") }
@@ -100,7 +100,7 @@ final class MakeableStack: MakeableView, Codable {
         }
     }
     
-    func insertValues(into variables: Binding<Variables>) async throws {
+    func insertValues(into variables: Variables) async throws {
         for element in content {
             try await element.insertValues(into: variables)
         }

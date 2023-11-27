@@ -33,7 +33,7 @@ final class TemporaryValue: CompositeEditableVariableValue {
     
     var valueString: String { output.valueString }
     
-    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue? {
         if let setValue = try? await output.value(with: variables) {
             return setValue
         } else {
@@ -45,15 +45,18 @@ final class TemporaryValue: CompositeEditableVariableValue {
         VStack {
             HStack {
                 Text("Initial")
-                initial.editView(onUpdate: {
-                    onUpdate(.init(initial: $0, output: self.output))
+                initial.editView(onUpdate: { [weak self] in
+                    guard let self = self else { return }
+                    self.initial = $0
+                    onUpdate(self)
                 })
             }
             
             HStack {
                 Text("Output")
                 output.editView {
-                    onUpdate(.init(initial: self.initial, output: $0))
+                    self.output = $0
+                    onUpdate(self)
                 }
             }
         }.any

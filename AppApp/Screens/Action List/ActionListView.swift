@@ -22,9 +22,12 @@ struct ActionListView: View {
                     element.editView { value in
                         onUpdate(steps.replacing(value, at: index))
                     }
+                    .buttonStyle(.plain)
+                    
                     Button("X") {
                         onUpdate(steps.removing(at: index))
                     }
+                    .buttonStyle(.plain)
                 }
                 
                 addButton(index: index + 1)

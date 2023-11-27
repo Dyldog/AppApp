@@ -12,54 +12,44 @@ import Combine
 @MainActor
 class ViewMakerViewModel: ObservableObject {
     let name: String
-    var content: MakeableArray = .init(value: []) {
+    var content: MakeableStack = .init(content: .init(value: [])) {
         didSet {
             objectWillChange.send()
-            onUpdate(.init(name: self.name, initActions: self.initActions, content: content))
+            onUpdate(.init(id: screenID, name: self.name, initActions: self.initActions, content: content))
         }
     }
+    
+    let screenID: UUID
     @Published private(set) var initActions: StepArray = .init(value: [])
     private let onUpdate: (Screen) -> Void
     
     @Published var showErrors: Bool = false
-    var error: VariableValueError?
+//    var error: VariableValueError?
     
     @Published var makeMode: Bool = true
     
 //    @Published var showAddIndex: Int?
 //    @Published var showEditIndex: EditRow?
     
-    @Published private var updater: Int = 0
+    @Published private(set) var updater: Int = 0
     
-    @MainActor private var _variables: Variables? {
-        willSet { onMain { self.objectWillChange.send() } }
-    }
+    @Published private(set) var _variables: Variables
     
     private var cancellables: Set<AnyCancellable> = .init()
     
-    var variables: Variables? {
+    var variables: Variables {
         get {
-            guard !makeMode else { return nil }
+            guard !makeMode else { return .init() }
             return _variables
         }
         set {
-            guard !self.makeMode, let newValue = newValue else { return }
-            self._variables?.set(from: newValue)
+            guard !self.makeMode else { return }
+            self._variables.set(from: newValue)
         }
-    }
-    
-    private var variablesBinding: Binding<Variables> {
-        .init {
-            self._variables!
-        } set: { new in
-            onMain {
-                self._variables = new
-            }
-        }
-
     }
     
     init(screen: Screen, onUpdate: @escaping (Screen) -> Void) {
+        self.screenID = screen.id
         self.name = screen.name
         self.initActions = screen.initActions
         self.content = screen.content
@@ -67,8 +57,12 @@ class ViewMakerViewModel: ObservableObject {
         self._variables = .init()
         
         Task { @MainActor in
-//            _variables = await makeVariables()
+            _variables = await makeVariables()
         }
+        
+        _variables.objectWillChange.sink { [weak self] _ in
+            self?.objectWillChange.send()
+        }.store(in: &cancellables)
         
 //        $content.dropFirst().sink { content in
 //            onUpdate(.init(name: self.name, initActions: self.initActions, content: content))
@@ -81,58 +75,41 @@ class ViewMakerViewModel: ObservableObject {
 //        }.store(in: &cancellables)
     }
     
-    private func updateVariablesFromContent(vars: Binding<Variables>) async {
-        for element in content {
+    private func updateVariablesFromContent(vars: Variables) async {
+        for element in content.content {
             try? await element.insertValues(into: vars)
         }
         
-        updater += 1
+        self.variables = vars
+        
+        self.updater += 1
     }
     
     func makeVariables()  async -> Variables {
-        var newVars = Variables()
-        
-        let varsBinding = Binding(get: {
-            newVars
-        }, set: {
-            newVars = $0
-        })
+        let newVars = Variables()
         
         for action in initActions {
             do {
-                try await action.run(with: varsBinding)
+                try await action.run(with: newVars)
             } catch {
                 print(error)
             }
         }
         
-        await self.updateVariablesFromContent(vars: varsBinding)
+        await self.updateVariablesFromContent(vars: newVars)
         
         return newVars
     }
     
-    func onRuntimeUpdate() async {
-//        await self.updateVariablesFromContent(vars: variablesBinding)
-        onMain { self.updater += 1 }
+    func onRuntimeUpdate() {
+        Task { @MainActor in
+            await self.updateVariablesFromContent(vars: variables)
+        }
     }
-    
-//    private func updateContent() {
-//        onMain {
-//            self.updater += 1
-//        }
-//    }
-//    
-//    private func viewUpdated() {
-//        self.content.forEach {
-//            try? $0.insertValues(into: &self._variables)
-//        }
-//        
-//        self.updateContent()
-//    }    
     
     func updateInitActions(_ newValue: StepArray) {
         initActions = newValue
-        onUpdate(.init(name: self.name, initActions: self.initActions, content: self.content))
+        onUpdate(.init(id: screenID, name: self.name, initActions: self.initActions, content: self.content))
     }
 }
 

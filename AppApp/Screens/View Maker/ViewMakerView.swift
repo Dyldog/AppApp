@@ -19,34 +19,36 @@ struct ViewMakerView: View {
                     CenterStack {
                         MakeableStackView(
                             makeMode: viewModel.makeMode,
-                            stack: .init(content: viewModel.content),
+                            stack: viewModel.content,
                             onContentUpdate: { content in
                                 onMain {
-                                    viewModel.content = content.content
+                                    viewModel.content = content
                                 }
                             }, onRuntimeUpdate: {
-                                Task { @MainActor in
-                                    await viewModel.onRuntimeUpdate()
+                                withAnimation {
+                                    viewModel.onRuntimeUpdate()
                                 }
-                            },
-                            variables: $viewModel.variables,
-                            error: $viewModel.error
-                        )
+                                
+                            }
+                        ).id(viewModel.variables)
                     }
                     .frame(minHeight: geometry.size.height)
                 }
             }
+            .environmentObject(viewModel.variables)
             .navigationTitle(viewModel.name)
-            .if(viewModel.showErrors, modified: { view in
-                view.alert(item: $viewModel.error, content: {
-                    .init(title: Text("Error"), message: Text($0.localizedDescription))
-                })
-            })
+//            .if(viewModel.showErrors, modified: { view in
+//                view.alert(item: $viewModel.error, content: {
+//                    .init(title: Text("Error"), message: Text($0.localizedDescription))
+//                })
+//            })
             .toolbar {
                 HStack {
                     if viewModel.makeMode {
-                        viewModel.initActions.editView {
-                            viewModel.updateInitActions($0)
+                        SheetButton(title: { Text("Edit") }) {
+                            ActionListView(steps: viewModel.initActions.value, onUpdate: {
+                                viewModel.updateInitActions(.init(value: $0))
+                            })
                         }
                         
                         VStack(spacing: 0) {

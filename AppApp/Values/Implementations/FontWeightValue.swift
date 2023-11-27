@@ -48,15 +48,17 @@ final class FontWeightValue: PrimitiveEditableVariableValue, Codable {
     
     var valueString: String { protoString }
     
-    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue? {
         self
     }
     
     func editView(onUpdate: @escaping (FontWeightValue) -> Void) -> AnyView {
-        Picker("", selection: .init(get: {
-            self.value
-        }, set: { new in
-            onUpdate(.init(value: new))
+        Picker("", selection: .init(get: { [weak self] in
+            self?.value ?? .regular
+        }, set: { [weak self] new in
+            guard let self = self else { return }
+            self.value = new
+            onUpdate(self)
         })) {
             ForEach(Font.Weight.allCases) {
                 Text($0.title).tag($0)

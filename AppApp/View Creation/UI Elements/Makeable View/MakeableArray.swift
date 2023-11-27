@@ -23,7 +23,7 @@ final class MakeableArray: Codable, PrimitiveEditableVariableValue {
     
     var valueString: String { "TODO" }
     
-    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue? {
         self
     }
     

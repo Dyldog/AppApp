@@ -17,7 +17,7 @@ import SwiftUI
 //    
 //    var protoString: String { self }
 //    var valueString: String { self }
-//    func value(with variables: Binding<Variables>) throws -> VariableValue? { self }
+//    func value(with variables: Variables) throws -> VariableValue? { self }
 //    
 //    func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView {
 //        TextField("", text: .init(get: {
@@ -39,17 +39,19 @@ final class StringValue: PrimitiveEditableVariableValue {
     }
     
     func add(_ other: VariableValue) throws -> VariableValue {
-        return StringValue(value: value + other.valueString)
+        value = value + other.valueString
+        return self
     }
     
     var protoString: String { value }
     var valueString: String { value }
-    func value(with variables: Binding<Variables>) throws -> VariableValue? { self }
+    func value(with variables: Variables) throws -> VariableValue? { self }
     
     func editView(onUpdate: @escaping (StringValue) -> Void) -> AnyView {
-        TextField("", text: .init(get: {
-            self.value
-        }, set: {
+        TextField("", text: .init(get: { [weak self] in
+            self?.value ?? "ERROR666"
+        }, set: { [weak self] in
+            guard let self = self else { return }
             self.value = $0
             onUpdate(self)
         })).any

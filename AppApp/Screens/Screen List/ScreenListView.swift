@@ -37,9 +37,10 @@ struct ScreenListView: View {
             ToolbarItem(placement: .navigation) {
                 SwiftUI.Button("Add") {
                     viewModel.screens.append(Screen(
+                        id: .init(), 
                         name: randomString(length: 5).uppercased(),
                         initActions: .init(value: []),
-                        content: .init(value: [])
+                        content: .init(content: .init(value: []))
                     ))
                     viewModel.objectWillChange.send()
                 }

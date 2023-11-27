@@ -12,12 +12,12 @@ typealias Alert = DylKit.Alert
 //
 //struct StepButton<Title: View>: View {
 //    
-//    let title: (inout Variables) -> Title
+//    let title: (Variables) -> Title
 //    let step: any Step
 //    @Binding var variables: Variables
 //    @Binding var alert: Alert?
 //    
-//    init(title: @escaping (inout Variables) -> Title, step: any Step, variables: Binding<Variables>, alert: Binding<Alert?>) {
+//    init(title: @escaping (Variables) -> Title, step: any Step, variables: Binding<Variables>, alert: Binding<Alert?>) {
 //        self.title = title
 //        self.step = step
 //        self._variables = variables
@@ -28,7 +28,7 @@ typealias Alert = DylKit.Alert
 //        self.init(title: { _ in Text(title) }, step: step, variables: variables, alert: alert)
 //    }
 //    
-//    init(title: @escaping (inout Variables) -> String, step: any Step, variables: Binding<Variables>, alert: Binding<Alert?>) where Title == Text {
+//    init(title: @escaping (Variables) -> String, step: any Step, variables: Binding<Variables>, alert: Binding<Alert?>) where Title == Text {
 //        self.init(title: { Text(title(&$0)) }, step: step, variables: variables, alert: alert)
 //    }
 //    
@@ -40,7 +40,7 @@ typealias Alert = DylKit.Alert
 //                alert = .init(title: "Error", message: error.localizedDescription)
 //            }
 //        }, label: {
-//            title(&variables)
+//            title(variables)
 //        })
 //    }
 //}

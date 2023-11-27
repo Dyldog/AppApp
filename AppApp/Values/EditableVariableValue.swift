@@ -59,7 +59,7 @@ extension CompositeEditableVariableValue {
             } else {
                 fatalError()
             }
-        }
+        }.sorted(by: { $0.0 < $1.0 })
     }
 }
 

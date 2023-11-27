@@ -16,6 +16,6 @@ struct CodableVariableList: Codable {
     }
     
     init(variables: [any EditableVariableValue]) {
-        self.variables = variables.map { .init(value: $0 as! (any EditableVariableValue)) }
+        self.variables = variables.map { .init(value: $0) }
     }
 }

@@ -8,10 +8,10 @@
 import SwiftUI
 
 extension StepType {
-    func run(with variables: Binding<Variables>) async throws {
+    func run(with variables: Variables) async throws {
         switch self {
         case let step as any ValueStep:
-            try await variables.wrappedValue.set(step.run(with: variables), for: "$0")
+            try await variables.set(step.run(with: variables), for: "$0")
         case let step as any Step:
             try await step.run(with: variables)
         default:

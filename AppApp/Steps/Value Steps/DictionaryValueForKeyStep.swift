@@ -19,7 +19,7 @@ import SwiftUI
 //    
 //    var protoString: String { "{ \(dictionary.protoString)[\(key.protoString)] }" }
 //    
-//    func run(with variables: Binding<Variables>) async throws -> VariableValue {
+//    func run(with variables: Variables) async throws -> VariableValue {
 //        guard
 //            let key = try await key.value(with: variables),
 //            let dictionary = try await dictionary.value(with: variables) as? DictionaryValue

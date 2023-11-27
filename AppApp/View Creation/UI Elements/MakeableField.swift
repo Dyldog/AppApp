@@ -12,13 +12,13 @@ struct MakeableFieldView: View {
     let field: MakeableField
     let onContentUpdate: (MakeableField) -> Void
     let onRuntimeUpdate: () -> Void
-    @Binding var variables: Variables!
-    @Binding var error: VariableValueError?
-    @State var text: String = ""
+    @EnvironmentObject var variables: Variables
+//    @Binding var error: VariableValueError?
+    @State var text: String = "LOADING"
     
     var body: some View {
         VStack {
-            if variables != nil {
+            if !makeMode {
                 TextField("", text: .init(get: {
                     text
                 }, set: {
@@ -30,15 +30,13 @@ struct MakeableFieldView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .any
             }
-        }.task(id: variables) {
+        }.task {
             do {
-                if variables != nil {
-                    guard let value = try await field.text.value(with: $variables.unwrapped())?.valueString
-                    else { throw VariableValueError.valueNotFoundForVariable(field.text.protoString) }
-                    return self.text = value
-                }
-            } catch let error as VariableValueError {
-                self.error = error
+                guard let value = try await field.text.value(with: variables)?.valueString
+                else { throw VariableValueError.valueNotFoundForVariable(field.text.protoString) }
+                self.text = value
+            }catch let error as VariableValueError {
+//                self.error = error
             } catch {
                 fatalError(error.localizedDescription)
             }
@@ -50,14 +48,14 @@ struct MakeableFieldView: View {
         
         Task { @MainActor in
             do {
-                if variables != nil, let outputVar = try await field.text.output.value.value(with: $variables.unwrapped()) {
+                if !makeMode, let outputVar = try await field.text.output.value.value(with: variables) {
                     variables.set(Value(value: StringValue(value: string)), for: outputVar.valueString)
                     for step in field.onTextUpdate {
-                        try await step.run(with: $variables.unwrapped())
+                        try await step.run(with: variables)
                     }
                 }
             } catch let error as VariableValueError {
-                self.error = error
+//                self.error = error
             } catch {
                 fatalError(error.localizedDescription)
             }
@@ -70,7 +68,6 @@ struct MakeableFieldView: View {
 final class MakeableField: MakeableView, Codable {
     
     static var type: VariableType { .label }
-    var id: UUID = .init()
     var text: TemporaryValue
     var fontSize: IntValue
     var onTextUpdate: StepArray
@@ -96,13 +93,16 @@ final class MakeableField: MakeableView, Codable {
         fatalError()
     }
     
-    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue? {
         self
     }
     
-    func insertValues(into variables: Binding<Variables>) async throws {
-        if let outputVarName = try await text.value(with: variables)?.valueString {
-            variables.wrappedValue.set(text, for: outputVarName)
+    func insertValues(into variables: Variables) async throws {
+        if 
+            let outputVarName = try await text.output.value.value(with: variables),
+            let outputValue = try await text.value(with: variables)
+        {
+            await variables.set(outputValue, for: outputVarName.valueString)
         }
         
         for step in onTextUpdate {

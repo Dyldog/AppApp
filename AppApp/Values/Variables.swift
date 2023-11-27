@@ -6,25 +6,36 @@
 //
 
 import Foundation
+import DylKit
+import Combine
 
-struct Variables: Equatable {
-    private(set) var variables: [String: VariableValue]
+class Variables: Equatable, ObservableObject, Hashable, Identifiable {
     
-    var keys: [String] { Array(variables.keys) }
+    @MainActor var id: String { keyString + valueString }
+//    var objectWillChange = PassthroughSubject<Void, Never>()
+    
+    @MainActor private(set) var variables: [String: VariableValue] {
+        willSet { objectWillChange.send() }
+        didSet {
+            print("DIDSET")
+        }
+    }
+    
+    @MainActor var keys: [String] { Array(variables.keys) }
     
     init() {
         variables = .init()
     }
     
-    func value(for name: String) -> VariableValue? {
+    @MainActor func value(for name: String) -> VariableValue? {
         variables[name]
     }
     
-    mutating func set(_ value: VariableValue, for name: String) {
+    @MainActor func set(_ value: VariableValue, for name: String) {
         variables[name] = value
     }
     
-    mutating func set(from other: Variables) {
+    @MainActor func set(from other: Variables) {
         for (key, value) in other.variables {
             if self.value(for: key)?.valueString != value.valueString {
                 set(value, for: key)
@@ -32,15 +43,22 @@ struct Variables: Equatable {
         }
     }
     
-    static func == (lhs: Variables, rhs: Variables) -> Bool {
-        func keyString(_ vars: Variables) -> String {
-            vars.keys.sorted().joined()
-        }
-        
-        func valueString(_ vars: Variables) -> String {
-            vars.variables.values.map { $0.valueString }.sorted().joined()
-        }
-        
-        return keyString(lhs) == keyString(rhs) && valueString(lhs) == valueString(rhs)
+    @MainActor static func == (lhs: Variables, rhs: Variables) -> Bool {
+        let isEqual = (lhs.keyString == rhs.keyString) && (lhs.valueString == rhs.valueString)
+        return isEqual
+    }
+    
+    @MainActor func hash(into hasher: inout Hasher) {
+        hasher.combine(variables.mapValues { $0.valueString })
+    }
+}
+
+private extension Variables {
+    @MainActor var keyString: String {
+        variables.keys.sorted().joined()
+    }
+    
+    @MainActor var valueString: String {
+        variables.values.map { $0.valueString }.sorted().joined()
     }
 }

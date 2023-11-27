@@ -31,7 +31,7 @@ final class StepArray: Codable, PrimitiveEditableVariableValue {
     
     var valueString: String { value.map { $0.protoString }.joined(separator: ", ") }
     
-    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue? {
         fatalError()
     }
     
@@ -41,10 +41,13 @@ final class StepArray: Codable, PrimitiveEditableVariableValue {
                 .fixedSize()
             SheetButton(title: {
                 Text("Edit")
-            }) {
-                ActionListView(steps: self.value, onUpdate: {
-                    onUpdate(.init(value: $0))
-                })
+            }) { [weak self] in
+                guard let self = self else { return Text("WASNIL").any }
+                return ActionListView(steps: self.value, onUpdate: { [weak self] in
+                    guard let self = self else { return }
+                    self.value = $0
+                    onUpdate(self)
+                }).any
             }
         }.any
     }

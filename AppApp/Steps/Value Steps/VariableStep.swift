@@ -26,10 +26,10 @@ final class VariableStep: ValueStep {
         }
     }
 
-    func run(with variables: Binding<Variables>) async throws -> VariableValue {
+    func run(with variables: Variables) async throws -> VariableValue {
         guard
             let nameValue = try await varName.value(with: variables),
-            let value = variables.wrappedValue.value(for: nameValue.valueString)
+            let value = await variables.value(for: nameValue.valueString)
         else { throw VariableValueError.valueNotFoundForVariable(varName.protoString) }
         
         guard let typedValue = try await value.value(with: variables)

@@ -22,7 +22,7 @@ final class VariableTypeValue: PrimitiveEditableVariableValue {
         self.value = value
     }
     
-    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue? {
         self
     }
     
@@ -31,8 +31,10 @@ final class VariableTypeValue: PrimitiveEditableVariableValue {
     }
     
     func editView(onUpdate: @escaping (VariableTypeValue) -> Void) -> AnyView {
-        value.editView {
-            onUpdate(.init(value: $0))
+        value.editView { [weak self] in
+            guard let self = self else { return }
+            self.value = $0
+            onUpdate(self)
         }
     }
     

@@ -30,7 +30,7 @@ final class Value: PrimitiveEditableVariableValue {
     var protoString: String { value.protoString }
     var valueString: String { value.valueString }
     
-    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue? {
         try await value.value(with: variables)
     }
     
@@ -38,8 +38,10 @@ final class Value: PrimitiveEditableVariableValue {
         HStack {
             Text(value.protoString)
             SheetButton(title: { Text("Edit") }) {
-                EditVariableView(value: self.value) {
-                    onUpdate(.init(value: $0))
+                EditVariableView(value: value) { [weak self] in
+                    guard let self = self else { return }
+                    self.value = $0
+                    onUpdate(self)
                 }
             }
         }.any

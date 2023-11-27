@@ -27,15 +27,17 @@ final class BoolValue: PrimitiveEditableVariableValue, Codable {
     
     var valueString: String { self.value ? "true" : "false" }
     
-    func value(with variables: Binding<Variables>) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue? {
         self
     }
     
     func editView(onUpdate: @escaping (BoolValue) -> Void) -> AnyView {
-        Toggle("", isOn: .init(get: {
-            self.value
-        }, set: {
-            onUpdate(.init(value: $0))
+        Toggle("", isOn: .init(get: { [weak self] in
+            self?.value ?? false
+        }, set: { [weak self] in
+            guard let self = self else { return }
+            self.value = $0
+            onUpdate(self)
         })).any
     }
 }

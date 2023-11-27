@@ -23,7 +23,7 @@ final class APIValueStep: ValueStep {
         }
     }
     
-    func run(with variables: Binding<Variables>) async throws -> VariableValue {
+    func run(with variables: Variables) async throws -> VariableValue {
         guard
             let value = try await url.value(with: variables),
             let url = URL(string: value.valueString)

@@ -188,7 +188,7 @@ extension MakeableWrapperView {
         switch view {
 {% for type in types.implementing.MakeableView|!protocol %}
         case let value as {{ type.name }}:
-            {{ type.name }}View(makeMode: makeMode, {%+ call VariableTypeName type +%}: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, variables: $variables, error: $error).any
+            {{ type.name }}View(makeMode: makeMode, {%+ call VariableTypeName type +%}: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
 {% endfor %}
         default:
             Text("UNKNOWN VIEW").any

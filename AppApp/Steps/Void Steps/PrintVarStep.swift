@@ -19,11 +19,11 @@ final class PrintVarStep: Step, Codable {
         self.varName = varName
     }
     
-    func run(with variables: Binding<Variables>) async throws {
+    func run(with variables: Variables) async throws {
         guard let nameValue = try await varName.value(with: variables) else {
             throw VariableValueError.valueNotFoundForVariable(varName.protoString)
         }
-        print("\(varName): \(variables.wrappedValue.value(for: nameValue.valueString) as Any)")
+        print("\(varName): \(await variables.value(for: nameValue.valueString) as Any)")
     }
     
     static func defaultValue(for property: Properties) -> Any {
