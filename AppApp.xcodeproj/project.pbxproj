@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC18BAD02B15468E007838AA /* MakeablePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BACF2B15468E007838AA /* MakeablePicker.swift */; };
 		FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */; };
 		FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */; };
 		FC2B8A892B108F3F003FAB86 /* CodableMakeableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */; };
@@ -117,6 +118,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC18BACF2B15468E007838AA /* MakeablePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeablePicker.swift; sourceTree = "<group>"; };
 		FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableWrapperView.swift; sourceTree = "<group>"; };
 		FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryValue.swift; sourceTree = "<group>"; };
 		FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMakeableList.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				FCD3B22E2B0B9FBA0054371B /* MakeableLabel.swift */,
 				FCD3B22C2B0B9FA70054371B /* MakeableButton.swift */,
 				FC4C2C312B0CD657008217AC /* MakeableField.swift */,
+				FC18BACF2B15468E007838AA /* MakeablePicker.swift */,
 			);
 			path = "UI Elements";
 			sourceTree = "<group>";
@@ -775,6 +778,7 @@
 				FCD3B2422B0BB3360054371B /* Int+Identifiable.swift in Sources */,
 				FC2B8A972B10900C003FAB86 /* StepArray.swift in Sources */,
 				FC4C15CF2B0C97830010BB1A /* StepType+EditView.swift in Sources */,
+				FC18BAD02B15468E007838AA /* MakeablePicker.swift in Sources */,
 				FC4C2C292B0CBCF1008217AC /* DecodeDictionaryStep.swift in Sources */,
 				FC9047B92B14A1D900B599BE /* ConditionalActionValue.swift in Sources */,
 				FCD3B23F2B0BB31F0054371B /* AddActionView.swift in Sources */,

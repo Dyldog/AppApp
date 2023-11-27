@@ -642,6 +642,45 @@ extension MakeableStack {
 	}
 }
 
+extension MakeableToggle {
+	 enum Properties: String, ViewProperty {
+        case isOn
+        case onToggleUpdate
+        var defaultValue: Any {
+            switch self {
+            case .isOn: return MakeableToggle.defaultValue(for: .isOn)
+            case .onToggleUpdate: return MakeableToggle.defaultValue(for: .onToggleUpdate)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> MakeableToggle {
+        .init(
+            isOn: factory(.isOn) as! TemporaryValue,
+            onToggleUpdate: factory(.onToggleUpdate) as! StepArray
+        )
+    }
+
+    static func makeDefault() -> MakeableToggle {
+        .init(
+            isOn: Properties.isOn.defaultValue as! TemporaryValue,
+            onToggleUpdate: Properties.onToggleUpdate.defaultValue as! StepArray
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .isOn: return isOn
+	        case .onToggleUpdate: return onToggleUpdate
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .isOn: self.isOn = value as! TemporaryValue
+	        case .onToggleUpdate: self.onToggleUpdate = value as! StepArray
+	    }
+	}
+}
+
 extension PrintVarStep {
 	 enum Properties: String, ViewProperty {
         case varName
@@ -1014,6 +1053,9 @@ extension CodableMakeableList: Codable {
             else if let value = try? contentContainer.decode(MakeableStack.self) {
                 content.append(value)
             }  
+            else if let value = try? contentContainer.decode(MakeableToggle.self) {
+                content.append(value)
+            }  
             else {
                 self.init(elements: [MakeableLabel.withText("ERROR")])
                 return
@@ -1032,6 +1074,8 @@ extension CodableMakeableList: Codable {
             case let value as MakeableLabel:
                 try contentContainer.encode(value)
             case let value as MakeableStack:
+                try contentContainer.encode(value)
+            case let value as MakeableToggle:
                 try contentContainer.encode(value)
             default:
                 fatalError()
@@ -1084,6 +1128,8 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(MakeableLabel.self, forKey: .value)
         case typeString(MakeableStack.self):
             self.value = try valueContainer.decode(MakeableStack.self, forKey: .value)
+        case typeString(MakeableToggle.self):
+            self.value = try valueContainer.decode(MakeableToggle.self, forKey: .value)
         case typeString(PrintVarStep.self):
             self.value = try valueContainer.decode(PrintVarStep.self, forKey: .value)
         case typeString(SetVarStep.self):
@@ -1146,6 +1192,8 @@ extension CodableVariableValue: Codable {
             try container.encode(value, forKey: .value)
         case let value as MakeableStack:
             try container.encode(value, forKey: .value)
+        case let value as MakeableToggle:
+            try container.encode(value, forKey: .value)
         case let value as PrintVarStep:
             try container.encode(value, forKey: .value)
         case let value as SetVarStep:
@@ -1185,6 +1233,9 @@ extension AddViewViewModel {
             }),
             .init(title: "Stack", onTap: {
                 onSelect(MakeableStack.makeDefault())
+            }),
+            .init(title: "Toggle", onTap: {
+                onSelect(MakeableToggle.makeDefault())
             })
         ])
 	}
@@ -1204,6 +1255,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
 	case field // MakeableField
 	case label // MakeableLabel
 	case stack // MakeableStack
+	case toggle // MakeableToggle
 	case stepArray // StepArray
 	case string // StringValue
 	case temporary // TemporaryValue
@@ -1225,6 +1277,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
         case .field: return MakeableField.makeDefault()
         case .label: return MakeableLabel.makeDefault()
         case .stack: return MakeableStack.makeDefault()
+        case .toggle: return MakeableToggle.makeDefault()
         case .stepArray: return StepArray.makeDefault()
         case .string: return StringValue.makeDefault()
         case .temporary: return TemporaryValue.makeDefault()
@@ -1246,6 +1299,8 @@ extension MakeableWrapperView {
             MakeableLabelView(isRunning: isRunning, showEditControls: showEditControls, label: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
         case let value as MakeableStack:
             MakeableStackView(isRunning: isRunning, showEditControls: showEditControls, stack: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
+        case let value as MakeableToggle:
+            MakeableToggleView(isRunning: isRunning, showEditControls: showEditControls, toggle: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate).any
         default:
             Text("UNKNOWN VIEW").any
         }
