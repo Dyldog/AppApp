@@ -52,6 +52,8 @@
 		FC4C2C322B0CD657008217AC /* MakeableField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C312B0CD657008217AC /* MakeableField.swift */; };
 		FC9047B32B14806C00B599BE /* Templates in Resources */ = {isa = PBXBuildFile; fileRef = FC9047B22B14806C00B599BE /* Templates */; };
 		FC9047B52B14872B00B599BE /* AxisValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9047B42B14872B00B599BE /* AxisValue.swift */; };
+		FC9047B72B14A01800B599BE /* IfStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9047B62B14A01700B599BE /* IfStep.swift */; };
+		FC9047B92B14A1D900B599BE /* ConditionalActionValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */; };
 		FC9C41C92B12AC3300E51957 /* EditableVariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */; };
 		FC9C41CC2B12C69400E51957 /* Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C41CB2B12C69400E51957 /* Generated.swift */; };
 		FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B1E82B0B584B0054371B /* AppAppApp.swift */; };
@@ -160,6 +162,8 @@
 		FC4C2C312B0CD657008217AC /* MakeableField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableField.swift; sourceTree = "<group>"; };
 		FC9047B22B14806C00B599BE /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Templates; sourceTree = "<group>"; };
 		FC9047B42B14872B00B599BE /* AxisValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisValue.swift; sourceTree = "<group>"; };
+		FC9047B62B14A01700B599BE /* IfStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfStep.swift; sourceTree = "<group>"; };
+		FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalActionValue.swift; sourceTree = "<group>"; };
 		FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableVariableValue.swift; sourceTree = "<group>"; };
 		FC9C41CB2B12C69400E51957 /* Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generated.swift; sourceTree = "<group>"; };
 		FCD3B1E52B0B584B0054371B /* AppApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,6 +282,7 @@
 				FC46351B2B0C993600B8DCBE /* SetVarStep.swift */,
 				FC46351D2B0C997700B8DCBE /* AddToVarStep.swift */,
 				FC46351F2B0C998B00B8DCBE /* PrintVarStep.swift */,
+				FC9047B62B14A01700B599BE /* IfStep.swift */,
 			);
 			path = "Void Steps";
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				FC4635182B0C98EE00B8DCBE /* Value.swift */,
+				FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */,
 				FC9047B42B14872B00B599BE /* AxisValue.swift */,
 				FC2B8A9C2B10A2CA003FAB86 /* FontWeightValue.swift */,
 				FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */,
@@ -770,6 +776,7 @@
 				FC2B8A972B10900C003FAB86 /* StepArray.swift in Sources */,
 				FC4C15CF2B0C97830010BB1A /* StepType+EditView.swift in Sources */,
 				FC4C2C292B0CBCF1008217AC /* DecodeDictionaryStep.swift in Sources */,
+				FC9047B92B14A1D900B599BE /* ConditionalActionValue.swift in Sources */,
 				FCD3B23F2B0BB31F0054371B /* AddActionView.swift in Sources */,
 				FC2B8A9B2B109C3C003FAB86 /* ArrayValueStep.swift in Sources */,
 				FC46350F2B0C987100B8DCBE /* VariableType.swift in Sources */,
@@ -790,6 +797,7 @@
 				FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */,
 				FC9C41CC2B12C69400E51957 /* Generated.swift in Sources */,
 				FCD3B2442B0C31C40054371B /* ValueStep.swift in Sources */,
+				FC9047B72B14A01800B599BE /* IfStep.swift in Sources */,
 				FCD3B2352B0B9FF90054371B /* ViewProperty.swift in Sources */,
 				FC4C2C272B0CA872008217AC /* ListEditView.swift in Sources */,
 				FC46351E2B0C997700B8DCBE /* AddToVarStep.swift in Sources */,

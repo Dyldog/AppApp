@@ -21,7 +21,7 @@ struct MakeableLabelView: View {
     
     func labelText() async -> String {
         do {
-            if !isRunning {
+            if isRunning {
                 guard let value = try await label.text.value(with: variables)?.valueString
                 else { throw VariableValueError.valueNotFoundForVariable(label.text.protoString) }
                 return value

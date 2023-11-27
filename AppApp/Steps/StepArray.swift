@@ -46,9 +46,10 @@ final class StepArray: Codable, PrimitiveEditableVariableValue {
                 return ActionListView(steps: self.value, onUpdate: { [weak self] in
                     guard let self = self else { return }
                     self.value = $0
+                    onUpdate(self)
                 }).any
             } onDismiss: {
-                onUpdate(self)
+                
             }
         }.any
     }
@@ -57,6 +58,12 @@ final class StepArray: Codable, PrimitiveEditableVariableValue {
     func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(CodableStepList(steps: value))
+    }
+    
+    func run(with variables: Variables) async throws {
+        for step in value {
+            try await step.run(with: variables)
+        }
     }
 }
 

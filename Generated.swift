@@ -219,6 +219,45 @@ extension BoolValue {
 	}
 }
 
+extension ConditionalActionValue {
+	 enum Properties: String, ViewProperty {
+        case ifCondition
+        case ifSteps
+        var defaultValue: Any {
+            switch self {
+            case .ifCondition: return ConditionalActionValue.defaultValue(for: .ifCondition)
+            case .ifSteps: return ConditionalActionValue.defaultValue(for: .ifSteps)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> ConditionalActionValue {
+        .init(
+            ifCondition: factory(.ifCondition) as! Value,
+            ifSteps: factory(.ifSteps) as! StepArray
+        )
+    }
+
+    static func makeDefault() -> ConditionalActionValue {
+        .init(
+            ifCondition: Properties.ifCondition.defaultValue as! Value,
+            ifSteps: Properties.ifSteps.defaultValue as! StepArray
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .ifCondition: return ifCondition
+	        case .ifSteps: return ifSteps
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .ifCondition: self.ifCondition = value as! Value
+	        case .ifSteps: self.ifSteps = value as! StepArray
+	    }
+	}
+}
+
 extension DecodeDictionaryStep {
 	 enum Properties: String, ViewProperty {
         case value
@@ -320,6 +359,45 @@ extension FontWeightValue {
 	func set(_ value: Any, for property: Properties) {
 		switch property {
 	        case .value: self.value = value as! Font.Weight
+	    }
+	}
+}
+
+extension IfStep {
+	 enum Properties: String, ViewProperty {
+        case ifAction
+        case elseAction
+        var defaultValue: Any {
+            switch self {
+            case .ifAction: return IfStep.defaultValue(for: .ifAction)
+            case .elseAction: return IfStep.defaultValue(for: .elseAction)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> Any) -> IfStep {
+        .init(
+            ifAction: factory(.ifAction) as! ConditionalActionValue,
+            elseAction: factory(.elseAction) as! StepArray
+        )
+    }
+
+    static func makeDefault() -> IfStep {
+        .init(
+            ifAction: Properties.ifAction.defaultValue as! ConditionalActionValue,
+            elseAction: Properties.elseAction.defaultValue as! StepArray
+		)
+    }
+    func value(for property: Properties) -> Any? {
+		switch property {
+	        case .ifAction: return ifAction
+	        case .elseAction: return elseAction
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .ifAction: self.ifAction = value as! ConditionalActionValue
+	        case .elseAction: self.elseAction = value as! StepArray
 	    }
 	}
 }
@@ -984,12 +1062,16 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(AxisValue.self, forKey: .value)
         case typeString(BoolValue.self):
             self.value = try valueContainer.decode(BoolValue.self, forKey: .value)
+        case typeString(ConditionalActionValue.self):
+            self.value = try valueContainer.decode(ConditionalActionValue.self, forKey: .value)
         case typeString(DecodeDictionaryStep.self):
             self.value = try valueContainer.decode(DecodeDictionaryStep.self, forKey: .value)
         case typeString(DictionaryValue.self):
             self.value = try valueContainer.decode(DictionaryValue.self, forKey: .value)
         case typeString(FontWeightValue.self):
             self.value = try valueContainer.decode(FontWeightValue.self, forKey: .value)
+        case typeString(IfStep.self):
+            self.value = try valueContainer.decode(IfStep.self, forKey: .value)
         case typeString(IntValue.self):
             self.value = try valueContainer.decode(IntValue.self, forKey: .value)
         case typeString(MakeableArray.self):
@@ -1042,11 +1124,15 @@ extension CodableVariableValue: Codable {
             try container.encode(value, forKey: .value)
         case let value as BoolValue:
             try container.encode(value, forKey: .value)
+        case let value as ConditionalActionValue:
+            try container.encode(value, forKey: .value)
         case let value as DecodeDictionaryStep:
             try container.encode(value, forKey: .value)
         case let value as DictionaryValue:
             try container.encode(value, forKey: .value)
         case let value as FontWeightValue:
+            try container.encode(value, forKey: .value)
+        case let value as IfStep:
             try container.encode(value, forKey: .value)
         case let value as IntValue:
             try container.encode(value, forKey: .value)
@@ -1109,6 +1195,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
 	case list // ArrayValue
 	case axis // AxisValue
 	case boolean // BoolValue
+	case conditionalAction // ConditionalActionValue
 	case dictionary // DictionaryValue
 	case fontWeight // FontWeightValue
 	case int // IntValue
@@ -1129,6 +1216,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
         case .list: return ArrayValue.makeDefault()
         case .axis: return AxisValue.makeDefault()
         case .boolean: return BoolValue.makeDefault()
+        case .conditionalAction: return ConditionalActionValue.makeDefault()
         case .dictionary: return DictionaryValue.makeDefault()
         case .fontWeight: return FontWeightValue.makeDefault()
         case .int: return IntValue.makeDefault()
@@ -1171,6 +1259,7 @@ extension AddActionView {
 		case AddToVar
 		case ArrayValue
 		case DecodeDictionary
+		case If
 		case PrintVar
 		case SetVar
 		case StaticValue
@@ -1181,6 +1270,7 @@ extension AddActionView {
             case .AddToVar: return AddToVarStep.title
             case .ArrayValue: return ArrayValueStep.title
             case .DecodeDictionary: return DecodeDictionaryStep.title
+            case .If: return IfStep.title
             case .PrintVar: return PrintVarStep.title
             case .SetVar: return SetVarStep.title
             case .StaticValue: return StaticValueStep.title
@@ -1193,6 +1283,7 @@ extension AddActionView {
             case .AddToVar: AddToVarStep.makeDefault()
             case .ArrayValue: ArrayValueStep.makeDefault()
             case .DecodeDictionary: DecodeDictionaryStep.makeDefault()
+            case .If: IfStep.makeDefault()
             case .PrintVar: PrintVarStep.makeDefault()
             case .SetVar: SetVarStep.makeDefault()
             case .StaticValue: StaticValueStep.makeDefault()
@@ -1215,6 +1306,8 @@ extension CodableStep: Codable {
 			self.value = try valueContainer.decode(ArrayValueStep.self, forKey: .value)
         case typeString(DecodeDictionaryStep.self):
 			self.value = try valueContainer.decode(DecodeDictionaryStep.self, forKey: .value)
+        case typeString(IfStep.self):
+			self.value = try valueContainer.decode(IfStep.self, forKey: .value)
         case typeString(PrintVarStep.self):
 			self.value = try valueContainer.decode(PrintVarStep.self, forKey: .value)
         case typeString(SetVarStep.self):
@@ -1238,6 +1331,8 @@ extension CodableStep: Codable {
 		case let value as ArrayValueStep:
 			try container.encode(value, forKey: .value)
 		case let value as DecodeDictionaryStep:
+			try container.encode(value, forKey: .value)
+		case let value as IfStep:
 			try container.encode(value, forKey: .value)
 		case let value as PrintVarStep:
 			try container.encode(value, forKey: .value)

@@ -23,7 +23,7 @@ final class BoolValue: PrimitiveEditableVariableValue, Codable {
         throw VariableValueError.variableCannotPerformOperation(.boolean, "add")
     }
     
-    var protoString: String { "BOOL" }
+    var protoString: String { valueString }
     
     var valueString: String { self.value ? "true" : "false" }
     

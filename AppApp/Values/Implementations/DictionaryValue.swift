@@ -37,6 +37,7 @@ final class DictionaryValue: CompositeEditableVariableValue, ObservableObject {
         case .elements: return [StringValue: any EditableVariableValue]()
         }
     }
+    
     func value(with variables: Variables) async throws -> VariableValue? {
         var mapped: [StringValue: (any VariableValue)?] = [:]
         for (key, value) in elements {
