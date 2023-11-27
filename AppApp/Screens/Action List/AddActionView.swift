@@ -17,14 +17,14 @@ struct AddActionView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            List(Actions.allCases, id: \.self) { item in
+        NavigationView {
+            List(actions, id: \.self) { item in
                 SwiftUI.Button(item.title) {
                     onSelect(item.make())
                 }
             }
             .navigationTitle("Add Action")
+            .searchable(text: $searchText)
         }
-        .searchable(text: $searchText)
     }
 }
