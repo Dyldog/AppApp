@@ -49,7 +49,7 @@ struct MakeableFieldView: View {
         
         Task { @MainActor in
             do {
-                if !isRunning, let outputVar = try await field.text.output.value.value(with: variables) {
+                if isRunning, let outputVar = try await field.text.output.value.value(with: variables) {
                     variables.set(Value(value: StringValue(value: string)), for: outputVar.valueString)
                     for step in field.onTextUpdate {
                         try await step.run(with: variables)
