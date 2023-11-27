@@ -19,7 +19,7 @@ struct MakeableFieldView: View {
     
     var body: some View {
         VStack {
-            if !showEditControls {
+            if isRunning {
                 TextField("", text: .init(get: {
                     text
                 }, set: {
