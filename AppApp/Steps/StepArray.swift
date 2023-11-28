@@ -30,9 +30,9 @@ final class StepArray: Codable, EditableVariableValue {
         fatalError()
     }
     
-    var protoString: String { value.map { $0.protoString }.joined(separator: ", ") }
+    var protoString: String { value.map { $0.protoString }.joined(separator: ",\n") }
     
-    var valueString: String { value.map { $0.protoString }.joined(separator: ", ") }
+    var valueString: String { value.map { $0.protoString }.joined(separator: ",\n") }
     
     func value(with variables: Variables) async throws -> VariableValue {
         fatalError()
@@ -41,7 +41,6 @@ final class StepArray: Codable, EditableVariableValue {
     func editView(onUpdate: @escaping (StepArray) -> Void) -> AnyView {
         return HStack {
             Text(protoString)
-                .fixedSize()
             SheetButton(title: {
                 Text("Edit")
             }) { [weak self] in

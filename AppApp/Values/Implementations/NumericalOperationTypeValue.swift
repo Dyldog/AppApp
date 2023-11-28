@@ -33,7 +33,7 @@ enum NumericalOperationType: String, Codable, CaseIterable, Titleable {
         case .mulitply: return { $0 * $1}
         case .divide: return { $0 / $1}
         case .power: return { (pow(Decimal($0), $1) as NSDecimalNumber).intValue }
-        case .mod: return { $0 + $1}
+        case .mod: return { $0 % $1}
         }
     }
 }

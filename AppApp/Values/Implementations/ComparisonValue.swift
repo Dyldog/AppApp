@@ -37,7 +37,7 @@ final class ComparisonValue: CompositeEditableVariableValue {
     }
     
     func value(with variables: Variables) async throws -> VariableValue {
-        try await comparison.compare(
+        comparison.compare(
             lhs: try await lhs.value(with: variables),
             rhs: try await rhs.value(with: variables)
         )

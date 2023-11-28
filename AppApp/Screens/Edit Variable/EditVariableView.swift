@@ -30,6 +30,7 @@ struct EditVariableView: View {
                 self.value = $0
                 onUpdate($0)
             })
+            .buttonStyle(.plain)
         }.onChange(of: selectedType, perform: { value in
             self.value = value.defaultView
             onUpdate(self.value)
