@@ -112,6 +112,50 @@ extension ArrayValueStep {
 	    }
 	}
 }
+extension ComparisonValue {
+	 enum Properties: String, ViewProperty {
+        case lhs
+        case rhs
+        case comparison
+        var defaultValue: any EditableVariableValue {
+            switch self {
+            case .lhs: return ComparisonValue.defaultValue(for: .lhs)
+            case .rhs: return ComparisonValue.defaultValue(for: .rhs)
+            case .comparison: return ComparisonValue.defaultValue(for: .comparison)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> any EditableVariableValue) -> ComparisonValue {
+        .init(
+            lhs: factory(.lhs) as! Value,
+            rhs: factory(.rhs) as! Value,
+            comparison: factory(.comparison) as! ComparisonTypeValue
+        )
+    }
+
+    static func makeDefault() -> ComparisonValue {
+        .init(
+            lhs: Properties.lhs.defaultValue as! Value,
+            rhs: Properties.rhs.defaultValue as! Value,
+            comparison: Properties.comparison.defaultValue as! ComparisonTypeValue
+		)
+    }
+    func value(for property: Properties) -> any EditableVariableValue {
+		switch property {
+	        case .lhs: return lhs
+	        case .rhs: return rhs
+	        case .comparison: return comparison
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .lhs: self.lhs = value as! Value
+	        case .rhs: self.rhs = value as! Value
+	        case .comparison: self.comparison = value as! ComparisonTypeValue
+	    }
+	}
+}
 extension ConditionalActionValue {
 	 enum Properties: String, ViewProperty {
         case ifCondition
@@ -125,14 +169,14 @@ extension ConditionalActionValue {
     }
     static func make(factory: (Properties) -> any EditableVariableValue) -> ConditionalActionValue {
         .init(
-            ifCondition: factory(.ifCondition) as! Value,
+            ifCondition: factory(.ifCondition) as! ComparisonValue,
             ifSteps: factory(.ifSteps) as! StepArray
         )
     }
 
     static func makeDefault() -> ConditionalActionValue {
         .init(
-            ifCondition: Properties.ifCondition.defaultValue as! Value,
+            ifCondition: Properties.ifCondition.defaultValue as! ComparisonValue,
             ifSteps: Properties.ifSteps.defaultValue as! StepArray
 		)
     }
@@ -145,7 +189,7 @@ extension ConditionalActionValue {
 
 	func set(_ value: Any, for property: Properties) {
 		switch property {
-	        case .ifCondition: self.ifCondition = value as! Value
+	        case .ifCondition: self.ifCondition = value as! ComparisonValue
 	        case .ifSteps: self.ifSteps = value as! StepArray
 	    }
 	}
@@ -677,6 +721,10 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(AxisValue.self, forKey: .value)
         case typeString(BoolValue.self):
             self.value = try valueContainer.decode(BoolValue.self, forKey: .value)
+        case typeString(ComparisonTypeValue.self):
+            self.value = try valueContainer.decode(ComparisonTypeValue.self, forKey: .value)
+        case typeString(ComparisonValue.self):
+            self.value = try valueContainer.decode(ComparisonValue.self, forKey: .value)
         case typeString(ConditionalActionValue.self):
             self.value = try valueContainer.decode(ConditionalActionValue.self, forKey: .value)
         case typeString(DecodeDictionaryStep.self):
@@ -744,6 +792,10 @@ extension CodableVariableValue: Codable {
         case let value as AxisValue:
             try container.encode(value, forKey: .value)
         case let value as BoolValue:
+            try container.encode(value, forKey: .value)
+        case let value as ComparisonTypeValue:
+            try container.encode(value, forKey: .value)
+        case let value as ComparisonValue:
             try container.encode(value, forKey: .value)
         case let value as ConditionalActionValue:
             try container.encode(value, forKey: .value)
@@ -825,6 +877,8 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
 	case list // ArrayValue
 	case axis // AxisValue
 	case boolean // BoolValue
+	case comparisonType // ComparisonTypeValue
+	case comparison // ComparisonValue
 	case conditionalAction // ConditionalActionValue
 	case dictionary // DictionaryValue
 	case fontWeight // FontWeightValue
@@ -849,6 +903,8 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .list: return ArrayValue.makeDefault()
         case .axis: return AxisValue.makeDefault()
         case .boolean: return BoolValue.makeDefault()
+        case .comparisonType: return ComparisonTypeValue.makeDefault()
+        case .comparison: return ComparisonValue.makeDefault()
         case .conditionalAction: return ConditionalActionValue.makeDefault()
         case .dictionary: return DictionaryValue.makeDefault()
         case .fontWeight: return FontWeightValue.makeDefault()
@@ -874,6 +930,8 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .list: return "list"
         case .axis: return "axis"
         case .boolean: return "boolean"
+        case .comparisonType: return "comparisonType"
+        case .comparison: return "comparison"
         case .conditionalAction: return "conditionalAction"
         case .dictionary: return "dictionary"
         case .fontWeight: return "fontWeight"

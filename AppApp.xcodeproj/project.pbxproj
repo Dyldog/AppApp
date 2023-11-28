@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		FC18BAD02B15468E007838AA /* MakeablePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BACF2B15468E007838AA /* MakeablePicker.swift */; };
-		FC18BAD22B156D90007838AA /* ConditionalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD12B156D90007838AA /* ConditionalValue.swift */; };
+		FC18BAD22B156D90007838AA /* ComparisonTypeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */; };
 		FC18BAD42B157F44007838AA /* NilValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD32B157F44007838AA /* NilValue.swift */; };
 		FC18BAD62B157F56007838AA /* OptionalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD52B157F56007838AA /* OptionalValue.swift */; };
 		FC18BAD92B1581CF007838AA /* Titleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD82B1581CF007838AA /* Titleable.swift */; };
+		FC18BADB2B159218007838AA /* ComparisonValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BADA2B159218007838AA /* ComparisonValue.swift */; };
 		FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */; };
 		FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */; };
 		FC2B8A892B108F3F003FAB86 /* CodableMakeableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */; };
@@ -123,10 +124,11 @@
 
 /* Begin PBXFileReference section */
 		FC18BACF2B15468E007838AA /* MakeablePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeablePicker.swift; sourceTree = "<group>"; };
-		FC18BAD12B156D90007838AA /* ConditionalValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalValue.swift; sourceTree = "<group>"; };
+		FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonTypeValue.swift; sourceTree = "<group>"; };
 		FC18BAD32B157F44007838AA /* NilValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NilValue.swift; sourceTree = "<group>"; };
 		FC18BAD52B157F56007838AA /* OptionalValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalValue.swift; sourceTree = "<group>"; };
 		FC18BAD82B1581CF007838AA /* Titleable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Titleable.swift; sourceTree = "<group>"; };
+		FC18BADA2B159218007838AA /* ComparisonValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonValue.swift; sourceTree = "<group>"; };
 		FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableWrapperView.swift; sourceTree = "<group>"; };
 		FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryValue.swift; sourceTree = "<group>"; };
 		FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMakeableList.swift; sourceTree = "<group>"; };
@@ -336,7 +338,8 @@
 			children = (
 				FC4635182B0C98EE00B8DCBE /* Value.swift */,
 				FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */,
-				FC18BAD12B156D90007838AA /* ConditionalValue.swift */,
+				FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */,
+				FC18BADA2B159218007838AA /* ComparisonValue.swift */,
 				FC18BAD52B157F56007838AA /* OptionalValue.swift */,
 				FC18BAD32B157F44007838AA /* NilValue.swift */,
 				FC9047B42B14872B00B599BE /* AxisValue.swift */,
@@ -751,6 +754,7 @@
 				FCD3B21C2B0B639F0054371B /* StepButton.swift in Sources */,
 				FCD3B2612B0C96890054371B /* EditableViewConstructor.swift in Sources */,
 				FCD3B2232B0B77C50054371B /* AddViewView.swift in Sources */,
+				FC18BADB2B159218007838AA /* ComparisonValue.swift in Sources */,
 				FC4635192B0C98EE00B8DCBE /* Value.swift in Sources */,
 				FCD3B23D2B0BB2020054371B /* String+VariableValue.swift in Sources */,
 				FCD3B24B2B0C948C0054371B /* Array+Safe.swift in Sources */,
@@ -816,7 +820,7 @@
 				FC4C2C242B0C9B7F008217AC /* ArrayValue.swift in Sources */,
 				FC2B8A8D2B108F7C003FAB86 /* CodableVariableList.swift in Sources */,
 				FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */,
-				FC18BAD22B156D90007838AA /* ConditionalValue.swift in Sources */,
+				FC18BAD22B156D90007838AA /* ComparisonTypeValue.swift in Sources */,
 				FCE36F4C2B0D752200E247D8 /* ScreenListView.swift in Sources */,
 				FCD3B2162B0B63010054371B /* Variables.swift in Sources */,
 				FC9C41C92B12AC3300E51957 /* EditableVariableValue.swift in Sources */,

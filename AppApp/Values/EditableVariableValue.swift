@@ -34,7 +34,7 @@ extension PrimitiveEditableVariableValue {
 }
 
 protocol CompositeEditableVariableValue: EditableVariableValue {
-    func propertyRows(onUpdate: @escaping (Self) -> Void) -> [(String, any PrimitiveEditableVariableValue, VariableUpdater)]
+    func propertyRows(onUpdate: @escaping (Self) -> Void) -> [(String, any EditableVariableValue, VariableUpdater)]
     
     associatedtype Properties: ViewProperty
     static func make(factory: (Properties) -> any EditableVariableValue) -> Self
@@ -47,7 +47,7 @@ typealias VariableUpdater = (any EditableVariableValue) -> Void
 extension CompositeEditableVariableValue {
     func propertyRows(
         onUpdate: @escaping (Self) -> Void
-    ) -> [(String, any PrimitiveEditableVariableValue, VariableUpdater)] {
+    ) -> [(String, any EditableVariableValue, VariableUpdater)] {
         properties.flatMap { (key, value) in
             if let composite = value as? any CompositeEditableVariableValue {
                 return composite.propertyRows(onUpdate: { value in
@@ -60,7 +60,10 @@ extension CompositeEditableVariableValue {
                     onUpdate(self)
                 })]
             } else {
-                fatalError()
+                return [(key.rawValue, value, {
+                    self.set($0, for: key)
+                    onUpdate(self)
+                })]
             }
         }.sorted(by: { $0.0 < $1.0 })
     }

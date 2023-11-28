@@ -11,13 +11,13 @@ final class ConditionalActionValue: CompositeEditableVariableValue, ObservableOb
     
     static var type: VariableType { .conditionalAction }
     
-    var ifCondition: Value
+    var ifCondition: ComparisonValue
     var ifSteps: StepArray
     
     var protoString: String { "if { \(ifCondition.protoString) }:\n\t\(ifSteps.protoString)" }
     var valueString: String { "if { \(ifCondition.valueString) }:\n\t\(ifSteps.valueString)" }
     
-    init(ifCondition: Value, ifSteps: StepArray) {
+    init(ifCondition: ComparisonValue, ifSteps: StepArray) {
         self.ifCondition = ifCondition
         self.ifSteps = ifSteps
     }
