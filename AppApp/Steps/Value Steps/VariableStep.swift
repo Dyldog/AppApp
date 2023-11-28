@@ -19,7 +19,7 @@ final class VariableStep: ValueStep {
         self.type = type
     }
     
-    static func defaultValue(for property: Properties) -> Any {
+    static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .varName: return Value(value: StringValue(value: "$0"))
         case .type: return VariableTypeValue(value: .string)
@@ -27,15 +27,11 @@ final class VariableStep: ValueStep {
     }
 
     func run(with variables: Variables) async throws -> VariableValue {
-        guard
-            let nameValue = try await varName.value(with: variables),
-            let value = await variables.value(for: nameValue.valueString)
+        let nameValue = try await varName.value(with: variables)
+        
+        guard let value = await variables.value(for: nameValue.valueString)
         else { throw VariableValueError.valueNotFoundForVariable(varName.protoString) }
         
-        guard let typedValue = try await value.value(with: variables)
-        else { throw VariableValueError.wrongTypeForOperation }
-        
-        
-        return typedValue
+        return try await value.value(with: variables)
     }
 }

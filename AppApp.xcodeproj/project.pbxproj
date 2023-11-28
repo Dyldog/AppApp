@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		FC18BAD02B15468E007838AA /* MakeablePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BACF2B15468E007838AA /* MakeablePicker.swift */; };
+		FC18BAD22B156D90007838AA /* ConditionalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD12B156D90007838AA /* ConditionalValue.swift */; };
+		FC18BAD42B157F44007838AA /* NilValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD32B157F44007838AA /* NilValue.swift */; };
+		FC18BAD62B157F56007838AA /* OptionalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD52B157F56007838AA /* OptionalValue.swift */; };
+		FC18BAD92B1581CF007838AA /* Titleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD82B1581CF007838AA /* Titleable.swift */; };
 		FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */; };
 		FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */; };
 		FC2B8A892B108F3F003FAB86 /* CodableMakeableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */; };
@@ -119,6 +123,10 @@
 
 /* Begin PBXFileReference section */
 		FC18BACF2B15468E007838AA /* MakeablePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeablePicker.swift; sourceTree = "<group>"; };
+		FC18BAD12B156D90007838AA /* ConditionalValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalValue.swift; sourceTree = "<group>"; };
+		FC18BAD32B157F44007838AA /* NilValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NilValue.swift; sourceTree = "<group>"; };
+		FC18BAD52B157F56007838AA /* OptionalValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalValue.swift; sourceTree = "<group>"; };
+		FC18BAD82B1581CF007838AA /* Titleable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Titleable.swift; sourceTree = "<group>"; };
 		FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableWrapperView.swift; sourceTree = "<group>"; };
 		FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryValue.swift; sourceTree = "<group>"; };
 		FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMakeableList.swift; sourceTree = "<group>"; };
@@ -240,6 +248,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC18BAD72B1581C8007838AA /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FC18BAD82B1581CF007838AA /* Titleable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		FC2B8A872B108F2E003FAB86 /* Codable */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +336,9 @@
 			children = (
 				FC4635182B0C98EE00B8DCBE /* Value.swift */,
 				FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */,
+				FC18BAD12B156D90007838AA /* ConditionalValue.swift */,
+				FC18BAD52B157F56007838AA /* OptionalValue.swift */,
+				FC18BAD32B157F44007838AA /* NilValue.swift */,
 				FC9047B42B14872B00B599BE /* AxisValue.swift */,
 				FC2B8A9C2B10A2CA003FAB86 /* FontWeightValue.swift */,
 				FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */,
@@ -527,6 +546,7 @@
 		FCD3B2582B0C960D0054371B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				FC18BAD72B1581C8007838AA /* Protocols */,
 				FC2B8A872B108F2E003FAB86 /* Codable */,
 				FCD3B2402B0BB32E0054371B /* Extensions */,
 				FCD3B2592B0C96110054371B /* Views */,
@@ -727,6 +747,7 @@
 				FCD3B2492B0C69070054371B /* EditVariableView.swift in Sources */,
 				FCD3B25B2B0C96170054371B /* DoView.swift in Sources */,
 				FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */,
+				FC18BAD62B157F56007838AA /* OptionalValue.swift in Sources */,
 				FCD3B21C2B0B639F0054371B /* StepButton.swift in Sources */,
 				FCD3B2612B0C96890054371B /* EditableViewConstructor.swift in Sources */,
 				FCD3B2232B0B77C50054371B /* AddViewView.swift in Sources */,
@@ -746,12 +767,14 @@
 				FC2B8A992B109038003FAB86 /* MakeableArray.swift in Sources */,
 				FC4C15D12B0C97B20010BB1A /* Array_StepType+VariableValue.swift in Sources */,
 				FC2B8A9F2B10ACD5003FAB86 /* Binding+Nil.swift in Sources */,
+				FC18BAD92B1581CF007838AA /* Titleable.swift in Sources */,
 				FC4635132B0C989000B8DCBE /* VariableValue+EditView.swift in Sources */,
 				FC4C2C302B0CCBE0008217AC /* DictionaryValueForKeyStep.swift in Sources */,
 				FC46350C2B0C983D00B8DCBE /* APIValueStep.swift in Sources */,
 				FCD3B2182B0B63110054371B /* Step.swift in Sources */,
 				FC2B8A892B108F3F003FAB86 /* CodableMakeableList.swift in Sources */,
 				FCD3B2252B0B7C9F0054371B /* EditViewView.swift in Sources */,
+				FC18BAD42B157F44007838AA /* NilValue.swift in Sources */,
 				FCD3B2212B0B6FCB0054371B /* ViewMakerView.swift in Sources */,
 				FC9047B52B14872B00B599BE /* AxisValue.swift in Sources */,
 				FCD3B22A2B0B9F7D0054371B /* EditViewViewModel.swift in Sources */,
@@ -793,6 +816,7 @@
 				FC4C2C242B0C9B7F008217AC /* ArrayValue.swift in Sources */,
 				FC2B8A8D2B108F7C003FAB86 /* CodableVariableList.swift in Sources */,
 				FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */,
+				FC18BAD22B156D90007838AA /* ConditionalValue.swift in Sources */,
 				FCE36F4C2B0D752200E247D8 /* ScreenListView.swift in Sources */,
 				FCD3B2162B0B63010054371B /* Variables.swift in Sources */,
 				FC9C41C92B12AC3300E51957 /* EditableVariableValue.swift in Sources */,

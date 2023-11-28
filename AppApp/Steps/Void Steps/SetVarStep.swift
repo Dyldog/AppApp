@@ -24,15 +24,12 @@ final class SetVarStep: Step {
     var protoString: String { "{ $\(varName.protoString) = \(value.protoString) }" }
     
     func run(with variables: Variables) async throws {
-        guard
-            let varValue = try await varName.value(with: variables),
-            let valueValue = try await value.value(with: variables)
-        else { throw VariableValueError.valueNotFoundForVariable(varName.protoString) }
-
+        let varValue = try await varName.value(with: variables)
+        let valueValue = try await value.value(with: variables)
         await variables.set(valueValue, for: varValue.valueString)
     }
 
-    static func defaultValue(for property: Properties) -> Any {
+    static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .value: return Value(value: StringValue(value: "TEXT"))
         case .varName: return Value(value: StringValue(value: "VAR"))

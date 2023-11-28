@@ -8,22 +8,14 @@
 import SwiftUI
 
 // sourcery: variableTypeName = "makeableArray"
-final class MakeableArray: PrimitiveEditableVariableValue {
+final class MakeableArray: EditableVariableValue {
 
     static var type: VariableType { .makeableArray }
     static var defaultValue: MakeableArray { .init(value: [], axis: .init(value: .vertical))}
     
-    func add(_ other: VariableValue) throws -> VariableValue {
-        fatalError()
-    }
-    
     var protoString: String { "TODO" }
-    
     var valueString: String { "TODO" }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
-        self
-    }
     
     var value: [any MakeableView]
     var axis: AxisValue
@@ -32,6 +24,22 @@ final class MakeableArray: PrimitiveEditableVariableValue {
         self.value = value
         self.axis = axis
     }
+    
+    static func makeDefault() -> MakeableArray {
+        .init(
+            value: [any MakeableView](),
+            axis: .init(value: .vertical)
+        )
+    }
+    
+    func add(_ other: VariableValue) throws -> VariableValue {
+        fatalError()
+    }
+    
+    func value(with variables: Variables) async throws -> VariableValue {
+        self
+    }
+    
     
     func editView(onUpdate: @escaping (MakeableArray) -> Void) -> AnyView {
         VStack {

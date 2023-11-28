@@ -34,7 +34,7 @@ final class IfStep: Step {
         }
     }
 
-    static func defaultValue(for property: Properties) -> Any {
+    static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .ifAction: return ConditionalActionValue.makeDefault()
         case .elseAction: return StepArray.makeDefault()

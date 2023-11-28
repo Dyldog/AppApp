@@ -22,9 +22,7 @@ struct MakeableLabelView: View {
     func labelText() async -> String {
         do {
             if isRunning {
-                guard let value = try await label.text.value(with: variables)?.valueString
-                else { throw VariableValueError.valueNotFoundForVariable(label.text.protoString) }
-                return value
+                return try await label.text.value(with: variables).valueString
             } else {
                 return label.protoString
             }
@@ -80,9 +78,9 @@ final class MakeableLabel: MakeableView, Codable {
     
     var valueString: String { text.valueString }
 
-    func value(with variables: Variables) async throws -> VariableValue? { self }
+    func value(with variables: Variables) async throws -> VariableValue { self }
 
-    static func defaultValue(for property: Properties) -> Any {
+    static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .text: return Value(value: StringValue(value: "TEXT"))
         case .fontSize: return IntValue(value: 18)

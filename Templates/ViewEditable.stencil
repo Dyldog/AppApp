@@ -1,6 +1,6 @@
 import SwiftUI
 
-{% for type in types.implementing.EditableVariableValue|!protocol %}
+{% macro EditableProperties type %}
 extension {{ type.name }} {
 	 enum Properties: String, ViewProperty {
         {% for property in type.storedVariables %}
@@ -9,7 +9,7 @@ extension {{ type.name }} {
             {% endif %}
         {% endfor %}
         
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
         {% for property in type.storedVariables %}
             {% if not property.defaultValue %}
@@ -20,7 +20,7 @@ extension {{ type.name }} {
         }
     }
      
-    static func make(factory: (Properties) -> Any) -> {{ type.name }} {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> {{ type.name }} {
         .init(
     {% for property in type.storedVariables %}
         {% if not property.defaultValue %}
@@ -40,7 +40,7 @@ extension {{ type.name }} {
 		)
     }
     
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
     {% for property in type.storedVariables where not property.defaultValue %}
         {% if forloop.first %}
 		switch property {
@@ -64,7 +64,12 @@ extension {{ type.name }} {
     {% endfor %}
 	}
 }
+{% endmacro %}
 
+{% for type in types.implementing.EditableVariableValue|!protocol %}
+    {% if type.implements.CompositeEditableVariableValue %}
+        {% call EditableProperties type %}
+    {% endif %}
 {% endfor %}
 
 extension CodableMakeableList: Codable {
@@ -154,7 +159,7 @@ extension AddViewViewModel {
 
 {% macro VariableTypeName type %}{% if type|annotated:"variableTypeName" %}{{ type.annotations.variableTypeName }}{% else %}{{ type.name|replace:"Value",""|replace:"Makeable",""|lowerFirstLetter }}{% endif %}{% endmacro %}
 
-enum VariableType: String, CaseIterable, Equatable, Codable {   
+enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {   
 {% for type in types.implementing.EditableVariableValue|!protocol %}
 {% if not type.implements.StepType %}
 	case {%+ call VariableTypeName type +%} // {{ type.name }}
@@ -168,6 +173,16 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
         case .{%+ call VariableTypeName type +%}: return {{ type.name }}.makeDefault()
 {% endif %}
 {% endfor %}
+        }
+    }
+    
+    var title: String {
+        switch self {
+        {% for type in types.implementing.EditableVariableValue|!protocol %}
+        {% if not type.implements.StepType %}
+        case .{%+ call VariableTypeName type +%}: return "{%+ call VariableTypeName type +%}"
+        {% endif %}
+    {% endfor %}
         }
     }
 }

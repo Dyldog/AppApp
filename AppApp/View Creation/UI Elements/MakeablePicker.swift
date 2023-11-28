@@ -22,7 +22,7 @@ final class MakeableToggle: MakeableView {
         self.onToggleUpdate = onToggleUpdate
     }
     
-    static func defaultValue(for property: Properties) -> Any {
+    static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .isOn: return TemporaryValue(
             initial: .init(value: BoolValue(value: false)),
@@ -31,17 +31,14 @@ final class MakeableToggle: MakeableView {
         }
     }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue {
         self
     }
     
     func insertValues(into variables: Variables) async throws {
-        if
-            let outputVarName = try await isOn.output.value.value(with: variables),
-            let outputValue = try await isOn.value(with: variables)
-        {
-            await variables.set(outputValue, for: outputVarName.valueString)
-        }
+        let outputVarName = try await isOn.output.value.value(with: variables)
+        let outputValue = try await isOn.value(with: variables)
+        await variables.set(outputValue, for: outputVarName.valueString)
         
         try await onToggleUpdate.run(with: variables)
     }
@@ -86,7 +83,8 @@ struct MakeableToggleView: View {
         
         Task { @MainActor in
             do {
-                if isRunning, let outputVar = try await toggle.isOn.output.value.value(with: variables) {
+                if isRunning {
+                  let outputVar = try await toggle.isOn.output.value.value(with: variables)
                     variables.set(Value(value: BoolValue(value: value)), for: outputVar.valueString)
                     try await toggle.onToggleUpdate.run(with: variables)
                 }

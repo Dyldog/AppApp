@@ -66,11 +66,11 @@ final class MakeableButton: MakeableView, Codable {
         fatalError()
     }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue {
         self
     }
     
-    static func defaultValue(for property: Properties) -> Any {
+    static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .title: return MakeableLabel.makeDefault()
         case .action: return StepArray(value: [])

@@ -3,16 +3,17 @@
 
 import SwiftUI
 
+
 extension APIValueStep {
 	 enum Properties: String, ViewProperty {
         case url
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .url: return APIValueStep.defaultValue(for: .url)
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> APIValueStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> APIValueStep {
         .init(
             url: factory(.url) as! Value
         )
@@ -23,7 +24,7 @@ extension APIValueStep {
             url: Properties.url.defaultValue as! Value
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .url: return url
         }
@@ -35,19 +36,18 @@ extension APIValueStep {
 	    }
 	}
 }
-
 extension AddToVarStep {
 	 enum Properties: String, ViewProperty {
         case varName
         case value
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .varName: return AddToVarStep.defaultValue(for: .varName)
             case .value: return AddToVarStep.defaultValue(for: .value)
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> AddToVarStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> AddToVarStep {
         .init(
             varName: factory(.varName) as! Value,
             value: factory(.value) as! Value
@@ -60,7 +60,7 @@ extension AddToVarStep {
             value: Properties.value.defaultValue as! Value
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .varName: return varName
 	        case .value: return value
@@ -74,58 +74,18 @@ extension AddToVarStep {
 	    }
 	}
 }
-
-extension ArrayValue {
-	 enum Properties: String, ViewProperty {
-        case type
-        case elements
-        var defaultValue: Any {
-            switch self {
-            case .type: return ArrayValue.defaultValue(for: .type)
-            case .elements: return ArrayValue.defaultValue(for: .elements)
-            }
-        }
-    }
-    static func make(factory: (Properties) -> Any) -> ArrayValue {
-        .init(
-            type: factory(.type) as! VariableType,
-            elements: factory(.elements) as! [any EditableVariableValue]
-        )
-    }
-
-    static func makeDefault() -> ArrayValue {
-        .init(
-            type: Properties.type.defaultValue as! VariableType,
-            elements: Properties.elements.defaultValue as! [any EditableVariableValue]
-		)
-    }
-    func value(for property: Properties) -> Any? {
-		switch property {
-	        case .type: return type
-	        case .elements: return elements
-        }
-    }
-
-	func set(_ value: Any, for property: Properties) {
-		switch property {
-	        case .type: self.type = value as! VariableType
-	        case .elements: self.elements = value as! [any EditableVariableValue]
-	    }
-	}
-}
-
 extension ArrayValueStep {
 	 enum Properties: String, ViewProperty {
         case array
         case index
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .array: return ArrayValueStep.defaultValue(for: .array)
             case .index: return ArrayValueStep.defaultValue(for: .index)
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> ArrayValueStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> ArrayValueStep {
         .init(
             array: factory(.array) as! Value,
             index: factory(.index) as! Value
@@ -138,7 +98,7 @@ extension ArrayValueStep {
             index: Properties.index.defaultValue as! Value
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .array: return array
 	        case .index: return index
@@ -152,85 +112,18 @@ extension ArrayValueStep {
 	    }
 	}
 }
-
-extension AxisValue {
-	 enum Properties: String, ViewProperty {
-        case value
-        var defaultValue: Any {
-            switch self {
-            case .value: return AxisValue.defaultValue
-            }
-        }
-    }
-    static func make(factory: (Properties) -> Any) -> AxisValue {
-        .init(
-            value: factory(.value) as! Axis
-        )
-    }
-
-    static func makeDefault() -> AxisValue {
-        .init(
-            value: Properties.value.defaultValue as! Axis
-		)
-    }
-    func value(for property: Properties) -> Any? {
-		switch property {
-	        case .value: return value
-        }
-    }
-
-	func set(_ value: Any, for property: Properties) {
-		switch property {
-	        case .value: self.value = value as! Axis
-	    }
-	}
-}
-
-extension BoolValue {
-	 enum Properties: String, ViewProperty {
-        case value
-        var defaultValue: Any {
-            switch self {
-            case .value: return BoolValue.defaultValue
-            }
-        }
-    }
-    static func make(factory: (Properties) -> Any) -> BoolValue {
-        .init(
-            value: factory(.value) as! Bool
-        )
-    }
-
-    static func makeDefault() -> BoolValue {
-        .init(
-            value: Properties.value.defaultValue as! Bool
-		)
-    }
-    func value(for property: Properties) -> Any? {
-		switch property {
-	        case .value: return value
-        }
-    }
-
-	func set(_ value: Any, for property: Properties) {
-		switch property {
-	        case .value: self.value = value as! Bool
-	    }
-	}
-}
-
 extension ConditionalActionValue {
 	 enum Properties: String, ViewProperty {
         case ifCondition
         case ifSteps
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .ifCondition: return ConditionalActionValue.defaultValue(for: .ifCondition)
             case .ifSteps: return ConditionalActionValue.defaultValue(for: .ifSteps)
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> ConditionalActionValue {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> ConditionalActionValue {
         .init(
             ifCondition: factory(.ifCondition) as! Value,
             ifSteps: factory(.ifSteps) as! StepArray
@@ -243,7 +136,7 @@ extension ConditionalActionValue {
             ifSteps: Properties.ifSteps.defaultValue as! StepArray
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .ifCondition: return ifCondition
 	        case .ifSteps: return ifSteps
@@ -257,17 +150,16 @@ extension ConditionalActionValue {
 	    }
 	}
 }
-
 extension DecodeDictionaryStep {
 	 enum Properties: String, ViewProperty {
         case value
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .value: return DecodeDictionaryStep.defaultValue(for: .value)
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> DecodeDictionaryStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> DecodeDictionaryStep {
         .init(
             value: factory(.value) as! Value
         )
@@ -278,7 +170,7 @@ extension DecodeDictionaryStep {
             value: Properties.value.defaultValue as! Value
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .value: return value
         }
@@ -290,91 +182,18 @@ extension DecodeDictionaryStep {
 	    }
 	}
 }
-
-extension DictionaryValue {
-	 enum Properties: String, ViewProperty {
-        case type
-        case elements
-        var defaultValue: Any {
-            switch self {
-            case .type: return DictionaryValue.defaultValue(for: .type)
-            case .elements: return DictionaryValue.defaultValue(for: .elements)
-            }
-        }
-    }
-    static func make(factory: (Properties) -> Any) -> DictionaryValue {
-        .init(
-            type: factory(.type) as! VariableTypeValue,
-            elements: factory(.elements) as! [StringValue: any EditableVariableValue]
-        )
-    }
-
-    static func makeDefault() -> DictionaryValue {
-        .init(
-            type: Properties.type.defaultValue as! VariableTypeValue,
-            elements: Properties.elements.defaultValue as! [StringValue: any EditableVariableValue]
-		)
-    }
-    func value(for property: Properties) -> Any? {
-		switch property {
-	        case .type: return type
-	        case .elements: return elements
-        }
-    }
-
-	func set(_ value: Any, for property: Properties) {
-		switch property {
-	        case .type: self.type = value as! VariableTypeValue
-	        case .elements: self.elements = value as! [StringValue: any EditableVariableValue]
-	    }
-	}
-}
-
-extension FontWeightValue {
-	 enum Properties: String, ViewProperty {
-        case value
-        var defaultValue: Any {
-            switch self {
-            case .value: return FontWeightValue.defaultValue
-            }
-        }
-    }
-    static func make(factory: (Properties) -> Any) -> FontWeightValue {
-        .init(
-            value: factory(.value) as! Font.Weight
-        )
-    }
-
-    static func makeDefault() -> FontWeightValue {
-        .init(
-            value: Properties.value.defaultValue as! Font.Weight
-		)
-    }
-    func value(for property: Properties) -> Any? {
-		switch property {
-	        case .value: return value
-        }
-    }
-
-	func set(_ value: Any, for property: Properties) {
-		switch property {
-	        case .value: self.value = value as! Font.Weight
-	    }
-	}
-}
-
 extension IfStep {
 	 enum Properties: String, ViewProperty {
         case ifAction
         case elseAction
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .ifAction: return IfStep.defaultValue(for: .ifAction)
             case .elseAction: return IfStep.defaultValue(for: .elseAction)
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> IfStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> IfStep {
         .init(
             ifAction: factory(.ifAction) as! ConditionalActionValue,
             elseAction: factory(.elseAction) as! StepArray
@@ -387,7 +206,7 @@ extension IfStep {
             elseAction: Properties.elseAction.defaultValue as! StepArray
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .ifAction: return ifAction
 	        case .elseAction: return elseAction
@@ -401,91 +220,18 @@ extension IfStep {
 	    }
 	}
 }
-
-extension IntValue {
-	 enum Properties: String, ViewProperty {
-        case value
-        var defaultValue: Any {
-            switch self {
-            case .value: return IntValue.defaultValue
-            }
-        }
-    }
-    static func make(factory: (Properties) -> Any) -> IntValue {
-        .init(
-            value: factory(.value) as! Int
-        )
-    }
-
-    static func makeDefault() -> IntValue {
-        .init(
-            value: Properties.value.defaultValue as! Int
-		)
-    }
-    func value(for property: Properties) -> Any? {
-		switch property {
-	        case .value: return value
-        }
-    }
-
-	func set(_ value: Any, for property: Properties) {
-		switch property {
-	        case .value: self.value = value as! Int
-	    }
-	}
-}
-
-extension MakeableArray {
-	 enum Properties: String, ViewProperty {
-        case value
-        case axis
-        var defaultValue: Any {
-            switch self {
-            case .value: return MakeableArray.defaultValue
-            case .axis: return MakeableArray.defaultValue
-            }
-        }
-    }
-    static func make(factory: (Properties) -> Any) -> MakeableArray {
-        .init(
-            value: factory(.value) as! [any MakeableView],
-            axis: factory(.axis) as! AxisValue
-        )
-    }
-
-    static func makeDefault() -> MakeableArray {
-        .init(
-            value: Properties.value.defaultValue as! [any MakeableView],
-            axis: Properties.axis.defaultValue as! AxisValue
-		)
-    }
-    func value(for property: Properties) -> Any? {
-		switch property {
-	        case .value: return value
-	        case .axis: return axis
-        }
-    }
-
-	func set(_ value: Any, for property: Properties) {
-		switch property {
-	        case .value: self.value = value as! [any MakeableView]
-	        case .axis: self.axis = value as! AxisValue
-	    }
-	}
-}
-
 extension MakeableButton {
 	 enum Properties: String, ViewProperty {
         case title
         case action
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .title: return MakeableButton.defaultValue(for: .title)
             case .action: return MakeableButton.defaultValue(for: .action)
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> MakeableButton {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> MakeableButton {
         .init(
             title: factory(.title) as! MakeableLabel,
             action: factory(.action) as! StepArray
@@ -498,7 +244,7 @@ extension MakeableButton {
             action: Properties.action.defaultValue as! StepArray
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .title: return title
 	        case .action: return action
@@ -512,13 +258,12 @@ extension MakeableButton {
 	    }
 	}
 }
-
 extension MakeableField {
 	 enum Properties: String, ViewProperty {
         case text
         case fontSize
         case onTextUpdate
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .text: return MakeableField.defaultValue(for: .text)
             case .fontSize: return MakeableField.defaultValue(for: .fontSize)
@@ -526,7 +271,7 @@ extension MakeableField {
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> MakeableField {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> MakeableField {
         .init(
             text: factory(.text) as! TemporaryValue,
             fontSize: factory(.fontSize) as! IntValue,
@@ -541,7 +286,7 @@ extension MakeableField {
             onTextUpdate: Properties.onTextUpdate.defaultValue as! StepArray
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .text: return text
 	        case .fontSize: return fontSize
@@ -557,14 +302,13 @@ extension MakeableField {
 	    }
 	}
 }
-
 extension MakeableLabel {
 	 enum Properties: String, ViewProperty {
         case text
         case fontSize
         case fontWeight
         case italic
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .text: return MakeableLabel.defaultValue(for: .text)
             case .fontSize: return MakeableLabel.defaultValue(for: .fontSize)
@@ -573,7 +317,7 @@ extension MakeableLabel {
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> MakeableLabel {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> MakeableLabel {
         .init(
             text: factory(.text) as! Value,
             fontSize: factory(.fontSize) as! IntValue,
@@ -590,7 +334,7 @@ extension MakeableLabel {
             italic: Properties.italic.defaultValue as! BoolValue
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .text: return text
 	        case .fontSize: return fontSize
@@ -608,17 +352,16 @@ extension MakeableLabel {
 	    }
 	}
 }
-
 extension MakeableStack {
 	 enum Properties: String, ViewProperty {
         case content
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .content: return MakeableStack.defaultValue(for: .content)
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> MakeableStack {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> MakeableStack {
         .init(
             content: factory(.content) as! MakeableArray
         )
@@ -629,7 +372,7 @@ extension MakeableStack {
             content: Properties.content.defaultValue as! MakeableArray
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .content: return content
         }
@@ -641,19 +384,18 @@ extension MakeableStack {
 	    }
 	}
 }
-
 extension MakeableToggle {
 	 enum Properties: String, ViewProperty {
         case isOn
         case onToggleUpdate
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .isOn: return MakeableToggle.defaultValue(for: .isOn)
             case .onToggleUpdate: return MakeableToggle.defaultValue(for: .onToggleUpdate)
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> MakeableToggle {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> MakeableToggle {
         .init(
             isOn: factory(.isOn) as! TemporaryValue,
             onToggleUpdate: factory(.onToggleUpdate) as! StepArray
@@ -666,7 +408,7 @@ extension MakeableToggle {
             onToggleUpdate: Properties.onToggleUpdate.defaultValue as! StepArray
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .isOn: return isOn
 	        case .onToggleUpdate: return onToggleUpdate
@@ -680,17 +422,16 @@ extension MakeableToggle {
 	    }
 	}
 }
-
 extension PrintVarStep {
 	 enum Properties: String, ViewProperty {
         case varName
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .varName: return PrintVarStep.defaultValue(for: .varName)
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> PrintVarStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> PrintVarStep {
         .init(
             varName: factory(.varName) as! Value
         )
@@ -701,7 +442,7 @@ extension PrintVarStep {
             varName: Properties.varName.defaultValue as! Value
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .varName: return varName
         }
@@ -713,19 +454,18 @@ extension PrintVarStep {
 	    }
 	}
 }
-
 extension SetVarStep {
 	 enum Properties: String, ViewProperty {
         case varName
         case value
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .varName: return SetVarStep.defaultValue(for: .varName)
             case .value: return SetVarStep.defaultValue(for: .value)
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> SetVarStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> SetVarStep {
         .init(
             varName: factory(.varName) as! Value,
             value: factory(.value) as! Value
@@ -738,7 +478,7 @@ extension SetVarStep {
             value: Properties.value.defaultValue as! Value
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .varName: return varName
 	        case .value: return value
@@ -752,19 +492,18 @@ extension SetVarStep {
 	    }
 	}
 }
-
 extension StaticValueStep {
 	 enum Properties: String, ViewProperty {
         case value
         case type
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .value: return StaticValueStep.defaultValue(for: .value)
             case .type: return StaticValueStep.defaultValue(for: .type)
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> StaticValueStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> StaticValueStep {
         .init(
             value: factory(.value) as! Value,
             type: factory(.type) as! VariableTypeValue
@@ -777,7 +516,7 @@ extension StaticValueStep {
             type: Properties.type.defaultValue as! VariableTypeValue
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .value: return value
 	        case .type: return type
@@ -791,85 +530,18 @@ extension StaticValueStep {
 	    }
 	}
 }
-
-extension StepArray {
-	 enum Properties: String, ViewProperty {
-        case value
-        var defaultValue: Any {
-            switch self {
-            case .value: return StepArray.defaultValue
-            }
-        }
-    }
-    static func make(factory: (Properties) -> Any) -> StepArray {
-        .init(
-            value: factory(.value) as! [any StepType]
-        )
-    }
-
-    static func makeDefault() -> StepArray {
-        .init(
-            value: Properties.value.defaultValue as! [any StepType]
-		)
-    }
-    func value(for property: Properties) -> Any? {
-		switch property {
-	        case .value: return value
-        }
-    }
-
-	func set(_ value: Any, for property: Properties) {
-		switch property {
-	        case .value: self.value = value as! [any StepType]
-	    }
-	}
-}
-
-extension StringValue {
-	 enum Properties: String, ViewProperty {
-        case value
-        var defaultValue: Any {
-            switch self {
-            case .value: return StringValue.defaultValue
-            }
-        }
-    }
-    static func make(factory: (Properties) -> Any) -> StringValue {
-        .init(
-            value: factory(.value) as! String
-        )
-    }
-
-    static func makeDefault() -> StringValue {
-        .init(
-            value: Properties.value.defaultValue as! String
-		)
-    }
-    func value(for property: Properties) -> Any? {
-		switch property {
-	        case .value: return value
-        }
-    }
-
-	func set(_ value: Any, for property: Properties) {
-		switch property {
-	        case .value: self.value = value as! String
-	    }
-	}
-}
-
 extension TemporaryValue {
 	 enum Properties: String, ViewProperty {
         case initial
         case output
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .initial: return TemporaryValue.defaultValue(for: .initial)
             case .output: return TemporaryValue.defaultValue(for: .output)
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> TemporaryValue {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> TemporaryValue {
         .init(
             initial: factory(.initial) as! Value,
             output: factory(.output) as! Variable
@@ -882,7 +554,7 @@ extension TemporaryValue {
             output: Properties.output.defaultValue as! Variable
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .initial: return initial
 	        case .output: return output
@@ -896,85 +568,18 @@ extension TemporaryValue {
 	    }
 	}
 }
-
-extension Value {
-	 enum Properties: String, ViewProperty {
-        case value
-        var defaultValue: Any {
-            switch self {
-            case .value: return Value.defaultValue
-            }
-        }
-    }
-    static func make(factory: (Properties) -> Any) -> Value {
-        .init(
-            value: factory(.value) as! any EditableVariableValue
-        )
-    }
-
-    static func makeDefault() -> Value {
-        .init(
-            value: Properties.value.defaultValue as! any EditableVariableValue
-		)
-    }
-    func value(for property: Properties) -> Any? {
-		switch property {
-	        case .value: return value
-        }
-    }
-
-	func set(_ value: Any, for property: Properties) {
-		switch property {
-	        case .value: self.value = value as! any EditableVariableValue
-	    }
-	}
-}
-
-extension Variable {
-	 enum Properties: String, ViewProperty {
-        case value
-        var defaultValue: Any {
-            switch self {
-            case .value: return Variable.defaultValue
-            }
-        }
-    }
-    static func make(factory: (Properties) -> Any) -> Variable {
-        .init(
-            value: factory(.value) as! any EditableVariableValue
-        )
-    }
-
-    static func makeDefault() -> Variable {
-        .init(
-            value: Properties.value.defaultValue as! any EditableVariableValue
-		)
-    }
-    func value(for property: Properties) -> Any? {
-		switch property {
-	        case .value: return value
-        }
-    }
-
-	func set(_ value: Any, for property: Properties) {
-		switch property {
-	        case .value: self.value = value as! any EditableVariableValue
-	    }
-	}
-}
-
 extension VariableStep {
 	 enum Properties: String, ViewProperty {
         case varName
         case type
-        var defaultValue: Any {
+        var defaultValue: any EditableVariableValue {
             switch self {
             case .varName: return VariableStep.defaultValue(for: .varName)
             case .type: return VariableStep.defaultValue(for: .type)
             }
         }
     }
-    static func make(factory: (Properties) -> Any) -> VariableStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> VariableStep {
         .init(
             varName: factory(.varName) as! Value,
             type: factory(.type) as! VariableTypeValue
@@ -987,7 +592,7 @@ extension VariableStep {
             type: Properties.type.defaultValue as! VariableTypeValue
 		)
     }
-    func value(for property: Properties) -> Any? {
+    func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .varName: return varName
 	        case .type: return type
@@ -1001,40 +606,6 @@ extension VariableStep {
 	    }
 	}
 }
-
-extension VariableTypeValue {
-	 enum Properties: String, ViewProperty {
-        case value
-        var defaultValue: Any {
-            switch self {
-            case .value: return VariableTypeValue.defaultValue
-            }
-        }
-    }
-    static func make(factory: (Properties) -> Any) -> VariableTypeValue {
-        .init(
-            value: factory(.value) as! VariableType
-        )
-    }
-
-    static func makeDefault() -> VariableTypeValue {
-        .init(
-            value: Properties.value.defaultValue as! VariableType
-		)
-    }
-    func value(for property: Properties) -> Any? {
-		switch property {
-	        case .value: return value
-        }
-    }
-
-	func set(_ value: Any, for property: Properties) {
-		switch property {
-	        case .value: self.value = value as! VariableType
-	    }
-	}
-}
-
 
 extension CodableMakeableList: Codable {
 	init(from decoder: Decoder) throws {
@@ -1130,6 +701,10 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(MakeableStack.self, forKey: .value)
         case typeString(MakeableToggle.self):
             self.value = try valueContainer.decode(MakeableToggle.self, forKey: .value)
+        case typeString(NilValue.self):
+            self.value = try valueContainer.decode(NilValue.self, forKey: .value)
+        case typeString(OptionalValue.self):
+            self.value = try valueContainer.decode(OptionalValue.self, forKey: .value)
         case typeString(PrintVarStep.self):
             self.value = try valueContainer.decode(PrintVarStep.self, forKey: .value)
         case typeString(SetVarStep.self):
@@ -1194,6 +769,10 @@ extension CodableVariableValue: Codable {
             try container.encode(value, forKey: .value)
         case let value as MakeableToggle:
             try container.encode(value, forKey: .value)
+        case let value as NilValue:
+            try container.encode(value, forKey: .value)
+        case let value as OptionalValue:
+            try container.encode(value, forKey: .value)
         case let value as PrintVarStep:
             try container.encode(value, forKey: .value)
         case let value as SetVarStep:
@@ -1242,7 +821,7 @@ extension AddViewViewModel {
 }
 
 
-enum VariableType: String, CaseIterable, Equatable, Codable {   
+enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {   
 	case list // ArrayValue
 	case axis // AxisValue
 	case boolean // BoolValue
@@ -1256,6 +835,8 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
 	case label // MakeableLabel
 	case stack // MakeableStack
 	case toggle // MakeableToggle
+	case `nil` // NilValue
+	case optional // OptionalValue
 	case stepArray // StepArray
 	case string // StringValue
 	case temporary // TemporaryValue
@@ -1278,12 +859,39 @@ enum VariableType: String, CaseIterable, Equatable, Codable {
         case .label: return MakeableLabel.makeDefault()
         case .stack: return MakeableStack.makeDefault()
         case .toggle: return MakeableToggle.makeDefault()
+        case .`nil`: return NilValue.makeDefault()
+        case .optional: return OptionalValue.makeDefault()
         case .stepArray: return StepArray.makeDefault()
         case .string: return StringValue.makeDefault()
         case .temporary: return TemporaryValue.makeDefault()
         case .value: return Value.makeDefault()
         case .variable: return Variable.makeDefault()
         case .type: return VariableTypeValue.makeDefault()
+        }
+    }
+    var title: String {
+        switch self {
+        case .list: return "list"
+        case .axis: return "axis"
+        case .boolean: return "boolean"
+        case .conditionalAction: return "conditionalAction"
+        case .dictionary: return "dictionary"
+        case .fontWeight: return "fontWeight"
+        case .int: return "int"
+        case .makeableArray: return "makeableArray"
+        case .button: return "button"
+        case .field: return "field"
+        case .label: return "label"
+        case .stack: return "stack"
+        case .toggle: return "toggle"
+        case .`nil`: return "`nil`"
+        case .optional: return "optional"
+        case .stepArray: return "stepArray"
+        case .string: return "string"
+        case .temporary: return "temporary"
+        case .value: return "value"
+        case .variable: return "variable"
+        case .type: return "type"
         }
     }
 }

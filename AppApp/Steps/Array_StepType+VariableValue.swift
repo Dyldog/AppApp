@@ -25,7 +25,7 @@ import SwiftUI
 //        .joined(separator: "\n")
 //    }
 //    
-//    func value(with variables: Variables) async throws -> VariableValue? {
+//    func value(with variables: Variables) async throws -> VariableValue {
 //        for step in self {
 //            try await step.run(with: variables)
 //        }

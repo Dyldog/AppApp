@@ -8,9 +8,9 @@
 import Foundation
 
 extension CompositeEditableVariableValue {
-    var properties: [Properties: Any] {
+    var properties: [Properties: any EditableVariableValue] {
         Properties.allCases.reduce(into: [:], {
-            $0[$1] = value(for: $1) ?? $1.defaultValue
+            $0[$1] = value(for: $1)
         })
     }
     

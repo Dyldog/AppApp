@@ -20,7 +20,7 @@ import SwiftUI
 //    
 //    var valueString: String { steps.map { $0.protoString }.joined(separator: "\n") }
 //    
-//    func value(with variables: Variables) async throws -> VariableValue? {
+//    func value(with variables: Variables) async throws -> VariableValue {
 //        for step in steps {
 //            try await step.run(with: variables)
 //        }

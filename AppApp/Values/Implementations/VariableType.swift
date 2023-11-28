@@ -11,7 +11,6 @@ import SwiftUI
 final class VariableTypeValue: PrimitiveEditableVariableValue {
     
     static var type: VariableType { .type }
-    static var defaultValue: VariableType { .string }
     var value: VariableType
     
     var protoString: String { value.protoString }
@@ -22,7 +21,11 @@ final class VariableTypeValue: PrimitiveEditableVariableValue {
         self.value = value
     }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
+    static func makeDefault() -> VariableTypeValue {
+        .init(value: .string)
+    }
+    
+    func value(with variables: Variables) async throws -> VariableValue {
         self
     }
     

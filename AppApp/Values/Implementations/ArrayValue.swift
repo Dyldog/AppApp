@@ -8,7 +8,7 @@
 import SwiftUI
 
 // sourcery: variableTypeName = "list"
-final class ArrayValue: CompositeEditableVariableValue, ObservableObject {
+final class ArrayValue: EditableVariableValue, ObservableObject {
     
     static var type: VariableType { .list }
     
@@ -22,11 +22,11 @@ final class ArrayValue: CompositeEditableVariableValue, ObservableObject {
         self.elements = elements
     }
     
-    static func defaultValue(for property: Properties) -> Any {
-        switch property {
-        case .type: return VariableType.string
-        case .elements: return [any VariableValue]()
-        }
+    static func makeDefault() -> ArrayValue {
+        .init(
+            type: VariableType.string,
+            elements: [any EditableVariableValue]()
+        )
     }
     
     var valueString: String { 
@@ -37,7 +37,7 @@ final class ArrayValue: CompositeEditableVariableValue, ObservableObject {
         """
     }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue {
         var mapped: [(any EditableVariableValue)?] = []
         for element in elements {
             mapped.append(try await element.value(with: variables) as? (any EditableVariableValue))

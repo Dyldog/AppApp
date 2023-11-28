@@ -17,15 +17,16 @@ final class APIValueStep: ValueStep {
         self.url = url
     }
     
-    static func defaultValue(for property: Properties) -> Any {
+    static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .url: return Value(value: StringValue(value: "https://swapi.dev/api/people/1"))
         }
     }
     
     func run(with variables: Variables) async throws -> VariableValue {
+        let value = try await url.value(with: variables)
+        
         guard
-            let value = try await url.value(with: variables),
             let url = URL(string: value.valueString)
         else { throw VariableValueError.wrongTypeForOperation }
         

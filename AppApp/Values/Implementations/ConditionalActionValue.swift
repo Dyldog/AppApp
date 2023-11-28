@@ -24,14 +24,14 @@ final class ConditionalActionValue: CompositeEditableVariableValue, ObservableOb
     
     func add(_ other: VariableValue) throws -> VariableValue { fatalError() }
     
-    static func defaultValue(for property: Properties) -> Any {
+    static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .ifCondition: return Value(value: BoolValue(value: true))
         case .ifSteps: return StepArray(value: [])
         }
     }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue {
         guard
             let conditionValue = try await ifCondition.value(with: variables) as? BoolValue
         else { throw VariableValueError.valueNotFoundForVariable(ifCondition.protoString) }
@@ -39,7 +39,7 @@ final class ConditionalActionValue: CompositeEditableVariableValue, ObservableOb
         if conditionValue.value {
             return ifSteps
         } else {
-            return nil
+            return StepArray(value: [])
         }
     }
 }

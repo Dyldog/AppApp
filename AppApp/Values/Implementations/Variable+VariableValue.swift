@@ -8,13 +8,16 @@
 import SwiftUI
 
 /// A value that provides a value from the variables
-final class Variable: PrimitiveEditableVariableValue {
+final class Variable: EditableVariableValue {
     static var type: VariableType { .variable }
     var value: any EditableVariableValue
-    static var defaultValue: any EditableVariableValue { StringValue(value: "VAR") }
     
     init(value: any EditableVariableValue) {
         self.value = value
+    }
+    
+    static func makeDefault() -> Variable {
+        .init(value: StringValue(value: "VAR"))
     }
     
     func add(_ other: VariableValue) throws -> VariableValue {
@@ -25,11 +28,9 @@ final class Variable: PrimitiveEditableVariableValue {
     var protoString: String { "{ \(value.protoString) }" }
     var valueString: String { "\(value.valueString)" }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
-        guard
-            let nameValue = try await value.value(with: variables),
-            let value = await variables.value(for: nameValue.valueString)
-        else {
+    func value(with variables: Variables) async throws -> VariableValue {
+        let nameValue = try await value.value(with: variables)
+        guard let value = await variables.value(for: nameValue.valueString) else {
             throw VariableValueError.valueNotFoundForVariable(value.protoString)
         }
         return try await value.value(with: variables)

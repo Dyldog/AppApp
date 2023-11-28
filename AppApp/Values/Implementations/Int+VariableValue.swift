@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class IntValue: PrimitiveEditableVariableValue, Codable {
+final class IntValue: EditableVariableValue, Codable {
     
     static var type: VariableType { .int }
     var value: Int
@@ -17,6 +17,9 @@ final class IntValue: PrimitiveEditableVariableValue, Codable {
         self.value = value
     }
     
+    static func makeDefault() -> IntValue {
+        .init(value: 69)
+    }
     func editView(onUpdate: @escaping (IntValue) -> Void) -> AnyView {
         TextField("", text: .init(get: { [weak self] in
             self?.protoString.components(separatedBy: .decimalDigits.inverted).joined() ?? "666"
@@ -37,7 +40,7 @@ final class IntValue: PrimitiveEditableVariableValue, Codable {
     
     var valueString: String { "\(value)"}
     
-    func value(with variables: Variables) throws -> VariableValue? {
+    func value(with variables: Variables) throws -> VariableValue {
         self
     }
 }

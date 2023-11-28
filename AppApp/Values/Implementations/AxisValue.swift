@@ -9,9 +9,8 @@ import SwiftUI
 
 extension Axis: Codable { }
 
-final class AxisValue: PrimitiveEditableVariableValue, Codable {
+final class AxisValue: EditableVariableValue, Codable {
     static var type: VariableType { .axis }
-    static var defaultValue: Axis = .vertical
     
     var protoString: String { "AXIS" }
     var valueString: String { value.description }
@@ -22,7 +21,11 @@ final class AxisValue: PrimitiveEditableVariableValue, Codable {
         self.value = value
     }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
+    static func makeDefault() -> AxisValue {
+        .init(value: .vertical)
+    }
+    
+    func value(with variables: Variables) async throws -> VariableValue {
         self
     }
     

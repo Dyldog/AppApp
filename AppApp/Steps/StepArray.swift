@@ -7,15 +7,18 @@
 
 import SwiftUI
 
-final class StepArray: Codable, PrimitiveEditableVariableValue {
+final class StepArray: Codable, EditableVariableValue {
     
     static var type: VariableType { .list }
-    static var defaultValue: [any StepType] { .init() }
     
     var value: [any StepType]
     
     init(value: [any StepType]) {
         self.value = value
+    }
+    
+    static func makeDefault() -> StepArray {
+        .init(value: .init())
     }
     
     init(from decoder: Decoder) throws {
@@ -31,7 +34,7 @@ final class StepArray: Codable, PrimitiveEditableVariableValue {
     
     var valueString: String { value.map { $0.protoString }.joined(separator: ", ") }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue {
         fatalError()
     }
     

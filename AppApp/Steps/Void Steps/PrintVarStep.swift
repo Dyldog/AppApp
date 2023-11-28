@@ -20,13 +20,11 @@ final class PrintVarStep: Step, Codable {
     }
     
     func run(with variables: Variables) async throws {
-        guard let nameValue = try await varName.value(with: variables) else {
-            throw VariableValueError.valueNotFoundForVariable(varName.protoString)
-        }
+        let nameValue = try await varName.value(with: variables)
         print("\(varName): \(await variables.value(for: nameValue.valueString) as Any)")
     }
     
-    static func defaultValue(for property: Properties) -> Any {
+    static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .varName: return Value(value: Variable(value: StringValue(value: "$0")))
         }

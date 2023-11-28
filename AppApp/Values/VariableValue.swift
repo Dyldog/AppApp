@@ -14,7 +14,7 @@ protocol VariableValue: Codable {
     func add(_ other: VariableValue) throws -> VariableValue
     var protoString: String { get }
     var valueString: String { get }
-    func value(with variables: Variables) async throws -> VariableValue?
+    func value(with variables: Variables) async throws -> VariableValue
 //    func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView
 }
 

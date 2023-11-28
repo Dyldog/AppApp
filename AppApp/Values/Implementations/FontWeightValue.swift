@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-extension Font.Weight {
-    static var allCases: [Font.Weight] { [
+extension Font.Weight: CaseIterable, Titleable {
+    public static var allCases: [Font.Weight] { [
         .regular,
         .bold,
         .semibold,
@@ -33,11 +33,15 @@ extension Font.Weight {
 final class FontWeightValue: PrimitiveEditableVariableValue, Codable {
 
     static var type: VariableType { .fontWeight }
-    static var defaultValue: Font.Weight { .regular}
+    static var defaultValue: Font.Weight { .regular }
     var value: Font.Weight
     
     init(value: Font.Weight) {
         self.value = value
+    }
+    
+    static func makeDefault() -> FontWeightValue {
+        .init(value: .regular)
     }
     
     func add(_ other: VariableValue) throws -> VariableValue {
@@ -48,22 +52,8 @@ final class FontWeightValue: PrimitiveEditableVariableValue, Codable {
     
     var valueString: String { protoString }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue {
         self
-    }
-    
-    func editView(onUpdate: @escaping (FontWeightValue) -> Void) -> AnyView {
-        Picker("", selection: .init(get: { [weak self] in
-            self?.value ?? .regular
-        }, set: { [weak self] new in
-            guard let self = self else { return }
-            self.value = new
-            onUpdate(self)
-        })) {
-            ForEach(Font.Weight.allCases) {
-                Text($0.title).tag($0)
-            }
-        }.pickerStyle(.menu).any
     }
 }
     

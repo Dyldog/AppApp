@@ -89,7 +89,7 @@ final class MakeableStack: MakeableView, Codable {
     
     var valueString: String { "STACK" }
     
-    func value(with variables: Variables) async throws -> VariableValue? { self }
+    func value(with variables: Variables) async throws -> VariableValue { self }
     
     var content: MakeableArray
     
@@ -99,7 +99,7 @@ final class MakeableStack: MakeableView, Codable {
         self.content = content
     }
     
-    static func defaultValue(for property: Properties) -> Any {
+    static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .content: return MakeableArray(value: [], axis: .init(value: .vertical))
         }

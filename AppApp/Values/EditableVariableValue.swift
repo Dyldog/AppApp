@@ -7,20 +7,40 @@
 
 import SwiftUI
 
-protocol EditableVariableValue: VariableValue, ViewEditable {
+protocol EditableVariableValue: AnyObject, VariableValue, ViewEditable {
+    static func makeDefault() -> Self
     func editView(onUpdate: @escaping (Self) -> Void) -> AnyView
 }
 
-protocol PrimitiveEditableVariableValue: EditableVariableValue { }
+protocol PrimitiveEditableVariableValue: EditableVariableValue where Primitive.AllCases: RandomAccessCollection {
+    associatedtype Primitive: CaseIterable & Hashable & Titleable
+    var value: Primitive { get set }
+}
+
+extension PrimitiveEditableVariableValue {
+    func editView(onUpdate: @escaping (Self) -> Void) -> AnyView {
+        Picker("", selection: .init(get: { [weak self] in
+            self?.value ?? Self.makeDefault().value
+        }, set: { [weak self] new in
+            guard let self = self else { return }
+            self.value = new
+            onUpdate(self)
+        })) {
+            ForEach(Primitive.allCases) {
+                Text($0.title).tag($0)
+            }
+        }.pickerStyle(.menu).any
+    }
+}
 
 protocol CompositeEditableVariableValue: EditableVariableValue {
     func propertyRows(onUpdate: @escaping (Self) -> Void) -> [(String, any PrimitiveEditableVariableValue, VariableUpdater)]
     
     associatedtype Properties: ViewProperty
-    static func make(factory: (Properties) -> Any) -> Self
-    func value(for property: Properties) -> Any?
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self
+    func value(for property: Properties) -> any EditableVariableValue
     func set(_ value: Any, for property: Properties)
-    static func defaultValue(for property: Properties) -> Any
+    static func defaultValue(for property: Properties) -> any EditableVariableValue
 }
 
 typealias VariableUpdater = (any EditableVariableValue) -> Void

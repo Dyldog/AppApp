@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ViewProperty: RawRepresentable, CaseIterable, Hashable where RawValue == String {
-    var defaultValue: Any { get }
+    var defaultValue: any EditableVariableValue { get }
 }
 
 protocol PrimitiveViewProperty: ViewProperty {

@@ -17,7 +17,7 @@ import SwiftUI
 //    
 //    var protoString: String { self }
 //    var valueString: String { self }
-//    func value(with variables: Variables) throws -> VariableValue? { self }
+//    func value(with variables: Variables) throws -> VariableValue { self }
 //    
 //    func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView {
 //        TextField("", text: .init(get: {
@@ -28,14 +28,17 @@ import SwiftUI
 //    }
 //}
 
-final class StringValue: PrimitiveEditableVariableValue {
+final class StringValue: EditableVariableValue {
     
     static var type: VariableType { .string }
     var value: String
-    static let defaultValue: String = "TEXT"
     
     init(value: String) {
         self.value = value
+    }
+    
+    static func makeDefault() -> StringValue {
+        .init(value: "TEXT")
     }
     
     func add(_ other: VariableValue) throws -> VariableValue {
@@ -45,7 +48,7 @@ final class StringValue: PrimitiveEditableVariableValue {
     
     var protoString: String { value }
     var valueString: String { value }
-    func value(with variables: Variables) throws -> VariableValue? { self }
+    func value(with variables: Variables) throws -> VariableValue { self }
     
     func editView(onUpdate: @escaping (StringValue) -> Void) -> AnyView {
         TextField("", text: .init(get: { [weak self] in

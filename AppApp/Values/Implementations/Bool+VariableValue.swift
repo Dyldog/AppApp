@@ -8,15 +8,18 @@
 import SwiftUI
 
 // sourcery: variableTypeName = "boolean"
-final class BoolValue: PrimitiveEditableVariableValue, Codable {
+final class BoolValue: EditableVariableValue, Codable {
     
     static var type: VariableType { .boolean }
     
     var value: Bool
-    static let defaultValue: Bool = false
     
     init(value: Bool) {
         self.value = value
+    }
+    
+    static func makeDefault() -> BoolValue {
+        .init(value: false)
     }
     
     func add(_ other: VariableValue) throws -> VariableValue {
@@ -27,7 +30,7 @@ final class BoolValue: PrimitiveEditableVariableValue, Codable {
     
     var valueString: String { self.value ? "true" : "false" }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue {
         self
     }
     

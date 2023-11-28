@@ -17,16 +17,14 @@ final class DecodeDictionaryStep: ValueStep {
         self.value = value
     }
     
-    static func defaultValue(for property: Properties) -> Any {
+    static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .value: return Value(value: Variable(value: StringValue(value: "$0")))
         }
     }
     
     func run(with variables: Variables) async throws -> VariableValue {
-        guard
-            let value = try await value.value(with: variables)
-        else { throw VariableValueError.wrongTypeForOperation }
+        let value = try await value.value(with: variables)
         
         return DictionaryValue(type: VariableTypeValue(value: .string), elements: (try JSONSerialization.jsonObject(
             with: value.valueString.data(using: .utf8)!,

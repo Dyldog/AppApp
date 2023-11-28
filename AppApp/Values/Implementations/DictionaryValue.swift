@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class DictionaryValue: CompositeEditableVariableValue, ObservableObject {
+final class DictionaryValue: EditableVariableValue, ObservableObject {
     
     static var type: VariableType { .dictionary }
     
@@ -31,14 +31,14 @@ final class DictionaryValue: CompositeEditableVariableValue, ObservableObject {
         self.elements = elements
     }
     
-    static func defaultValue(for property: Properties) -> Any {
-        switch property {
-        case .type: return VariableTypeValue(value: .string)
-        case .elements: return [StringValue: any EditableVariableValue]()
-        }
+    static func makeDefault() -> DictionaryValue {
+        .init(
+            type: VariableTypeValue(value: .string),
+            elements: [StringValue: any EditableVariableValue]()
+        )
     }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue {
         var mapped: [StringValue: (any VariableValue)?] = [:]
         for (key, value) in elements {
             mapped[key] = try await value.value(with: variables)

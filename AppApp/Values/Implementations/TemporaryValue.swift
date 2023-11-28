@@ -18,7 +18,7 @@ final class TemporaryValue: CompositeEditableVariableValue {
         self.output = output
     }
     
-    static func defaultValue(for property: Properties) -> Any {
+    static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .initial: return Value(value: StringValue(value: "TEXT"))
         case .output: return Variable(value: StringValue(value: "FIELDTEXT"))
@@ -33,7 +33,7 @@ final class TemporaryValue: CompositeEditableVariableValue {
     
     var valueString: String { output.valueString }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue {
         if let setValue = try? await output.value(with: variables) {
             return setValue
         } else {

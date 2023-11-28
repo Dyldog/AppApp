@@ -19,7 +19,7 @@ final class ArrayValueStep: ValueStep {
         self.index = index
     }
     
-    static func defaultValue(for property: Properties) -> Any {
+    static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .array: return Value(value: Variable(value: StringValue(value: "$0")))
         case .index: return Value(value: IntValue(value: 0))

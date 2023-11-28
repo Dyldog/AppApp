@@ -33,10 +33,9 @@ struct MakeableFieldView: View {
             }
         }.task {
             do {
-                guard let value = try await field.text.value(with: variables)?.valueString
-                else { throw VariableValueError.valueNotFoundForVariable(field.text.protoString) }
+                let value = try await field.text.value(with: variables).valueString
                 self.text = value
-            }catch let error as VariableValueError {
+            } catch let error as VariableValueError {
 //                self.error = error
             } catch {
                 fatalError(error.localizedDescription)
@@ -49,11 +48,10 @@ struct MakeableFieldView: View {
         
         Task { @MainActor in
             do {
-                if isRunning, let outputVar = try await field.text.output.value.value(with: variables) {
+                if isRunning {
+                    let outputVar = try await field.text.output.value.value(with: variables)
                     variables.set(Value(value: StringValue(value: string)), for: outputVar.valueString)
-                    for step in field.onTextUpdate {
-                        try await step.run(with: variables)
-                    }
+                    try await field.onTextUpdate.run(with: variables)
                 }
             } catch let error as VariableValueError {
 //                self.error = error
@@ -79,7 +77,7 @@ final class MakeableField: MakeableView, Codable {
         self.onTextUpdate = onTextUpdate
     }
     
-    static func defaultValue(for property: Properties) -> Any {
+    static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .text: return TemporaryValue.makeDefault()
         case .fontSize: return IntValue(value: 18)
@@ -94,20 +92,14 @@ final class MakeableField: MakeableView, Codable {
         fatalError()
     }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue {
         self
     }
     
     func insertValues(into variables: Variables) async throws {
-        if 
-            let outputVarName = try await text.output.value.value(with: variables),
-            let outputValue = try await text.value(with: variables)
-        {
-            await variables.set(outputValue, for: outputVarName.valueString)
-        }
-        
-        for step in onTextUpdate {
-            try await step.run(with: variables)
-        }
+        let outputVarName = try await text.output.value.value(with: variables)
+        let outputValue = try await text.value(with: variables)
+        await variables.set(outputValue, for: outputVarName.valueString)
+        try await onTextUpdate.run(with: variables)
     }
 }

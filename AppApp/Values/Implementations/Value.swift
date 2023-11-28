@@ -8,13 +8,17 @@
 import SwiftUI
 
 // sourcery: variableTypeName = "value"
-final class Value: PrimitiveEditableVariableValue {
+final class Value: EditableVariableValue {
     
     static var type: VariableType { .value }
     var value: any EditableVariableValue
-    static var defaultValue: any EditableVariableValue { StringValue(value: "TEXT") }
+    
     init(value: any EditableVariableValue) {
         self.value = value
+    }
+    
+    static func makeDefault() -> Value {
+        .init(value: StringValue(value: "TEXT"))
     }
     
     func add(_ other: VariableValue) throws -> VariableValue {
@@ -24,7 +28,7 @@ final class Value: PrimitiveEditableVariableValue {
     var protoString: String { value.protoString }
     var valueString: String { value.valueString }
     
-    func value(with variables: Variables) async throws -> VariableValue? {
+    func value(with variables: Variables) async throws -> VariableValue {
         try await value.value(with: variables)
     }
     
