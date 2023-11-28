@@ -73,7 +73,7 @@ struct MakeableStackView: View {
                 onUpdate(at: index, with: $0)
             })
         })
-        .id(variables)
+        .id(variables.hashValue)
     }
     
     private func onRemove(at index: Int) {

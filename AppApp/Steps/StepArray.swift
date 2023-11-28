@@ -9,7 +9,7 @@ import SwiftUI
 
 final class StepArray: Codable, EditableVariableValue {
     
-    static var type: VariableType { .list }
+    static var type: VariableType { .stepArray }
     
     var value: [any StepType]
     
@@ -35,7 +35,7 @@ final class StepArray: Codable, EditableVariableValue {
     var valueString: String { value.map { $0.protoString }.joined(separator: ",\n") }
     
     func value(with variables: Variables) async throws -> VariableValue {
-        fatalError()
+        self
     }
     
     func editView(onUpdate: @escaping (StepArray) -> Void) -> AnyView {

@@ -226,6 +226,38 @@ extension DecodeDictionaryStep {
 	    }
 	}
 }
+extension FunctionStep {
+	 enum Properties: String, ViewProperty {
+        case functionName
+        var defaultValue: any EditableVariableValue {
+            switch self {
+            case .functionName: return FunctionStep.defaultValue(for: .functionName)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> any EditableVariableValue) -> FunctionStep {
+        .init(
+            functionName: factory(.functionName) as! Value
+        )
+    }
+
+    static func makeDefault() -> FunctionStep {
+        .init(
+            functionName: Properties.functionName.defaultValue as! Value
+		)
+    }
+    func value(for property: Properties) -> any EditableVariableValue {
+		switch property {
+	        case .functionName: return functionName
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .functionName: self.functionName = value as! Value
+	    }
+	}
+}
 extension IfStep {
 	 enum Properties: String, ViewProperty {
         case ifAction
@@ -777,6 +809,8 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(DictionaryValue.self, forKey: .value)
         case typeString(FontWeightValue.self):
             self.value = try valueContainer.decode(FontWeightValue.self, forKey: .value)
+        case typeString(FunctionStep.self):
+            self.value = try valueContainer.decode(FunctionStep.self, forKey: .value)
         case typeString(IfStep.self):
             self.value = try valueContainer.decode(IfStep.self, forKey: .value)
         case typeString(IntValue.self):
@@ -852,6 +886,8 @@ extension CodableVariableValue: Codable {
         case let value as DictionaryValue:
             try container.encode(value, forKey: .value)
         case let value as FontWeightValue:
+            try container.encode(value, forKey: .value)
+        case let value as FunctionStep:
             try container.encode(value, forKey: .value)
         case let value as IfStep:
             try container.encode(value, forKey: .value)
@@ -1038,6 +1074,7 @@ extension AddActionView {
 		case AddToVar
 		case ArrayValue
 		case DecodeDictionary
+		case Function
 		case If
 		case PrintVar
 		case SetVar
@@ -1049,6 +1086,7 @@ extension AddActionView {
             case .AddToVar: return AddToVarStep.title
             case .ArrayValue: return ArrayValueStep.title
             case .DecodeDictionary: return DecodeDictionaryStep.title
+            case .Function: return FunctionStep.title
             case .If: return IfStep.title
             case .PrintVar: return PrintVarStep.title
             case .SetVar: return SetVarStep.title
@@ -1062,6 +1100,7 @@ extension AddActionView {
             case .AddToVar: AddToVarStep.makeDefault()
             case .ArrayValue: ArrayValueStep.makeDefault()
             case .DecodeDictionary: DecodeDictionaryStep.makeDefault()
+            case .Function: FunctionStep.makeDefault()
             case .If: IfStep.makeDefault()
             case .PrintVar: PrintVarStep.makeDefault()
             case .SetVar: SetVarStep.makeDefault()
@@ -1085,6 +1124,8 @@ extension CodableStep: Codable {
 			self.value = try valueContainer.decode(ArrayValueStep.self, forKey: .value)
         case typeString(DecodeDictionaryStep.self):
 			self.value = try valueContainer.decode(DecodeDictionaryStep.self, forKey: .value)
+        case typeString(FunctionStep.self):
+			self.value = try valueContainer.decode(FunctionStep.self, forKey: .value)
         case typeString(IfStep.self):
 			self.value = try valueContainer.decode(IfStep.self, forKey: .value)
         case typeString(PrintVarStep.self):
@@ -1110,6 +1151,8 @@ extension CodableStep: Codable {
 		case let value as ArrayValueStep:
 			try container.encode(value, forKey: .value)
 		case let value as DecodeDictionaryStep:
+			try container.encode(value, forKey: .value)
+		case let value as FunctionStep:
 			try container.encode(value, forKey: .value)
 		case let value as IfStep:
 			try container.encode(value, forKey: .value)

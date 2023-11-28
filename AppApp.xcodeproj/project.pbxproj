@@ -15,6 +15,7 @@
 		FC18BADB2B159218007838AA /* ComparisonValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BADA2B159218007838AA /* ComparisonValue.swift */; };
 		FC18BADD2B159593007838AA /* NumericalOperationTypeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BADC2B159593007838AA /* NumericalOperationTypeValue.swift */; };
 		FC18BADF2B159642007838AA /* NumericalOperationValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BADE2B159642007838AA /* NumericalOperationValue.swift */; };
+		FC18BAE12B1695A6007838AA /* FunctionStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAE02B1695A6007838AA /* FunctionStep.swift */; };
 		FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */; };
 		FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */; };
 		FC2B8A892B108F3F003FAB86 /* CodableMakeableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */; };
@@ -133,6 +134,7 @@
 		FC18BADA2B159218007838AA /* ComparisonValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonValue.swift; sourceTree = "<group>"; };
 		FC18BADC2B159593007838AA /* NumericalOperationTypeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericalOperationTypeValue.swift; sourceTree = "<group>"; };
 		FC18BADE2B159642007838AA /* NumericalOperationValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericalOperationValue.swift; sourceTree = "<group>"; };
+		FC18BAE02B1695A6007838AA /* FunctionStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionStep.swift; sourceTree = "<group>"; };
 		FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableWrapperView.swift; sourceTree = "<group>"; };
 		FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryValue.swift; sourceTree = "<group>"; };
 		FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMakeableList.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				FCD3B2432B0C31C40054371B /* ValueStep.swift */,
+				FC18BAE02B1695A6007838AA /* FunctionStep.swift */,
 				FC4635092B0C982E00B8DCBE /* VariableStep.swift */,
 				FC4635062B0C980A00B8DCBE /* StaticValueStep.swift */,
 				FC46350B2B0C983D00B8DCBE /* APIValueStep.swift */,
@@ -819,6 +822,7 @@
 				FCD3B23F2B0BB31F0054371B /* AddActionView.swift in Sources */,
 				FC2B8A9B2B109C3C003FAB86 /* ArrayValueStep.swift in Sources */,
 				FC46350F2B0C987100B8DCBE /* VariableType.swift in Sources */,
+				FC18BAE12B1695A6007838AA /* FunctionStep.swift in Sources */,
 				FCD3B22D2B0B9FA70054371B /* MakeableButton.swift in Sources */,
 				FC4C2C2E2B0CBE76008217AC /* DictionaryEditView.swift in Sources */,
 				FC4C15C12B0C96E60010BB1A /* ActionValue.swift in Sources */,

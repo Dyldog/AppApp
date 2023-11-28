@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ActionListView: View {
     @State var showAddIndex: Int?
-    var steps: [any StepType]
+    @State var steps: [any StepType]
     let onUpdate: ([any StepType]) -> Void
     
     var body: some View {
@@ -22,7 +22,8 @@ struct ActionListView: View {
                         Text(type(of: element).title).bold()
                         
                         Button("X") {
-                            onUpdate(steps.removing(at: index))
+                            steps = steps.removing(at: index)
+                            onUpdate(steps)
                         }
                         .buttonStyle(.plain)
                     }
@@ -38,7 +39,8 @@ struct ActionListView: View {
             }
         }.sheet(item: $showAddIndex) { index in
             AddActionView { newStep in
-                onUpdate(steps.inserting(newStep, at: index))
+                steps = steps.inserting(newStep, at: index)
+                onUpdate(steps)
                 showAddIndex = nil
             }
         }
