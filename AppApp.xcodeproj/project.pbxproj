@@ -13,6 +13,8 @@
 		FC18BAD62B157F56007838AA /* OptionalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD52B157F56007838AA /* OptionalValue.swift */; };
 		FC18BAD92B1581CF007838AA /* Titleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD82B1581CF007838AA /* Titleable.swift */; };
 		FC18BADB2B159218007838AA /* ComparisonValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BADA2B159218007838AA /* ComparisonValue.swift */; };
+		FC18BADD2B159593007838AA /* NumericalOperationTypeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BADC2B159593007838AA /* NumericalOperationTypeValue.swift */; };
+		FC18BADF2B159642007838AA /* NumericalOperationValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BADE2B159642007838AA /* NumericalOperationValue.swift */; };
 		FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */; };
 		FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */; };
 		FC2B8A892B108F3F003FAB86 /* CodableMakeableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */; };
@@ -129,6 +131,8 @@
 		FC18BAD52B157F56007838AA /* OptionalValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalValue.swift; sourceTree = "<group>"; };
 		FC18BAD82B1581CF007838AA /* Titleable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Titleable.swift; sourceTree = "<group>"; };
 		FC18BADA2B159218007838AA /* ComparisonValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonValue.swift; sourceTree = "<group>"; };
+		FC18BADC2B159593007838AA /* NumericalOperationTypeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericalOperationTypeValue.swift; sourceTree = "<group>"; };
+		FC18BADE2B159642007838AA /* NumericalOperationValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericalOperationValue.swift; sourceTree = "<group>"; };
 		FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableWrapperView.swift; sourceTree = "<group>"; };
 		FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryValue.swift; sourceTree = "<group>"; };
 		FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMakeableList.swift; sourceTree = "<group>"; };
@@ -339,7 +343,9 @@
 				FC4635182B0C98EE00B8DCBE /* Value.swift */,
 				FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */,
 				FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */,
+				FC18BADC2B159593007838AA /* NumericalOperationTypeValue.swift */,
 				FC18BADA2B159218007838AA /* ComparisonValue.swift */,
+				FC18BADE2B159642007838AA /* NumericalOperationValue.swift */,
 				FC18BAD52B157F56007838AA /* OptionalValue.swift */,
 				FC18BAD32B157F44007838AA /* NilValue.swift */,
 				FC9047B42B14872B00B599BE /* AxisValue.swift */,
@@ -752,6 +758,7 @@
 				FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */,
 				FC18BAD62B157F56007838AA /* OptionalValue.swift in Sources */,
 				FCD3B21C2B0B639F0054371B /* StepButton.swift in Sources */,
+				FC18BADF2B159642007838AA /* NumericalOperationValue.swift in Sources */,
 				FCD3B2612B0C96890054371B /* EditableViewConstructor.swift in Sources */,
 				FCD3B2232B0B77C50054371B /* AddViewView.swift in Sources */,
 				FC18BADB2B159218007838AA /* ComparisonValue.swift in Sources */,
@@ -760,6 +767,7 @@
 				FCD3B24B2B0C948C0054371B /* Array+Safe.swift in Sources */,
 				FC4C15C92B0C974E0010BB1A /* StepType.swift in Sources */,
 				FC2B8A8B2B108F6B003FAB86 /* CodableVariableValue.swift in Sources */,
+				FC18BADD2B159593007838AA /* NumericalOperationTypeValue.swift in Sources */,
 				FC2B8A9D2B10A2CA003FAB86 /* FontWeightValue.swift in Sources */,
 				FC4635112B0C988000B8DCBE /* VariableValueError.swift in Sources */,
 				FC4C15CB2B0C975F0010BB1A /* StepType+Run.swift in Sources */,

@@ -466,6 +466,50 @@ extension MakeableToggle {
 	    }
 	}
 }
+extension NumericalOperationValue {
+	 enum Properties: String, ViewProperty {
+        case lhs
+        case rhs
+        case operation
+        var defaultValue: any EditableVariableValue {
+            switch self {
+            case .lhs: return NumericalOperationValue.defaultValue(for: .lhs)
+            case .rhs: return NumericalOperationValue.defaultValue(for: .rhs)
+            case .operation: return NumericalOperationValue.defaultValue(for: .operation)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> any EditableVariableValue) -> NumericalOperationValue {
+        .init(
+            lhs: factory(.lhs) as! Value,
+            rhs: factory(.rhs) as! Value,
+            operation: factory(.operation) as! NumericalOperationTypeValue
+        )
+    }
+
+    static func makeDefault() -> NumericalOperationValue {
+        .init(
+            lhs: Properties.lhs.defaultValue as! Value,
+            rhs: Properties.rhs.defaultValue as! Value,
+            operation: Properties.operation.defaultValue as! NumericalOperationTypeValue
+		)
+    }
+    func value(for property: Properties) -> any EditableVariableValue {
+		switch property {
+	        case .lhs: return lhs
+	        case .rhs: return rhs
+	        case .operation: return operation
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .lhs: self.lhs = value as! Value
+	        case .rhs: self.rhs = value as! Value
+	        case .operation: self.operation = value as! NumericalOperationTypeValue
+	    }
+	}
+}
 extension PrintVarStep {
 	 enum Properties: String, ViewProperty {
         case varName
@@ -751,6 +795,10 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(MakeableToggle.self, forKey: .value)
         case typeString(NilValue.self):
             self.value = try valueContainer.decode(NilValue.self, forKey: .value)
+        case typeString(NumericalOperationTypeValue.self):
+            self.value = try valueContainer.decode(NumericalOperationTypeValue.self, forKey: .value)
+        case typeString(NumericalOperationValue.self):
+            self.value = try valueContainer.decode(NumericalOperationValue.self, forKey: .value)
         case typeString(OptionalValue.self):
             self.value = try valueContainer.decode(OptionalValue.self, forKey: .value)
         case typeString(PrintVarStep.self):
@@ -823,6 +871,10 @@ extension CodableVariableValue: Codable {
             try container.encode(value, forKey: .value)
         case let value as NilValue:
             try container.encode(value, forKey: .value)
+        case let value as NumericalOperationTypeValue:
+            try container.encode(value, forKey: .value)
+        case let value as NumericalOperationValue:
+            try container.encode(value, forKey: .value)
         case let value as OptionalValue:
             try container.encode(value, forKey: .value)
         case let value as PrintVarStep:
@@ -890,6 +942,8 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
 	case stack // MakeableStack
 	case toggle // MakeableToggle
 	case `nil` // NilValue
+	case numericalOperationType // NumericalOperationTypeValue
+	case numericalOperation // NumericalOperationValue
 	case optional // OptionalValue
 	case stepArray // StepArray
 	case string // StringValue
@@ -916,6 +970,8 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .stack: return MakeableStack.makeDefault()
         case .toggle: return MakeableToggle.makeDefault()
         case .`nil`: return NilValue.makeDefault()
+        case .numericalOperationType: return NumericalOperationTypeValue.makeDefault()
+        case .numericalOperation: return NumericalOperationValue.makeDefault()
         case .optional: return OptionalValue.makeDefault()
         case .stepArray: return StepArray.makeDefault()
         case .string: return StringValue.makeDefault()
@@ -943,6 +999,8 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .stack: return "stack"
         case .toggle: return "toggle"
         case .`nil`: return "`nil`"
+        case .numericalOperationType: return "numericalOperationType"
+        case .numericalOperation: return "numericalOperation"
         case .optional: return "optional"
         case .stepArray: return "stepArray"
         case .string: return "string"

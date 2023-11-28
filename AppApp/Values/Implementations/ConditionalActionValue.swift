@@ -26,7 +26,11 @@ final class ConditionalActionValue: CompositeEditableVariableValue, ObservableOb
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
-        case .ifCondition: return Value(value: BoolValue(value: true))
+        case .ifCondition: return ComparisonValue(
+            lhs: .init(value: Variable(value: StringValue(value: "VAR"))),
+            rhs: .init(value: BoolValue(value: true)),
+            comparison: .init(value: .equals)
+        )
         case .ifSteps: return StepArray(value: [])
         }
     }
