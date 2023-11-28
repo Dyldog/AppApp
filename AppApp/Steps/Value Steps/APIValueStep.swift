@@ -11,8 +11,8 @@ final class APIValueStep: ValueStep {
     static var title: String { "Get value from API" }
     var url: Value
     
-    var protoString: String { "{ $\(url.valueString) }" }
-    
+    var protoString: String { "{ $\(url.protoString) }" }
+    var valueString: String { "{ $\(url.valueString) }" }
     init(url: Value) {
         self.url = url
     }

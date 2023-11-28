@@ -11,6 +11,7 @@ import DylKit
 struct EditViewView: View {
     @StateObject var viewModel: EditViewViewModel
     @State var update: Int = 0
+    @State var error: VariableValueError?
     
     var body: some View {
         VStack {
@@ -19,6 +20,7 @@ struct EditViewView: View {
                 update += 1
             }
             .frame(minWidth: 300, minHeight: 300)
+            .padding()
             
 //            DoView {
             MakeableWrapperView(
@@ -26,7 +28,8 @@ struct EditViewView: View {
                 showEditControls: false,
                 view: viewModel.editable,
                 onContentUpdate: { _ in },
-                onRuntimeUpdate: { }
+                onRuntimeUpdate: { }, 
+                error: $error
             )
             .id(update)
             .padding(20)

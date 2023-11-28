@@ -12,7 +12,8 @@ final class VariableStep: ValueStep {
     var varName: Value
     var type: VariableTypeValue
     
-    var protoString: String { "{ $\(varName) }" }
+    var protoString: String { "{ $\(varName.protoString) }" }
+    var valueString: String { "{ $\(varName.valueString) }" }
     
     init(varName: Value, type: VariableTypeValue) {
         self.varName = varName

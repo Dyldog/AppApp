@@ -16,9 +16,19 @@ struct MakeableLabelView: View {
     let onRuntimeUpdate: () -> Void
     
     @EnvironmentObject var variables: Variables
-//    @Binding var error: VariableValueError?
+    @Binding var error: VariableValueError?
+    
     @State var text: String = "LOADING"
     
+    init(isRunning: Bool, showEditControls: Bool, label: MakeableLabel, onContentUpdate: @escaping (MakeableLabel) -> Void, onRuntimeUpdate: @escaping () -> Void, error: Binding<VariableValueError?>) {
+        self.isRunning = isRunning
+        self.showEditControls = showEditControls
+        self.label = label
+        self.onContentUpdate = onContentUpdate
+        self.onRuntimeUpdate = onRuntimeUpdate
+        self._variables = .init()
+        self._error = error
+    }
     func labelText() async -> String {
         do {
             if isRunning {
@@ -27,7 +37,7 @@ struct MakeableLabelView: View {
                 return label.protoString
             }
         } catch let error as VariableValueError {
-//            self.error = error
+            self.error = error
             return "Error"
         } catch {
             fatalError(error.localizedDescription)

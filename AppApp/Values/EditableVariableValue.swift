@@ -75,13 +75,14 @@ extension CompositeEditableVariableValue {
             ForEach(enumerated: propertyRows(onUpdate: onUpdate).map { ($0.0, $0.1, $0.2) }) { (index, row) in
                 HStack {
                     Text(row.0)
+                    Spacer()
                     row.1.editView { value in
                         row.2(value)
                         onUpdate(self)
                     }
                 }
             }
-            .padding()
+//            .padding()
         }.any
     }
 }

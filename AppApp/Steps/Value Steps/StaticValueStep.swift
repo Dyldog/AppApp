@@ -13,6 +13,7 @@ final class StaticValueStep: ValueStep {
     var type: VariableTypeValue
     
     var protoString: String { value.protoString }
+    var valueString: String { value.valueString }
     
     init(value: Value, type: VariableTypeValue) {
         self.value = value

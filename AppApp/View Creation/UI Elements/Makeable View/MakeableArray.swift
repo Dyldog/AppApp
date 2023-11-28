@@ -54,7 +54,8 @@ final class MakeableArray: EditableVariableValue {
                 onContentUpdate: {
                     onUpdate($0.content)
                 },
-                onRuntimeUpdate: { }
+                onRuntimeUpdate: { }, 
+                error: .constant(nil)
             )
         }.any
     }

@@ -55,7 +55,8 @@ struct MakeableToggleView: View {
     let onContentUpdate: (MakeableToggle) -> Void
     let onRuntimeUpdate: () -> Void
     @EnvironmentObject var variables: Variables
-//    @Binding var error: VariableValueError?
+    @Binding var error: VariableValueError?
+    
     @State var isOn: Bool = false
     
     var body: some View {
@@ -65,13 +66,13 @@ struct MakeableToggleView: View {
             }, set: {
                 onUpdate($0)
             })).fixedSize().any
-        }.task {
+        }.task(id: variables.hashValue) {
             do {
                 guard let value = try await toggle.isOn.value(with: variables) as? BoolValue
                 else { throw VariableValueError.valueNotFoundForVariable(toggle.isOn.protoString) }
                 self.isOn = value.value
             } catch let error as VariableValueError {
-//                self.error = error
+                self.error = error
             } catch {
                 fatalError(error.localizedDescription)
             }

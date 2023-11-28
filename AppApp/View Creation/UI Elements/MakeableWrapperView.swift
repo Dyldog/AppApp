@@ -13,4 +13,14 @@ struct MakeableWrapperView: View {
     @State var view: any MakeableView
     let onContentUpdate: (any MakeableView) -> Void
     let onRuntimeUpdate: () -> Void
+    @Binding var error: VariableValueError?
+    
+    init(isRunning: Bool, showEditControls: Bool, view: any MakeableView, onContentUpdate: @escaping (any MakeableView) -> Void, onRuntimeUpdate: @escaping () -> Void, error: Binding<VariableValueError?>) {
+        self.isRunning = isRunning
+        self.showEditControls = showEditControls
+        self.view = view
+        self.onContentUpdate = onContentUpdate
+        self.onRuntimeUpdate = onRuntimeUpdate
+        self._error = error
+    }
 }

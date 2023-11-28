@@ -26,6 +26,11 @@ final class IfStep: Step {
     else:\n\t\(elseAction.protoString)
     """ }
     
+    var valueString: String { """
+    \(ifAction.valueString)
+    else:\n\t\(elseAction.valueString)
+    """ }
+    
     func run(with variables: Variables) async throws {
         if let ifValue = try? await ifAction.value(with: variables) as? StepArray, !ifValue.value.isEmpty {
             try await ifValue.run(with: variables)

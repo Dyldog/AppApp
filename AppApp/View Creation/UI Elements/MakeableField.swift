@@ -14,7 +14,7 @@ struct MakeableFieldView: View {
     let onContentUpdate: (MakeableField) -> Void
     let onRuntimeUpdate: () -> Void
     @EnvironmentObject var variables: Variables
-//    @Binding var error: VariableValueError?
+    @Binding var error: VariableValueError?
     @State var text: String = "LOADING"
     
     var body: some View {
@@ -36,7 +36,7 @@ struct MakeableFieldView: View {
                 let value = try await field.text.value(with: variables).valueString
                 self.text = value
             } catch let error as VariableValueError {
-//                self.error = error
+                self.error = error
             } catch {
                 fatalError(error.localizedDescription)
             }
@@ -54,7 +54,7 @@ struct MakeableFieldView: View {
                     try await field.onTextUpdate.run(with: variables)
                 }
             } catch let error as VariableValueError {
-//                self.error = error
+                self.error = error
             } catch {
                 fatalError(error.localizedDescription)
             }

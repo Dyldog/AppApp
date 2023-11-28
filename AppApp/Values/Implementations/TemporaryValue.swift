@@ -34,7 +34,8 @@ final class TemporaryValue: CompositeEditableVariableValue {
     var valueString: String { output.valueString }
     
     func value(with variables: Variables) async throws -> VariableValue {
-        if let setValue = try? await output.value(with: variables) {
+        let variableName = try await output.value.value(with: variables)
+        if let setValue = await variables.value(for: variableName.valueString) {
             return setValue
         } else {
             return try await initial.value(with: variables)

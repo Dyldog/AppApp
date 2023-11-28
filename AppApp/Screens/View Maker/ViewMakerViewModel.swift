@@ -28,12 +28,10 @@ class ViewMakerViewModel: ObservableObject {
     
     @Published var makeMode: Bool = true
     
-//    @Published var showAddIndex: Int?
-//    @Published var showEditIndex: EditRow?
-    
     @Published private(set) var updater: Int = 0
     
     @Published private(set) var _variables: Variables
+    @Published var error: VariableValueError?
     
     private var cancellables: Set<AnyCancellable> = .init()
     
@@ -64,6 +62,12 @@ class ViewMakerViewModel: ObservableObject {
             self?.objectWillChange.send()
         }.store(in: &cancellables)
         
+        $makeMode.sink { _ in
+            Task { @MainActor in
+                await self.makeNewVariables()
+            }
+        }.store(in: &cancellables)
+        
 //        $content.dropFirst().sink { content in
 //            onUpdate(.init(name: self.name, initActions: self.initActions, content: content))
 //        }.store(in: &cancellables)
@@ -83,6 +87,10 @@ class ViewMakerViewModel: ObservableObject {
         self.variables = vars
         
         self.updater += 1
+    }
+    
+    func makeNewVariables() async {
+        self._variables = await self.makeVariables()
     }
     
     func makeVariables()  async -> Variables {
@@ -108,8 +116,11 @@ class ViewMakerViewModel: ObservableObject {
     }
     
     func updateInitActions(_ newValue: StepArray) {
-        initActions = newValue
-        onUpdate(.init(id: screenID, name: self.name, initActions: self.initActions, content: self.content))
+        Task { @MainActor in
+            self.initActions = newValue
+            await makeNewVariables()
+            onUpdate(.init(id: screenID, name: self.name, initActions: self.initActions, content: self.content))
+        }
     }
 }
 

@@ -19,7 +19,18 @@ struct MakeableStackView: View {
     @State var showAddIndex: Int?
     @State var showEditIndex: Int?
     @EnvironmentObject var variables: Variables
-//    @Binding var error: VariableValueError?
+    @Binding var error: VariableValueError?
+    
+    init(isRunning: Bool, showEditControls: Bool, stack: MakeableStack, onContentUpdate: @escaping (MakeableStack) -> Void, onRuntimeUpdate: @escaping () -> Void, showAddIndex: Int? = nil, showEditIndex: Int? = nil, error: Binding<VariableValueError?>) {
+        self.isRunning = isRunning
+        self.showEditControls = showEditControls
+        self.stack = stack
+        self.onContentUpdate = onContentUpdate
+        self.onRuntimeUpdate = onRuntimeUpdate
+        self.showAddIndex = showAddIndex
+        self.showEditIndex = showEditIndex
+        self._error = error
+    }
     
     var body: some View {
         Stack(axis: stack.content.axis.value) {
@@ -31,12 +42,11 @@ struct MakeableStackView: View {
                 Text("STACK")
             } else {
                 ForEach(enumerated: stack.content.value) { (index, element) in
-                    //                DoView {
                     VStack {
                         HStack {
                             MakeableWrapperView(isRunning: isRunning, showEditControls: false, view: element, onContentUpdate: {
                                 self.onUpdate(at: index, with: $0)
-                            }, onRuntimeUpdate: onRuntimeUpdate)
+                            }, onRuntimeUpdate: onRuntimeUpdate, error: $error)
                             .onEdit(showEditControls ? { self.showEditIndex = index } : nil)
                             
                             if showEditControls {

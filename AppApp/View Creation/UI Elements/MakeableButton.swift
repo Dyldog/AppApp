@@ -14,8 +14,16 @@ struct MakeableButtonView: View {
     let onContentUpdate: (MakeableButton) -> Void
     let onRuntimeUpdate: () -> Void
     @EnvironmentObject var variables: Variables
-//    @Binding var error: VariableValueError?
+    @Binding var error: VariableValueError?
     
+    init(isRunning: Bool, showEditControls: Bool, button: MakeableButton, onContentUpdate: @escaping (MakeableButton) -> Void, onRuntimeUpdate: @escaping () -> Void, error: Binding<VariableValueError?>) {
+        self.isRunning = isRunning
+        self.showEditControls = showEditControls
+        self.button = button
+        self.onContentUpdate = onContentUpdate
+        self.onRuntimeUpdate = onRuntimeUpdate
+        self._error = error
+    }
     var body: some View {
         return SwiftUI.Button(action: {
             runAction()
@@ -25,7 +33,7 @@ struct MakeableButtonView: View {
                 onContentUpdate(button)
             }, onRuntimeUpdate: {
                 onRuntimeUpdate()
-            })
+            }, error: $error)
         }).any
     }
     
@@ -39,7 +47,7 @@ struct MakeableButtonView: View {
                     
                     onRuntimeUpdate()
                 } catch let error as VariableValueError {
-//                    self.error = error
+                    self.error = error
                 } catch {
                     fatalError(error.localizedDescription)
                 }

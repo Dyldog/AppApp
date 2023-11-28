@@ -30,7 +30,8 @@ struct ViewMakerView: View {
                                     viewModel.onRuntimeUpdate()
                                 }
                                 
-                            }
+                            }, 
+                            error: $viewModel.error
                         ).id(viewModel.variables)
                     }
                     .frame(minHeight: geometry.size.height)
@@ -38,11 +39,11 @@ struct ViewMakerView: View {
             }
             .environmentObject(viewModel.variables)
             .navigationTitle(viewModel.name)
-//            .if(viewModel.showErrors, modified: { view in
-//                view.alert(item: $viewModel.error, content: {
-//                    .init(title: Text("Error"), message: Text($0.localizedDescription))
-//                })
-//            })
+            .if(viewModel.showErrors, modified: { view in
+                view.alert(item: $viewModel.error, content: {
+                    .init(title: Text("Error"), message: Text($0.localizedDescription))
+                })
+            })
             .toolbar {
                 HStack {
                     if viewModel.makeMode {

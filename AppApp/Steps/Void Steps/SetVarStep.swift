@@ -22,6 +22,7 @@ final class SetVarStep: Step {
     }
     
     var protoString: String { "{ $\(varName.protoString) = \(value.protoString) }" }
+    var valueString: String { "{ $\(varName.valueString) = \(value.valueString) }" }
     
     func run(with variables: Variables) async throws {
         let varValue = try await varName.value(with: variables)

@@ -12,6 +12,7 @@ final class DecodeDictionaryStep: ValueStep {
     var value: Value
     
     var protoString: String { "{ DECODE($\(value.protoString)) }" }
+    var valueString: String { "{ DECODE($\(value.valueString)) }" }
     
     init(value: Value) {
         self.value = value

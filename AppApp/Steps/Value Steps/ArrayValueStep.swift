@@ -9,8 +9,10 @@ import SwiftUI
 
 final class ArrayValueStep: ValueStep {
     static var title: String { "Get value from array" }
+    
     var protoString: String { "\(array.protoString)[\(index.protoString)]"}
-      
+    var valueString: String { "\(array.valueString)[\(index.valueString)]"}
+    
     var array: Value
     var index: Value
     

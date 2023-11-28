@@ -14,6 +14,7 @@ final class AddToVarStep: Step, ObservableObject {
     var value: Value
     
     var protoString: String { "{ $\(varName.protoString) += \(value.protoString) }" }
+    var valueString: String { "{ $\(varName.valueString) += \(value.value) }" }
     
     init(varName: Value, value: Value) {
         self.varName = varName

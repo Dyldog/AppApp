@@ -13,7 +13,8 @@ final class PrintVarStep: Step, Codable {
     static var title: String { "Print variable" }
     var varName: Value
     
-    var protoString: String { "{ print($\(varName)) }"}
+    var protoString: String { "{ print($\(varName.protoString)) }"}
+    var valueString: String { "{ print($\(varName.valueString)) }"}
     
     required init(varName: Value) {
         self.varName = varName
