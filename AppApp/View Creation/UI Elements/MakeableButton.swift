@@ -35,6 +35,8 @@ struct MakeableButtonView: View {
                 onRuntimeUpdate()
             }, error: $error)
         })
+        .buttonStyle(.bordered)
+//        .buttonStyle(button.style.value.style)
     }
     
     func runAction() {
@@ -60,13 +62,15 @@ final class MakeableButton: MakeableView, Codable {
     static var type: VariableType { .button }
     
     var title: MakeableLabel
+    var style: ButtonStyleValue
     var action: StepArray
     
     var protoString: String { title.protoString }
     var valueString: String { title.valueString }
     
-    init(title: MakeableLabel, action: StepArray) {
+    init(title: MakeableLabel, style: ButtonStyleValue, action: StepArray) {
         self.title = title
+        self.style = style
         self.action = action
     }
     
@@ -82,6 +86,7 @@ final class MakeableButton: MakeableView, Codable {
         switch property {
         case .title: return MakeableLabel.makeDefault()
         case .action: return StepArray(value: [])
+        case .style: return ButtonStyleValue(value: .bordered)
         }
     }
     

@@ -1,18 +1,13 @@
 //
-//  AxisValue.swift
+//  CaseIterable+Codable.swift
 //  AppApp
 //
-//  Created by Dylan Elliott on 27/11/2023.
+//  Created by Dylan Elliott on 29/11/2023.
 //
 
-import SwiftUI
+import Foundation
 
-extension Axis: Codable, PickableValue {
-    static var defaultValue: Axis = .vertical
-    var title: String { description }
-}
-
-extension Axis {
+extension PickableValue {
     public init(from decoder: Decoder) throws {
         let title = try decoder.singleValueContainer().decode(String.self)
         guard let value = Self.allCases.first(where: { $0.title == title }) else {

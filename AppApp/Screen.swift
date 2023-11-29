@@ -43,3 +43,76 @@ struct Screen: Codable, Identifiable {
         name = try container.decode(String.self, forKey: .name)
     }
 }
+
+extension Variable {
+    static func named(_ name: String) -> Variable {
+        .init(value: StringValue(value: name))
+    }
+}
+
+extension AnyValue {
+    static func variable(named name: String) -> AnyValue {
+        Variable.named(name).any
+    }
+    
+    static func string(_ value: String) -> AnyValue {
+        StringValue(value: value).any
+    }
+}
+
+extension IntValue {
+    static func int(_ value: Int) -> IntValue {
+        .init(value: value)
+    }
+}
+
+extension MakeableLabel {
+    static func text(_ text: AnyValue) -> MakeableLabel {
+        .init(text: text, fontSize: .int(18), fontWeight: .init(value: .regular), italic: .init(value: false), base: .makeDefault(), textColor: .init(value: .black))
+    }
+}
+
+extension Screen {
+    static let defaults: [Screen] = [.internetDictionary]
+    
+    private static let internetDictionary: Screen = .init(
+        id: .init(),
+        name: "Internet Dictionary",
+        initActions: .init(value: [
+            APIValueStep(url: StringValue(value: "https://api.ipify.org?format=json").any),
+            DecodeDictionaryStep(value: Variable(value: StringValue(value: "$0")).any),
+            DictionaryValueForKeyStep(dictionary: .init(value: .variable(.named("$0"))), key: .string("ip")),
+            SetVarStep(varName: .string("IP"), value: .variable(named: "$0")),
+            SetVarStep(varName: .string("LOCATIONURL"), value: .string("http://ip-api.com/json/")),
+            AddToVarStep(varName: .string("LOCATIONURL"), value: .variable(named: "IP")),
+            APIValueStep(url: .variable(named: "LOCATIONURL")),
+            DecodeDictionaryStep(value: .variable(named: "$0")),
+            SetVarStep(varName: .string("LOCATION"), value: .variable(named: "$0")),
+            DictionaryKeysStep(dictionary: .init(value: .variable(.named("$0")))),
+            SetVarStep(varName: .string("KEYS"), value: .variable(named: "$0"))
+        ]), content: .init(content: .init(value: [
+            MakeableLabel(
+                text: .variable(named: "IP"),
+                fontSize: .int(24),
+                fontWeight: .init(value: .semibold),
+                italic: .init(value: true),
+                base: .makeDefault(), 
+                textColor: .init(value: .black)
+            ),
+            MakeableList(
+                data: .init(value: .variable(.named("KEYS"))),
+                view: MakeableStack(
+                    content: .init(value: [
+                        MakeableLabel.text(.variable(named: "$0")),
+                        MakeableLabel.text(ResultValue(steps: .init(value: [
+                            DictionaryValueForKeyStep(
+                                dictionary: .init(value: .variable(.named("LOCATION"))),
+                                key: .variable(named: "$0")
+                            )
+                        ])).any)
+                    ], axis: .init(value: .horizontal)),
+                    padding: .int(5)
+                ).any
+            )
+        ], axis: .init(value: .vertical)), padding: .init(value: 5)))
+}

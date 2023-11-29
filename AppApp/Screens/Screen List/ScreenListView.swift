@@ -9,7 +9,7 @@ import SwiftUI
 import DylKit
 
 class ScreenListViewModel: ObservableObject {
-    @UserDefaultable(key: "SCREENS") var screens: [Screen] = []
+    @UserDefaultable(key: "SCREENS") var screens: [Screen] = Screen.defaults
 }
 
 struct ScreenListView: View {

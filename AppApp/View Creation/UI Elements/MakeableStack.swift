@@ -42,21 +42,19 @@ struct MakeableStackView: View {
                 Text("STACK")
             } else {
                 ForEach(enumerated: stack.content.value) { (index, element) in
-                    VStack {
-                        HStack {
-                            MakeableWrapperView(isRunning: isRunning, showEditControls: false, view: element, onContentUpdate: {
-                                self.onUpdate(at: index, with: $0)
-                            }, onRuntimeUpdate: onRuntimeUpdate, error: $error)
-                            .onEdit(showEditControls ? { self.showEditIndex = index } : nil)
-                            
-                            if showEditControls {
-                                SwiftUI.Button("X", action: { onRemove(at: index) })
-                            }
-                        }
+                    HStack {
+                        MakeableWrapperView(isRunning: isRunning, showEditControls: false, view: element, onContentUpdate: {
+                            self.onUpdate(at: index, with: $0)
+                        }, onRuntimeUpdate: onRuntimeUpdate, error: $error)
+                        .onEdit(showEditControls ? { self.showEditIndex = index } : nil)
                         
                         if showEditControls {
-                            makeButton(at: index + 1)
+                            SwiftUI.Button("X", action: { onRemove(at: index) })
                         }
+                    }
+                    
+                    if showEditControls {
+                        makeButton(at: index + 1)
                     }
                 }
             }
@@ -110,7 +108,12 @@ final class MakeableStack: MakeableView, Codable {
         self.padding = padding
     }
     
-    func value(with variables: Variables) async throws -> VariableValue { self }
+    func value(with variables: Variables) async throws -> VariableValue {
+        MakeableStack(
+            content: try await content.value(with: variables),
+            padding: try await padding.value(with: variables)
+        )
+    }
     
     func add(_ other: VariableValue) throws -> VariableValue { fatalError() }
     

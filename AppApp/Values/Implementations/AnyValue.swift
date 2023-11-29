@@ -43,9 +43,10 @@ final class AnyValue: EditableVariableValue {
                 EditVariableView(name: title, value: value) { [weak self] in
                     guard let self = self else { return }
                     self.value = $0
+                    onUpdate(self)
                 }
             } onDismiss: {
-                onUpdate(self)
+//                onUpdate(self)
             }
         }.any
     }

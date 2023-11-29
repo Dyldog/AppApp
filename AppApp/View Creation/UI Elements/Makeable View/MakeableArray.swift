@@ -37,7 +37,16 @@ final class MakeableArray: EditableVariableValue {
     }
     
     func value(with variables: Variables) async throws -> VariableValue {
-        self
+        var newViews: [any MakeableView] = []
+        
+        for view in value {
+            newViews.append(try await view.value(with: variables))
+        }
+        
+        return MakeableArray(
+            value: newViews,
+            axis: try await axis.value(with: variables)
+        )
     }
     
     

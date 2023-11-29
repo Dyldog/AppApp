@@ -7,7 +7,14 @@
 
 import SwiftUI
 
-extension Font.Weight: CaseIterable, Titleable {
+protocol PickableValue: CaseIterable, Titleable, Codable {
+    static var defaultValue: Self { get }
+}
+
+extension Font.Weight: PickableValue {
+    
+    static var defaultValue: Font.Weight { .regular }
+    
     public static var allCases: [Font.Weight] { [
         .regular,
         .bold,
@@ -27,33 +34,6 @@ extension Font.Weight: CaseIterable, Titleable {
         case .regular: return "Regular"
         default: return "???"
         }
-    }
-}
-
-final class FontWeightValue: PrimitiveEditableVariableValue, Codable {
-
-    static var type: VariableType { .fontWeight }
-    static var defaultValue: Font.Weight { .regular }
-    var value: Font.Weight
-    
-    init(value: Font.Weight) {
-        self.value = value
-    }
-    
-    static func makeDefault() -> FontWeightValue {
-        .init(value: .regular)
-    }
-    
-    func add(_ other: VariableValue) throws -> VariableValue {
-        throw VariableValueError.variableCannotPerformOperation(Self.type, "add")
-    }
-    
-    var protoString: String { "\(value.title)" }
-    
-    var valueString: String { protoString }
-    
-    func value(with variables: Variables) async throws -> VariableValue {
-        self
     }
 }
     

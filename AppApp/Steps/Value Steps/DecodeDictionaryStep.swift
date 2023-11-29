@@ -35,6 +35,7 @@ final class DecodeDictionaryStep: ValueStep {
             switch $1.value {
             case let string as String: value = StringValue(value: string)
             case let int as Int: value = IntValue(value: int)
+            case let nsNumber as NSNumber: value = IntValue(value: nsNumber.intValue)
             case let array as Array<String>:
                 value = ArrayValue(type: .string, elements: array.map { StringValue(value: $0) })
             case let array as Array<Int>:

@@ -62,6 +62,7 @@ final class ArrayValue: EditableVariableValue, ObservableObject {
                     self ?? .init(type: .int, elements: [IntValue(value: 666)])
                 }, set: {
                     self.elements = $0.elements
+//                    onUpdate(self)
                 }), onUpdate: {
                     self.elements = $0.elements
                     onUpdate(self)
