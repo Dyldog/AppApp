@@ -32,7 +32,7 @@ class Variables: Equatable, ObservableObject, Hashable, Identifiable {
     }
     
     @MainActor func set(_ value: VariableValue, for name: String) {
-        variables[name] = value
+        variables[name] = value.copy() as? any VariableValue
     }
     
     @MainActor func set(from other: Variables) {

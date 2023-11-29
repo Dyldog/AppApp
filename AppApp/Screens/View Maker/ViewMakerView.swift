@@ -32,7 +32,7 @@ struct ViewMakerView: View {
                                 
                             }, 
                             error: $viewModel.error
-                        ).id(viewModel.variables)
+                        )
                     }
                     .frame(minHeight: geometry.size.height)
                 }
@@ -47,7 +47,7 @@ struct ViewMakerView: View {
             .toolbar {
                 HStack {
                     if viewModel.makeMode {
-                        SheetButton(title: { Text("Edit") }) {
+                        SheetButton(title: { Text("Init Actions") }) {
                             ActionListView(steps: viewModel.initActions.value, onUpdate: {
                                 viewModel.updateInitActions(.init(value: $0))
                             })

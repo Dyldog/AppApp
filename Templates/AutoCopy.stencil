@@ -1,0 +1,11 @@
+{% for type in types.implementing.VariableValue|!protocol %}
+extension {{ type.name }}: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return {{type.name}}(
+                {% for var in type.storedVariables where not var.defaultValue %}
+                    {{ var.name }}: {{ var.name }}{% if var.type.implements.NSCopying %}.copy() as! {{ var.typeName }}{% endif %}{{ "," if not forloop.last}}
+                {% endfor %}
+        )
+    }
+}
+{% endfor %}

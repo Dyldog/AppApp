@@ -60,8 +60,12 @@ struct MakeableStackView: View {
                     }
                 }
             }
-        }.if(showEditControls) {
-            $0.padding().border(.black, width: 2)
+        }
+        .if(showEditControls) {
+            $0.padding().overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.gray.opacity(0.5), lineWidth: 2)
+            )
         }
         .sheet(item: $showAddIndex, content: { index in
             AddViewView(viewModel: .init(onSelect: { view in
@@ -73,7 +77,6 @@ struct MakeableStackView: View {
                 onUpdate(at: index, with: $0)
             })
         })
-        .id(variables.hashValue)
     }
     
     private func onRemove(at index: Int) {

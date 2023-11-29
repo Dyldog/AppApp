@@ -34,9 +34,7 @@ struct MakeableButtonView: View {
             }, onRuntimeUpdate: {
                 onRuntimeUpdate()
             }, error: $error)
-            .id(variables.hashValue)
         })
-        .id(variables.hashValue).any
     }
     
     func runAction() {

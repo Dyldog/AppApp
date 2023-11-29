@@ -79,10 +79,9 @@ extension CompositeEditableVariableValue {
                     row.1.editView { value in
                         row.2(value)
                         onUpdate(self)
-                    }
+                    }.multilineTextAlignment(.trailing)
                 }
             }
-//            .padding()
         }.any
     }
 }

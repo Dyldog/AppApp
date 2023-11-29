@@ -1,6 +1,281 @@
 // Generated using Sourcery 2.1.2 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
+
+extension APIValueStep: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return APIValueStep(
+                    url: url
+        )
+    }
+}
+extension AddToVarStep: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return AddToVarStep(
+                    varName: varName,
+                    value: value
+        )
+    }
+}
+extension ArrayValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return ArrayValue(
+                    type: type,
+                    elements: elements
+        )
+    }
+}
+extension ArrayValueStep: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return ArrayValueStep(
+                    array: array,
+                    index: index
+        )
+    }
+}
+extension AxisValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return AxisValue(
+                    value: value
+        )
+    }
+}
+extension BoolValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return BoolValue(
+                    value: value
+        )
+    }
+}
+extension ComparisonTypeValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return ComparisonTypeValue(
+                    value: value
+        )
+    }
+}
+extension ComparisonValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return ComparisonValue(
+                    lhs: lhs,
+                    rhs: rhs,
+                    comparison: comparison
+        )
+    }
+}
+extension ConditionalActionValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return ConditionalActionValue(
+                    ifCondition: ifCondition,
+                    ifSteps: ifSteps
+        )
+    }
+}
+extension DecodeDictionaryStep: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return DecodeDictionaryStep(
+                    value: value
+        )
+    }
+}
+extension DictionaryValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return DictionaryValue(
+                    type: type,
+                    elements: elements
+        )
+    }
+}
+extension FontWeightValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return FontWeightValue(
+                    value: value
+        )
+    }
+}
+extension FunctionStep: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return FunctionStep(
+                    functionName: functionName
+        )
+    }
+}
+extension IfStep: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return IfStep(
+                    ifAction: ifAction,
+                    elseAction: elseAction
+        )
+    }
+}
+extension IntValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return IntValue(
+                    value: value
+        )
+    }
+}
+extension MakeableArray: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return MakeableArray(
+                    value: value,
+                    axis: axis
+        )
+    }
+}
+extension MakeableBase: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return MakeableBase(
+                    padding: padding
+        )
+    }
+}
+extension MakeableButton: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return MakeableButton(
+                    title: title,
+                    action: action
+        )
+    }
+}
+extension MakeableField: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return MakeableField(
+                    text: text,
+                    fontSize: fontSize,
+                    onTextUpdate: onTextUpdate
+        )
+    }
+}
+extension MakeableLabel: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return MakeableLabel(
+                    text: text,
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                    italic: italic
+        )
+    }
+}
+extension MakeableStack: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return MakeableStack(
+                    content: content
+        )
+    }
+}
+extension MakeableToggle: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return MakeableToggle(
+                    isOn: isOn,
+                    onToggleUpdate: onToggleUpdate
+        )
+    }
+}
+extension NilValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return NilValue(
+        )
+    }
+}
+extension NumericalOperationTypeValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return NumericalOperationTypeValue(
+                    value: value
+        )
+    }
+}
+extension NumericalOperationValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return NumericalOperationValue(
+                    lhs: lhs,
+                    rhs: rhs,
+                    operation: operation
+        )
+    }
+}
+extension OptionalValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return OptionalValue(
+                    value: value
+        )
+    }
+}
+extension PrintVarStep: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return PrintVarStep(
+                    varName: varName
+        )
+    }
+}
+extension SetVarStep: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return SetVarStep(
+                    varName: varName,
+                    value: value
+        )
+    }
+}
+extension StaticValueStep: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return StaticValueStep(
+                    value: value,
+                    type: type
+        )
+    }
+}
+extension StepArray: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return StepArray(
+                    value: value
+        )
+    }
+}
+extension StringValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return StringValue(
+                    value: value
+        )
+    }
+}
+extension TemporaryValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return TemporaryValue(
+                    initial: initial,
+                    output: output
+        )
+    }
+}
+extension Value: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return Value(
+                    value: value
+        )
+    }
+}
+extension Variable: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return Variable(
+                    value: value
+        )
+    }
+}
+extension VariableStep: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return VariableStep(
+                    varName: varName,
+                    type: type
+        )
+    }
+}
+extension VariableTypeValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return VariableTypeValue(
+                    value: value
+        )
+    }
+}
+
 import SwiftUI
 
 
@@ -293,6 +568,38 @@ extension IfStep {
 		switch property {
 	        case .ifAction: self.ifAction = value as! ConditionalActionValue
 	        case .elseAction: self.elseAction = value as! StepArray
+	    }
+	}
+}
+extension MakeableBase {
+	 enum Properties: String, ViewProperty {
+        case padding
+        var defaultValue: any EditableVariableValue {
+            switch self {
+            case .padding: return MakeableBase.defaultValue(for: .padding)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> any EditableVariableValue) -> MakeableBase {
+        .init(
+            padding: factory(.padding) as! IntValue
+        )
+    }
+
+    static func makeDefault() -> MakeableBase {
+        .init(
+            padding: Properties.padding.defaultValue as! IntValue
+		)
+    }
+    func value(for property: Properties) -> any EditableVariableValue {
+		switch property {
+	        case .padding: return padding
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .padding: self.padding = value as! IntValue
 	    }
 	}
 }
@@ -732,7 +1039,10 @@ extension CodableMakeableList: Codable {
         var contentContainer = try decoder.unkeyedContainer()
         var content: [any MakeableView] = []
         while !contentContainer.isAtEnd {
-            if let value = try? contentContainer.decode(MakeableButton.self) {
+            if let value = try? contentContainer.decode(MakeableBase.self) {
+                content.append(value)
+            }  
+            else if let value = try? contentContainer.decode(MakeableButton.self) {
                 content.append(value)
             }  
             else if let value = try? contentContainer.decode(MakeableField.self) {
@@ -758,6 +1068,8 @@ extension CodableMakeableList: Codable {
         var contentContainer = encoder.unkeyedContainer()
         for element in elements {
             switch element {
+            case let value as MakeableBase:
+                try contentContainer.encode(value)
             case let value as MakeableButton:
                 try contentContainer.encode(value)
             case let value as MakeableField:
@@ -817,6 +1129,8 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(IntValue.self, forKey: .value)
         case typeString(MakeableArray.self):
             self.value = try valueContainer.decode(MakeableArray.self, forKey: .value)
+        case typeString(MakeableBase.self):
+            self.value = try valueContainer.decode(MakeableBase.self, forKey: .value)
         case typeString(MakeableButton.self):
             self.value = try valueContainer.decode(MakeableButton.self, forKey: .value)
         case typeString(MakeableField.self):
@@ -895,6 +1209,8 @@ extension CodableVariableValue: Codable {
             try container.encode(value, forKey: .value)
         case let value as MakeableArray:
             try container.encode(value, forKey: .value)
+        case let value as MakeableBase:
+            try container.encode(value, forKey: .value)
         case let value as MakeableButton:
             try container.encode(value, forKey: .value)
         case let value as MakeableField:
@@ -941,6 +1257,9 @@ extension CodableVariableValue: Codable {
 extension AddViewViewModel {
 	convenience init(onSelect: @escaping (any MakeableView) -> Void) {
 		self.init(rows: [
+            .init(title: "Base", onTap: {
+                onSelect(MakeableBase.makeDefault())
+            }),
             .init(title: "Button", onTap: {
                 onSelect(MakeableButton.makeDefault())
             }),
@@ -972,6 +1291,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
 	case fontWeight // FontWeightValue
 	case int // IntValue
 	case makeableArray // MakeableArray
+	case base // MakeableBase
 	case button // MakeableButton
 	case field // MakeableField
 	case label // MakeableLabel
@@ -1000,6 +1320,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .fontWeight: return FontWeightValue.makeDefault()
         case .int: return IntValue.makeDefault()
         case .makeableArray: return MakeableArray.makeDefault()
+        case .base: return MakeableBase.makeDefault()
         case .button: return MakeableButton.makeDefault()
         case .field: return MakeableField.makeDefault()
         case .label: return MakeableLabel.makeDefault()
@@ -1029,6 +1350,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .fontWeight: return "fontWeight"
         case .int: return "int"
         case .makeableArray: return "makeableArray"
+        case .base: return "base"
         case .button: return "button"
         case .field: return "field"
         case .label: return "label"
@@ -1051,6 +1373,8 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
 extension MakeableWrapperView {
 	var body: some View {
         switch view {
+        case let value as MakeableBase:
+            MakeableBaseView(isRunning: isRunning, showEditControls: showEditControls, base: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
         case let value as MakeableButton:
             MakeableButtonView(isRunning: isRunning, showEditControls: showEditControls, button: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
         case let value as MakeableField:

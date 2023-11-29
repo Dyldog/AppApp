@@ -45,7 +45,7 @@ struct MakeableFieldView: View {
     
     func onTextUpdate(_ string: String) {
         self.text = string
-        
+        self.onRuntimeUpdate()
         Task { @MainActor in
             do {
                 if isRunning {
