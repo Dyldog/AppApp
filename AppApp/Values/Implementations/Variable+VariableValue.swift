@@ -25,7 +25,7 @@ final class Variable: EditableVariableValue {
         return try value.add(other)
     }
     
-    var protoString: String { "{ \(value.protoString) }" }
+    var protoString: String { "$\(value.protoString)" }
     var valueString: String { "\(value.valueString)" }
     
     func value(with variables: Variables) async throws -> VariableValue {
@@ -38,10 +38,9 @@ final class Variable: EditableVariableValue {
     
     func editView(onUpdate: @escaping (Variable) -> Void) -> AnyView {
         HStack {
-            Text("Name")
-            Text(value.protoString)
+            Text(protoString)
             SheetButton(title: { Text("Edit") }) {
-                EditVariableView(value: value) { [weak self] in
+                EditVariableView(name: "name", value: value) { [weak self] in
                     guard let self = self else { return }
                     self.value = $0
                 }

@@ -14,11 +14,11 @@ final class ComparisonValue: CompositeEditableVariableValue {
     var protoString: String { "\(lhs.protoString) \(comparison.protoString) \(rhs.protoString)" }
     var valueString: String  { "\(lhs.valueString) \(comparison.valueString) \(rhs.valueString)" }
     
-    var lhs: Value
-    var rhs: Value
+    var lhs: AnyValue
+    var rhs: AnyValue
     var comparison: ComparisonTypeValue
     
-    init(lhs: Value, rhs: Value, comparison: ComparisonTypeValue) {
+    init(lhs: AnyValue, rhs: AnyValue, comparison: ComparisonTypeValue) {
         self.lhs = lhs
         self.rhs = rhs
         self.comparison = comparison
@@ -26,8 +26,8 @@ final class ComparisonValue: CompositeEditableVariableValue {
     
     static func defaultValue(for property: Properties) -> EditableVariableValue {
         switch property {
-        case .lhs: return Value(value: StringValue(value: "A"))
-        case .rhs: return Value(value: StringValue(value: "B"))
+        case .lhs: return AnyValue(value: StringValue(value: "A"))
+        case .rhs: return AnyValue(value: StringValue(value: "B"))
         case .comparison: return ComparisonTypeValue(value: .equals)
         }
     }

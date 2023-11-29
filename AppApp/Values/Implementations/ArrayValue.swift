@@ -15,7 +15,7 @@ final class ArrayValue: EditableVariableValue, ObservableObject {
     var type: VariableType
     var elements: [any EditableVariableValue]
     
-    var protoString: String { elements.map { $0.protoString }.joined(separator: ", ") }
+    var protoString: String { "[" + elements.map { $0.protoString }.joined(separator: ", ") + "]" }
     
     init(type: VariableType, elements: [any EditableVariableValue]) {
         self.type = type
@@ -30,11 +30,7 @@ final class ArrayValue: EditableVariableValue, ObservableObject {
     }
     
     var valueString: String { 
-        return """
-        [
-        \t\(elements.map { $0.valueString }.joined(separator: ", "))
-        ]
-        """
+        return "[\(elements.map { $0.valueString }.joined(separator: ", "))]"
     }
     
     func value(with variables: Variables) async throws -> VariableValue {
@@ -68,6 +64,7 @@ final class ArrayValue: EditableVariableValue, ObservableObject {
                     self.elements = $0.elements
                 }), onUpdate: {
                     self.elements = $0.elements
+                    onUpdate(self)
                 })
             } onDismiss: {
                 onUpdate(self)

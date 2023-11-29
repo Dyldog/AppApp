@@ -13,10 +13,10 @@ final class SetVarStep: Step {
     static var title: String { "Set variable" }
     static var type: VariableType { fatalError() }
     
-    var varName: Value
-    var value: Value
+    var varName: AnyValue
+    var value: AnyValue
     
-    init(varName: Value, value: Value) {
+    init(varName: AnyValue, value: AnyValue) {
         self.varName = varName
         self.value = value
     }
@@ -32,8 +32,8 @@ final class SetVarStep: Step {
 
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
-        case .value: return Value(value: StringValue(value: "TEXT"))
-        case .varName: return Value(value: StringValue(value: "VAR"))
+        case .value: return AnyValue(value: StringValue(value: "TEXT"))
+        case .varName: return AnyValue(value: StringValue(value: "VAR"))
         }
     }
     

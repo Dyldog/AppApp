@@ -14,14 +14,14 @@ final class OptionalValue: EditableVariableValue {
     var protoString: String { "\(value.protoString)?" }
     var valueString: String { "\(value.valueString)?"}
     
-    var value: Value
+    var value: AnyValue
     
-    init(value: Value) {
+    init(value: AnyValue) {
         self.value = value
     }
     
     static func makeDefault() -> OptionalValue {
-        .init(value: Value(value: NilValue()))
+        .init(value: AnyValue(value: NilValue()))
     }
     
     func add(_ other: VariableValue) throws -> VariableValue {

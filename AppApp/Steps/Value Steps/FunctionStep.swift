@@ -9,18 +9,18 @@ import SwiftUI
 
 final class FunctionStep: Step {
     static var title: String { "Run function" }
-    var functionName: Value
+    var functionName: AnyValue
     
     var protoString: String { "\(functionName.protoString)()" }
     var valueString: String { "\(functionName.valueString)()" }
     
-    init(functionName: Value) {
+    init(functionName: AnyValue) {
         self.functionName = functionName
     }
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
-        case .functionName: return Value(value: StringValue(value: "MYFUNC"))
+        case .functionName: return AnyValue(value: StringValue(value: "MYFUNC"))
         }
     }
 

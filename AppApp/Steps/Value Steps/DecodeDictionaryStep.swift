@@ -9,18 +9,18 @@ import SwiftUI
 
 final class DecodeDictionaryStep: ValueStep {
     static var title: String { "Decode a dictionary from JSON" }
-    var value: Value
+    var value: AnyValue
     
     var protoString: String { "{ DECODE($\(value.protoString)) }" }
     var valueString: String { "{ DECODE($\(value.valueString)) }" }
     
-    init(value: Value) {
+    init(value: AnyValue) {
         self.value = value
     }
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
-        case .value: return Value(value: Variable(value: StringValue(value: "$0")))
+        case .value: return AnyValue(value: Variable(value: StringValue(value: "$0")))
         }
     }
     

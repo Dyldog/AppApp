@@ -14,9 +14,13 @@ struct ListEditView: View {
     
     var body: some View {
         List {
-            value.type.editView(
-                onUpdate: { self.value.type = $0 }
-            )
+            HStack {
+                Text("Type")
+                Spacer()
+                value.type.editView(
+                    onUpdate: { self.value.type = $0 }
+                )
+            }
             
             addButton(index: 0)
             
@@ -28,7 +32,7 @@ struct ListEditView: View {
                 
                 addButton(index: index + 1)
             }
-        }
+        }.multilineTextAlignment(.center)
     }
     
     func addButton(index: Int) -> some View {
@@ -41,6 +45,6 @@ struct ListEditView: View {
             }
             
             onUpdate(value)
-        }
+        }.frame(maxWidth: .infinity)
     }
 }

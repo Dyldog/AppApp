@@ -7,57 +7,89 @@
 
 import SwiftUI
 
+// sourcery: skipCopying, skipVariableType, skipCodable
+typealias MakeableListRow = MakeableView & Codable
+
 // sourcery: variableTypeName = "listView"
 final class MakeableList: MakeableView {
     
     static var type: VariableType { .listView }
+    
+    var protoString: String { data.protoString }
+    var valueString: String { data.valueString }
         
-    var text: Value
-    var fontSize: IntValue
-    var fontWeight: FontWeightValue
-    var italic: BoolValue
-    var base: MakeableBase
-    var textColor: ColorValue
+    var data: TypedValue<ArrayValue>
+    var view: AnyMakeableView
     
-    init(text: Value, fontSize: IntValue, fontWeight: FontWeightValue, italic: BoolValue, base: MakeableBase, textColor: ColorValue) {
-        self.text = text
-        self.fontSize = fontSize
-        self.fontWeight = fontWeight
-        self.italic = italic
-        self.base = base
-        self.textColor = textColor
-    }
-    
-    static func withText(_ string: String) -> MakeableList {
-        .init(
-            text: Value(value: StringValue(value: string)),
-            fontSize: IntValue(value: 18),
-            fontWeight: .init(value: .regular),
-            italic: .init(value: false),
-            base: .makeDefault(),
-            textColor: .init(value: .black)
-        )
+    init(data: TypedValue<ArrayValue>, view: AnyMakeableView) {
+        self.data = data
+        self.view = view
     }
     
     func insertValues(into variables: Variables) throws { }
     
-    var protoString: String { text.protoString }
-    
     func add(_ other: VariableValue) throws -> VariableValue { fatalError() }
-    
-    var valueString: String { text.valueString }
 
     func value(with variables: Variables) async throws -> VariableValue { self }
 
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
-        case .text: return Value(value: StringValue(value: "TEXT"))
-        case .fontSize: return IntValue(value: 18)
-        case .fontWeight: return FontWeightValue(value: .regular)
-        case .italic: return BoolValue(value: false)
-        case .base: return MakeableBase.makeDefault()
-        case .textColor: return ColorValue(value: .black)
+        case .data: return TypedValue(value: .constant(ArrayValue(type: .string, elements: [])))
+        case .view: return MakeableLabel.makeDefault()
         }
+    }
+    
+    func protoViews() -> [any MakeableView] {
+        switch data.value {
+        case let .constant(array): 
+            return array.elements.map { _ in view.value }
+        case let .variable(variable):
+            return [MakeableLabel.withText(variable.protoString)]
+        }
+    }
+    
+    func valueViews(with variables: Variables) async throws -> [any MakeableView] {
+        var views: [any MakeableView] = []
+        
+        
+        for data in try await data.value.value(with: variables).elements {
+            let variables = await variables.copy()
+            
+            let value = try await data.value(
+                with: variables
+            )
+            
+            await variables.set(value, for: "$0")
+            
+            await views.append(
+                try view.value(with: variables)
+            )
+        }
+        
+        return views
+    }
+}
+
+extension MakeableList: Codable {
+    enum CodingKeys: String, CodingKey {
+        case data
+        case view
+    }
+    
+    convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(
+            data: try container.decode(TypedValue<ArrayValue>.self, forKey: .data),
+            view: AnyMakeableView(
+                value: try container.decode(CodableMakeableView.self, forKey: .view).value
+            )
+        )
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(CodableMakeableView(value: view.value), forKey: .view)
+        try container.encode(data, forKey: .data)
     }
 }
 
@@ -72,7 +104,7 @@ struct MakeableListView: View {
     @EnvironmentObject var variables: Variables
     @Binding var error: VariableValueError?
     
-    @State var text: String = "LOADING"
+    @State var views: [any MakeableView] = []
     
     init(isRunning: Bool, showEditControls: Bool, listView: MakeableList, onContentUpdate: @escaping (MakeableList) -> Void, onRuntimeUpdate: @escaping () -> Void, error: Binding<VariableValueError?>) {
         self.isRunning = isRunning
@@ -85,7 +117,40 @@ struct MakeableListView: View {
     }
     
     var body: some View {
-        EmptyView()
+        VStack {
+            ForEach(enumerated: views) { index, view in
+                MakeableWrapperView(
+                    isRunning: isRunning,
+                    showEditControls: showEditControls,
+                    view: view,
+                    onContentUpdate: {
+                        views[index] = $0
+                    },
+                    onRuntimeUpdate: {
+                        //
+                    },
+                    error: $error
+                )
+            }
+        }.task {
+            do {
+                if isRunning {
+                    views = try await listView.valueViews(with: variables)
+                } else {
+                    views = listView.protoViews()
+                }
+                
+                if views.isEmpty {
+                    views = [MakeableLabel.withText("LIST")]
+                }
+            } catch let error as VariableValueError {
+                self.error = error
+                views = [MakeableLabel.withText("ERROR")]
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+        }
+        .listStyle(.plain)
             .any
     }
 }

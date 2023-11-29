@@ -9,7 +9,7 @@ import Foundation
 import DylKit
 import Combine
 
-class Variables: Equatable, ObservableObject, Hashable, Identifiable {
+final class Variables: Equatable, ObservableObject, Hashable, Identifiable, Copying {
     
     @MainActor var id: String { keyString + valueString }
 //    var objectWillChange = PassthroughSubject<Void, Never>()
@@ -23,8 +23,8 @@ class Variables: Equatable, ObservableObject, Hashable, Identifiable {
     
     @MainActor var keys: [String] { Array(variables.keys) }
     
-    init() {
-        variables = .init()
+    init(values: [String: VariableValue] = [:]) {
+        variables = values
     }
     
     @MainActor func value(for name: String) -> VariableValue? {
@@ -50,6 +50,12 @@ class Variables: Equatable, ObservableObject, Hashable, Identifiable {
     
     @MainActor func hash(into hasher: inout Hasher) {
         hasher.combine(variables.mapValues { $0.valueString })
+    }
+    
+    @MainActor func copy() -> Variables {
+        return Variables(
+            values: variables.mapValues { $0.copy() as! VariableValue }
+        )
     }
 }
 

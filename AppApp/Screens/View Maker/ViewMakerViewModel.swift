@@ -14,8 +14,8 @@ class ViewMakerViewModel: ObservableObject {
     let name: String
     var content: MakeableStack = .init(content: .init(value: [], axis: .init(value: .vertical)), padding: .init(value: 5)) {
         didSet {
-            objectWillChange.send()
             onUpdate(.init(id: screenID, name: self.name, initActions: self.initActions, content: content))
+            updater += 1
         }
     }
     
@@ -63,7 +63,7 @@ class ViewMakerViewModel: ObservableObject {
         }.store(in: &cancellables)
         
         $makeMode.sink { _ in
-            Task { @MainActor in
+            Task {
                 await self.makeNewVariables()
             }
         }.store(in: &cancellables)

@@ -89,7 +89,7 @@ struct MakeableToggleView: View {
             do {
                 if isRunning {
                   let outputVar = try await toggle.isOn.output.value.value(with: variables)
-                    variables.set(Value(value: BoolValue(value: value)), for: outputVar.valueString)
+                    variables.set(AnyValue(value: BoolValue(value: value)), for: outputVar.valueString)
                     try await toggle.onToggleUpdate.run(with: variables)
                 }
             } catch let error as VariableValueError {

@@ -67,47 +67,10 @@ extension {{ type.name }} {
 {% endmacro %}
 
 {% for type in types.implementing.EditableVariableValue|!protocol %}
-    {% if type.implements.CompositeEditableVariableValue %}
+    {% if type.implements.CompositeEditableVariableValue and type|!annotated:"skipVariableType" %}
         {% call EditableProperties type %}
     {% endif %}
 {% endfor %}
-
-extension CodableMakeableList: Codable {
-	init(from decoder: Decoder) throws {
-        var contentContainer = try decoder.unkeyedContainer()
-        
-        var content: [any MakeableView] = []
-        
-        while !contentContainer.isAtEnd {
-{% for type in types.implementing.MakeableView|!protocol %}
-            {{ 'else ' if not forloop.first }}if let value = try? contentContainer.decode({{ type.name }}.self) {
-                content.append(value)
-            }  
-{% endfor %}
-            else {
-                self.init(elements: [MakeableLabel.withText("ERROR")])
-                return
-            }
-        }
-        
-        self.init(elements: content)
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var contentContainer = encoder.unkeyedContainer()
-        
-        for element in elements {
-            switch element {
-{% for type in types.implementing.MakeableView|!protocol %}
-            case let value as {{ type.name }}:
-                try contentContainer.encode(value)
-{% endfor %}
-            default:
-                fatalError()
-            }
-        }
-    }
-}
 
 extension CodableVariableValue: Codable {
 	enum CodingKeys: String, CodingKey {
@@ -122,8 +85,10 @@ extension CodableVariableValue: Codable {
         
         switch type {
 {% for type in types.implementing.VariableValue|!protocol %}
+{% if type|!annotated:"skipCodable" %}
         case typeString({{ type.name }}.self):
             self.value = try valueContainer.decode({{ type.name }}.self, forKey: .value)
+{% endif %}
 {% endfor %}
         default:
             fatalError(type)
@@ -137,8 +102,10 @@ extension CodableVariableValue: Codable {
         
         switch self.value {
 {% for type in types.implementing.VariableValue|!protocol %}
+{% if type|!annotated:"skipCodable" %}
         case let value as {{ type.name }}:
             try container.encode(value, forKey: .value)
+{% endif %}
 {% endfor %}
         default: fatalError()
         }
@@ -149,9 +116,12 @@ extension AddViewViewModel {
 	convenience init(onSelect: @escaping (any MakeableView) -> Void) {
 		self.init(rows: [
 {% for type in types.implementing.MakeableView|!protocol %}
+        {% if type.kind != "protocolComposition" %}
+
             .init(title: "{{ type.name|replace:"Makeable","" }}", onTap: {
                 onSelect({{ type.name }}.makeDefault())
             }){{ ',' if not forloop.last }}
+        {% endif %}
 {% endfor %}
         ])
 	}
@@ -162,7 +132,9 @@ extension AddViewViewModel {
 enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {   
 {% for type in types.implementing.EditableVariableValue|!protocol %}
 {% if not type.implements.StepType %}
+{% if type|!annotated:"skipVariableType" %}
 	case {%+ call VariableTypeName type +%} // {{ type.name }}
+{% endif %}
 {% endif %}
 {% endfor %}
 
@@ -170,7 +142,9 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         switch self {
 {% for type in types.implementing.EditableVariableValue|!protocol %}
 {% if not type.implements.StepType %}
+{% if type|!annotated:"skipVariableType" %}
         case .{%+ call VariableTypeName type +%}: return {{ type.name }}.makeDefault()
+{% endif %}
 {% endif %}
 {% endfor %}
         }
@@ -180,7 +154,9 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         switch self {
         {% for type in types.implementing.EditableVariableValue|!protocol %}
         {% if not type.implements.StepType %}
+        {% if type|!annotated:"skipVariableType" %}
         case .{%+ call VariableTypeName type +%}: return "{%+ call VariableTypeName type +%}"
+        {% endif %}
         {% endif %}
     {% endfor %}
         }
@@ -197,8 +173,10 @@ extension MakeableWrapperView {
     var inner: some View {
         switch view {
         {% for type in types.implementing.MakeableView|!protocol %}
+        {% if type.kind != "protocolComposition" %}
         case let value as {{ type.name }}:
             return {{ type.name }}View(isRunning: isRunning, showEditControls: showEditControls, {%+ call VariableTypeName type +%}: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
+        {% endif %}
         {% endfor %}
         default:
             return Text("UNKNOWN VIEW").any

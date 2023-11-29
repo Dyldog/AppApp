@@ -9,13 +9,13 @@ import SwiftUI
 
 final class StaticValueStep: ValueStep {
     static var title: String { "Static value" }
-    var value: Value
+    var value: AnyValue
     var type: VariableTypeValue
     
     var protoString: String { value.protoString }
     var valueString: String { value.valueString }
     
-    init(value: Value, type: VariableTypeValue) {
+    init(value: AnyValue, type: VariableTypeValue) {
         self.value = value
         self.type = type
     }

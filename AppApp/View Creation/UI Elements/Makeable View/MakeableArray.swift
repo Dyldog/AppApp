@@ -69,7 +69,7 @@ extension MakeableArray: Codable {
     convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
-            value: try container.decode(CodableMakeableList.self, forKey: .value).elements,
+            value: try container.decode(CodableMakeableList.self, forKey: .value).elements.map { $0.value },
             axis: try container.decode(AxisValue.self, forKey: .axis)
         )
     }

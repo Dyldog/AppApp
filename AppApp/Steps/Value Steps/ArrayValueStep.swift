@@ -13,18 +13,18 @@ final class ArrayValueStep: ValueStep {
     var protoString: String { "\(array.protoString)[\(index.protoString)]"}
     var valueString: String { "\(array.valueString)[\(index.valueString)]"}
     
-    var array: Value
-    var index: Value
+    var array: AnyValue
+    var index: AnyValue
     
-    init(array: Value, index: Value) {
+    init(array: AnyValue, index: AnyValue) {
         self.array = array
         self.index = index
     }
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
-        case .array: return Value(value: Variable(value: StringValue(value: "$0")))
-        case .index: return Value(value: IntValue(value: 0))
+        case .array: return AnyValue(value: Variable(value: StringValue(value: "$0")))
+        case .index: return AnyValue(value: IntValue(value: 0))
         }
     }
     

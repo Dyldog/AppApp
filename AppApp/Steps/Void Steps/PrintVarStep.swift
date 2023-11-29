@@ -11,12 +11,12 @@ final class PrintVarStep: Step, Codable {
     static var type: VariableType { fatalError() }
 
     static var title: String { "Print variable" }
-    var varName: Value
+    var varName: AnyValue
     
     var protoString: String { "{ print($\(varName.protoString)) }"}
     var valueString: String { "{ print($\(varName.valueString)) }"}
     
-    required init(varName: Value) {
+    required init(varName: AnyValue) {
         self.varName = varName
     }
     
@@ -27,7 +27,7 @@ final class PrintVarStep: Step, Codable {
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
-        case .varName: return Value(value: Variable(value: StringValue(value: "$0")))
+        case .varName: return AnyValue(value: Variable(value: StringValue(value: "$0")))
         }
     }
 }

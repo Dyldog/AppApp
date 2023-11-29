@@ -10,21 +10,21 @@ import SwiftUI
 final class AddToVarStep: Step, ObservableObject {
     
     static var title: String { "Add to variable" }
-    var varName: Value
-    var value: Value
+    var varName: AnyValue
+    var value: AnyValue
     
     var protoString: String { "{ $\(varName.protoString) += \(value.protoString) }" }
     var valueString: String { "{ $\(varName.valueString) += \(value.value) }" }
     
-    init(varName: Value, value: Value) {
+    init(varName: AnyValue, value: AnyValue) {
         self.varName = varName
         self.value = value
     }
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
-        case .value: return Value(value: IntValue(value: 1))
-        case .varName: return Value(value: Variable(value: StringValue(value: "VAR")))
+        case .value: return AnyValue(value: IntValue(value: 1))
+        case .varName: return AnyValue(value: Variable(value: StringValue(value: "VAR")))
         }
     }
     

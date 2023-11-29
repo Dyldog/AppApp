@@ -50,7 +50,7 @@ struct MakeableFieldView: View {
             do {
                 if isRunning {
                     let outputVar = try await field.text.output.value.value(with: variables)
-                    variables.set(Value(value: StringValue(value: string)), for: outputVar.valueString)
+                    variables.set(AnyValue(value: StringValue(value: string)), for: outputVar.valueString)
                     try await field.onTextUpdate.run(with: variables)
                 }
             } catch let error as VariableValueError {

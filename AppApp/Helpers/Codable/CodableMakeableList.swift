@@ -7,12 +7,14 @@
 
 import Foundation
 
-struct CodableMakeableList {
-    let elements: [any MakeableView]
+struct CodableMakeableList: Codable {
+    let elements: [CodableMakeableView]
     
-    init(elements: [any MakeableView]) {
+    init(elements: [CodableMakeableView]) {
         self.elements = elements
     }
+    
+    init(elements: [any MakeableView]) {
+        self.elements = elements.map { .init(value: $0) }
+    }
 }
-
-// Codable implemented in `Generated.swift`

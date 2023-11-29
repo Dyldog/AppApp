@@ -45,7 +45,7 @@ final class StepArray: Codable, EditableVariableValue {
                 Text("Edit")
             }) { [weak self] in
                 guard let self = self else { return Text("WASNIL").any }
-                return ActionListView(steps: self.value, onUpdate: { [weak self] in
+                return ActionListView(title: "Edit Steps", steps: self.value, onUpdate: { [weak self] in
                     guard let self = self else { return }
                     self.value = $0
                     onUpdate(self)

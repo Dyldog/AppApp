@@ -9,20 +9,20 @@ import SwiftUI
 
 final class VariableStep: ValueStep {
     static var title: String { "Get variable" }
-    var varName: Value
+    var varName: AnyValue
     var type: VariableTypeValue
     
     var protoString: String { "{ $\(varName.protoString) }" }
     var valueString: String { "{ $\(varName.valueString) }" }
     
-    init(varName: Value, type: VariableTypeValue) {
+    init(varName: AnyValue, type: VariableTypeValue) {
         self.varName = varName
         self.type = type
     }
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
-        case .varName: return Value(value: StringValue(value: "$0"))
+        case .varName: return AnyValue(value: StringValue(value: "$0"))
         case .type: return VariableTypeValue(value: .string)
         }
     }

@@ -7,6 +7,6 @@
 
 import SwiftUI
 
-protocol MakeableView: CompositeEditableVariableValue {
+protocol MakeableView: CompositeEditableVariableValue, Codable {
     func insertValues(into variables: Variables) async throws
 }

@@ -9,18 +9,18 @@ import SwiftUI
 
 final class APIValueStep: ValueStep {
     static var title: String { "Get value from API" }
-    var url: Value
+    var url: AnyValue
     
     var protoString: String { "{ $\(url.protoString) }" }
     var valueString: String { "{ $\(url.valueString) }" }
     
-    init(url: Value) {
+    init(url: AnyValue) {
         self.url = url
     }
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
-        case .url: return Value(value: StringValue(value: "https://swapi.dev/api/people/1"))
+        case .url: return AnyValue(value: StringValue(value: "https://swapi.dev/api/people/1"))
         }
     }
     

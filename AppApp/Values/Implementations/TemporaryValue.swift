@@ -10,17 +10,17 @@ import SwiftUI
 final class TemporaryValue: CompositeEditableVariableValue {
     static var type: VariableType { .temporary }
     
-    var initial: Value
+    var initial: AnyValue
     var output: Variable
     
-    init(initial: Value, output: Variable) {
+    init(initial: AnyValue, output: Variable) {
         self.initial = initial
         self.output = output
     }
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
-        case .initial: return Value(value: StringValue(value: "TEXT"))
+        case .initial: return AnyValue(value: StringValue(value: "TEXT"))
         case .output: return Variable(value: StringValue(value: "FIELDTEXT"))
         }
     }
@@ -73,7 +73,7 @@ extension TemporaryValue: Codable {
     convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
-            initial: try container.decode(Value.self, forKey: .initial),
+            initial: try container.decode(AnyValue.self, forKey: .initial),
             output: try container.decode(Variable.self, forKey: .output)
         )
     }

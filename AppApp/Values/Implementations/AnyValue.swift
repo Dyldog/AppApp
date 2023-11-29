@@ -7,17 +7,21 @@
 
 import SwiftUI
 
-// sourcery: variableTypeName = "value"
-final class Value: EditableVariableValue {
+// sourcery: variableTypeName = "anyValue"
+final class AnyValue: EditableVariableValue {
     
-    static var type: VariableType { .value }
+    static var type: VariableType { .anyValue }
     var value: any EditableVariableValue
     
     init(value: any EditableVariableValue) {
-        self.value = value
+        if let value = value as? AnyValue {
+            self.value = value.value
+        } else {
+            self.value = value
+        }
     }
     
-    static func makeDefault() -> Value {
+    static func makeDefault() -> AnyValue {
         .init(value: StringValue(value: "TEXT"))
     }
     
@@ -32,11 +36,11 @@ final class Value: EditableVariableValue {
         try await value.value(with: variables)
     }
     
-    func editView(onUpdate: @escaping (Value) -> Void) -> AnyView {
+    func editView(onUpdate: @escaping (AnyValue) -> Void) -> AnyView {
         HStack {
             Text(value.protoString)
             SheetButton(title: { Text("Edit") }) {
-                EditVariableView(value: value) { [weak self] in
+                EditVariableView(name: "value", value: value) { [weak self] in
                     guard let self = self else { return }
                     self.value = $0
                 }
@@ -47,7 +51,7 @@ final class Value: EditableVariableValue {
     }
 }
 
-extension Value: Codable {
+extension AnyValue: Codable {
     enum CodingKeys: String, CodingKey {
         case type
         case value

@@ -61,14 +61,14 @@ final class MakeableLabel: MakeableView {
     
     static var type: VariableType { .label }
         
-    var text: Value
+    var text: AnyValue
     var fontSize: IntValue
     var fontWeight: FontWeightValue
     var italic: BoolValue
     var base: MakeableBase
     var textColor: ColorValue
     
-    init(text: Value, fontSize: IntValue, fontWeight: FontWeightValue, italic: BoolValue, base: MakeableBase, textColor: ColorValue) {
+    init(text: AnyValue, fontSize: IntValue, fontWeight: FontWeightValue, italic: BoolValue, base: MakeableBase, textColor: ColorValue) {
         self.text = text
         self.fontSize = fontSize
         self.fontWeight = fontWeight
@@ -79,7 +79,7 @@ final class MakeableLabel: MakeableView {
     
     static func withText(_ string: String) -> MakeableLabel {
         .init(
-            text: Value(value: StringValue(value: string)),
+            text: AnyValue(value: StringValue(value: string)),
             fontSize: IntValue(value: 18),
             fontWeight: .init(value: .regular),
             italic: .init(value: false),
@@ -96,11 +96,20 @@ final class MakeableLabel: MakeableView {
     
     var valueString: String { text.valueString }
 
-    func value(with variables: Variables) async throws -> VariableValue { self }
+    func value(with variables: Variables) async throws -> VariableValue {
+        await MakeableLabel(
+            text: AnyValue(value: try text.value(with: variables)),
+            fontSize: try fontSize.value(with: variables),
+            fontWeight: try fontWeight.value(with: variables),
+            italic: try italic.value(with: variables),
+            base: try base.value(with: variables),
+            textColor: try textColor.value(with: variables)
+        )
+    }
 
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
-        case .text: return Value(value: StringValue(value: "TEXT"))
+        case .text: return AnyValue(value: StringValue(value: "TEXT"))
         case .fontSize: return IntValue(value: 18)
         case .fontWeight: return FontWeightValue(value: .regular)
         case .italic: return BoolValue(value: false)

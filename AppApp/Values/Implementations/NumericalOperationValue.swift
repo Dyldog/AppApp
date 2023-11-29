@@ -14,11 +14,11 @@ final class NumericalOperationValue: CompositeEditableVariableValue {
     var protoString: String { "\(lhs.protoString) \(operation.protoString) \(rhs.protoString)" }
     var valueString: String  { "\(lhs.valueString) \(operation.valueString) \(rhs.valueString)" }
     
-    var lhs: Value
-    var rhs: Value
+    var lhs: AnyValue
+    var rhs: AnyValue
     var operation: NumericalOperationTypeValue
     
-    init(lhs: Value, rhs: Value, operation: NumericalOperationTypeValue) {
+    init(lhs: AnyValue, rhs: AnyValue, operation: NumericalOperationTypeValue) {
         self.lhs = lhs
         self.rhs = rhs
         self.operation = operation
@@ -26,8 +26,8 @@ final class NumericalOperationValue: CompositeEditableVariableValue {
     
     static func defaultValue(for property: Properties) -> EditableVariableValue {
         switch property {
-        case .lhs: return Value(value: StringValue(value: "A"))
-        case .rhs: return Value(value: StringValue(value: "B"))
+        case .lhs: return AnyValue(value: StringValue(value: "A"))
+        case .rhs: return AnyValue(value: StringValue(value: "B"))
         case .operation: return NumericalOperationTypeValue(value: .mod)
         }
     }

@@ -20,6 +20,10 @@
 		FC18BAE52B16BA14007838AA /* MakeableBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAE42B16BA14007838AA /* MakeableBase.swift */; };
 		FC18BAE72B16CD5F007838AA /* ColorValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAE62B16CD5F007838AA /* ColorValue.swift */; };
 		FC18BAE92B16E1EF007838AA /* MakeableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAE82B16E1EF007838AA /* MakeableList.swift */; };
+		FC18BAEB2B16EADE007838AA /* TypedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAEA2B16EADE007838AA /* TypedValue.swift */; };
+		FC18BAED2B16F5B4007838AA /* Copying.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAEC2B16F5B4007838AA /* Copying.swift */; };
+		FC18BAEF2B16FE81007838AA /* CodableMakeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAEE2B16FE81007838AA /* CodableMakeableView.swift */; };
+		FC18BAF12B172564007838AA /* AnyMakeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAF02B172564007838AA /* AnyMakeableView.swift */; };
 		FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */; };
 		FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */; };
 		FC2B8A892B108F3F003FAB86 /* CodableMakeableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */; };
@@ -43,7 +47,7 @@
 		FC4635132B0C989000B8DCBE /* VariableValue+EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635122B0C989000B8DCBE /* VariableValue+EditView.swift */; };
 		FC4635152B0C98A300B8DCBE /* Int+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635142B0C98A300B8DCBE /* Int+VariableValue.swift */; };
 		FC4635172B0C98C000B8DCBE /* Variable+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635162B0C98C000B8DCBE /* Variable+VariableValue.swift */; };
-		FC4635192B0C98EE00B8DCBE /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635182B0C98EE00B8DCBE /* Value.swift */; };
+		FC4635192B0C98EE00B8DCBE /* AnyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635182B0C98EE00B8DCBE /* AnyValue.swift */; };
 		FC46351C2B0C993600B8DCBE /* SetVarStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC46351B2B0C993600B8DCBE /* SetVarStep.swift */; };
 		FC46351E2B0C997700B8DCBE /* AddToVarStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC46351D2B0C997700B8DCBE /* AddToVarStep.swift */; };
 		FC4635202B0C998B00B8DCBE /* PrintVarStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC46351F2B0C998B00B8DCBE /* PrintVarStep.swift */; };
@@ -143,6 +147,10 @@
 		FC18BAE42B16BA14007838AA /* MakeableBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableBase.swift; sourceTree = "<group>"; };
 		FC18BAE62B16CD5F007838AA /* ColorValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorValue.swift; sourceTree = "<group>"; };
 		FC18BAE82B16E1EF007838AA /* MakeableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableList.swift; sourceTree = "<group>"; };
+		FC18BAEA2B16EADE007838AA /* TypedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedValue.swift; sourceTree = "<group>"; };
+		FC18BAEC2B16F5B4007838AA /* Copying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copying.swift; sourceTree = "<group>"; };
+		FC18BAEE2B16FE81007838AA /* CodableMakeableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMakeableView.swift; sourceTree = "<group>"; };
+		FC18BAF02B172564007838AA /* AnyMakeableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyMakeableView.swift; sourceTree = "<group>"; };
 		FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableWrapperView.swift; sourceTree = "<group>"; };
 		FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryValue.swift; sourceTree = "<group>"; };
 		FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMakeableList.swift; sourceTree = "<group>"; };
@@ -166,7 +174,7 @@
 		FC4635122B0C989000B8DCBE /* VariableValue+EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VariableValue+EditView.swift"; sourceTree = "<group>"; };
 		FC4635142B0C98A300B8DCBE /* Int+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+VariableValue.swift"; sourceTree = "<group>"; };
 		FC4635162B0C98C000B8DCBE /* Variable+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Variable+VariableValue.swift"; sourceTree = "<group>"; };
-		FC4635182B0C98EE00B8DCBE /* Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
+		FC4635182B0C98EE00B8DCBE /* AnyValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyValue.swift; sourceTree = "<group>"; };
 		FC46351B2B0C993600B8DCBE /* SetVarStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVarStep.swift; sourceTree = "<group>"; };
 		FC46351D2B0C997700B8DCBE /* AddToVarStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToVarStep.swift; sourceTree = "<group>"; };
 		FC46351F2B0C998B00B8DCBE /* PrintVarStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintVarStep.swift; sourceTree = "<group>"; };
@@ -268,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				FC18BAD82B1581CF007838AA /* Titleable.swift */,
+				FC18BAEC2B16F5B4007838AA /* Copying.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -276,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */,
+				FC18BAEE2B16FE81007838AA /* CodableMakeableView.swift */,
 				FC2B8A942B108FC0003FAB86 /* CodableTypeString.swift */,
 				FC2B8A8A2B108F6B003FAB86 /* CodableVariableValue.swift */,
 				FC2B8A8C2B108F7C003FAB86 /* CodableVariableList.swift */,
@@ -353,7 +363,8 @@
 		FC4635232B0C9ACD00B8DCBE /* Implementations */ = {
 			isa = PBXGroup;
 			children = (
-				FC4635182B0C98EE00B8DCBE /* Value.swift */,
+				FC4635182B0C98EE00B8DCBE /* AnyValue.swift */,
+				FC18BAF02B172564007838AA /* AnyMakeableView.swift */,
 				FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */,
 				FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */,
 				FC18BADC2B159593007838AA /* NumericalOperationTypeValue.swift */,
@@ -373,6 +384,7 @@
 				FC2B8AA02B10AE12003FAB86 /* Bool+VariableValue.swift */,
 				FCD3B23C2B0BB2020054371B /* String+VariableValue.swift */,
 				FC46350E2B0C987100B8DCBE /* VariableType.swift */,
+				FC18BAEA2B16EADE007838AA /* TypedValue.swift */,
 			);
 			path = Implementations;
 			sourceTree = "<group>";
@@ -778,7 +790,8 @@
 				FCD3B2612B0C96890054371B /* EditableViewConstructor.swift in Sources */,
 				FCD3B2232B0B77C50054371B /* AddViewView.swift in Sources */,
 				FC18BADB2B159218007838AA /* ComparisonValue.swift in Sources */,
-				FC4635192B0C98EE00B8DCBE /* Value.swift in Sources */,
+				FC18BAED2B16F5B4007838AA /* Copying.swift in Sources */,
+				FC4635192B0C98EE00B8DCBE /* AnyValue.swift in Sources */,
 				FCD3B23D2B0BB2020054371B /* String+VariableValue.swift in Sources */,
 				FCD3B24B2B0C948C0054371B /* Array+Safe.swift in Sources */,
 				FC4C15C92B0C974E0010BB1A /* StepType.swift in Sources */,
@@ -795,10 +808,12 @@
 				FC2B8A992B109038003FAB86 /* MakeableArray.swift in Sources */,
 				FC4C15D12B0C97B20010BB1A /* Array_StepType+VariableValue.swift in Sources */,
 				FC2B8A9F2B10ACD5003FAB86 /* Binding+Nil.swift in Sources */,
+				FC18BAEF2B16FE81007838AA /* CodableMakeableView.swift in Sources */,
 				FC18BAE52B16BA14007838AA /* MakeableBase.swift in Sources */,
 				FC18BAD92B1581CF007838AA /* Titleable.swift in Sources */,
 				FC4635132B0C989000B8DCBE /* VariableValue+EditView.swift in Sources */,
 				FC4C2C302B0CCBE0008217AC /* DictionaryValueForKeyStep.swift in Sources */,
+				FC18BAF12B172564007838AA /* AnyMakeableView.swift in Sources */,
 				FC46350C2B0C983D00B8DCBE /* APIValueStep.swift in Sources */,
 				FCD3B2182B0B63110054371B /* Step.swift in Sources */,
 				FC2B8A892B108F3F003FAB86 /* CodableMakeableList.swift in Sources */,
@@ -809,6 +824,7 @@
 				FCD3B22A2B0B9F7D0054371B /* EditViewViewModel.swift in Sources */,
 				FCD3B2312B0B9FCB0054371B /* MakeableStack.swift in Sources */,
 				FC2B8A952B108FC0003FAB86 /* CodableTypeString.swift in Sources */,
+				FC18BAEB2B16EADE007838AA /* TypedValue.swift in Sources */,
 				FC4635202B0C998B00B8DCBE /* PrintVarStep.swift in Sources */,
 				FCD3B2532B0C95360054371B /* MakableView+MakeableConstructor.swift in Sources */,
 				FC4C2C2B2B0CBD01008217AC /* DictionaryValue.swift in Sources */,
