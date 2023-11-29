@@ -38,7 +38,7 @@ final class StepArray: Codable, EditableVariableValue {
         self
     }
     
-    func editView(onUpdate: @escaping (StepArray) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (StepArray) -> Void) -> AnyView {
         return HStack {
             Text(protoString)
             SheetButton(title: {

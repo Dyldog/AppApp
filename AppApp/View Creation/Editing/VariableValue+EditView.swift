@@ -8,7 +8,7 @@
 import SwiftUI
 
 //extension EditableVariableValue {
-//    func editView(onUpdate: @escaping (Self) -> Void) -> AnyView {
+//    func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView {
 //        VStack {
 //            Text("TITLE")
 //            HStack {

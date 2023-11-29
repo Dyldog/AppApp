@@ -13,10 +13,12 @@ final class MakeableBase: MakeableView, Codable {
         
     var padding: IntValue
     var backgroundColor: ColorValue
+    var cornerRadius: IntValue
     
-    init(padding: IntValue, backgroundColor: ColorValue) {
+    init(padding: IntValue, backgroundColor: ColorValue, cornerRadius: IntValue) {
         self.padding = padding
         self.backgroundColor = backgroundColor
+        self.cornerRadius = cornerRadius
     }
     
     func insertValues(into variables: Variables) throws { }
@@ -33,6 +35,7 @@ final class MakeableBase: MakeableView, Codable {
         switch property {
         case .padding: return IntValue.init(value: 5)
         case .backgroundColor: return ColorValue(value: .white)
+        case .cornerRadius: return IntValue(value: 0)
         }
     }
 }
@@ -60,8 +63,10 @@ struct MakeableBaseView: View {
     
     var body: some View {
         Rectangle()
-            .padding(CGFloat(base.padding.value))
+            .background(.clear)
             .foregroundColor(base.backgroundColor.value)
+            .fixedSize()
+            .base(base)
             .any
     }
 }
@@ -71,6 +76,7 @@ extension View {
         self
             .padding(CGFloat(base.padding.value))
             .background(base.backgroundColor.value)
+            .clipShape(RoundedRectangle(cornerRadius: CGFloat(base.cornerRadius.value)))
         
     }
 }

@@ -33,8 +33,8 @@ final class VariableTypeValue: PrimitiveEditableVariableValue {
         fatalError()
     }
     
-    func editView(onUpdate: @escaping (VariableTypeValue) -> Void) -> AnyView {
-        value.editView { [weak self] in
+    func editView(title: String, onUpdate: @escaping (VariableTypeValue) -> Void) -> AnyView {
+        value.editView(title: title) { [weak self] in
             guard let self = self else { return }
             self.value = $0
             onUpdate(self)
@@ -47,7 +47,7 @@ extension VariableType {
 
     var valueString: String { protoString }
     
-    func editView(onUpdate: @escaping (VariableType) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (VariableType) -> Void) -> AnyView {
         Picker("", selection: .init(get: {
             self
         }, set: { new in

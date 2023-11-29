@@ -32,7 +32,7 @@ final class AnyMakeableView: EditableVariableValue {
         try await value.value(with: variables)
     }
     
-    func editView(onUpdate: @escaping (AnyMakeableView) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (AnyMakeableView) -> Void) -> AnyView {
         VStack {
             HStack {
                 Text("type")
@@ -49,7 +49,7 @@ final class AnyMakeableView: EditableVariableValue {
                 }.pickerStyle(.menu).any
             }
             
-            value.editView {[weak self] in
+            value.editView(title: "\(title)[value]") {[weak self] in
                 guard let self = self else { return }
                 self.value = $0
                 onUpdate(self)
@@ -73,7 +73,12 @@ extension AnyMakeableView: Codable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(CodableVariableValue(value: value), forKey: .value)
+        try container.encode(CodableMakeableView(value: value), forKey: .value)
     }
 }
 
+extension MakeableView {
+    var any: AnyMakeableView {
+        .init(value: self)
+    }
+}

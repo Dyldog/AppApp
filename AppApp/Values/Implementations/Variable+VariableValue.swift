@@ -36,11 +36,11 @@ final class Variable: EditableVariableValue {
         return try await value.value(with: variables)
     }
     
-    func editView(onUpdate: @escaping (Variable) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (Variable) -> Void) -> AnyView {
         HStack {
             Text(protoString)
             SheetButton(title: { Text("Edit") }) {
-                EditVariableView(name: "name", value: value) { [weak self] in
+                EditVariableView(name: title, value: value) { [weak self] in
                     guard let self = self else { return }
                     self.value = $0
                 }

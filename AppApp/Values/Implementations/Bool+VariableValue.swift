@@ -34,7 +34,7 @@ final class BoolValue: EditableVariableValue, Codable {
         self
     }
     
-    func editView(onUpdate: @escaping (BoolValue) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (BoolValue) -> Void) -> AnyView {
         Toggle("", isOn: .init(get: { [weak self] in
             self?.value ?? false
         }, set: { [weak self] in

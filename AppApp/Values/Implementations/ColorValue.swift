@@ -112,7 +112,7 @@ final class ColorValue: EditableVariableValue {
         .init(value: .blue)
     }
     
-    func editView(onUpdate: @escaping (ColorValue) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (ColorValue) -> Void) -> AnyView {
         ColorPicker("Set the background color", selection: .init(get: { [weak self] in
             self?.value ?? .blue
         }, set: { [weak self] in

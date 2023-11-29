@@ -54,11 +54,11 @@ final class ArrayValue: EditableVariableValue, ObservableObject {
         }
     }
     
-    func editView(onUpdate: @escaping (ArrayValue) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (ArrayValue) -> Void) -> AnyView {
         HStack {
             Text(protoString)
             SheetButton(title: { Text("Edit") }) {
-                ListEditView(value: .init(get: { [weak self] in
+                ListEditView(title: title, value: .init(get: { [weak self] in
                     self ?? .init(type: .int, elements: [IntValue(value: 666)])
                 }, set: {
                     self.elements = $0.elements

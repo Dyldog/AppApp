@@ -41,9 +41,9 @@ final class MakeableArray: EditableVariableValue {
     }
     
     
-    func editView(onUpdate: @escaping (MakeableArray) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (MakeableArray) -> Void) -> AnyView {
         VStack {
-            axis.editView {
+            axis.editView(title: "\(title)[axis]") {
                 self.axis = $0
                 onUpdate(self)
             }

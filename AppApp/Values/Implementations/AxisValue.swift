@@ -29,7 +29,7 @@ final class AxisValue: EditableVariableValue, Codable {
         self
     }
     
-    func editView(onUpdate: @escaping (AxisValue) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (AxisValue) -> Void) -> AnyView {
         Picker("", selection: .init(get: {
             self.value
         }, set: { new in

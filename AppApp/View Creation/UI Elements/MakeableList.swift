@@ -35,7 +35,7 @@ final class MakeableList: MakeableView {
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .data: return TypedValue(value: .constant(ArrayValue(type: .string, elements: [])))
-        case .view: return MakeableLabel.makeDefault()
+        case .view: return MakeableLabel.makeDefault().any
         }
     }
     
@@ -43,8 +43,8 @@ final class MakeableList: MakeableView {
         switch data.value {
         case let .constant(array): 
             return array.elements.map { _ in view.value }
-        case let .variable(variable):
-            return [MakeableLabel.withText(variable.protoString)]
+        case .variable:
+            return [view.value]
         }
     }
     
@@ -70,28 +70,26 @@ final class MakeableList: MakeableView {
     }
 }
 
-extension MakeableList: Codable {
-    enum CodingKeys: String, CodingKey {
-        case data
-        case view
-    }
-    
-    convenience init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.init(
-            data: try container.decode(TypedValue<ArrayValue>.self, forKey: .data),
-            view: AnyMakeableView(
-                value: try container.decode(CodableMakeableView.self, forKey: .view).value
-            )
-        )
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(CodableMakeableView(value: view.value), forKey: .view)
-        try container.encode(data, forKey: .data)
-    }
-}
+//extension MakeableList: Codable {
+//    enum CodingKeys: String, CodingKey {
+//        case data
+//        case view
+//    }
+//    
+//    convenience init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        self.init(
+//            data: try container.decode(TypedValue<ArrayValue>.self, forKey: .data),
+//            view: try container.decode(AnyMakeableView.self, forKey: .view)
+//        )
+//    }
+//    
+//    func encode(to encoder: Encoder) throws {
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        try container.encode(view, forKey: .view)
+//        try container.encode(data, forKey: .data)
+//    }
+//}
 
 struct MakeableListView: View {
     let isRunning: Bool

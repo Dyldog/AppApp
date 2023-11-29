@@ -22,7 +22,7 @@ final class NilValue: EditableVariableValue {
         .init()
     }
     
-    func editView(onUpdate: @escaping (NilValue) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (NilValue) -> Void) -> AnyView {
         Text(protoString).any
     }
     

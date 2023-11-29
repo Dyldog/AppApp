@@ -36,7 +36,7 @@ struct EditVariableView: View {
                 HStack {
                     Text("value")
                     Spacer()
-                    value.editView(onUpdate: {
+                    value.editView(title: name, onUpdate: {
                         self.value = $0
                         onUpdate($0)
                     })

@@ -9,6 +9,7 @@ import SwiftUI
 import DylKit
 
 struct ListEditView: View {
+    let title: String
     @Binding var value: ArrayValue
     let onUpdate: (ArrayValue) -> Void
     
@@ -17,15 +18,13 @@ struct ListEditView: View {
             HStack {
                 Text("Type")
                 Spacer()
-                value.type.editView(
-                    onUpdate: { self.value.type = $0 }
-                )
+                value.type.editView(title: "\(title)[type]", onUpdate: { self.value.type = $0 })
             }
             
             addButton(index: 0)
             
             ForEach(enumerated: value.elements) { (index, element) in
-                element.editView { editedElement in
+                element.editView(title: "\(title)[\(index)]") { editedElement in
                     value.elements[index] = editedElement
                     onUpdate(value)
                 }

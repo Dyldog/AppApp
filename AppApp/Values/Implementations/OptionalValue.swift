@@ -28,8 +28,8 @@ final class OptionalValue: EditableVariableValue {
         try value.add(other)
     }
     
-    func editView(onUpdate: @escaping (OptionalValue) -> Void) -> AnyView {
-        value.editView {
+    func editView(title: String, onUpdate: @escaping (OptionalValue) -> Void) -> AnyView {
+        value.editView(title: title) {
             self.value = $0
             onUpdate(self)
         }

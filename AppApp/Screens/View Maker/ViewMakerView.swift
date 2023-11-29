@@ -22,9 +22,7 @@ struct ViewMakerView: View {
                             showEditControls: viewModel.makeMode,
                             stack: viewModel.content, 
                             onContentUpdate: { content in
-                                onMain {
-                                    viewModel.content = content
-                                }
+                                viewModel.content = content
                             }, onRuntimeUpdate: {
                                 withAnimation {
                                     viewModel.onRuntimeUpdate()

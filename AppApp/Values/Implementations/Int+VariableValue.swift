@@ -20,7 +20,7 @@ final class IntValue: EditableVariableValue, Codable {
     static func makeDefault() -> IntValue {
         .init(value: 69)
     }
-    func editView(onUpdate: @escaping (IntValue) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (IntValue) -> Void) -> AnyView {
         TextField("", text: .init(get: { [weak self] in
             self?.protoString.components(separatedBy: .decimalDigits.inverted).joined() ?? "666"
         }, set: { [weak self] in

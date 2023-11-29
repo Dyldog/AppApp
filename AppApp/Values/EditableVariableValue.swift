@@ -9,7 +9,7 @@ import SwiftUI
 
 protocol EditableVariableValue: AnyObject, VariableValue, ViewEditable {
     static func makeDefault() -> Self
-    func editView(onUpdate: @escaping (Self) -> Void) -> AnyView
+    func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView
 }
 
 protocol PrimitiveEditableVariableValue: EditableVariableValue where Primitive.AllCases: RandomAccessCollection {
@@ -18,7 +18,7 @@ protocol PrimitiveEditableVariableValue: EditableVariableValue where Primitive.A
 }
 
 extension PrimitiveEditableVariableValue {
-    func editView(onUpdate: @escaping (Self) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView {
         Picker("", selection: .init(get: { [weak self] in
             self?.value ?? Self.makeDefault().value
         }, set: { [weak self] new in
@@ -70,13 +70,13 @@ extension CompositeEditableVariableValue {
 }
 
 extension CompositeEditableVariableValue {
-    func editView(onUpdate: @escaping (Self) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView {
         VStack(alignment: .leading, spacing: 8) {
             ForEach(enumerated: propertyRows(onUpdate: onUpdate).map { ($0.0, $0.1, $0.2) }) { (index, row) in
                 HStack {
                     Text(row.0)
                     Spacer()
-                    row.1.editView { value in
+                    row.1.editView(title: row.0) { value in
                         row.2(value)
                         onUpdate(self)
                     }.multilineTextAlignment(.trailing)

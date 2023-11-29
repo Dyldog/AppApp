@@ -36,11 +36,11 @@ final class AnyValue: EditableVariableValue {
         try await value.value(with: variables)
     }
     
-    func editView(onUpdate: @escaping (AnyValue) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (AnyValue) -> Void) -> AnyView {
         HStack {
             Text(value.protoString)
             SheetButton(title: { Text("Edit") }) {
-                EditVariableView(name: "value", value: value) { [weak self] in
+                EditVariableView(name: title, value: value) { [weak self] in
                     guard let self = self else { return }
                     self.value = $0
                 }
@@ -67,5 +67,11 @@ extension AnyValue: Codable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(CodableVariableValue(value: value), forKey: .value)
+    }
+}
+
+extension EditableVariableValue {
+    var any: AnyValue {
+        .init(value: self)
     }
 }

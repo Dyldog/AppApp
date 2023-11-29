@@ -30,7 +30,7 @@ struct ActionListView: View {
                             .buttonStyle(.plain)
                         }
                         
-                        element.editView { value in
+                        element.editView(title: title) { value in
                             onUpdate(steps.replacing(value, at: index))
                         }
                         .buttonStyle(.plain)

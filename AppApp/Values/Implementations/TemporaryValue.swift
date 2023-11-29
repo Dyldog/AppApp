@@ -42,11 +42,11 @@ final class TemporaryValue: CompositeEditableVariableValue {
         }
     }
     
-    func editView(onUpdate: @escaping (TemporaryValue) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (TemporaryValue) -> Void) -> AnyView {
         VStack {
             HStack {
                 Text("Initial")
-                initial.editView(onUpdate: { [weak self] in
+                initial.editView(title: "\(title)[initial]", onUpdate: { [weak self] in
                     guard let self = self else { return }
                     self.initial = $0
                     onUpdate(self)
@@ -55,7 +55,7 @@ final class TemporaryValue: CompositeEditableVariableValue {
             
             HStack {
                 Text("Output")
-                output.editView {
+                output.editView(title: "\(title)[output]") {
                     self.output = $0
                     onUpdate(self)
                 }

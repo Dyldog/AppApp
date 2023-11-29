@@ -99,7 +99,7 @@ final class TypedValue<T: TypeableValue>: EditableVariableValue, Codable {
         try await value.value.value(with: variables)
     }
 
-    func editView(onUpdate: @escaping (TypedValue<T>) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (TypedValue<T>) -> Void) -> AnyView {
         HStack {
             Picker("", selection: .init(get: { [weak self] in
                 self?.value.type ?? .constant
@@ -113,7 +113,7 @@ final class TypedValue<T: TypeableValue>: EditableVariableValue, Codable {
                 }
             }.pickerStyle(.menu).any
             
-            value.value.editView {
+            value.value.editView(title: title) {
                 switch self.value.type {
                 case .constant:
                     guard let constantValue = $0 as? T else { return }

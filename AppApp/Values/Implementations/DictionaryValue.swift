@@ -66,11 +66,11 @@ final class DictionaryValue: EditableVariableValue, ObservableObject {
         return self
     }
     
-    func editView(onUpdate: @escaping (DictionaryValue) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (DictionaryValue) -> Void) -> AnyView {
         HStack {
             Text(protoString)
             SheetButton(title: { Text("Edit") }) {
-                DictionaryEditView(value: .init(get: {
+                DictionaryEditView(title: title, value: .init(get: {
                     self
                 }, set: {
                     self.elements = $0.elements

@@ -50,7 +50,7 @@ final class StringValue: EditableVariableValue {
     var valueString: String { value }
     func value(with variables: Variables) throws -> VariableValue { self }
     
-    func editView(onUpdate: @escaping (StringValue) -> Void) -> AnyView {
+    func editView(title: String, onUpdate: @escaping (StringValue) -> Void) -> AnyView {
         TextField("", text: .init(get: { [weak self] in
             self?.value ?? "ERROR666"
         }, set: { [weak self] in
