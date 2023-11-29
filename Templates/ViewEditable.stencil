@@ -20,7 +20,7 @@ extension {{ type.name }} {
         }
     }
      
-    static func make(factory: (Properties) -> any EditableVariableValue) -> {{ type.name }} {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
     {% for property in type.storedVariables %}
         {% if not property.defaultValue %}
@@ -30,7 +30,7 @@ extension {{ type.name }} {
         )
     }
 
-    static func makeDefault() -> {{ type.name }} {
+    static func makeDefault() -> Self {
         .init(
     {% for property in type.storedVariables %}
         {% if not property.defaultValue %}
@@ -189,13 +189,19 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
 
 extension MakeableWrapperView {
 	var body: some View {
+        ZStack {
+            inner
+        }
+    }
+    
+    var inner: some View {
         switch view {
-{% for type in types.implementing.MakeableView|!protocol %}
+        {% for type in types.implementing.MakeableView|!protocol %}
         case let value as {{ type.name }}:
-            {{ type.name }}View(isRunning: isRunning, showEditControls: showEditControls, {%+ call VariableTypeName type +%}: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
-{% endfor %}
+            return {{ type.name }}View(isRunning: isRunning, showEditControls: showEditControls, {%+ call VariableTypeName type +%}: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
+        {% endfor %}
         default:
-            Text("UNKNOWN VIEW").any
+            return Text("UNKNOWN VIEW").any
         }
     }
 }

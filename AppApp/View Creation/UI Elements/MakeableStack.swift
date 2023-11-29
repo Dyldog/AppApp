@@ -62,14 +62,15 @@ struct MakeableStackView: View {
             }
         }
         .if(showEditControls) {
-            $0.padding().overlay(
+            $0.overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(Color.gray.opacity(0.5), lineWidth: 2)
             )
         }
         .sheet(item: $showAddIndex, content: { index in
             AddViewView(viewModel: .init(onSelect: { view in
-                onContentUpdate(MakeableStack(content: stack.content.inserting(view, at: index)))
+                stack.content = stack.content.inserting(view, at: index)
+                onContentUpdate(stack)
                 self.showAddIndex = nil
             }))
         }).sheet(item: $showEditIndex, content: { index in
@@ -98,23 +99,25 @@ struct MakeableStackView: View {
 final class MakeableStack: MakeableView, Codable {
     static var type: VariableType { .stack }
     
-    func add(_ other: VariableValue) throws -> VariableValue { fatalError() }
-    
     var valueString: String { "STACK" }
+    var protoString: String { content.map { $0.protoString }.joined(separator: "\n") }
+    
+    var content: MakeableArray
+    var padding: IntValue
+    
+    init(content: MakeableArray, padding: IntValue) {
+        self.content = content
+        self.padding = padding
+    }
     
     func value(with variables: Variables) async throws -> VariableValue { self }
     
-    var content: MakeableArray
-    
-    var protoString: String { content.map { $0.protoString }.joined(separator: "\n") }
-    
-    init(content: MakeableArray) {
-        self.content = content
-    }
+    func add(_ other: VariableValue) throws -> VariableValue { fatalError() }
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .content: return MakeableArray(value: [], axis: .init(value: .vertical))
+        case .padding: return IntValue(value: 5)
         }
     }
     

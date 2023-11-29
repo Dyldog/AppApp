@@ -16,7 +16,7 @@ extension View {
             SwiftUI.Button {
                 onEdit()
             } label: {
-                self.disabled(true)
+                self.disabled(true).background(.background)
             }
             .buttonStyle(.plain)
             .any

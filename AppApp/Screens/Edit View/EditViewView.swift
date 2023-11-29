@@ -15,34 +15,37 @@ struct EditViewView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                MakeableWrapperView(
-                    isRunning: false,
-                    showEditControls: false,
-                    view: viewModel.editable,
-                    onContentUpdate: { _ in },
-                    onRuntimeUpdate: { },
-                    error: $error
-                )
-                .id(update)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.gray.opacity(0.5), lineWidth: 2)
-                )
-                .padding()
-                .any
-                
+            GeometryReader { geometry in
                 ScrollView {
-                    viewModel.editable.editView {
-                        viewModel.editable = $0
-                        update += 1
+                    VStack {
+                        MakeableWrapperView(
+                            isRunning: false,
+                            showEditControls: false,
+                            view: viewModel.editable,
+                            onContentUpdate: { _ in },
+                            onRuntimeUpdate: { },
+                            error: $error
+                        )
+                        .id(update)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.gray.opacity(0.5), lineWidth: 2)
+                        )
+                        .padding()
+                        .frame(maxWidth: geometry.size.width)
+                        .any
+                        
+                        ScrollView {
+                            viewModel.editable.editView {
+                                viewModel.editable = $0
+                                update += 1
+                            }
+                            .padding()
+                        }
+                        .navigationTitle("Edit View")
+                        
                     }
-                    .padding()
                 }
-                .navigationTitle("Edit View")
-                
             }
         }.onDisappear {
             viewModel.onUpdate(viewModel.editable)

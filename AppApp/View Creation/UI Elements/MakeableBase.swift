@@ -7,14 +7,16 @@
 
 import SwiftUI
 
-class MakeableBase: MakeableView, Codable {
+final class MakeableBase: MakeableView, Codable {
     
     static var type: VariableType { .base }
         
     var padding: IntValue
+    var backgroundColor: ColorValue
     
-    init(padding: IntValue) {
+    init(padding: IntValue, backgroundColor: ColorValue) {
         self.padding = padding
+        self.backgroundColor = backgroundColor
     }
     
     func insertValues(into variables: Variables) throws { }
@@ -30,6 +32,7 @@ class MakeableBase: MakeableView, Codable {
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .padding: return IntValue.init(value: 5)
+        case .backgroundColor: return ColorValue(value: .white)
         }
     }
 }
@@ -56,8 +59,18 @@ struct MakeableBaseView: View {
     }
     
     var body: some View {
-        EmptyView()
+        Rectangle()
             .padding(CGFloat(base.padding.value))
+            .foregroundColor(base.backgroundColor.value)
             .any
+    }
+}
+
+extension View {
+    func base(_ base: MakeableBase) -> some View {
+        self
+            .padding(CGFloat(base.padding.value))
+            .background(base.backgroundColor.value)
+        
     }
 }

@@ -12,7 +12,7 @@ import Combine
 @MainActor
 class ViewMakerViewModel: ObservableObject {
     let name: String
-    var content: MakeableStack = .init(content: .init(value: [], axis: .init(value: .vertical))) {
+    var content: MakeableStack = .init(content: .init(value: [], axis: .init(value: .vertical)), padding: .init(value: 5)) {
         didSet {
             objectWillChange.send()
             onUpdate(.init(id: screenID, name: self.name, initActions: self.initActions, content: content))

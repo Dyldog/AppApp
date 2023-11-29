@@ -50,7 +50,7 @@ final class MakeableArray: EditableVariableValue {
             MakeableStackView(
                 isRunning: false,
                 showEditControls: true,
-                stack: .init(content: self),
+                stack: .init(content: self, padding: .init(value: 5)),
                 onContentUpdate: {
                     onUpdate($0.content)
                 },

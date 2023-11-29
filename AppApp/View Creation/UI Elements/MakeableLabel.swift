@@ -48,6 +48,8 @@ struct MakeableLabelView: View {
         Text(text)
             .font(.system(size: CGFloat(label.fontSize.value)).weight(label.fontWeight.value))
             .if(label.italic.value) { $0.italic() }
+            .foregroundStyle(label.textColor.value)
+            .base(label.base)
             .task(id: variables.hashValue) {
                 self.text = await labelText()
             }
@@ -55,7 +57,7 @@ struct MakeableLabelView: View {
     }
 }
 
-final class MakeableLabel: MakeableView, Codable {
+final class MakeableLabel: MakeableView {
     
     static var type: VariableType { .label }
         
@@ -63,12 +65,16 @@ final class MakeableLabel: MakeableView, Codable {
     var fontSize: IntValue
     var fontWeight: FontWeightValue
     var italic: BoolValue
+    var base: MakeableBase
+    var textColor: ColorValue
     
-    init(text: Value, fontSize: IntValue, fontWeight: FontWeightValue, italic: BoolValue) {
+    init(text: Value, fontSize: IntValue, fontWeight: FontWeightValue, italic: BoolValue, base: MakeableBase, textColor: ColorValue) {
         self.text = text
         self.fontSize = fontSize
         self.fontWeight = fontWeight
         self.italic = italic
+        self.base = base
+        self.textColor = textColor
     }
     
     static func withText(_ string: String) -> MakeableLabel {
@@ -76,7 +82,9 @@ final class MakeableLabel: MakeableView, Codable {
             text: Value(value: StringValue(value: string)),
             fontSize: IntValue(value: 18),
             fontWeight: .init(value: .regular),
-            italic: .init(value: false)
+            italic: .init(value: false),
+            base: .makeDefault(), 
+            textColor: .init(value: .black)
         )
     }
     
@@ -96,6 +104,8 @@ final class MakeableLabel: MakeableView, Codable {
         case .fontSize: return IntValue(value: 18)
         case .fontWeight: return FontWeightValue(value: .regular)
         case .italic: return BoolValue(value: false)
+        case .base: return MakeableBase.makeDefault()
+        case .textColor: return ColorValue(value: .black)
         }
     }
 }

@@ -47,6 +47,13 @@ extension BoolValue: NSCopying {
         )
     }
 }
+extension ColorValue: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return ColorValue(
+                    value: value
+        )
+    }
+}
 extension ComparisonTypeValue: NSCopying {
     func copy(with zone: NSZone? = nil) -> Any {
         return ComparisonTypeValue(
@@ -126,7 +133,8 @@ extension MakeableArray: NSCopying {
 extension MakeableBase: NSCopying {
     func copy(with zone: NSZone? = nil) -> Any {
         return MakeableBase(
-                    padding: padding
+                    padding: padding,
+                    backgroundColor: backgroundColor
         )
     }
 }
@@ -143,7 +151,8 @@ extension MakeableField: NSCopying {
         return MakeableField(
                     text: text,
                     fontSize: fontSize,
-                    onTextUpdate: onTextUpdate
+                    onTextUpdate: onTextUpdate,
+                    padding: padding
         )
     }
 }
@@ -153,14 +162,29 @@ extension MakeableLabel: NSCopying {
                     text: text,
                     fontSize: fontSize,
                     fontWeight: fontWeight,
-                    italic: italic
+                    italic: italic,
+                    base: base,
+                    textColor: textColor
+        )
+    }
+}
+extension MakeableList: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return MakeableList(
+                    text: text,
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                    italic: italic,
+                    base: base,
+                    textColor: textColor
         )
     }
 }
 extension MakeableStack: NSCopying {
     func copy(with zone: NSZone? = nil) -> Any {
         return MakeableStack(
-                    content: content
+                    content: content,
+                    padding: padding
         )
     }
 }
@@ -168,7 +192,8 @@ extension MakeableToggle: NSCopying {
     func copy(with zone: NSZone? = nil) -> Any {
         return MakeableToggle(
                     isOn: isOn,
-                    onToggleUpdate: onToggleUpdate
+                    onToggleUpdate: onToggleUpdate,
+                    padding: padding
         )
     }
 }
@@ -288,13 +313,13 @@ extension APIValueStep {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> APIValueStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             url: factory(.url) as! Value
         )
     }
 
-    static func makeDefault() -> APIValueStep {
+    static func makeDefault() -> Self {
         .init(
             url: Properties.url.defaultValue as! Value
 		)
@@ -322,14 +347,14 @@ extension AddToVarStep {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> AddToVarStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             varName: factory(.varName) as! Value,
             value: factory(.value) as! Value
         )
     }
 
-    static func makeDefault() -> AddToVarStep {
+    static func makeDefault() -> Self {
         .init(
             varName: Properties.varName.defaultValue as! Value,
             value: Properties.value.defaultValue as! Value
@@ -360,14 +385,14 @@ extension ArrayValueStep {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> ArrayValueStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             array: factory(.array) as! Value,
             index: factory(.index) as! Value
         )
     }
 
-    static func makeDefault() -> ArrayValueStep {
+    static func makeDefault() -> Self {
         .init(
             array: Properties.array.defaultValue as! Value,
             index: Properties.index.defaultValue as! Value
@@ -400,7 +425,7 @@ extension ComparisonValue {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> ComparisonValue {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             lhs: factory(.lhs) as! Value,
             rhs: factory(.rhs) as! Value,
@@ -408,7 +433,7 @@ extension ComparisonValue {
         )
     }
 
-    static func makeDefault() -> ComparisonValue {
+    static func makeDefault() -> Self {
         .init(
             lhs: Properties.lhs.defaultValue as! Value,
             rhs: Properties.rhs.defaultValue as! Value,
@@ -442,14 +467,14 @@ extension ConditionalActionValue {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> ConditionalActionValue {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             ifCondition: factory(.ifCondition) as! ComparisonValue,
             ifSteps: factory(.ifSteps) as! StepArray
         )
     }
 
-    static func makeDefault() -> ConditionalActionValue {
+    static func makeDefault() -> Self {
         .init(
             ifCondition: Properties.ifCondition.defaultValue as! ComparisonValue,
             ifSteps: Properties.ifSteps.defaultValue as! StepArray
@@ -478,13 +503,13 @@ extension DecodeDictionaryStep {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> DecodeDictionaryStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             value: factory(.value) as! Value
         )
     }
 
-    static func makeDefault() -> DecodeDictionaryStep {
+    static func makeDefault() -> Self {
         .init(
             value: Properties.value.defaultValue as! Value
 		)
@@ -510,13 +535,13 @@ extension FunctionStep {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> FunctionStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             functionName: factory(.functionName) as! Value
         )
     }
 
-    static func makeDefault() -> FunctionStep {
+    static func makeDefault() -> Self {
         .init(
             functionName: Properties.functionName.defaultValue as! Value
 		)
@@ -544,14 +569,14 @@ extension IfStep {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> IfStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             ifAction: factory(.ifAction) as! ConditionalActionValue,
             elseAction: factory(.elseAction) as! StepArray
         )
     }
 
-    static func makeDefault() -> IfStep {
+    static func makeDefault() -> Self {
         .init(
             ifAction: Properties.ifAction.defaultValue as! ConditionalActionValue,
             elseAction: Properties.elseAction.defaultValue as! StepArray
@@ -574,32 +599,38 @@ extension IfStep {
 extension MakeableBase {
 	 enum Properties: String, ViewProperty {
         case padding
+        case backgroundColor
         var defaultValue: any EditableVariableValue {
             switch self {
             case .padding: return MakeableBase.defaultValue(for: .padding)
+            case .backgroundColor: return MakeableBase.defaultValue(for: .backgroundColor)
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> MakeableBase {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
-            padding: factory(.padding) as! IntValue
+            padding: factory(.padding) as! IntValue,
+            backgroundColor: factory(.backgroundColor) as! ColorValue
         )
     }
 
-    static func makeDefault() -> MakeableBase {
+    static func makeDefault() -> Self {
         .init(
-            padding: Properties.padding.defaultValue as! IntValue
+            padding: Properties.padding.defaultValue as! IntValue,
+            backgroundColor: Properties.backgroundColor.defaultValue as! ColorValue
 		)
     }
     func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .padding: return padding
+	        case .backgroundColor: return backgroundColor
         }
     }
 
 	func set(_ value: Any, for property: Properties) {
 		switch property {
 	        case .padding: self.padding = value as! IntValue
+	        case .backgroundColor: self.backgroundColor = value as! ColorValue
 	    }
 	}
 }
@@ -614,14 +645,14 @@ extension MakeableButton {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> MakeableButton {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             title: factory(.title) as! MakeableLabel,
             action: factory(.action) as! StepArray
         )
     }
 
-    static func makeDefault() -> MakeableButton {
+    static func makeDefault() -> Self {
         .init(
             title: Properties.title.defaultValue as! MakeableLabel,
             action: Properties.action.defaultValue as! StepArray
@@ -646,27 +677,31 @@ extension MakeableField {
         case text
         case fontSize
         case onTextUpdate
+        case padding
         var defaultValue: any EditableVariableValue {
             switch self {
             case .text: return MakeableField.defaultValue(for: .text)
             case .fontSize: return MakeableField.defaultValue(for: .fontSize)
             case .onTextUpdate: return MakeableField.defaultValue(for: .onTextUpdate)
+            case .padding: return MakeableField.defaultValue(for: .padding)
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> MakeableField {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             text: factory(.text) as! TemporaryValue,
             fontSize: factory(.fontSize) as! IntValue,
-            onTextUpdate: factory(.onTextUpdate) as! StepArray
+            onTextUpdate: factory(.onTextUpdate) as! StepArray,
+            padding: factory(.padding) as! IntValue
         )
     }
 
-    static func makeDefault() -> MakeableField {
+    static func makeDefault() -> Self {
         .init(
             text: Properties.text.defaultValue as! TemporaryValue,
             fontSize: Properties.fontSize.defaultValue as! IntValue,
-            onTextUpdate: Properties.onTextUpdate.defaultValue as! StepArray
+            onTextUpdate: Properties.onTextUpdate.defaultValue as! StepArray,
+            padding: Properties.padding.defaultValue as! IntValue
 		)
     }
     func value(for property: Properties) -> any EditableVariableValue {
@@ -674,6 +709,7 @@ extension MakeableField {
 	        case .text: return text
 	        case .fontSize: return fontSize
 	        case .onTextUpdate: return onTextUpdate
+	        case .padding: return padding
         }
     }
 
@@ -682,6 +718,7 @@ extension MakeableField {
 	        case .text: self.text = value as! TemporaryValue
 	        case .fontSize: self.fontSize = value as! IntValue
 	        case .onTextUpdate: self.onTextUpdate = value as! StepArray
+	        case .padding: self.padding = value as! IntValue
 	    }
 	}
 }
@@ -691,30 +728,38 @@ extension MakeableLabel {
         case fontSize
         case fontWeight
         case italic
+        case base
+        case textColor
         var defaultValue: any EditableVariableValue {
             switch self {
             case .text: return MakeableLabel.defaultValue(for: .text)
             case .fontSize: return MakeableLabel.defaultValue(for: .fontSize)
             case .fontWeight: return MakeableLabel.defaultValue(for: .fontWeight)
             case .italic: return MakeableLabel.defaultValue(for: .italic)
+            case .base: return MakeableLabel.defaultValue(for: .base)
+            case .textColor: return MakeableLabel.defaultValue(for: .textColor)
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> MakeableLabel {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             text: factory(.text) as! Value,
             fontSize: factory(.fontSize) as! IntValue,
             fontWeight: factory(.fontWeight) as! FontWeightValue,
-            italic: factory(.italic) as! BoolValue
+            italic: factory(.italic) as! BoolValue,
+            base: factory(.base) as! MakeableBase,
+            textColor: factory(.textColor) as! ColorValue
         )
     }
 
-    static func makeDefault() -> MakeableLabel {
+    static func makeDefault() -> Self {
         .init(
             text: Properties.text.defaultValue as! Value,
             fontSize: Properties.fontSize.defaultValue as! IntValue,
             fontWeight: Properties.fontWeight.defaultValue as! FontWeightValue,
-            italic: Properties.italic.defaultValue as! BoolValue
+            italic: Properties.italic.defaultValue as! BoolValue,
+            base: Properties.base.defaultValue as! MakeableBase,
+            textColor: Properties.textColor.defaultValue as! ColorValue
 		)
     }
     func value(for property: Properties) -> any EditableVariableValue {
@@ -723,6 +768,8 @@ extension MakeableLabel {
 	        case .fontSize: return fontSize
 	        case .fontWeight: return fontWeight
 	        case .italic: return italic
+	        case .base: return base
+	        case .textColor: return textColor
         }
     }
 
@@ -732,38 +779,108 @@ extension MakeableLabel {
 	        case .fontSize: self.fontSize = value as! IntValue
 	        case .fontWeight: self.fontWeight = value as! FontWeightValue
 	        case .italic: self.italic = value as! BoolValue
+	        case .base: self.base = value as! MakeableBase
+	        case .textColor: self.textColor = value as! ColorValue
+	    }
+	}
+}
+extension MakeableList {
+	 enum Properties: String, ViewProperty {
+        case text
+        case fontSize
+        case fontWeight
+        case italic
+        case base
+        case textColor
+        var defaultValue: any EditableVariableValue {
+            switch self {
+            case .text: return MakeableList.defaultValue(for: .text)
+            case .fontSize: return MakeableList.defaultValue(for: .fontSize)
+            case .fontWeight: return MakeableList.defaultValue(for: .fontWeight)
+            case .italic: return MakeableList.defaultValue(for: .italic)
+            case .base: return MakeableList.defaultValue(for: .base)
+            case .textColor: return MakeableList.defaultValue(for: .textColor)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+        .init(
+            text: factory(.text) as! Value,
+            fontSize: factory(.fontSize) as! IntValue,
+            fontWeight: factory(.fontWeight) as! FontWeightValue,
+            italic: factory(.italic) as! BoolValue,
+            base: factory(.base) as! MakeableBase,
+            textColor: factory(.textColor) as! ColorValue
+        )
+    }
+
+    static func makeDefault() -> Self {
+        .init(
+            text: Properties.text.defaultValue as! Value,
+            fontSize: Properties.fontSize.defaultValue as! IntValue,
+            fontWeight: Properties.fontWeight.defaultValue as! FontWeightValue,
+            italic: Properties.italic.defaultValue as! BoolValue,
+            base: Properties.base.defaultValue as! MakeableBase,
+            textColor: Properties.textColor.defaultValue as! ColorValue
+		)
+    }
+    func value(for property: Properties) -> any EditableVariableValue {
+		switch property {
+	        case .text: return text
+	        case .fontSize: return fontSize
+	        case .fontWeight: return fontWeight
+	        case .italic: return italic
+	        case .base: return base
+	        case .textColor: return textColor
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .text: self.text = value as! Value
+	        case .fontSize: self.fontSize = value as! IntValue
+	        case .fontWeight: self.fontWeight = value as! FontWeightValue
+	        case .italic: self.italic = value as! BoolValue
+	        case .base: self.base = value as! MakeableBase
+	        case .textColor: self.textColor = value as! ColorValue
 	    }
 	}
 }
 extension MakeableStack {
 	 enum Properties: String, ViewProperty {
         case content
+        case padding
         var defaultValue: any EditableVariableValue {
             switch self {
             case .content: return MakeableStack.defaultValue(for: .content)
+            case .padding: return MakeableStack.defaultValue(for: .padding)
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> MakeableStack {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
-            content: factory(.content) as! MakeableArray
+            content: factory(.content) as! MakeableArray,
+            padding: factory(.padding) as! IntValue
         )
     }
 
-    static func makeDefault() -> MakeableStack {
+    static func makeDefault() -> Self {
         .init(
-            content: Properties.content.defaultValue as! MakeableArray
+            content: Properties.content.defaultValue as! MakeableArray,
+            padding: Properties.padding.defaultValue as! IntValue
 		)
     }
     func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .content: return content
+	        case .padding: return padding
         }
     }
 
 	func set(_ value: Any, for property: Properties) {
 		switch property {
 	        case .content: self.content = value as! MakeableArray
+	        case .padding: self.padding = value as! IntValue
 	    }
 	}
 }
@@ -771,30 +888,35 @@ extension MakeableToggle {
 	 enum Properties: String, ViewProperty {
         case isOn
         case onToggleUpdate
+        case padding
         var defaultValue: any EditableVariableValue {
             switch self {
             case .isOn: return MakeableToggle.defaultValue(for: .isOn)
             case .onToggleUpdate: return MakeableToggle.defaultValue(for: .onToggleUpdate)
+            case .padding: return MakeableToggle.defaultValue(for: .padding)
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> MakeableToggle {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             isOn: factory(.isOn) as! TemporaryValue,
-            onToggleUpdate: factory(.onToggleUpdate) as! StepArray
+            onToggleUpdate: factory(.onToggleUpdate) as! StepArray,
+            padding: factory(.padding) as! IntValue
         )
     }
 
-    static func makeDefault() -> MakeableToggle {
+    static func makeDefault() -> Self {
         .init(
             isOn: Properties.isOn.defaultValue as! TemporaryValue,
-            onToggleUpdate: Properties.onToggleUpdate.defaultValue as! StepArray
+            onToggleUpdate: Properties.onToggleUpdate.defaultValue as! StepArray,
+            padding: Properties.padding.defaultValue as! IntValue
 		)
     }
     func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .isOn: return isOn
 	        case .onToggleUpdate: return onToggleUpdate
+	        case .padding: return padding
         }
     }
 
@@ -802,6 +924,7 @@ extension MakeableToggle {
 		switch property {
 	        case .isOn: self.isOn = value as! TemporaryValue
 	        case .onToggleUpdate: self.onToggleUpdate = value as! StepArray
+	        case .padding: self.padding = value as! IntValue
 	    }
 	}
 }
@@ -818,7 +941,7 @@ extension NumericalOperationValue {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> NumericalOperationValue {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             lhs: factory(.lhs) as! Value,
             rhs: factory(.rhs) as! Value,
@@ -826,7 +949,7 @@ extension NumericalOperationValue {
         )
     }
 
-    static func makeDefault() -> NumericalOperationValue {
+    static func makeDefault() -> Self {
         .init(
             lhs: Properties.lhs.defaultValue as! Value,
             rhs: Properties.rhs.defaultValue as! Value,
@@ -858,13 +981,13 @@ extension PrintVarStep {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> PrintVarStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             varName: factory(.varName) as! Value
         )
     }
 
-    static func makeDefault() -> PrintVarStep {
+    static func makeDefault() -> Self {
         .init(
             varName: Properties.varName.defaultValue as! Value
 		)
@@ -892,14 +1015,14 @@ extension SetVarStep {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> SetVarStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             varName: factory(.varName) as! Value,
             value: factory(.value) as! Value
         )
     }
 
-    static func makeDefault() -> SetVarStep {
+    static func makeDefault() -> Self {
         .init(
             varName: Properties.varName.defaultValue as! Value,
             value: Properties.value.defaultValue as! Value
@@ -930,14 +1053,14 @@ extension StaticValueStep {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> StaticValueStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             value: factory(.value) as! Value,
             type: factory(.type) as! VariableTypeValue
         )
     }
 
-    static func makeDefault() -> StaticValueStep {
+    static func makeDefault() -> Self {
         .init(
             value: Properties.value.defaultValue as! Value,
             type: Properties.type.defaultValue as! VariableTypeValue
@@ -968,14 +1091,14 @@ extension TemporaryValue {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> TemporaryValue {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             initial: factory(.initial) as! Value,
             output: factory(.output) as! Variable
         )
     }
 
-    static func makeDefault() -> TemporaryValue {
+    static func makeDefault() -> Self {
         .init(
             initial: Properties.initial.defaultValue as! Value,
             output: Properties.output.defaultValue as! Variable
@@ -1006,14 +1129,14 @@ extension VariableStep {
             }
         }
     }
-    static func make(factory: (Properties) -> any EditableVariableValue) -> VariableStep {
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             varName: factory(.varName) as! Value,
             type: factory(.type) as! VariableTypeValue
         )
     }
 
-    static func makeDefault() -> VariableStep {
+    static func makeDefault() -> Self {
         .init(
             varName: Properties.varName.defaultValue as! Value,
             type: Properties.type.defaultValue as! VariableTypeValue
@@ -1051,6 +1174,9 @@ extension CodableMakeableList: Codable {
             else if let value = try? contentContainer.decode(MakeableLabel.self) {
                 content.append(value)
             }  
+            else if let value = try? contentContainer.decode(MakeableList.self) {
+                content.append(value)
+            }  
             else if let value = try? contentContainer.decode(MakeableStack.self) {
                 content.append(value)
             }  
@@ -1075,6 +1201,8 @@ extension CodableMakeableList: Codable {
             case let value as MakeableField:
                 try contentContainer.encode(value)
             case let value as MakeableLabel:
+                try contentContainer.encode(value)
+            case let value as MakeableList:
                 try contentContainer.encode(value)
             case let value as MakeableStack:
                 try contentContainer.encode(value)
@@ -1109,6 +1237,8 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(AxisValue.self, forKey: .value)
         case typeString(BoolValue.self):
             self.value = try valueContainer.decode(BoolValue.self, forKey: .value)
+        case typeString(ColorValue.self):
+            self.value = try valueContainer.decode(ColorValue.self, forKey: .value)
         case typeString(ComparisonTypeValue.self):
             self.value = try valueContainer.decode(ComparisonTypeValue.self, forKey: .value)
         case typeString(ComparisonValue.self):
@@ -1137,6 +1267,8 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(MakeableField.self, forKey: .value)
         case typeString(MakeableLabel.self):
             self.value = try valueContainer.decode(MakeableLabel.self, forKey: .value)
+        case typeString(MakeableList.self):
+            self.value = try valueContainer.decode(MakeableList.self, forKey: .value)
         case typeString(MakeableStack.self):
             self.value = try valueContainer.decode(MakeableStack.self, forKey: .value)
         case typeString(MakeableToggle.self):
@@ -1189,6 +1321,8 @@ extension CodableVariableValue: Codable {
             try container.encode(value, forKey: .value)
         case let value as BoolValue:
             try container.encode(value, forKey: .value)
+        case let value as ColorValue:
+            try container.encode(value, forKey: .value)
         case let value as ComparisonTypeValue:
             try container.encode(value, forKey: .value)
         case let value as ComparisonValue:
@@ -1216,6 +1350,8 @@ extension CodableVariableValue: Codable {
         case let value as MakeableField:
             try container.encode(value, forKey: .value)
         case let value as MakeableLabel:
+            try container.encode(value, forKey: .value)
+        case let value as MakeableList:
             try container.encode(value, forKey: .value)
         case let value as MakeableStack:
             try container.encode(value, forKey: .value)
@@ -1269,6 +1405,9 @@ extension AddViewViewModel {
             .init(title: "Label", onTap: {
                 onSelect(MakeableLabel.makeDefault())
             }),
+            .init(title: "List", onTap: {
+                onSelect(MakeableList.makeDefault())
+            }),
             .init(title: "Stack", onTap: {
                 onSelect(MakeableStack.makeDefault())
             }),
@@ -1284,6 +1423,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
 	case list // ArrayValue
 	case axis // AxisValue
 	case boolean // BoolValue
+	case color // ColorValue
 	case comparisonType // ComparisonTypeValue
 	case comparison // ComparisonValue
 	case conditionalAction // ConditionalActionValue
@@ -1295,6 +1435,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
 	case button // MakeableButton
 	case field // MakeableField
 	case label // MakeableLabel
+	case listView // MakeableList
 	case stack // MakeableStack
 	case toggle // MakeableToggle
 	case `nil` // NilValue
@@ -1313,6 +1454,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .list: return ArrayValue.makeDefault()
         case .axis: return AxisValue.makeDefault()
         case .boolean: return BoolValue.makeDefault()
+        case .color: return ColorValue.makeDefault()
         case .comparisonType: return ComparisonTypeValue.makeDefault()
         case .comparison: return ComparisonValue.makeDefault()
         case .conditionalAction: return ConditionalActionValue.makeDefault()
@@ -1324,6 +1466,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .button: return MakeableButton.makeDefault()
         case .field: return MakeableField.makeDefault()
         case .label: return MakeableLabel.makeDefault()
+        case .listView: return MakeableList.makeDefault()
         case .stack: return MakeableStack.makeDefault()
         case .toggle: return MakeableToggle.makeDefault()
         case .`nil`: return NilValue.makeDefault()
@@ -1343,6 +1486,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .list: return "list"
         case .axis: return "axis"
         case .boolean: return "boolean"
+        case .color: return "color"
         case .comparisonType: return "comparisonType"
         case .comparison: return "comparison"
         case .conditionalAction: return "conditionalAction"
@@ -1354,6 +1498,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .button: return "button"
         case .field: return "field"
         case .label: return "label"
+        case .listView: return "listView"
         case .stack: return "stack"
         case .toggle: return "toggle"
         case .`nil`: return "`nil`"
@@ -1372,21 +1517,28 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
 
 extension MakeableWrapperView {
 	var body: some View {
+        ZStack {
+            inner
+        }
+    }
+    var inner: some View {
         switch view {
         case let value as MakeableBase:
-            MakeableBaseView(isRunning: isRunning, showEditControls: showEditControls, base: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
+            return MakeableBaseView(isRunning: isRunning, showEditControls: showEditControls, base: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
         case let value as MakeableButton:
-            MakeableButtonView(isRunning: isRunning, showEditControls: showEditControls, button: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
+            return MakeableButtonView(isRunning: isRunning, showEditControls: showEditControls, button: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
         case let value as MakeableField:
-            MakeableFieldView(isRunning: isRunning, showEditControls: showEditControls, field: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
+            return MakeableFieldView(isRunning: isRunning, showEditControls: showEditControls, field: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
         case let value as MakeableLabel:
-            MakeableLabelView(isRunning: isRunning, showEditControls: showEditControls, label: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
+            return MakeableLabelView(isRunning: isRunning, showEditControls: showEditControls, label: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
+        case let value as MakeableList:
+            return MakeableListView(isRunning: isRunning, showEditControls: showEditControls, listView: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
         case let value as MakeableStack:
-            MakeableStackView(isRunning: isRunning, showEditControls: showEditControls, stack: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
+            return MakeableStackView(isRunning: isRunning, showEditControls: showEditControls, stack: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
         case let value as MakeableToggle:
-            MakeableToggleView(isRunning: isRunning, showEditControls: showEditControls, toggle: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
+            return MakeableToggleView(isRunning: isRunning, showEditControls: showEditControls, toggle: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
         default:
-            Text("UNKNOWN VIEW").any
+            return Text("UNKNOWN VIEW").any
         }
     }
 }

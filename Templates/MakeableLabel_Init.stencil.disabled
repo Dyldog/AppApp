@@ -1,0 +1,13 @@
+
+extension MakeableLabel {
+    static func withText(_ string: String) -> MakeableLabel {
+        .init(
+{% for type in types.implementing.MakeableView %}
+{% for property in type.storedVariables %}
+    {% if not property.defaultValue %}
+            {{ property.name }}: factory(.{{ property.name }}) as! {{ property.typeName }}{{ ',' if not forloop.last }}
+    {% endif %}
+{% endfor %}
+        )
+    }
+}

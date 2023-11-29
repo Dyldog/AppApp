@@ -13,13 +13,15 @@ final class MakeableToggle: MakeableView {
     
     var isOn: TemporaryValue
     var onToggleUpdate: StepArray
+    var padding: IntValue
     
     var protoString: String { isOn.protoString }
     var valueString: String { isOn.valueString }
     
-    init(isOn: TemporaryValue, onToggleUpdate: StepArray) {
+    init(isOn: TemporaryValue, onToggleUpdate: StepArray, padding: IntValue) {
         self.isOn = isOn
         self.onToggleUpdate = onToggleUpdate
+        self.padding = padding
     }
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
@@ -28,6 +30,7 @@ final class MakeableToggle: MakeableView {
             initial: .init(value: BoolValue(value: false)),
             output: .init(value: StringValue(value: "SWITCHON")))
         case .onToggleUpdate: return StepArray(value: [])
+        case .padding: return IntValue(value: 5)
         }
     }
     

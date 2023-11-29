@@ -70,11 +70,13 @@ final class MakeableField: MakeableView, Codable {
     var text: TemporaryValue
     var fontSize: IntValue
     var onTextUpdate: StepArray
+    var padding: IntValue
     
-    init(text: TemporaryValue, fontSize: IntValue, onTextUpdate: StepArray) {
+    init(text: TemporaryValue, fontSize: IntValue, onTextUpdate: StepArray, padding: IntValue) {
         self.text = text
         self.fontSize = fontSize
         self.onTextUpdate = onTextUpdate
+        self.padding = padding
     }
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
@@ -82,6 +84,7 @@ final class MakeableField: MakeableView, Codable {
         case .text: return TemporaryValue.makeDefault()
         case .fontSize: return IntValue(value: 18)
         case .onTextUpdate: return StepArray(value: [])
+        case .padding: return IntValue(value: 5)
         }
     }
     
