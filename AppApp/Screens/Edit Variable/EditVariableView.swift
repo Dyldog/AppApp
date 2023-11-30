@@ -24,7 +24,7 @@ struct EditVariableView: View {
         NavigationView {
             List {
                 HStack {
-                    Text("type")
+                    Text("Type")
                     Spacer()
                     Picker("Type", selection: $selectedType) {
                         ForEach(VariableType.allCases) {
@@ -34,8 +34,10 @@ struct EditVariableView: View {
                 }
                 
                 HStack {
-                    Text("value")
-                    Spacer()
+                    if !(value is any CompositeEditableVariableValue) {
+                        Text("Value")
+                        Spacer()
+                    }
                     value.editView(title: name, onUpdate: {
                         self.value = $0
                         onUpdate($0)

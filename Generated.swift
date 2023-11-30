@@ -123,18 +123,19 @@ extension FunctionStep: Copying {
         )
     }
 }
+extension GetNumberStep: Copying {
+    func copy() -> GetNumberStep {
+        return GetNumberStep(
+                    value: value.copy() as! AnyValue,
+                    numberType: numberType
+        )
+    }
+}
 extension IfStep: Copying {
     func copy() -> IfStep {
         return IfStep(
                     ifAction: ifAction.copy() as! ConditionalActionValue,
                     elseAction: elseAction.copy() as! StepArray
-        )
-    }
-}
-extension IntValue: Copying {
-    func copy() -> IntValue {
-        return IntValue(
-                    value: value
         )
     }
 }
@@ -149,9 +150,9 @@ extension MakeableArray: Copying {
 extension MakeableBase: Copying {
     func copy() -> MakeableBase {
         return MakeableBase(
-                    padding: padding.copy() as! IntValue,
+                    padding: padding,
                     backgroundColor: backgroundColor.copy() as! ColorValue,
-                    cornerRadius: cornerRadius.copy() as! IntValue
+                    cornerRadius: cornerRadius
         )
     }
 }
@@ -168,9 +169,9 @@ extension MakeableField: Copying {
     func copy() -> MakeableField {
         return MakeableField(
                     text: text.copy() as! TemporaryValue,
-                    fontSize: fontSize.copy() as! IntValue,
+                    fontSize: fontSize,
                     onTextUpdate: onTextUpdate.copy() as! StepArray,
-                    padding: padding.copy() as! IntValue
+                    padding: padding
         )
     }
 }
@@ -178,7 +179,7 @@ extension MakeableLabel: Copying {
     func copy() -> MakeableLabel {
         return MakeableLabel(
                     text: text.copy() as! AnyValue,
-                    fontSize: fontSize.copy() as! IntValue,
+                    fontSize: fontSize,
                     fontWeight: fontWeight,
                     italic: italic.copy() as! BoolValue,
                     base: base.copy() as! MakeableBase,
@@ -198,7 +199,7 @@ extension MakeableStack: Copying {
     func copy() -> MakeableStack {
         return MakeableStack(
                     content: content.copy() as! MakeableArray,
-                    padding: padding.copy() as! IntValue
+                    padding: padding
         )
     }
 }
@@ -207,7 +208,7 @@ extension MakeableToggle: Copying {
         return MakeableToggle(
                     isOn: isOn.copy() as! TemporaryValue,
                     onToggleUpdate: onToggleUpdate.copy() as! StepArray,
-                    padding: padding.copy() as! IntValue
+                    padding: padding
         )
     }
 }
@@ -388,6 +389,24 @@ extension VariableType {
     ] }
 }
 
+enum NumericType: String, Codable, CaseIterable {
+    static var defaultValue: NumericType = .int
+    var title: String { rawValue.capitalized }
+
+    case float
+    case int
+    func make(from string: String) throws -> any VariableValue {
+        switch self {
+        case .float:
+            guard let value = Float(string) else { throw VariableValueError.wrongTypeForOperation }
+            return FloatValue(value: value)
+        case .int:
+            guard let value = Int(string) else { throw VariableValueError.wrongTypeForOperation }
+            return IntValue(value: value)
+        }
+    }
+}
+
 
 
 
@@ -483,6 +502,126 @@ final class FontWeightValue: PrimitiveEditableVariableValue, Codable, Copying {
 
 extension Font.Weight: Copying {
     func copy() -> Font.Weight {
+        return self
+    }
+}
+
+final class NumericTypeValue: PrimitiveEditableVariableValue, Codable, Copying {
+
+    static var type: VariableType { .numericType }
+    static var defaultValue: NumericType { .defaultValue }
+    var value: NumericType
+    init(value: NumericType) {
+        self.value = value
+    }
+    static func makeDefault() -> NumericTypeValue {
+        .init(value: defaultValue)
+    }
+    func add(_ other: VariableValue) throws -> VariableValue {
+        throw VariableValueError.variableCannotPerformOperation(Self.type, "add")
+    }
+    var protoString: String { "\(value.title)" }
+    var valueString: String { protoString }
+    func value(with variables: Variables) async throws -> VariableValue {
+        self
+    }
+    func copy() -> NumericTypeValue {
+        .init(
+            value: value
+        )
+    }
+}
+
+extension NumericType: Copying {
+    func copy() -> NumericType {
+        return self
+    }
+}
+
+
+
+
+
+final class FloatValue: EditableVariableValue, Codable, Copying, NumericValue {
+    static var type: VariableType { .float }
+    var value: Float
+    static var defaultValue: Float = .defaultValue
+    init(value: Float) {
+        self.value = value
+    }
+    static func makeDefault() -> FloatValue {
+        .init(value: Self.defaultValue)
+    }
+    func editView(title: String, onUpdate: @escaping (FloatValue) -> Void) -> AnyView {
+        TextField("", text: .init(get: { [weak self] in
+            self?.protoString ?? "ERROR"
+        }, set: { [weak self] in
+            guard let self = self else { return }
+            self.value = Float($0) ?? self.value
+            onUpdate(self)
+        })).any
+    }
+    func add(_ other: VariableValue) throws -> VariableValue {
+        guard let other = other as? FloatValue else { throw VariableValueError.wrongTypeForOperation }
+        self.value = self.value + other.value
+        return self
+    }
+    var protoString: String { "\(value)" }
+    var valueString: String { "\(value)"}
+    func value(with variables: Variables) throws -> VariableValue {
+        self
+    }
+    func copy() -> FloatValue {
+        .init(
+            value: value
+        )
+    }
+}
+
+extension Float: Copying {
+    func copy() -> Float {
+        return self
+    }
+}
+
+final class IntValue: EditableVariableValue, Codable, Copying, NumericValue {
+    static var type: VariableType { .int }
+    var value: Int
+    static var defaultValue: Int = .defaultValue
+    init(value: Int) {
+        self.value = value
+    }
+    static func makeDefault() -> IntValue {
+        .init(value: Self.defaultValue)
+    }
+    func editView(title: String, onUpdate: @escaping (IntValue) -> Void) -> AnyView {
+        TextField("", text: .init(get: { [weak self] in
+            self?.protoString ?? "ERROR"
+        }, set: { [weak self] in
+            guard let self = self else { return }
+            self.value = Int($0) ?? self.value
+            onUpdate(self)
+        })).any
+    }
+    func add(_ other: VariableValue) throws -> VariableValue {
+        guard let other = other as? IntValue else { throw VariableValueError.wrongTypeForOperation }
+        self.value = self.value + other.value
+        return self
+    }
+    var protoString: String { "\(value)" }
+    var valueString: String { "\(value)"}
+    func value(with variables: Variables) throws -> VariableValue {
+        self
+    }
+    func copy() -> IntValue {
+        .init(
+            value: value
+        )
+    }
+}
+
+extension Int: Copying {
+    func copy() -> Int {
         return self
     }
 }
@@ -812,6 +951,44 @@ extension FunctionStep {
 	func set(_ value: Any, for property: Properties) {
 		switch property {
 	        case .functionName: self.functionName = value as! AnyValue
+	    }
+	}
+}
+extension GetNumberStep {
+	 enum Properties: String, ViewProperty {
+        case value
+        case numberType
+        var defaultValue: any EditableVariableValue {
+            switch self {
+            case .value: return GetNumberStep.defaultValue(for: .value)
+            case .numberType: return GetNumberStep.defaultValue(for: .numberType)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+        .init(
+            value: factory(.value) as! AnyValue,
+            numberType: factory(.numberType) as! NumericTypeValue
+        )
+    }
+
+    static func makeDefault() -> Self {
+        .init(
+            value: Properties.value.defaultValue as! AnyValue,
+            numberType: Properties.numberType.defaultValue as! NumericTypeValue
+		)
+    }
+    func value(for property: Properties) -> any EditableVariableValue {
+		switch property {
+	        case .value: return value
+	        case .numberType: return numberType
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .value: self.value = value as! AnyValue
+	        case .numberType: self.numberType = value as! NumericTypeValue
 	    }
 	}
 }
@@ -1411,6 +1588,8 @@ extension CodableVariableValue: Codable {
     init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.type = try valueContainer.decode(String.self, forKey: .type)
+
+
         switch type {
         case typeString(APIValueStep.self):
             self.value = try valueContainer.decode(APIValueStep.self, forKey: .value)
@@ -1444,10 +1623,10 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(DictionaryValueForKeyStep.self, forKey: .value)
         case typeString(FunctionStep.self):
             self.value = try valueContainer.decode(FunctionStep.self, forKey: .value)
+        case typeString(GetNumberStep.self):
+            self.value = try valueContainer.decode(GetNumberStep.self, forKey: .value)
         case typeString(IfStep.self):
             self.value = try valueContainer.decode(IfStep.self, forKey: .value)
-        case typeString(IntValue.self):
-            self.value = try valueContainer.decode(IntValue.self, forKey: .value)
         case typeString(MakeableArray.self):
             self.value = try valueContainer.decode(MakeableArray.self, forKey: .value)
         case typeString(MakeableBase.self):
@@ -1492,6 +1671,19 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(VariableStep.self, forKey: .value)
         case typeString(VariableTypeValue.self):
             self.value = try valueContainer.decode(VariableTypeValue.self, forKey: .value)
+        case typeString(AxisValue.self):
+            self.value = try valueContainer.decode(AxisValue.self, forKey: .value)
+        case typeString(ButtonStyleValue.self):
+            self.value = try valueContainer.decode(ButtonStyleValue.self, forKey: .value)
+        case typeString(FontWeightValue.self):
+            self.value = try valueContainer.decode(FontWeightValue.self, forKey: .value)
+        case typeString(NumericTypeValue.self):
+            self.value = try valueContainer.decode(NumericTypeValue.self, forKey: .value)
+        case typeString(FloatValue.self):
+            self.value = try valueContainer.decode(FloatValue.self, forKey: .value)
+        case typeString(IntValue.self):
+            self.value = try valueContainer.decode(IntValue.self, forKey: .value)
+
         default:
             fatalError(type)
         }
@@ -1532,9 +1724,9 @@ extension CodableVariableValue: Codable {
             try container.encode(value, forKey: .value)
         case let value as FunctionStep:
             try container.encode(value, forKey: .value)
-        case let value as IfStep:
+        case let value as GetNumberStep:
             try container.encode(value, forKey: .value)
-        case let value as IntValue:
+        case let value as IfStep:
             try container.encode(value, forKey: .value)
         case let value as MakeableArray:
             try container.encode(value, forKey: .value)
@@ -1580,6 +1772,21 @@ extension CodableVariableValue: Codable {
             try container.encode(value, forKey: .value)
         case let value as VariableTypeValue:
             try container.encode(value, forKey: .value)
+
+        case let value as AxisValue:
+            try container.encode(value, forKey: .value)
+        case let value as ButtonStyleValue:
+            try container.encode(value, forKey: .value)
+        case let value as FontWeightValue:
+            try container.encode(value, forKey: .value)
+        case let value as NumericTypeValue:
+            try container.encode(value, forKey: .value)
+
+        case let value as FloatValue:
+            try container.encode(value, forKey: .value)
+        case let value as IntValue:
+            try container.encode(value, forKey: .value)
+
         default: fatalError()
         }
     }
@@ -1623,6 +1830,7 @@ extension AddViewViewModel {
 
 
 enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
+
 	case view // AnyMakeableView
 	case anyValue // AnyValue
 	case list // ArrayValue
@@ -1632,7 +1840,6 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
 	case comparison // ComparisonValue
 	case conditionalAction // ConditionalActionValue
 	case dictionary // DictionaryValue
-	case int // IntValue
 	case makeableArray // MakeableArray
 	case base // MakeableBase
 	case button // MakeableButton
@@ -1651,9 +1858,14 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
 	case temporary // TemporaryValue
 	case variable // Variable
 	case type // VariableTypeValue
+
     case axis // Axis
     case buttonStyle // ButtonStyle
     case fontWeight // Font.Weight
+    case numericType // NumericType
+
+    case float // Float
+    case int // Int
 
 	var defaultView: any EditableVariableValue {
         switch self {
@@ -1666,7 +1878,6 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .comparison: return ComparisonValue.makeDefault()
         case .conditionalAction: return ConditionalActionValue.makeDefault()
         case .dictionary: return DictionaryValue.makeDefault()
-        case .int: return IntValue.makeDefault()
         case .makeableArray: return MakeableArray.makeDefault()
         case .base: return MakeableBase.makeDefault()
         case .button: return MakeableButton.makeDefault()
@@ -1685,9 +1896,14 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .temporary: return TemporaryValue.makeDefault()
         case .variable: return Variable.makeDefault()
         case .type: return VariableTypeValue.makeDefault()
+
     case .axis: return AxisValue.makeDefault()
     case .buttonStyle: return ButtonStyleValue.makeDefault()
     case .fontWeight: return FontWeightValue.makeDefault()
+    case .numericType: return NumericTypeValue.makeDefault()
+
+    case .float: return FloatValue.makeDefault()
+    case .int: return IntValue.makeDefault()
         }
     }
     var title: String {
@@ -1701,7 +1917,6 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .comparison: return "comparison"
         case .conditionalAction: return "conditionalAction"
         case .dictionary: return "dictionary"
-        case .int: return "int"
         case .makeableArray: return "makeableArray"
         case .base: return "base"
         case .button: return "button"
@@ -1723,6 +1938,9 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .axis: return "axis"
         case .buttonStyle: return "buttonStyle"
         case .fontWeight: return "fontWeight"
+        case .numericType: return "numericType"
+        case .float: return "float"
+        case .int: return "int"
         }
     }
 }
@@ -1765,6 +1983,7 @@ extension AddActionView {
 		case DictionaryKeys
 		case DictionaryValueForKey
 		case Function
+		case GetNumber
 		case If
 		case PrintVar
 		case SetVar
@@ -1779,6 +1998,7 @@ extension AddActionView {
             case .DictionaryKeys: return DictionaryKeysStep.title
             case .DictionaryValueForKey: return DictionaryValueForKeyStep.title
             case .Function: return FunctionStep.title
+            case .GetNumber: return GetNumberStep.title
             case .If: return IfStep.title
             case .PrintVar: return PrintVarStep.title
             case .SetVar: return SetVarStep.title
@@ -1795,6 +2015,7 @@ extension AddActionView {
             case .DictionaryKeys: DictionaryKeysStep.makeDefault()
             case .DictionaryValueForKey: DictionaryValueForKeyStep.makeDefault()
             case .Function: FunctionStep.makeDefault()
+            case .GetNumber: GetNumberStep.makeDefault()
             case .If: IfStep.makeDefault()
             case .PrintVar: PrintVarStep.makeDefault()
             case .SetVar: SetVarStep.makeDefault()
@@ -1824,6 +2045,8 @@ extension CodableStep: Codable {
 			self.value = try valueContainer.decode(DictionaryValueForKeyStep.self, forKey: .value)
         case typeString(FunctionStep.self):
 			self.value = try valueContainer.decode(FunctionStep.self, forKey: .value)
+        case typeString(GetNumberStep.self):
+			self.value = try valueContainer.decode(GetNumberStep.self, forKey: .value)
         case typeString(IfStep.self):
 			self.value = try valueContainer.decode(IfStep.self, forKey: .value)
         case typeString(PrintVarStep.self):
@@ -1855,6 +2078,8 @@ extension CodableStep: Codable {
 		case let value as DictionaryValueForKeyStep:
 			try container.encode(value, forKey: .value)
 		case let value as FunctionStep:
+			try container.encode(value, forKey: .value)
+		case let value as GetNumberStep:
 			try container.encode(value, forKey: .value)
 		case let value as IfStep:
 			try container.encode(value, forKey: .value)

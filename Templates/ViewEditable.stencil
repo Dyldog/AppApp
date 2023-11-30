@@ -83,13 +83,31 @@ extension CodableVariableValue: Codable {
         
         self.type = try valueContainer.decode(String.self, forKey: .type)
         
-        switch type {
-{% for type in types.implementing.VariableValue|!protocol %}
+{% macro VariableCodableCase type %}
 {% if type|!annotated:"skipCodable" %}
         case typeString({{ type.name }}.self):
             self.value = try valueContainer.decode({{ type.name }}.self, forKey: .value)
 {% endif %}
+{% endmacro %}
+
+{% macro OtherCodableCase type %}
+{% if type|!annotated:"skipCodable" %}
+        case typeString({{ type.name|replace:".", "" }}Value.self):
+            self.value = try valueContainer.decode({{ type.name|replace:".", "" }}Value.self, forKey: .value)
+{% endif %}
+{% endmacro %}
+
+        switch type {
+{% for type in types.implementing.VariableValue|!protocol %}
+{% call VariableCodableCase type %}
 {% endfor %}
+{% for type in types.implementing.PickableValue|!protocol %}
+{% call OtherCodableCase type %}
+{% endfor %}
+{% for type in types.implementing.StringRepresentableValue|!protocol %}
+{% call OtherCodableCase type %}
+{% endfor %}
+
         default:
             fatalError(type)
         }
@@ -102,11 +120,26 @@ extension CodableVariableValue: Codable {
         
         switch self.value {
 {% for type in types.implementing.VariableValue|!protocol %}
-{% if type|!annotated:"skipCodable" %}
+    {% if type|!annotated:"skipCodable" %}
         case let value as {{ type.name }}:
             try container.encode(value, forKey: .value)
-{% endif %}
+    {% endif %}
 {% endfor %}
+
+{% for type in types.implementing.PickableValue|!protocol %}
+    {% if type|!annotated:"skipCodable" %}
+        case let value as {{ type.name|replace:".", "" }}Value:
+            try container.encode(value, forKey: .value)
+    {% endif %}
+{% endfor %}
+
+{% for type in types.implementing.StringRepresentableValue|!protocol %}
+    {% if type|!annotated:"skipCodable" %}
+        case let value as {{ type.name|replace:".", "" }}Value:
+            try container.encode(value, forKey: .value)
+    {% endif %}
+{% endfor %}
+
         default: fatalError()
         }
     }
@@ -133,32 +166,48 @@ extension AddViewViewModel {
 {% macro VariableTypeName type %}{% if type|annotated:"variableTypeName" %}{{ type.annotations.variableTypeName }}{% else %}{{ type.name|replace:"Value",""|replace:"Makeable",""|lowerFirstLetter }}{% endif %}{% endmacro %}
 
 enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
+
 {% for type in types.implementing.EditableVariableValue|!protocol %}
-{% if not type.implements.StepType %}
-{% if type|!annotated:"skipVariableType" %}
+    {% if not type.implements.StepType %}
+        {% if type|!annotated:"skipVariableType" %}
 	case {%+ call VariableTypeName type +%} // {{ type.name }}
-{% endif %}
-{% endif %}
+        {% endif %}
+    {% endif %}
 {% endfor %}
+
 {% for type in types.implementing.PickableValue|!protocol %}
-{% if type|!annotated:"skipVariableType" %}
+    {% if type|!annotated:"skipVariableType" %}
     case {%+ call TypeNameCase type +%} // {{ type.name }}
-{% endif %}
+    {% endif %}
+{% endfor %}
+
+{% for type in types.implementing.StringRepresentableValue|!protocol %}
+    {% if type|!annotated:"skipVariableType" %}
+    case {%+ call TypeNameCase type +%} // {{ type.name }}
+    {% endif %}
 {% endfor %}
 
 	var defaultView: any EditableVariableValue {
         switch self {
+        
 {% for type in types.implementing.EditableVariableValue|!protocol %}
-{% if not type.implements.StepType %}
-{% if type|!annotated:"skipVariableType" %}
+    {% if not type.implements.StepType %}
+        {% if type|!annotated:"skipVariableType" %}
         case .{%+ call VariableTypeName type +%}: return {{ type.name }}.makeDefault()
-{% endif %}
-{% endif %}
+        {% endif %}
+    {% endif %}
 {% endfor %}
+
 {% for type in types.implementing.PickableValue|!protocol %}
-{% if type|!annotated:"skipVariableType" %}
+    {% if type|!annotated:"skipVariableType" %}
     case .{%+ call TypeNameCase type +%}: return {% call TypeNameCaseType type %}Value.makeDefault()
-{% endif %}
+    {% endif %}
+{% endfor %}
+
+{% for type in types.implementing.StringRepresentableValue|!protocol %}
+    {% if type|!annotated:"skipVariableType" %}
+    case .{%+ call TypeNameCase type +%}: return {% call TypeNameCaseType type %}Value.makeDefault()
+    {% endif %}
 {% endfor %}
         }
     }
@@ -166,14 +215,20 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
     var title: String {
         switch self {
         {% for type in types.implementing.EditableVariableValue|!protocol %}
-        {% if not type.implements.StepType %}
-        {% if type|!annotated:"skipVariableType" %}
+            {% if not type.implements.StepType %}
+                {% if type|!annotated:"skipVariableType" %}
         case .{%+ call VariableTypeName type +%}: return "{%+ call VariableTypeName type +%}"
-        {% endif %}
-        {% endif %}
+                {% endif %}
+            {% endif %}
         {% endfor %}
         
         {% for type in types.implementing.PickableValue|!protocol %}
+            {% if type|!annotated:"skipVariableType" %}
+        case .{%+ call TypeNameCase type +%}: return "{% call TypeNameCase type %}"
+            {% endif %}
+        {% endfor %}
+        
+        {% for type in types.implementing.StringRepresentableValue|!protocol %}
             {% if type|!annotated:"skipVariableType" %}
         case .{%+ call TypeNameCase type +%}: return "{% call TypeNameCase type %}"
             {% endif %}

@@ -69,7 +69,7 @@ final class DictionaryValue: EditableVariableValue, ObservableObject {
     func editView(title: String, onUpdate: @escaping (DictionaryValue) -> Void) -> AnyView {
         HStack {
             Text(protoString)
-            SheetButton(title: { Text("Edit") }) {
+            SheetButton(title: { Image(systemName: "ellipsis.circle.fill") }) {
                 DictionaryEditView(title: title, value: .init(get: {
                     self
                 }, set: {
@@ -105,3 +105,37 @@ extension DictionaryValue: Codable {
     }
 }
 
+
+extension DictionaryValue {
+    static func from(_ dictionary: [String: Any]) -> DictionaryValue {
+        return DictionaryValue(
+            type: VariableTypeValue(value: .string),
+            elements: dictionary.reduce(into: [StringValue: any EditableVariableValue](), {
+                let value: VariableValue
+                switch $1.value {
+                case let string as String: value = StringValue(value: string)
+                case let float as Float: value = FloatValue(value: float)
+                case let int as Int: value = IntValue(value: int)
+                case let nsNumber as NSNumber: value = FloatValue(value: nsNumber.floatValue)
+                // TODO: Handle array generically
+                case let array as Array<String>:
+                    value = ArrayValue(type: .string, elements: array.map { StringValue(value: $0) })
+                case let array as Array<Int>:
+                    value = ArrayValue(type: .int, elements: array.map { IntValue(value: $0) })
+                case let array as Array<Float>:
+                    value = ArrayValue(type: .float, elements: array.map { FloatValue(value: $0) })
+                case let dictionary as [String: Any]:
+                    value = DictionaryValue.from(dictionary)
+                default: fatalError()
+                }
+                
+                $0[StringValue(value: $1.key)] = value as? any EditableVariableValue
+            })
+        )
+    }
+    
+    // (try JSONSerialization.jsonObject(
+//with: value.valueString.data(using: .utf8)!,
+//options: []
+//) as! [String: Any])
+}

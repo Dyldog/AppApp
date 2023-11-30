@@ -49,7 +49,7 @@ struct MakeableStackView: View {
                         .onEdit(showEditControls ? { self.showEditIndex = index } : nil)
                         
                         if showEditControls {
-                            SwiftUI.Button("X", action: { onRemove(at: index) })
+                            ElementDeleteButton { onRemove(at: index) }
                         }
                     }
                     
@@ -60,7 +60,7 @@ struct MakeableStackView: View {
             }
         }
         .if(showEditControls) {
-            $0.overlay(
+            $0.padding().overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(Color.gray.opacity(0.5), lineWidth: 2)
             )
@@ -88,9 +88,11 @@ struct MakeableStackView: View {
     }
     
     func makeButton(at index: Int) -> some View {
-        SwiftUI.Button("Add", action: {
+        SwiftUI.Button {
             showAddIndex = index
-        })
+        } label: {
+            Image(systemName: "plus.app.fill")
+        }
     }
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC062FA22B187C18009ECA24 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC062FA12B187C18009ECA24 /* Style.swift */; };
+		FC062FA52B187DB5009ECA24 /* ElementDeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC062FA42B187DB5009ECA24 /* ElementDeleteButton.swift */; };
 		FC18BAD02B15468E007838AA /* MakeablePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BACF2B15468E007838AA /* MakeablePicker.swift */; };
 		FC18BAD22B156D90007838AA /* ComparisonTypeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */; };
 		FC18BAD42B157F44007838AA /* NilValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD32B157F44007838AA /* NilValue.swift */; };
@@ -78,6 +80,13 @@
 		FC9047B92B14A1D900B599BE /* ConditionalActionValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */; };
 		FC9C41C92B12AC3300E51957 /* EditableVariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */; };
 		FC9C41CC2B12C69400E51957 /* Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C41CB2B12C69400E51957 /* Generated.swift */; };
+		FCCB8F432B1892A100233D1F /* String+TitleCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F422B1892A100233D1F /* String+TitleCase.swift */; };
+		FCCB8F452B18AC3100233D1F /* Float+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F442B18AC3100233D1F /* Float+VariableValue.swift */; };
+		FCCB8F472B18B52600233D1F /* StringRepresentableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F462B18B52600233D1F /* StringRepresentableValue.swift */; };
+		FCCB8F492B18B9B800233D1F /* Numbers+Pow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F482B18B9B800233D1F /* Numbers+Pow.swift */; };
+		FCCB8F4B2B18B9D100233D1F /* Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F4A2B18B9D100233D1F /* Numeric.swift */; };
+		FCCB8F4D2B18BA1700233D1F /* NumericValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F4C2B18BA1700233D1F /* NumericValue.swift */; };
+		FCCB8F4F2B18C15E00233D1F /* GetNumberStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F4E2B18C15E00233D1F /* GetNumberStep.swift */; };
 		FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B1E82B0B584B0054371B /* AppAppApp.swift */; };
 		FCD3B1ED2B0B584D0054371B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD3B1EC2B0B584D0054371B /* Assets.xcassets */; };
 		FCD3B1F12B0B584D0054371B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD3B1F02B0B584D0054371B /* Preview Assets.xcassets */; };
@@ -139,6 +148,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC062FA12B187C18009ECA24 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		FC062FA42B187DB5009ECA24 /* ElementDeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementDeleteButton.swift; sourceTree = "<group>"; };
 		FC18BACF2B15468E007838AA /* MakeablePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeablePicker.swift; sourceTree = "<group>"; };
 		FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonTypeValue.swift; sourceTree = "<group>"; };
 		FC18BAD32B157F44007838AA /* NilValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NilValue.swift; sourceTree = "<group>"; };
@@ -211,6 +222,13 @@
 		FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalActionValue.swift; sourceTree = "<group>"; };
 		FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableVariableValue.swift; sourceTree = "<group>"; };
 		FC9C41CB2B12C69400E51957 /* Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generated.swift; sourceTree = "<group>"; };
+		FCCB8F422B1892A100233D1F /* String+TitleCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+TitleCase.swift"; sourceTree = "<group>"; };
+		FCCB8F442B18AC3100233D1F /* Float+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+VariableValue.swift"; sourceTree = "<group>"; };
+		FCCB8F462B18B52600233D1F /* StringRepresentableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringRepresentableValue.swift; sourceTree = "<group>"; };
+		FCCB8F482B18B9B800233D1F /* Numbers+Pow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numbers+Pow.swift"; sourceTree = "<group>"; };
+		FCCB8F4A2B18B9D100233D1F /* Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numeric.swift; sourceTree = "<group>"; };
+		FCCB8F4C2B18BA1700233D1F /* NumericValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericValue.swift; sourceTree = "<group>"; };
+		FCCB8F4E2B18C15E00233D1F /* GetNumberStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNumberStep.swift; sourceTree = "<group>"; };
 		FCD3B1E52B0B584B0054371B /* AppApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD3B1E82B0B584B0054371B /* AppAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppApp.swift; sourceTree = "<group>"; };
 		FCD3B1EC2B0B584D0054371B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -283,6 +301,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC062FA32B187DAC009ECA24 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				FC062FA42B187DB5009ECA24 /* ElementDeleteButton.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		FC18BAD72B1581C8007838AA /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +346,7 @@
 				FCD3B2432B0C31C40054371B /* ValueStep.swift */,
 				FC18BAE02B1695A6007838AA /* FunctionStep.swift */,
 				FC4635092B0C982E00B8DCBE /* VariableStep.swift */,
+				FCCB8F4E2B18C15E00233D1F /* GetNumberStep.swift */,
 				FC4635062B0C980A00B8DCBE /* StaticValueStep.swift */,
 				FC46350B2B0C983D00B8DCBE /* APIValueStep.swift */,
 				FC4C2C282B0CBCF1008217AC /* DecodeDictionaryStep.swift */,
@@ -337,6 +364,9 @@
 				FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */,
 				FCD3B2132B0B62F40054371B /* VariableValue.swift */,
 				FC4635102B0C988000B8DCBE /* VariableValueError.swift */,
+				FCCB8F462B18B52600233D1F /* StringRepresentableValue.swift */,
+				FCCB8F4A2B18B9D100233D1F /* Numeric.swift */,
+				FCCB8F4C2B18BA1700233D1F /* NumericValue.swift */,
 				FC4635232B0C9ACD00B8DCBE /* Implementations */,
 			);
 			path = Values;
@@ -403,6 +433,7 @@
 				FC4C2C2A2B0CBD01008217AC /* DictionaryValue.swift */,
 				FC4635162B0C98C000B8DCBE /* Variable+VariableValue.swift */,
 				FC4635142B0C98A300B8DCBE /* Int+VariableValue.swift */,
+				FCCB8F442B18AC3100233D1F /* Float+VariableValue.swift */,
 				FC2B8AA02B10AE12003FAB86 /* Bool+VariableValue.swift */,
 				FCD3B23C2B0BB2020054371B /* String+VariableValue.swift */,
 				FC46350E2B0C987100B8DCBE /* VariableType.swift */,
@@ -415,6 +446,7 @@
 		FC4635242B0C9B0900B8DCBE /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				FC062FA32B187DAC009ECA24 /* Shared */,
 				FCE36F4A2B0D751800E247D8 /* Screen List */,
 				FC4C2C2C2B0CBE5E008217AC /* Dictionary Edit */,
 				FC4C2C252B0CA869008217AC /* List Edit */,
@@ -508,6 +540,7 @@
 			children = (
 				FC18BAF62B1752C7007838AA /* Info.plist */,
 				FCD3B1E82B0B584B0054371B /* AppAppApp.swift */,
+				FC062FA12B187C18009ECA24 /* Style.swift */,
 				FCD3B24E2B0C94C10054371B /* Screen.swift */,
 				FC4635242B0C9B0900B8DCBE /* Screens */,
 				FC4C15D42B0C97DA0010BB1A /* Steps */,
@@ -587,6 +620,8 @@
 			isa = PBXGroup;
 			children = (
 				FCD3B2562B0C95B30054371B /* View+OnEdit.swift */,
+				FCCB8F422B1892A100233D1F /* String+TitleCase.swift */,
+				FCCB8F482B18B9B800233D1F /* Numbers+Pow.swift */,
 				FC2B8A9E2B10ACD5003FAB86 /* Binding+Nil.swift */,
 				FCD3B2412B0BB3360054371B /* Int+Identifiable.swift */,
 				FCD3B24A2B0C948C0054371B /* Array+Safe.swift */,
@@ -805,8 +840,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC2B8A912B108FA0003FAB86 /* CodableStep.swift in Sources */,
+				FCCB8F4B2B18B9D100233D1F /* Numeric.swift in Sources */,
 				FCD3B2492B0C69070054371B /* EditVariableView.swift in Sources */,
 				FCD3B25B2B0C96170054371B /* DoView.swift in Sources */,
+				FCCB8F492B18B9B800233D1F /* Numbers+Pow.swift in Sources */,
 				FC18BAE32B169F02007838AA /* PrimitiveCopying.swift in Sources */,
 				FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */,
 				FC18BAD62B157F56007838AA /* OptionalValue.swift in Sources */,
@@ -823,6 +860,7 @@
 				FC2B8A8B2B108F6B003FAB86 /* CodableVariableValue.swift in Sources */,
 				FC18BAF82B175510007838AA /* DictionaryKeysStep.swift in Sources */,
 				FC18BADD2B159593007838AA /* NumericalOperationTypeValue.swift in Sources */,
+				FC062FA22B187C18009ECA24 /* Style.swift in Sources */,
 				FC2B8A9D2B10A2CA003FAB86 /* FontWeightValue.swift in Sources */,
 				FC4635112B0C988000B8DCBE /* VariableValueError.swift in Sources */,
 				FC4C15CB2B0C975F0010BB1A /* StepType+Run.swift in Sources */,
@@ -831,12 +869,14 @@
 				FCD3B2512B0C94E80054371B /* MakeableView+Prototype.swift in Sources */,
 				FCD3B24F2B0C94C10054371B /* Screen.swift in Sources */,
 				FCD3B25F2B0C96790054371B /* MakeableConstructor.swift in Sources */,
+				FCCB8F452B18AC3100233D1F /* Float+VariableValue.swift in Sources */,
 				FC2B8A992B109038003FAB86 /* MakeableArray.swift in Sources */,
 				FC4C15D12B0C97B20010BB1A /* Array_StepType+VariableValue.swift in Sources */,
 				FC2B8A9F2B10ACD5003FAB86 /* Binding+Nil.swift in Sources */,
 				FC18BAEF2B16FE81007838AA /* CodableMakeableView.swift in Sources */,
 				FC18BAE52B16BA14007838AA /* MakeableBase.swift in Sources */,
 				FC18BAD92B1581CF007838AA /* Titleable.swift in Sources */,
+				FCCB8F4D2B18BA1700233D1F /* NumericValue.swift in Sources */,
 				FC4635132B0C989000B8DCBE /* VariableValue+EditView.swift in Sources */,
 				FC4C2C302B0CCBE0008217AC /* DictionaryValueForKeyStep.swift in Sources */,
 				FC18BAF12B172564007838AA /* AnyMakeableView.swift in Sources */,
@@ -870,6 +910,7 @@
 				FCD3B2572B0C95B30054371B /* View+OnEdit.swift in Sources */,
 				FCD3B22F2B0B9FBA0054371B /* MakeableLabel.swift in Sources */,
 				FCD3B23B2B0BA8580054371B /* ActionListView.swift in Sources */,
+				FCCB8F472B18B52600233D1F /* StringRepresentableValue.swift in Sources */,
 				FCD3B2422B0BB3360054371B /* Int+Identifiable.swift in Sources */,
 				FC2B8A972B10900C003FAB86 /* StepArray.swift in Sources */,
 				FC4C15CF2B0C97830010BB1A /* StepType+EditView.swift in Sources */,
@@ -881,11 +922,13 @@
 				FC18BAF32B174656007838AA /* ButtonStyleValue.swift in Sources */,
 				FC2B8A9B2B109C3C003FAB86 /* ArrayValueStep.swift in Sources */,
 				FC46350F2B0C987100B8DCBE /* VariableType.swift in Sources */,
+				FCCB8F4F2B18C15E00233D1F /* GetNumberStep.swift in Sources */,
 				FC18BAE12B1695A6007838AA /* FunctionStep.swift in Sources */,
 				FCD3B22D2B0B9FA70054371B /* MakeableButton.swift in Sources */,
 				FC4C2C2E2B0CBE76008217AC /* DictionaryEditView.swift in Sources */,
 				FC4C15C12B0C96E60010BB1A /* ActionValue.swift in Sources */,
 				FC4635172B0C98C000B8DCBE /* Variable+VariableValue.swift in Sources */,
+				FC062FA52B187DB5009ECA24 /* ElementDeleteButton.swift in Sources */,
 				FCD3B2382B0BA01D0054371B /* ViewMakerViewModel.swift in Sources */,
 				FC2B8A8F2B108F90003FAB86 /* CodableVariableDictionary.swift in Sources */,
 				FC4C2C242B0C9B7F008217AC /* ArrayValue.swift in Sources */,
@@ -900,6 +943,7 @@
 				FC4C15C72B0C97390010BB1A /* ViewEditable+Constructor.swift in Sources */,
 				FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */,
 				FC9C41CC2B12C69400E51957 /* Generated.swift in Sources */,
+				FCCB8F432B1892A100233D1F /* String+TitleCase.swift in Sources */,
 				FCD3B2442B0C31C40054371B /* ValueStep.swift in Sources */,
 				FC9047B72B14A01800B599BE /* IfStep.swift in Sources */,
 				FCD3B2352B0B9FF90054371B /* ViewProperty.swift in Sources */,

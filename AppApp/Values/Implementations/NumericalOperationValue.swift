@@ -38,11 +38,11 @@ final class NumericalOperationValue: CompositeEditableVariableValue {
     
     func value(with variables: Variables) async throws -> VariableValue {
         guard
-            let lhs = try await lhs.value(with: variables) as? IntValue,
-            let rhs = try await rhs.value(with: variables) as? IntValue
+            let lhs = try await lhs.value(with: variables) as? any NumericValue,
+            let rhs = try await rhs.value(with: variables) as? any NumericValue
         else { throw VariableValueError.wrongTypeForOperation }
         
-        return operation.operate(lhs: lhs, rhs: rhs)
+        return try lhs.perform(operation: operation.value, with: rhs)
     }
 }
 

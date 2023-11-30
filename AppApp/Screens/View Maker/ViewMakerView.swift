@@ -62,12 +62,14 @@ struct ViewMakerView: View {
                         }
                     }
                     
-                    VStack(spacing: 0) {
-                        Text("Edit").font(.footnote)
-                        Toggle("Edit", isOn: $viewModel.makeMode)
-                            .toggleStyle(.switch)
-                            .fixedSize()
-                            .labelsHidden()
+                    if viewModel.showEdit {
+                        VStack(spacing: 0) {
+                            Text("Edit").font(.footnote)
+                            Toggle("Edit", isOn: $viewModel.makeMode)
+                                .toggleStyle(.switch)
+                                .fixedSize()
+                                .labelsHidden()
+                        }
                     }
                 }
             }

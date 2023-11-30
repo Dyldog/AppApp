@@ -39,7 +39,7 @@ final class AnyValue: EditableVariableValue {
     func editView(title: String, onUpdate: @escaping (AnyValue) -> Void) -> AnyView {
         HStack {
             Text(value.protoString)
-            SheetButton(title: { Text("Edit") }) {
+            SheetButton(title: { Image(systemName: "ellipsis.circle.fill") }) {
                 EditVariableView(name: title, value: value) { [weak self] in
                     guard let self = self else { return }
                     self.value = $0

@@ -42,7 +42,7 @@ final class StepArray: Codable, EditableVariableValue {
         return HStack {
             Text(protoString)
             SheetButton(title: {
-                Text("Edit")
+                Image(systemName: "ellipsis.circle.fill")
             }) { [weak self] in
                 guard let self = self else { return Text("WASNIL").any }
                 return ActionListView(title: "Edit Steps", steps: self.value, onUpdate: { [weak self] in

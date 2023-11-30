@@ -15,31 +15,37 @@ struct ActionListView: View {
     
     var body: some View {
         NavigationView {
-            List {
+            ScrollView {
+                VStack {
                 addButton(index: 0)
                 
-                ForEach(enumerated: steps) { (index, element) in
-                    VStack {
-                        HStack {
-                            Text(type(of: element).title).bold()
+                    ForEach(enumerated: steps) { (index, element) in
+                        VStack {
+                            HStack {
+                                Text(type(of: element).title).bold().foregroundStyle(.gray).brightness(-0.2)
+                                
+                                ElementDeleteButton {
+                                    steps = steps.removing(at: index)
+                                    onUpdate(steps)
+                                }
+                            }
                             
-                            Button("X") {
-                                steps = steps.removing(at: index)
-                                onUpdate(steps)
+                            element.editView(title: title) { value in
+                                onUpdate(steps.replacing(value, at: index))
                             }
                             .buttonStyle(.plain)
                         }
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 12).foregroundStyle(.white))
+                        .padding()
+                        .frame(maxWidth: .infinity)
                         
-                        element.editView(title: title) { value in
-                            onUpdate(steps.replacing(value, at: index))
-                        }
-                        .buttonStyle(.plain)
+                        addButton(index: index + 1)
                     }
-                    .frame(maxWidth: .infinity)
-                    
-                    addButton(index: index + 1)
                 }
+                .frame(maxWidth: .infinity)
             }
+            .background(.gray.opacity(0.1))
             .navigationTitle(title)
         }.sheet(item: $showAddIndex) { index in
             AddActionView { newStep in
@@ -51,8 +57,10 @@ struct ActionListView: View {
     }
     
     func addButton(index: Int) -> some View {
-        SwiftUI.Button("+") {
+        SwiftUI.Button {
             showAddIndex = index
+        } label: {
+            Image(systemName: "plus.app.fill")
         }
     }
 }

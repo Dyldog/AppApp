@@ -26,13 +26,13 @@ enum NumericalOperationType: String, Codable, CaseIterable, Titleable {
         }
     }
     
-    var `func`: (Int, Int) -> Int {
+    func `func`<T: Numeric>() -> (T, T) -> T {
         switch self {
         case .add: return { $0 + $1}
         case .subtract: return { $0 - $1}
         case .mulitply: return { $0 * $1}
         case .divide: return { $0 / $1}
-        case .power: return { (pow(Decimal($0), $1) as NSDecimalNumber).intValue }
+        case .power: return { $0 ** $1 }
         case .mod: return { $0 % $1}
         }
     }
@@ -63,7 +63,7 @@ final class NumericalOperationTypeValue: PrimitiveEditableVariableValue {
         self
     }
     
-    func operate(lhs: IntValue, rhs: IntValue) -> IntValue {
-        return .init(value: value.func(lhs.value, rhs.value))
+    func operate<T: NumericValue>(lhs: T, rhs: T) -> T {
+        return .init(value: value.func()(lhs.value, rhs.value))
     }
 }

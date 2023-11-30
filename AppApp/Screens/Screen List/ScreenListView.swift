@@ -9,7 +9,14 @@ import SwiftUI
 import DylKit
 
 class ScreenListViewModel: ObservableObject {
-    @UserDefaultable(key: "SCREENS") var screens: [Screen] = Screen.defaults
+    var screens: [Screen] {
+        get { Screen.screens }
+        set{ Screen.screens = newValue }
+    }
+    
+    func addBookmark(for index: Int) {
+        
+    }
 }
 
 struct ScreenListView: View {
@@ -26,29 +33,43 @@ struct ScreenListView: View {
                 } label: {
                     Text(screen.name).font(.largeTitle)
                 }
+                .swipeActions {
+                    Button {
+                        viewModel.addBookmark(for: index)
+                    } label: {
+                        Label("Favorite", systemImage: "bookmark.fill")
+                    }
+                    .tint(.yellow)
+        
+                    Button {
+                        viewModel.screens.remove(atOffsets: [index])
+                        viewModel.objectWillChange.send()
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                    .tint(.red)
+                }
             }
-            .onDelete(perform: { indexSet in
-                viewModel.screens.remove(atOffsets: indexSet)
-                viewModel.objectWillChange.send()
-            })
         }
         .navigationTitle("Screens")
         .toolbar {
             ToolbarItem(placement: .navigation) {
-                SwiftUI.Button("Add") {
+                SwiftUI.Button {
                     viewModel.screens.append(Screen(
-                        id: .init(), 
+                        id: .init(),
                         name: randomString(length: 5).uppercased(),
                         initActions: .init(value: []),
                         content: .init(
                             content: .init(
                                 value: [],
                                 axis: .init(value: .vertical)
-                            ), 
+                            ),
                             padding: .init(value: 5)
                         )
                     ))
                     viewModel.objectWillChange.send()
+                } label: {
+                    Image(systemName: "plus.app.fill")
                 }
             }
         }

@@ -14,28 +14,45 @@ struct ListEditView: View {
     let onUpdate: (ArrayValue) -> Void
     
     var body: some View {
-        List {
-            HStack {
-                Text("Type")
-                Spacer()
-                value.type.editView(title: "\(title)[type]", onUpdate: { self.value.type = $0 })
-            }
-            
-            addButton(index: 0)
-            
-            ForEach(enumerated: value.elements) { (index, element) in
-                element.editView(title: "\(title)[\(index)]") { editedElement in
-                    value.elements[index] = editedElement
-                    onUpdate(value)
+        NavigationView {
+            ScrollView {
+                HStack {
+                    Text("Type")
+                    Spacer()
+                    value.type.editView(title: "\(title)[type]", onUpdate: {
+                        value.type = $0
+                        value.elements = []
+                        onUpdate(value)
+                    })
                 }
+                .padding()
+                .background(RoundedRectangle(cornerRadius: 12).foregroundStyle(.white))
+                .padding()
                 
-                addButton(index: index + 1)
+                addButton(index: 0)
+                
+                ForEach(enumerated: value.elements) { (index, element) in
+                    VStack {
+                        element.editView(title: "\(title)[\(index)]") { editedElement in
+                            value.elements[index] = editedElement
+                            onUpdate(value)
+                        }
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 12).foregroundStyle(.white))
+                    .padding()
+                    
+                    addButton(index: index + 1)
+                }
+                .multilineTextAlignment(.center)
             }
-        }.multilineTextAlignment(.center)
+            .navigationTitle(title)
+            .background(.gray.opacity(0.1))
+        }
     }
     
     func addButton(index: Int) -> some View {
-        SwiftUI.Button("+") {
+        SwiftUI.Button {
             let view = value.type.defaultView
             if index <= value.elements.count {
                 value.elements.append(view)
@@ -44,6 +61,8 @@ struct ListEditView: View {
             }
             
             onUpdate(value)
-        }.frame(maxWidth: .infinity)
+        } label: {
+            Image(systemName: "plus.app.fill").foregroundStyle(.blue)
+        }
     }
 }

@@ -14,19 +14,20 @@ class ViewMakerViewModel: ObservableObject {
     let name: String
     var content: MakeableStack = .init(content: .init(value: [], axis: .init(value: .vertical)), padding: .init(value: 5)) {
         didSet {
-            onUpdate(.init(id: screenID, name: self.name, initActions: self.initActions, content: content))
+            onUpdate?(.init(id: screenID, name: self.name, initActions: self.initActions, content: content))
             updater += 1
         }
     }
     
     let screenID: UUID
     @Published private(set) var initActions: StepArray = .init(value: [])
-    private let onUpdate: (Screen) -> Void
+    private let onUpdate: ((Screen) -> Void)?
+    var showEdit: Bool { onUpdate != nil }
     
     @Published var showErrors: Bool = false
 //    var error: VariableValueError?
     
-    @Published var makeMode: Bool = true
+    @Published var makeMode: Bool = false
     
     @Published private(set) var updater: Int = 0
     
@@ -46,13 +47,14 @@ class ViewMakerViewModel: ObservableObject {
         }
     }
     
-    init(screen: Screen, onUpdate: @escaping (Screen) -> Void) {
+    init(screen: Screen, onUpdate: ((Screen) -> Void)?) {
         self.screenID = screen.id
         self.name = screen.name
         self.initActions = screen.initActions
         self.content = screen.content
         self.onUpdate = onUpdate
         self._variables = .init()
+        self.makeMode = showEdit
         
         Task { @MainActor in
             _variables = await makeVariables()
@@ -62,9 +64,9 @@ class ViewMakerViewModel: ObservableObject {
             self?.objectWillChange.send()
         }.store(in: &cancellables)
         
-        $makeMode.sink { _ in
+        $makeMode.sink { [weak self] _ in
             Task {
-                await self.makeNewVariables()
+                await self?.makeNewVariables()
             }
         }.store(in: &cancellables)
         
@@ -119,7 +121,7 @@ class ViewMakerViewModel: ObservableObject {
         Task { @MainActor in
             self.initActions = newValue
             await makeNewVariables()
-            onUpdate(.init(id: screenID, name: self.name, initActions: self.initActions, content: self.content))
+            onUpdate?(.init(id: screenID, name: self.name, initActions: self.initActions, content: self.content))
         }
     }
 }

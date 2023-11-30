@@ -19,6 +19,7 @@ struct SheetButton<Title: View, Content: View>: View {
             showSheet = true
         } label: {
             title()
+                .foregroundStyle(.blue)
         }.sheet(isPresented: $showSheet, onDismiss: onDismiss, content: {
             content
         })

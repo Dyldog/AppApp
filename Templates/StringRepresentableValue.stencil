@@ -1,0 +1,62 @@
+{% macro AutoCopy type %}
+    {% if type|!annotated:"skipCopying" %}
+extension {{ type.name }}: Copying {
+    func copy() -> {{ type.name }} {
+        return self
+    }
+}
+    {% endif %}
+{% endmacro %}
+
+{% macro ValueTypeName type %}{{ type.name|replace:".", "" }}{% endmacro %}
+{% macro ValueTypeTypeName type %}{{ type.name|replace:".", ""|lowerFirstLetter }}{% endmacro %}
+
+{% for type in types.implementing.StringRepresentableValue %}
+final class {{ type.name }}Value: EditableVariableValue, Codable, Copying, NumericValue {
+    
+    static var type: VariableType { .{% call ValueTypeTypeName type %} }
+    var value: {{ type.name }}
+    static var defaultValue: {{ type.name }} = .defaultValue
+    
+    init(value: {{ type.name }}) {
+        self.value = value
+    }
+    
+    static func makeDefault() -> {{ type.name }}Value {
+        .init(value: Self.defaultValue)
+    }
+    
+    func editView(title: String, onUpdate: @escaping ({{ type.name }}Value) -> Void) -> AnyView {
+        TextField("", text: .init(get: { [weak self] in
+            self?.protoString ?? "ERROR"
+        }, set: { [weak self] in
+            guard let self = self else { return }
+            self.value = {{ type.name }}($0) ?? self.value
+            onUpdate(self)
+        })).any
+    }
+    
+    func add(_ other: VariableValue) throws -> VariableValue {
+        guard let other = other as? {{ type.name }}Value else { throw VariableValueError.wrongTypeForOperation }
+        self.value = self.value + other.value
+        return self
+    }
+    
+    var protoString: String { "\(value)" }
+    
+    var valueString: String { "\(value)"}
+    
+    func value(with variables: Variables) throws -> VariableValue {
+        self
+    }
+    
+    func copy() -> {% call ValueTypeName type %}Value {
+        .init(
+            value: value
+        )
+    }
+}
+
+{% call AutoCopy type %}
+
+{% endfor %}

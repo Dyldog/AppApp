@@ -6,8 +6,12 @@
 //
 
 import Foundation
+import DylKit
+import SwiftUI
 
 struct Screen: Codable, Identifiable {
+    @UserDefaultable(key: "SCREENS") static var screens: [Screen] = Screen.defaults
+    
     let id: UUID
     var name: String
     var initActions: StepArray
@@ -76,8 +80,13 @@ extension MakeableLabel {
     }
 }
 
+extension MakeableStack {
+    convenience init(axis: Axis = .vertical, _ elements: [any MakeableView]) {
+        self.init(content: .init(value: elements, axis: .init(value: axis)), padding: .init(value: 5))
+    }
+}
 extension Screen {
-    static let defaults: [Screen] = [.internetDictionary, .countingButton]
+    static let defaults: [Screen] = [.internetDictionary, .countingButton, .currencyConverter]
     
     private static let internetDictionary: Screen = .init(
         id: .init(),
@@ -100,7 +109,7 @@ extension Screen {
                 fontSize: .int(24),
                 fontWeight: .init(value: .semibold),
                 italic: .init(value: true),
-                base: .makeDefault(), 
+                base: .makeDefault(),
                 textColor: .init(value: .black)
             ),
             MakeableList(
@@ -130,4 +139,45 @@ extension Screen {
                 AddToVarStep(varName: .string("COUNT"), value: .int(1))
             ]))
         ], axis: .init(value: .vertical)), padding: .int(5)))
+    
+    private static let currencyConverter: Screen = .init(
+        id: .init(),
+        name: "Currency Converter",
+        initActions: .init(value: [
+            APIValueStep(url: .string("https://open.er-api.com/v6/latest/AUD")),
+            DecodeDictionaryStep(value: .variable(named: "$0")),
+            DictionaryValueForKeyStep(
+                dictionary: .init(value: .variable(.named("$0"))), key: .string("rates")
+            ),
+            SetVarStep(varName: .string("JSON"), value: .variable(named: "$0"))
+        ]), content: .init(axis: .horizontal, [
+            MakeableStack([
+                MakeableLabel.withText("AUD"),
+                MakeableField(
+                    text: .init(initial: .string("123"), output: .named("AUD_VALUE")),
+                    fontSize: .init(value: 24),
+                    onTextUpdate: .init(value: []),
+                    padding: .int(5)
+                )
+            ]),
+            MakeableStack([
+                MakeableLabel.withText("=")
+            ]),
+            MakeableStack([
+                MakeableLabel.withText("THB"),
+                MakeableLabel.text(NumericalOperationValue(
+                    lhs: ResultValue(steps: .init(value: [
+                        DictionaryValueForKeyStep(
+                            dictionary: .init(value: .variable(.named("JSON"))),
+                            key: .string("THB")
+                        )
+                    ])).any,
+                    rhs: ResultValue(steps: .init(value: [
+                        GetNumberStep(value: .variable(named: "AUD_VALUE"), numberType: .init(value: .float))
+                    ])).any,
+                    operation: .init(value: .mulitply)
+                ).any)
+            ])
+        ])
+    )
 }
