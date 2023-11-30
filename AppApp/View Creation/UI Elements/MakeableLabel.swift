@@ -77,11 +77,13 @@ final class MakeableLabel: MakeableView {
         self.textColor = textColor
     }
     
-    static func withText(_ string: String) -> MakeableLabel {
+    static func withText(
+        _ string: String, fontSize: Int = 18, bold: Bool = false
+    ) -> MakeableLabel {
         .init(
             text: AnyValue(value: StringValue(value: string)),
-            fontSize: IntValue(value: 18),
-            fontWeight: .init(value: .regular),
+            fontSize: IntValue(value: fontSize),
+            fontWeight: .init(value: bold ? .bold : .regular),
             italic: .init(value: false),
             base: .makeDefault(), 
             textColor: .init(value: .black)

@@ -152,31 +152,38 @@ extension Screen {
             SetVarStep(varName: .string("JSON"), value: .variable(named: "$0"))
         ]), content: .init(axis: .horizontal, [
             MakeableStack([
-                MakeableLabel.withText("AUD"),
+                MakeableLabel.withText("AUD", fontSize: 24, bold: true),
                 MakeableField(
                     text: .init(initial: .string("123"), output: .named("AUD_VALUE")),
-                    fontSize: .init(value: 24),
+                    fontSize: .init(value: 48),
                     onTextUpdate: .init(value: []),
-                    padding: .int(5)
+                    padding: .int(5), 
+                    alignment: .init(value: .center)
                 )
             ]),
             MakeableStack([
                 MakeableLabel.withText("=")
             ]),
             MakeableStack([
-                MakeableLabel.withText("THB"),
+                MakeableField(
+                    text: .init(initial: .string("THB"), output: .named("CURRENCY")),
+                    fontSize: .init(value: 24),
+                    onTextUpdate: .init(value: []),
+                    padding: .int(5),
+                    alignment: .init(value: .center)
+                ),
                 MakeableLabel.text(NumericalOperationValue(
                     lhs: ResultValue(steps: .init(value: [
                         DictionaryValueForKeyStep(
                             dictionary: .init(value: .variable(.named("JSON"))),
-                            key: .string("THB")
+                            key: .variable(named: "CURRENCY")
                         )
                     ])).any,
                     rhs: ResultValue(steps: .init(value: [
                         GetNumberStep(value: .variable(named: "AUD_VALUE"), numberType: .init(value: .float))
                     ])).any,
                     operation: .init(value: .mulitply)
-                ).any)
+                ).any, size: 48)
             ])
         ])
     )

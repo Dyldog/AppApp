@@ -171,7 +171,8 @@ extension MakeableField: Copying {
                     text: text.copy() as! TemporaryValue,
                     fontSize: fontSize,
                     onTextUpdate: onTextUpdate.copy() as! StepArray,
-                    padding: padding
+                    padding: padding,
+                    alignment: alignment
         )
     }
 }
@@ -534,6 +535,38 @@ final class NumericTypeValue: PrimitiveEditableVariableValue, Codable, Copying {
 
 extension NumericType: Copying {
     func copy() -> NumericType {
+        return self
+    }
+}
+
+final class TextAlignmentValue: PrimitiveEditableVariableValue, Codable, Copying {
+
+    static var type: VariableType { .textAlignment }
+    static var defaultValue: TextAlignment { .defaultValue }
+    var value: TextAlignment
+    init(value: TextAlignment) {
+        self.value = value
+    }
+    static func makeDefault() -> TextAlignmentValue {
+        .init(value: defaultValue)
+    }
+    func add(_ other: VariableValue) throws -> VariableValue {
+        throw VariableValueError.variableCannotPerformOperation(Self.type, "add")
+    }
+    var protoString: String { "\(value.title)" }
+    var valueString: String { protoString }
+    func value(with variables: Variables) async throws -> VariableValue {
+        self
+    }
+    func copy() -> TextAlignmentValue {
+        .init(
+            value: value
+        )
+    }
+}
+
+extension TextAlignment: Copying {
+    func copy() -> TextAlignment {
         return self
     }
 }
@@ -1124,12 +1157,14 @@ extension MakeableField {
         case fontSize
         case onTextUpdate
         case padding
+        case alignment
         var defaultValue: any EditableVariableValue {
             switch self {
             case .text: return MakeableField.defaultValue(for: .text)
             case .fontSize: return MakeableField.defaultValue(for: .fontSize)
             case .onTextUpdate: return MakeableField.defaultValue(for: .onTextUpdate)
             case .padding: return MakeableField.defaultValue(for: .padding)
+            case .alignment: return MakeableField.defaultValue(for: .alignment)
             }
         }
     }
@@ -1138,7 +1173,8 @@ extension MakeableField {
             text: factory(.text) as! TemporaryValue,
             fontSize: factory(.fontSize) as! IntValue,
             onTextUpdate: factory(.onTextUpdate) as! StepArray,
-            padding: factory(.padding) as! IntValue
+            padding: factory(.padding) as! IntValue,
+            alignment: factory(.alignment) as! TextAlignmentValue
         )
     }
 
@@ -1147,7 +1183,8 @@ extension MakeableField {
             text: Properties.text.defaultValue as! TemporaryValue,
             fontSize: Properties.fontSize.defaultValue as! IntValue,
             onTextUpdate: Properties.onTextUpdate.defaultValue as! StepArray,
-            padding: Properties.padding.defaultValue as! IntValue
+            padding: Properties.padding.defaultValue as! IntValue,
+            alignment: Properties.alignment.defaultValue as! TextAlignmentValue
 		)
     }
     func value(for property: Properties) -> any EditableVariableValue {
@@ -1156,6 +1193,7 @@ extension MakeableField {
 	        case .fontSize: return fontSize
 	        case .onTextUpdate: return onTextUpdate
 	        case .padding: return padding
+	        case .alignment: return alignment
         }
     }
 
@@ -1165,6 +1203,7 @@ extension MakeableField {
 	        case .fontSize: self.fontSize = value as! IntValue
 	        case .onTextUpdate: self.onTextUpdate = value as! StepArray
 	        case .padding: self.padding = value as! IntValue
+	        case .alignment: self.alignment = value as! TextAlignmentValue
 	    }
 	}
 }
@@ -1679,6 +1718,8 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(FontWeightValue.self, forKey: .value)
         case typeString(NumericTypeValue.self):
             self.value = try valueContainer.decode(NumericTypeValue.self, forKey: .value)
+        case typeString(TextAlignmentValue.self):
+            self.value = try valueContainer.decode(TextAlignmentValue.self, forKey: .value)
         case typeString(FloatValue.self):
             self.value = try valueContainer.decode(FloatValue.self, forKey: .value)
         case typeString(IntValue.self):
@@ -1781,6 +1822,8 @@ extension CodableVariableValue: Codable {
             try container.encode(value, forKey: .value)
         case let value as NumericTypeValue:
             try container.encode(value, forKey: .value)
+        case let value as TextAlignmentValue:
+            try container.encode(value, forKey: .value)
 
         case let value as FloatValue:
             try container.encode(value, forKey: .value)
@@ -1863,6 +1906,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
     case buttonStyle // ButtonStyle
     case fontWeight // Font.Weight
     case numericType // NumericType
+    case textAlignment // TextAlignment
 
     case float // Float
     case int // Int
@@ -1901,6 +1945,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
     case .buttonStyle: return ButtonStyleValue.makeDefault()
     case .fontWeight: return FontWeightValue.makeDefault()
     case .numericType: return NumericTypeValue.makeDefault()
+    case .textAlignment: return TextAlignmentValue.makeDefault()
 
     case .float: return FloatValue.makeDefault()
     case .int: return IntValue.makeDefault()
@@ -1939,6 +1984,7 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .buttonStyle: return "buttonStyle"
         case .fontWeight: return "fontWeight"
         case .numericType: return "numericType"
+        case .textAlignment: return "textAlignment"
         case .float: return "float"
         case .int: return "int"
         }

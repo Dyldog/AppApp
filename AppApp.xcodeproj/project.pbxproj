@@ -87,6 +87,7 @@
 		FCCB8F4B2B18B9D100233D1F /* Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F4A2B18B9D100233D1F /* Numeric.swift */; };
 		FCCB8F4D2B18BA1700233D1F /* NumericValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F4C2B18BA1700233D1F /* NumericValue.swift */; };
 		FCCB8F4F2B18C15E00233D1F /* GetNumberStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F4E2B18C15E00233D1F /* GetNumberStep.swift */; };
+		FCCB8F512B18D1F900233D1F /* TextAlignmentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F502B18D1F900233D1F /* TextAlignmentValue.swift */; };
 		FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B1E82B0B584B0054371B /* AppAppApp.swift */; };
 		FCD3B1ED2B0B584D0054371B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD3B1EC2B0B584D0054371B /* Assets.xcassets */; };
 		FCD3B1F12B0B584D0054371B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD3B1F02B0B584D0054371B /* Preview Assets.xcassets */; };
@@ -229,6 +230,7 @@
 		FCCB8F4A2B18B9D100233D1F /* Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numeric.swift; sourceTree = "<group>"; };
 		FCCB8F4C2B18BA1700233D1F /* NumericValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericValue.swift; sourceTree = "<group>"; };
 		FCCB8F4E2B18C15E00233D1F /* GetNumberStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNumberStep.swift; sourceTree = "<group>"; };
+		FCCB8F502B18D1F900233D1F /* TextAlignmentValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAlignmentValue.swift; sourceTree = "<group>"; };
 		FCD3B1E52B0B584B0054371B /* AppApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD3B1E82B0B584B0054371B /* AppAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppApp.swift; sourceTree = "<group>"; };
 		FCD3B1EC2B0B584D0054371B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 			children = (
 				FC4635182B0C98EE00B8DCBE /* AnyValue.swift */,
 				FC18BAF02B172564007838AA /* AnyMakeableView.swift */,
+				FCCB8F502B18D1F900233D1F /* TextAlignmentValue.swift */,
 				FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */,
 				FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */,
 				FC18BADC2B159593007838AA /* NumericalOperationTypeValue.swift */,
@@ -847,6 +850,7 @@
 				FC18BAE32B169F02007838AA /* PrimitiveCopying.swift in Sources */,
 				FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */,
 				FC18BAD62B157F56007838AA /* OptionalValue.swift in Sources */,
+				FCCB8F512B18D1F900233D1F /* TextAlignmentValue.swift in Sources */,
 				FCD3B21C2B0B639F0054371B /* StepButton.swift in Sources */,
 				FC18BADF2B159642007838AA /* NumericalOperationValue.swift in Sources */,
 				FCD3B2612B0C96890054371B /* EditableViewConstructor.swift in Sources */,

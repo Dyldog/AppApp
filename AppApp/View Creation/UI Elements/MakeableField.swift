@@ -24,7 +24,9 @@ struct MakeableFieldView: View {
                     text
                 }, set: {
                     onTextUpdate($0)
-                })).font(.system(size: CGFloat(field.fontSize.value))).any
+                }))
+                .multilineTextAlignment(field.alignment.value)
+                .font(.system(size: CGFloat(field.fontSize.value))).any
             } else {
                 Text(field.protoString)
                     .font(.system(size: CGFloat(field.fontSize.value)))
@@ -71,12 +73,14 @@ final class MakeableField: MakeableView, Codable {
     var fontSize: IntValue
     var onTextUpdate: StepArray
     var padding: IntValue
+    var alignment: TextAlignmentValue
     
-    init(text: TemporaryValue, fontSize: IntValue, onTextUpdate: StepArray, padding: IntValue) {
+    init(text: TemporaryValue, fontSize: IntValue, onTextUpdate: StepArray, padding: IntValue, alignment: TextAlignmentValue) {
         self.text = text
         self.fontSize = fontSize
         self.onTextUpdate = onTextUpdate
         self.padding = padding
+        self.alignment = alignment
     }
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
@@ -85,6 +89,7 @@ final class MakeableField: MakeableView, Codable {
         case .fontSize: return IntValue(value: 18)
         case .onTextUpdate: return StepArray(value: [])
         case .padding: return IntValue(value: 5)
+        case .alignment: return TextAlignmentValue(value: .center)
         }
     }
     
