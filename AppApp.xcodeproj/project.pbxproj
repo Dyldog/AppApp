@@ -28,6 +28,7 @@
 		FC18BAF52B1747A6007838AA /* CaseIterable+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAF42B1747A6007838AA /* CaseIterable+Codable.swift */; };
 		FC18BAF82B175510007838AA /* DictionaryKeysStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAF72B175510007838AA /* DictionaryKeysStep.swift */; };
 		FC18BAFA2B1762B5007838AA /* ResultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAF92B1762B4007838AA /* ResultValue.swift */; };
+		FC18BAFD2B177199007838AA /* SetVarStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAFC2B177199007838AA /* SetVarStep.swift */; };
 		FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */; };
 		FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */; };
 		FC2B8A892B108F3F003FAB86 /* CodableMakeableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */; };
@@ -160,6 +161,7 @@
 		FC18BAF62B1752C7007838AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FC18BAF72B175510007838AA /* DictionaryKeysStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryKeysStep.swift; sourceTree = "<group>"; };
 		FC18BAF92B1762B4007838AA /* ResultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultValue.swift; sourceTree = "<group>"; };
+		FC18BAFC2B177199007838AA /* SetVarStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVarStep.swift; sourceTree = "<group>"; };
 		FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableWrapperView.swift; sourceTree = "<group>"; };
 		FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryValue.swift; sourceTree = "<group>"; };
 		FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMakeableList.swift; sourceTree = "<group>"; };
@@ -288,6 +290,14 @@
 				FC18BAEC2B16F5B4007838AA /* Copying.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		FC18BAFB2B177190007838AA /* Steps */ = {
+			isa = PBXGroup;
+			children = (
+				FC18BAFC2B177199007838AA /* SetVarStep.swift */,
+			);
+			path = Steps;
 			sourceTree = "<group>";
 		};
 		FC2B8A872B108F2E003FAB86 /* Codable */ = {
@@ -523,6 +533,7 @@
 			isa = PBXGroup;
 			children = (
 				FCD3B1FA2B0B584E0054371B /* AppAppTests.swift */,
+				FC18BAFB2B177190007838AA /* Steps */,
 			);
 			path = AppAppTests;
 			sourceTree = "<group>";
@@ -905,6 +916,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCD3B1FB2B0B584E0054371B /* AppAppTests.swift in Sources */,
+				FC18BAFD2B177199007838AA /* SetVarStep.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

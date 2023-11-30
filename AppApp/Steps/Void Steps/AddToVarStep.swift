@@ -29,7 +29,11 @@ final class AddToVarStep: Step, ObservableObject {
     }
     
     func run(with variables: Variables) async throws {
-        let oldValue = try await varName.value(with: variables)
+        let varNameValue = try await varName.value(with: variables)
+        
+        guard let oldValue = await variables.value(for: varNameValue.valueString) else {
+            throw VariableValueError.valueNotFoundForVariable(varNameValue.valueString)
+        }
         let extraValue = try await value.value(with: variables)
         await variables.set(try oldValue.add(extraValue), for: varName.valueString)
     }

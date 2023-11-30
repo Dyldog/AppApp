@@ -58,6 +58,10 @@ extension AnyValue {
     static func string(_ value: String) -> AnyValue {
         StringValue(value: value).any
     }
+    
+    static func int(_ value: Int) -> AnyValue {
+        IntValue.int(value).any
+    }
 }
 
 extension IntValue {
@@ -67,13 +71,13 @@ extension IntValue {
 }
 
 extension MakeableLabel {
-    static func text(_ text: AnyValue) -> MakeableLabel {
-        .init(text: text, fontSize: .int(18), fontWeight: .init(value: .regular), italic: .init(value: false), base: .makeDefault(), textColor: .init(value: .black))
+    static func text(_ text: AnyValue, size: Int = 18) -> MakeableLabel {
+        .init(text: text, fontSize: .int(size), fontWeight: .init(value: .regular), italic: .init(value: false), base: .makeDefault(), textColor: .init(value: .black))
     }
 }
 
 extension Screen {
-    static let defaults: [Screen] = [.internetDictionary]
+    static let defaults: [Screen] = [.internetDictionary, .countingButton]
     
     private static let internetDictionary: Screen = .init(
         id: .init(),
@@ -115,4 +119,15 @@ extension Screen {
                 ).any
             )
         ], axis: .init(value: .vertical)), padding: .init(value: 5)))
+    
+    private static let countingButton: Screen = .init(
+        id: .init(),
+        name: "Counting Button",
+        initActions: .init(value: [
+            SetVarStep(varName: .string("COUNT"), value: .int(0))
+        ]), content: .init(content: .init(value: [
+            MakeableButton(title: .text(.variable(named: "COUNT"), size: 120), style: .makeDefault(), action: .init(value: [
+                AddToVarStep(varName: .string("COUNT"), value: .int(1))
+            ]))
+        ], axis: .init(value: .vertical)), padding: .int(5)))
 }
