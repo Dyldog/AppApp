@@ -15,7 +15,7 @@ struct AppAppApp: App {
     var body: some Scene {
         WindowGroup {
             if let deepLink = deepLink {
-                ViewMakerView(viewModel: .init(screen: deepLink, onUpdate: nil))
+                ViewMakerView(viewModel: .init(screen: deepLink, makeMode: false, onUpdate: nil))
             } else {
                 NavigationView {
                     ScreenListView()

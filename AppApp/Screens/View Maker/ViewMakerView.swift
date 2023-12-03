@@ -7,7 +7,7 @@
 
 import SwiftUI
 import DylKit
-       
+
 struct ViewMakerView: View {
     @StateObject var viewModel: ViewMakerViewModel
     
@@ -17,20 +17,21 @@ struct ViewMakerView: View {
             VStack {
                 ScrollView {
                     CenterStack {
-                        MakeableStackView(
-                            isRunning: !viewModel.makeMode,
-                            showEditControls: viewModel.makeMode,
-                            stack: viewModel.content, 
-                            onContentUpdate: { content in
-                                viewModel.content = content
-                            }, onRuntimeUpdate: {
-                                withAnimation {
+                        if viewModel.hasFinishedFirstLoad {
+                            MakeableStackView(
+                                isRunning: !viewModel.makeMode,
+                                showEditControls: viewModel.makeMode,
+                                stack: viewModel.content,
+                                onContentUpdate: { content in
+                                    viewModel.content = content
+                                }, onRuntimeUpdate: {
                                     viewModel.onRuntimeUpdate()
-                                }
-                                
-                            }, 
-                            error: $viewModel.error
-                        )
+                                },
+                                error: $viewModel.error
+                            ).any
+                        } else {
+                            ProgressView().progressViewStyle(.circular).any
+                        }
                     }
                     .frame(minHeight: geometry.size.height)
                 }

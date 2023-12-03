@@ -10,7 +10,7 @@ import DylKit
 import SwiftUI
 
 struct Screen: Codable, Identifiable {
-    @UserDefaultable(key: "SCREENS") static var screens: [Screen] = Screen.defaults
+    @UserDefaultable(key: "SCREENS") static var screens: [Screen] = []
     
     let id: UUID
     var name: String

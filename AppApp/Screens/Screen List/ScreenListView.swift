@@ -14,6 +14,10 @@ class ScreenListViewModel: ObservableObject {
         set{ Screen.screens = newValue }
     }
     
+    var defaultScreens: [Screen] {
+        Screen.defaults
+    }
+    
     func addBookmark(for index: Int) {
         
     }
@@ -22,32 +26,57 @@ class ScreenListViewModel: ObservableObject {
 struct ScreenListView: View {
     @StateObject var viewModel: ScreenListViewModel = .init()
     
+    func onUpdate(_ screen: Screen, index: Int?) -> ((Screen) -> Void)? {
+        if let index = index {
+            return {
+                viewModel.objectWillChange.send()
+                viewModel.screens[index] = $0
+            }
+        } else {
+            return { _ in }
+        }
+    }
+    
+    func screenView(_ screen: Screen, index: Int?) -> some View {
+        NavigationLink {
+            ViewMakerView(viewModel: .init(
+                screen: screen,
+                makeMode: false,
+                onUpdate: onUpdate(screen, index: index))
+            )
+        } label: {
+            Text(screen.name).font(.largeTitle)
+        }
+    }
     var body: some View {
         List {
-            ForEach(enumerated: viewModel.screens) { (index, screen) in
-                NavigationLink {
-                    ViewMakerView(viewModel: .init(screen: screen, onUpdate: {
-                        viewModel.objectWillChange.send()
-                        viewModel.screens[index] = $0
-                    }))
-                } label: {
-                    Text(screen.name).font(.largeTitle)
+            if !viewModel.screens.isEmpty {
+                Section("User") {
+                    ForEach(enumerated: viewModel.screens) { (index, screen) in
+                        screenView(screen, index: index)
+                        .swipeActions {
+                            Button {
+                                viewModel.addBookmark(for: index)
+                            } label: {
+                                Label("Favorite", systemImage: "bookmark.fill")
+                            }
+                            .tint(.yellow)
+                
+                            Button {
+                                viewModel.screens.remove(atOffsets: [index])
+                                viewModel.objectWillChange.send()
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                            .tint(.red)
+                        }
+                    }
                 }
-                .swipeActions {
-                    Button {
-                        viewModel.addBookmark(for: index)
-                    } label: {
-                        Label("Favorite", systemImage: "bookmark.fill")
-                    }
-                    .tint(.yellow)
-        
-                    Button {
-                        viewModel.screens.remove(atOffsets: [index])
-                        viewModel.objectWillChange.send()
-                    } label: {
-                        Label("Delete", systemImage: "trash")
-                    }
-                    .tint(.red)
+            }
+            
+            Section("Defaults") {
+                ForEach(viewModel.defaultScreens) { screen in
+                        screenView(screen, index: nil)
                 }
             }
         }

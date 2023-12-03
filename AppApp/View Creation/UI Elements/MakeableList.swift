@@ -130,7 +130,7 @@ struct MakeableListView: View {
                     error: $error
                 )
             }
-        }.task {
+        }.task(id: variables.hashValue) {
             do {
                 if isRunning {
                     views = try await listView.valueViews(with: variables)
@@ -143,7 +143,7 @@ struct MakeableListView: View {
                 }
             } catch let error as VariableValueError {
                 self.error = error
-                views = [MakeableLabel.withText("ERROR")]
+                views = [MakeableLabel.withText("ERR")]
             } catch {
                 fatalError(error.localizedDescription)
             }

@@ -15,7 +15,6 @@ class ViewMakerViewModel: ObservableObject {
     var content: MakeableStack = .init(content: .init(value: [], axis: .init(value: .vertical)), padding: .init(value: 5)) {
         didSet {
             onUpdate?(.init(id: screenID, name: self.name, initActions: self.initActions, content: content))
-            updater += 1
         }
     }
     
@@ -29,10 +28,11 @@ class ViewMakerViewModel: ObservableObject {
     
     @Published var makeMode: Bool = false
     
-    @Published private(set) var updater: Int = 0
+//    @Published private(set) var updater: Int = 0
     
     @Published private(set) var _variables: Variables
     @Published var error: VariableValueError?
+    @Published var hasFinishedFirstLoad: Bool = false
     
     private var cancellables: Set<AnyCancellable> = .init()
     
@@ -42,19 +42,19 @@ class ViewMakerViewModel: ObservableObject {
             return _variables
         }
         set {
-            guard !self.makeMode else { return }
+            guard !self.makeMode, newValue != self._variables else { return }
             self._variables.set(from: newValue)
         }
     }
     
-    init(screen: Screen, onUpdate: ((Screen) -> Void)?) {
+    init(screen: Screen, makeMode: Bool, onUpdate: ((Screen) -> Void)?) {
         self.screenID = screen.id
         self.name = screen.name
         self.initActions = screen.initActions
         self.content = screen.content
         self.onUpdate = onUpdate
         self._variables = .init()
-        self.makeMode = showEdit
+        self.makeMode = makeMode
         
         Task { @MainActor in
             _variables = await makeVariables()
@@ -88,7 +88,7 @@ class ViewMakerViewModel: ObservableObject {
         
         self.variables = vars
         
-        self.updater += 1
+//        self.updater += 1
     }
     
     func makeNewVariables() async {
@@ -107,6 +107,8 @@ class ViewMakerViewModel: ObservableObject {
         }
         
         await self.updateVariablesFromContent(vars: newVars)
+        
+        hasFinishedFirstLoad = true
         
         return newVars
     }

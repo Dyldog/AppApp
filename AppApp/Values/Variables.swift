@@ -14,12 +14,7 @@ final class Variables: Equatable, ObservableObject, Hashable, Identifiable, Copy
     @MainActor var id: String { keyString + valueString }
 //    var objectWillChange = PassthroughSubject<Void, Never>()
     
-    @MainActor private(set) var variables: [String: VariableValue] {
-        willSet { objectWillChange.send() }
-        didSet {
-            print("DIDSET")
-        }
-    }
+    @MainActor private(set) var variables: [String: VariableValue]
     
     @MainActor var keys: [String] { Array(variables.keys) }
     
@@ -28,14 +23,17 @@ final class Variables: Equatable, ObservableObject, Hashable, Identifiable, Copy
     }
     
     @MainActor func value(for name: String) -> VariableValue? {
-        variables[name]
+        objectWillChange.send()
+        return variables[name]?.copy()
     }
     
     @MainActor func set(_ value: VariableValue, for name: String) {
+        objectWillChange.send()
         variables[name] = value.copy()
     }
     
     @MainActor func set(from other: Variables) {
+        objectWillChange.send()
         for (key, value) in other.variables {
             if self.value(for: key)?.valueString != value.valueString {
                 set(value, for: key)

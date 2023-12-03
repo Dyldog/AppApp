@@ -33,7 +33,7 @@ struct MakeableFieldView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .any
             }
-        }.task {
+        }.task(id: variables.hashValue) {
             do {
                 let value = try await field.text.value(with: variables).valueString
                 self.text = value
@@ -47,7 +47,7 @@ struct MakeableFieldView: View {
     
     func onTextUpdate(_ string: String) {
         self.text = string
-        self.onRuntimeUpdate()
+        
         Task { @MainActor in
             do {
                 if isRunning {
