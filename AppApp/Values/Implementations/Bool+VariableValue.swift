@@ -44,3 +44,12 @@ final class BoolValue: EditableVariableValue, Codable {
         })).any
     }
 }
+
+extension BoolValue: CodeRepresentable {
+    var codeRepresentation: String {
+        switch value {
+        case true: "true"
+        case false: "false"
+        }
+    }
+}

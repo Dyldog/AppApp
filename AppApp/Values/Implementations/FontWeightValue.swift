@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol PickableValue: CaseIterable, Titleable, Codable {
+protocol PickableValue: CaseIterable, Titleable, Codable, CodeRepresentable {
     static var defaultValue: Self { get }
 }
 
@@ -49,5 +49,21 @@ extension Font.Weight: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(title)
+    }
+}
+
+extension Font.Weight: CodeRepresentable {
+    var codeRepresentation: String {
+        switch self {
+        case .black: return ".black"
+        case .bold: return ".bold"
+        case .heavy: return ".heavy"
+        case .light: return ".light"
+        case .ultraLight: return ".ultraLight"
+        case .semibold: return ".semibold"
+        case .thin: return ".thin"
+        case .regular: return ".regular"
+        default: return "???"
+        }
     }
 }

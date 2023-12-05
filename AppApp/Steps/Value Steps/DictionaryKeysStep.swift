@@ -30,3 +30,8 @@ final class  DictionaryKeysStep: ValueStep {
     }
 }
 
+extension DictionaryKeysStep: CodeRepresentable {
+    var codeRepresentation: String {
+        "Array(\(dictionary.codeRepresentation).keys)"
+    }
+}

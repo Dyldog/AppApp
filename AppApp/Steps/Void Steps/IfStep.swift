@@ -50,3 +50,13 @@ final class IfStep: Step {
         fatalError()
     }
 }
+
+extension IfStep {
+    var codeRepresentation: String {
+        """
+        \(ifAction.codeRepresentation) else {
+            \(elseAction.codeRepresentation)
+        }
+        """
+    }
+}

@@ -42,3 +42,9 @@ final class AddToVarStep: Step, ObservableObject {
         case cantAddToUnsetVariable
     }
 }
+
+extension AddToVarStep: CodeRepresentable {
+    var codeRepresentation: String {
+        "\(varName.valueString) = \(varName.codeRepresentation) + \(value.codeRepresentation)"
+    }
+}

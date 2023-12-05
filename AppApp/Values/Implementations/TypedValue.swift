@@ -138,3 +138,9 @@ final class TypedValue<T: TypeableValue>: EditableVariableValue, Codable {
 //        }.any
     }
 }
+
+extension TypedValue: CodeRepresentable {
+    var codeRepresentation: String {
+        value.value.codeRepresentation
+    }
+}

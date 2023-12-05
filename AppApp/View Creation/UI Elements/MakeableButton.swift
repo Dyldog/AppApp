@@ -95,3 +95,15 @@ final class MakeableButton: MakeableView, Codable {
     }
 }
 
+extension MakeableButton: CodeRepresentable {
+    var codeRepresentation: String {
+        """
+        Button {
+            \(action.map { "\t" + $0.codeRepresentation }.joined(separator: "\n"))
+        } label: {
+            \(title.codeRepresentation)
+        }
+        .buttonStyle(\(style.codeRepresentation))
+        """
+    }
+}

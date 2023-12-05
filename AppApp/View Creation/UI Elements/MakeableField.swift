@@ -111,3 +111,17 @@ final class MakeableField: MakeableView, Codable {
         try await onTextUpdate.run(with: variables)
     }
 }
+
+extension MakeableField: CodeRepresentable {
+    var codeRepresentation: String {
+        """
+        TextField("", text: .init(get: {
+            \(text.codeRepresentation)
+        }, set: {
+            // TODO
+        }))
+        .multilineTextAlignment(\(alignment.codeRepresentation)
+        .font(.system(size: \(fontSize.value))
+        """
+    }
+}

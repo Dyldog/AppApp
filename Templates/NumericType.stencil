@@ -17,3 +17,9 @@ enum NumericType: String, Codable, CaseIterable {
         }
     }
 }
+
+extension NumericType: CodeRepresentable {
+    var codeRepresentation: String {
+        title
+    }
+}

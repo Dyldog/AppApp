@@ -84,3 +84,38 @@ extension StepArray: Sequence {
         .init(values: value)
     }
 }
+
+extension StepArray: CodeRepresentable {
+    var codeRepresentation: String {
+        """
+        {
+        \(declarationCodeRepresentation)
+        }
+        """
+    }
+    
+    var declarationCodeRepresentation: String {
+        var lastOutputIndex: Int = 0
+        
+        var outputs: [String] = []
+        
+        for (_, step) in value.enumerated() {
+            var prefix = ""
+            
+            if step is any ValueStep {
+                prefix = "let OUT\(lastOutputIndex + 1) = "
+            }
+            
+            outputs.append(
+                prefix + step.codeRepresentation
+                    .replacingOccurrences(of: "$0", with: "OUT\(lastOutputIndex)")
+            )
+            
+            if step is any ValueStep {
+                lastOutputIndex += 1
+            }
+        }
+        
+        return outputs.joined(separator: "\n")
+    }
+}

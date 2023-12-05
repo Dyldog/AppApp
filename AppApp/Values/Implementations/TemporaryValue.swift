@@ -84,3 +84,9 @@ extension TemporaryValue: Codable {
         try container.encode(output, forKey: .output)
     }
 }
+
+extension TemporaryValue: CodeRepresentable {
+    var codeRepresentation: String {
+        "\(output.codeRepresentation) ?? \(initial.codeRepresentation)"
+    }
+}

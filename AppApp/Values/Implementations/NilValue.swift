@@ -34,3 +34,7 @@ final class NilValue: EditableVariableValue {
         self
     }
 }
+
+extension NilValue: CodeRepresentable {
+    var codeRepresentation: String { "nil" }
+}

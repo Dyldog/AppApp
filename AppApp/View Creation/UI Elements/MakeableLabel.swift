@@ -120,3 +120,14 @@ final class MakeableLabel: MakeableView {
         }
     }
 }
+
+extension MakeableLabel: CodeRepresentable {
+    var codeRepresentation: String {
+        """
+        Text("\\(\(text.codeRepresentation))\")
+            .font(.system(size: \(fontSize.codeRepresentation)).weight(\(fontWeight.codeRepresentation)))
+            .if(\(italic.codeRepresentation)) { $0.italic() }
+            .foregroundStyle(\(textColor.codeRepresentation))
+        """
+    }
+}

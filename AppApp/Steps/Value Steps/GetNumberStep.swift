@@ -32,3 +32,9 @@ final class GetNumberStep: ValueStep {
         return try numberType.value.make(from: value.valueString)
     }
 }
+
+extension GetNumberStep: CodeRepresentable {
+    var codeRepresentation: String {
+        "\(value.codeRepresentation)"
+    }
+}

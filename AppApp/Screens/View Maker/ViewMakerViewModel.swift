@@ -56,6 +56,8 @@ class ViewMakerViewModel: ObservableObject {
         self._variables = .init()
         self.makeMode = makeMode
         
+        print(screen.codeRepresentation)
+        
         Task { @MainActor in
             _variables = await makeVariables()
         }

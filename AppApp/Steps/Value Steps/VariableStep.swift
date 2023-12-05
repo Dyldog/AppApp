@@ -36,3 +36,9 @@ final class VariableStep: ValueStep {
         return try await value.value(with: variables)
     }
 }
+
+extension VariableStep: CodeRepresentable {
+    var codeRepresentation: String {
+        varName.codeRepresentation
+    }
+}

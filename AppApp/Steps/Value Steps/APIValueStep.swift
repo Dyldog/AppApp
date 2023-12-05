@@ -34,3 +34,9 @@ final class APIValueStep: ValueStep {
         return StringValue(value: try String(contentsOf: url))
     }
 }
+
+extension APIValueStep: CodeRepresentable {
+    var codeRepresentation: String {
+        "try! String(contentsOf: URL(string: \(url.codeRepresentation))!)"
+    }
+}

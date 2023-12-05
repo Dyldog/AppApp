@@ -13,8 +13,12 @@ protocol EditableVariableValue: AnyObject, VariableValue, ViewEditable {
 }
 
 protocol PrimitiveEditableVariableValue: EditableVariableValue where Primitive.AllCases: RandomAccessCollection {
-    associatedtype Primitive: CaseIterable & Hashable & Titleable
+    associatedtype Primitive: CaseIterable & Hashable & Titleable & CodeRepresentable
     var value: Primitive { get set }
+}
+
+extension PrimitiveEditableVariableValue {
+    var codeRepresentation: String { value.codeRepresentation }
 }
 
 extension PrimitiveEditableVariableValue {

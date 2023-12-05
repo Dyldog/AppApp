@@ -66,3 +66,9 @@ extension Variable: Codable {
         try container.encode(CodableVariableValue(value: value), forKey: .name)
     }
 }
+
+extension Variable: CodeRepresentable {
+    var codeRepresentation: String {
+        value.valueString
+    }
+}

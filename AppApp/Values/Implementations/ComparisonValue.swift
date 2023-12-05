@@ -43,3 +43,9 @@ final class ComparisonValue: CompositeEditableVariableValue {
         )
     }
 }
+
+extension ComparisonValue: CodeRepresentable {
+    var codeRepresentation: String {
+        "\(lhs.codeRepresentation) \(comparison.codeRepresentation) \(rhs.codeRepresentation)"
+    }
+}

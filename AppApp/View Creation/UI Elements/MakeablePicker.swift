@@ -102,3 +102,16 @@ struct MakeableToggleView: View {
         }
     }
 }
+
+extension MakeableToggle: CodeRepresentable {
+    var codeRepresentation: String {
+        """
+        Toggle("", isOn: .init(get: {
+            \(isOn.codeRepresentation)
+        }, set: {
+            // TODO
+        }))
+        .fixedSize()
+        """
+    }
+}

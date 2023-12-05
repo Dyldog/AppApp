@@ -41,3 +41,9 @@ final class  DictionaryValueForKeyStep: ValueStep {
         return value
     }
 }
+
+extension DictionaryValueForKeyStep: CodeRepresentable {
+    var codeRepresentation: String {
+        "\(dictionary.codeRepresentation)[\(key.codeRepresentation)]"
+    }
+}

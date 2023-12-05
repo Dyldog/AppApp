@@ -49,3 +49,8 @@ final class NumericalOperationValue: CompositeEditableVariableValue {
     }
 }
 
+extension NumericalOperationValue: CodeRepresentable {
+    var codeRepresentation: String {
+        "\(lhs.codeRepresentation) \(operation.codeRepresentation) \(rhs.codeRepresentation)"
+    }
+}

@@ -57,6 +57,12 @@ final class {{ type.name }}Value: EditableVariableValue, Codable, Copying, Numer
     }
 }
 
+extension {% call ValueTypeName type %}Value: CodeRepresentable {
+    var codeRepresentation: String {
+        "\(value)"
+    }
+}
+
 {% call AutoCopy type %}
 
 {% endfor %}

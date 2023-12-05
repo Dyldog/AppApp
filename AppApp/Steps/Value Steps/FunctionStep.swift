@@ -34,3 +34,9 @@ final class FunctionStep: Step {
     }
 }
 
+
+extension FunctionStep: CodeRepresentable {
+    var codeRepresentation: String {
+        "\(functionName.codeRepresentation)()"
+    }
+}

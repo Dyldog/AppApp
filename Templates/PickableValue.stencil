@@ -46,6 +46,12 @@ final class {% call ValueTypeName type %}Value: PrimitiveEditableVariableValue, 
     }
 }
 
+extension {% call ValueTypeName type %}Value: CodeRepresentable {
+    var codeRepresentation: String {
+        value.codeRepresentation
+    }
+}
+
 {% call AutoCopy type %}
 
 {% endfor %}

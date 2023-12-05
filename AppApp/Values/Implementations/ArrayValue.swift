@@ -95,3 +95,8 @@ extension ArrayValue: Codable {
     }
 }
 
+extension ArrayValue: CodeRepresentable {
+    var codeRepresentation: String {
+        "[\(elements.map { $0.codeRepresentation }.joined(separator: ", "))]"
+    }
+}

@@ -76,3 +76,7 @@ extension EditableVariableValue {
         .init(value: self)
     }
 }
+
+extension AnyValue: CodeRepresentable {
+    var codeRepresentation: String { value.codeRepresentation }
+}

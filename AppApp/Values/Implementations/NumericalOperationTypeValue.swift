@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum NumericalOperationType: String, Codable, CaseIterable, Titleable {
+enum NumericalOperationType: String, Codable, CaseIterable, Titleable, CodeRepresentable {
     case add
     case subtract
     case mulitply
@@ -34,6 +34,17 @@ enum NumericalOperationType: String, Codable, CaseIterable, Titleable {
         case .divide: return { $0 / $1}
         case .power: return { $0 ** $1 }
         case .mod: return { $0 % $1}
+        }
+    }
+    
+    var codeRepresentation: String {
+        switch self {
+        case .add: return "+"
+        case .subtract: return "-"
+        case .mulitply: return "*"
+        case .divide: return "/"
+        case .power: return "**"
+        case .mod: return "%"
         }
     }
 }

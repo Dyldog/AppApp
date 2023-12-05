@@ -47,3 +47,13 @@ final class ConditionalActionValue: CompositeEditableVariableValue, ObservableOb
         }
     }
 }
+
+extension ConditionalActionValue: CodeRepresentable {
+    var codeRepresentation: String {
+        """
+        if (\(ifCondition.codeRepresentation) {
+            \(ifSteps.codeRepresentation)
+        }
+        """
+    }
+}

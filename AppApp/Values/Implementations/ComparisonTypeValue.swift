@@ -7,12 +7,18 @@
 
 import SwiftUI
 
-enum ComparisonType: String, Codable, CaseIterable, Titleable {
+enum ComparisonType: String, Codable, CaseIterable, Titleable, CodeRepresentable {
     case equals
     
     var title: String {
         switch self {
         case .equals: "Equals"
+        }
+    }
+    
+    var codeRepresentation: String {
+        switch self {
+        case .equals: "=="
         }
     }
 }
@@ -48,7 +54,3 @@ final class ComparisonTypeValue: PrimitiveEditableVariableValue {
         }
     }
 }
-//
-//final class ComparisonValue: CompositeEditableVariableValue {
-//    
-//}

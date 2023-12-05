@@ -43,3 +43,9 @@ final class OptionalValue: EditableVariableValue {
         }
     }
 }
+
+extension OptionalValue: CodeRepresentable {
+    var codeRepresentation: String {
+        "\(value.codeRepresentation)?"
+    }
+}

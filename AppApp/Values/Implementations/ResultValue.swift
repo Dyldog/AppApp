@@ -44,3 +44,9 @@ final class ResultValue: EditableVariableValue {
         return await variables.value(for: "$0") ?? NilValue()
     }
 }
+
+extension ResultValue: CodeRepresentable {
+    var codeRepresentation: String {
+        steps.codeRepresentation
+    }
+}

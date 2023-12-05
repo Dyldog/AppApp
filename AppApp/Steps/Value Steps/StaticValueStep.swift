@@ -31,3 +31,9 @@ final class StaticValueStep: ValueStep {
         return try await value.value(with: variables)
     }
 }
+
+extension StaticValueStep {
+    var codeRepresentation: String {
+        value.valueString
+    }
+}

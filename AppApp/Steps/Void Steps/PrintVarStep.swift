@@ -31,3 +31,9 @@ final class PrintVarStep: Step, Codable {
         }
     }
 }
+
+extension PrintVarStep: CodeRepresentable {
+    var codeRepresentation: String {
+        "print(\(varName.codeRepresentation)"
+    }
+}

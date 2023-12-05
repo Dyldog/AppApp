@@ -82,3 +82,9 @@ extension MakeableView {
         .init(value: self)
     }
 }
+
+extension AnyMakeableView: CodeRepresentable {
+    var codeRepresentation: String {
+        value.codeRepresentation
+    }
+}

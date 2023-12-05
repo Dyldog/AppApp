@@ -165,7 +165,7 @@ extension AddViewViewModel {
 
 {% macro VariableTypeName type %}{% if type|annotated:"variableTypeName" %}{{ type.annotations.variableTypeName }}{% else %}{{ type.name|replace:"Value",""|replace:"Makeable",""|lowerFirstLetter }}{% endif %}{% endmacro %}
 
-enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
+enum VariableType: String, CaseIterable, Equatable, Codable, Titleable, CodeRepresentable {
 
 {% for type in types.implementing.EditableVariableValue|!protocol %}
     {% if not type.implements.StepType %}
@@ -231,6 +231,30 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         {% for type in types.implementing.StringRepresentableValue|!protocol %}
             {% if type|!annotated:"skipVariableType" %}
         case .{%+ call TypeNameCase type +%}: return "{% call TypeNameCase type %}"
+            {% endif %}
+        {% endfor %}
+        }
+    }
+    
+    var codeRepresentation: String {
+        switch self {
+        {% for type in types.implementing.EditableVariableValue|!protocol %}
+            {% if not type.implements.StepType %}
+                {% if type|!annotated:"skipVariableType" %}
+        case .{%+ call VariableTypeName type +%}: return "{{ type.name }}"
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        
+        {% for type in types.implementing.PickableValue|!protocol %}
+            {% if type|!annotated:"skipVariableType" %}
+        case .{%+ call TypeNameCase type +%}: return "{{ type.name }}"
+            {% endif %}
+        {% endfor %}
+        
+        {% for type in types.implementing.StringRepresentableValue|!protocol %}
+            {% if type|!annotated:"skipVariableType" %}
+        case .{%+ call TypeNameCase type +%}: return "{{ type.name }}"
             {% endif %}
         {% endfor %}
         }

@@ -16,11 +16,18 @@ extension TextAlignment: PickableValue, Codable {
         case .center: return "Center"
         case .leading: return "Leading"
         case .trailing: return "Trailing"
-        default: return "UNKNOWN"
         }
     }
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(title)
+    }
+    
+    var codeRepresentation: String {
+        switch self {
+        case .center: return ".center"
+        case .leading: return ".leading"
+        case .trailing: return ".trailing"
+        }
     }
 }

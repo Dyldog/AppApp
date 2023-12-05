@@ -10,6 +10,13 @@ import SwiftUI
 extension Axis: Codable, PickableValue {
     static var defaultValue: Axis = .vertical
     var title: String { description }
+    
+    var codeRepresentation: String {
+        switch self {
+        case .horizontal: return ".horizontal"
+        case .vertical: return ".vertical"
+        }
+    }
 }
 
 extension Axis {

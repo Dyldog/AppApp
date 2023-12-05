@@ -152,3 +152,15 @@ struct MakeableListView: View {
             .any
     }
 }
+
+extension MakeableList: CodeRepresentable {
+    var codeRepresentation: String {
+        """
+        List {
+            ForEach(enumerated: \(data.codeRepresentation)) { (index, element) in
+                \(view.codeRepresentation.replacingOccurrences(of: "$0", with: "element"))
+            }
+        }
+        """
+    }
+}

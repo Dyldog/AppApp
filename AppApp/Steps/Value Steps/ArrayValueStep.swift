@@ -41,38 +41,9 @@ final class ArrayValueStep: ValueStep {
         return value
     }
 }
-//
-//extension ArrayValueStep {
-//    func set(_ value: VariableValue, for property: Properties) {
-//        switch property {
-//        case .array: array = value as! Value
-//        case .index: array = value as! Value
-//        }
-//    }
-//    
-//    static func make(factory: (Properties) -> VariableValue) -> ArrayValueStep {
-//        .init(
-//            array: factory(.array) as! Value,
-//            index: factory(.index) as! Value
-//        )
-//    }
-//    
-//    func value(for property: Properties) -> (VariableValue)? {
-//        switch property {
-//        case .array: return array
-//        case .index: return index
-//        }
-//    }
-//    
-//    enum Properties: String, ViewProperty {
-//        case array
-//        case index
-//        
-//        var defaultValue: VariableValue {
-//            switch self {
-//            case .array: return Variable(name: StringValue(value: "ARRAY"))
-//            case .index: return 0
-//            }
-//        }
-//    }
-//}
+
+extension ArrayValueStep: CodeRepresentable {
+    var codeRepresentation: String {
+        "\(array.codeRepresentation)[\(index.codeRepresentation)]"
+    }
+}

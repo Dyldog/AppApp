@@ -86,3 +86,9 @@ extension StringValue: Codable {
         try container.encode(value, forKey: .value)
     }
 }
+
+extension StringValue: CodeRepresentable {
+    var codeRepresentation: String {
+        "\"\(value)\""
+    }
+}

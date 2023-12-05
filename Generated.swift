@@ -408,6 +408,12 @@ enum NumericType: String, Codable, CaseIterable {
     }
 }
 
+extension NumericType: CodeRepresentable {
+    var codeRepresentation: String {
+        title
+    }
+}
+
 
 
 
@@ -434,6 +440,12 @@ final class AxisValue: PrimitiveEditableVariableValue, Codable, Copying {
         .init(
             value: value
         )
+    }
+}
+
+extension AxisValue: CodeRepresentable {
+    var codeRepresentation: String {
+        value.codeRepresentation
     }
 }
 
@@ -469,6 +481,12 @@ final class ButtonStyleValue: PrimitiveEditableVariableValue, Codable, Copying {
     }
 }
 
+extension ButtonStyleValue: CodeRepresentable {
+    var codeRepresentation: String {
+        value.codeRepresentation
+    }
+}
+
 extension ButtonStyle: Copying {
     func copy() -> ButtonStyle {
         return self
@@ -498,6 +516,12 @@ final class FontWeightValue: PrimitiveEditableVariableValue, Codable, Copying {
         .init(
             value: value
         )
+    }
+}
+
+extension FontWeightValue: CodeRepresentable {
+    var codeRepresentation: String {
+        value.codeRepresentation
     }
 }
 
@@ -533,6 +557,12 @@ final class NumericTypeValue: PrimitiveEditableVariableValue, Codable, Copying {
     }
 }
 
+extension NumericTypeValue: CodeRepresentable {
+    var codeRepresentation: String {
+        value.codeRepresentation
+    }
+}
+
 extension NumericType: Copying {
     func copy() -> NumericType {
         return self
@@ -562,6 +592,12 @@ final class TextAlignmentValue: PrimitiveEditableVariableValue, Codable, Copying
         .init(
             value: value
         )
+    }
+}
+
+extension TextAlignmentValue: CodeRepresentable {
+    var codeRepresentation: String {
+        value.codeRepresentation
     }
 }
 
@@ -611,6 +647,12 @@ final class FloatValue: EditableVariableValue, Codable, Copying, NumericValue {
     }
 }
 
+extension FloatValue: CodeRepresentable {
+    var codeRepresentation: String {
+        "\(value)"
+    }
+}
+
 extension Float: Copying {
     func copy() -> Float {
         return self
@@ -650,6 +692,12 @@ final class IntValue: EditableVariableValue, Codable, Copying, NumericValue {
         .init(
             value: value
         )
+    }
+}
+
+extension IntValue: CodeRepresentable {
+    var codeRepresentation: String {
+        "\(value)"
     }
 }
 
@@ -1872,7 +1920,7 @@ extension AddViewViewModel {
 
 
 
-enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
+enum VariableType: String, CaseIterable, Equatable, Codable, Titleable, CodeRepresentable {
 
 	case view // AnyMakeableView
 	case anyValue // AnyValue
@@ -1987,6 +2035,44 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable {
         case .textAlignment: return "textAlignment"
         case .float: return "float"
         case .int: return "int"
+        }
+    }
+    var codeRepresentation: String {
+        switch self {
+        case .view: return "AnyMakeableView"
+        case .anyValue: return "AnyValue"
+        case .list: return "ArrayValue"
+        case .boolean: return "BoolValue"
+        case .color: return "ColorValue"
+        case .comparisonType: return "ComparisonTypeValue"
+        case .comparison: return "ComparisonValue"
+        case .conditionalAction: return "ConditionalActionValue"
+        case .dictionary: return "DictionaryValue"
+        case .makeableArray: return "MakeableArray"
+        case .base: return "MakeableBase"
+        case .button: return "MakeableButton"
+        case .field: return "MakeableField"
+        case .label: return "MakeableLabel"
+        case .listView: return "MakeableList"
+        case .stack: return "MakeableStack"
+        case .toggle: return "MakeableToggle"
+        case .`nil`: return "NilValue"
+        case .numericalOperationType: return "NumericalOperationTypeValue"
+        case .numericalOperation: return "NumericalOperationValue"
+        case .optional: return "OptionalValue"
+        case .result: return "ResultValue"
+        case .stepArray: return "StepArray"
+        case .string: return "StringValue"
+        case .temporary: return "TemporaryValue"
+        case .variable: return "Variable"
+        case .type: return "VariableTypeValue"
+        case .axis: return "Axis"
+        case .buttonStyle: return "ButtonStyle"
+        case .fontWeight: return "Font.Weight"
+        case .numericType: return "NumericType"
+        case .textAlignment: return "TextAlignment"
+        case .float: return "Float"
+        case .int: return "Int"
         }
     }
 }

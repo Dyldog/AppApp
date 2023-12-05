@@ -33,3 +33,9 @@ final class DecodeDictionaryStep: ValueStep {
         ) as! [String: Any])
     }
 }
+
+extension DecodeDictionaryStep: CodeRepresentable {
+    var codeRepresentation: String {
+        "try! JSONSerialization.jsonObject(with: \(value.codeRepresentation).data(using: .utf8)!, options: []) as! [String: Any]"
+    }
+}

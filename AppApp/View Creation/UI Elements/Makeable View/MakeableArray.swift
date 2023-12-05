@@ -103,3 +103,20 @@ extension MakeableArray: Sequence {
         IndexingIterator(_elements: value)
     }
 }
+
+extension MakeableArray: CodeRepresentable {
+    private var stackType: String {
+        switch axis.value {
+        case .vertical: return "VStack"
+        case .horizontal: return "HStack"
+        }
+    }
+    
+    var codeRepresentation: String {
+        """
+        \(stackType) {
+        \(value.map { "\t" + $0.codeRepresentation }.joined(separator: "\n"))
+        }
+        """
+    }
+}

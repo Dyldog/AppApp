@@ -132,3 +132,9 @@ final class MakeableStack: MakeableView, Codable {
         }
     }
 }
+
+extension MakeableStack: CodeRepresentable {
+    var codeRepresentation: String {
+        return content.codeRepresentation
+    }
+}

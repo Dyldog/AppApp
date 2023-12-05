@@ -139,3 +139,13 @@ extension DictionaryValue {
 //options: []
 //) as! [String: Any])
 }
+
+extension DictionaryValue: CodeRepresentable {
+    var codeRepresentation: String {
+        """
+        [
+        \(elements.map { "\t\($0.key.codeRepresentation): \($0.value.codeRepresentation)"})
+        ]
+        """
+    }
+}

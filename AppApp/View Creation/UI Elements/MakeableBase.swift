@@ -80,3 +80,13 @@ extension View {
         
     }
 }
+
+extension MakeableBase: CodeRepresentable {
+    var codeRepresentation: String {
+        """
+        Rectangle()
+            .background(.clear)
+            .foregroundColor(\(backgroundColor.codeRepresentation)
+        """
+    }
+}
