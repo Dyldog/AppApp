@@ -41,7 +41,8 @@ final class ResultValue: EditableVariableValue {
             try await step.run(with: variables)
         }
         
-        return await variables.value(for: "$0") ?? NilValue()
+        let value: (any VariableValue)? = try await variables.value(for: "$0")?.value(with: variables)
+        return value ?? NilValue()
     }
 }
 

@@ -38,8 +38,8 @@ final class NumericalOperationValue: CompositeEditableVariableValue {
     
     func value(with variables: Variables) async throws -> VariableValue {
         guard
-            let lhs = try await lhs.value(with: variables) as? any NumericValue,
-            let rhs = try await rhs.value(with: variables) as? any NumericValue
+            let lhs = try await lhs.value(with: variables.copy()) as? any NumericValue,
+            let rhs = try await rhs.value(with: variables.copy()) as? any NumericValue
         else { throw VariableValueError.wrongTypeForOperation }
         
         let lhsValue = lhs.value
