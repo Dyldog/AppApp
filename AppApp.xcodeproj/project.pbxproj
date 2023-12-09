@@ -19,6 +19,8 @@
 		FC0BE6462B1C95A20087EE00 /* DylKit in Frameworks */ = {isa = PBXBuildFile; productRef = FC0BE6452B1C95A20087EE00 /* DylKit */; };
 		FC0CF5692B2492FB00995F30 /* MapStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0CF5682B2492FB00995F30 /* MapStep.swift */; };
 		FC0CF56B2B24941600995F30 /* ForEachStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0CF56A2B24941600995F30 /* ForEachStep.swift */; };
+		FC0CF56D2B24B97800995F30 /* CLLocation+Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0CF56C2B24B97800995F30 /* CLLocation+Region.swift */; };
+		FC0CF56F2B24BC9700995F30 /* URLEncodeStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0CF56E2B24BC9600995F30 /* URLEncodeStep.swift */; };
 		FC18BAD02B15468E007838AA /* MakeablePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BACF2B15468E007838AA /* MakeablePicker.swift */; };
 		FC18BAD22B156D90007838AA /* ComparisonTypeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */; };
 		FC18BAD42B157F44007838AA /* NilValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD32B157F44007838AA /* NilValue.swift */; };
@@ -175,6 +177,8 @@
 		FC0BE63F2B1C93600087EE00 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FC0CF5682B2492FB00995F30 /* MapStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStep.swift; sourceTree = "<group>"; };
 		FC0CF56A2B24941600995F30 /* ForEachStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForEachStep.swift; sourceTree = "<group>"; };
+		FC0CF56C2B24B97800995F30 /* CLLocation+Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Region.swift"; sourceTree = "<group>"; };
+		FC0CF56E2B24BC9600995F30 /* URLEncodeStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLEncodeStep.swift; sourceTree = "<group>"; };
 		FC18BACF2B15468E007838AA /* MakeablePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeablePicker.swift; sourceTree = "<group>"; };
 		FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonTypeValue.swift; sourceTree = "<group>"; };
 		FC18BAD32B157F44007838AA /* NilValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NilValue.swift; sourceTree = "<group>"; };
@@ -421,6 +425,7 @@
 				FC18BAE02B1695A6007838AA /* FunctionStep.swift */,
 				FC4635092B0C982E00B8DCBE /* VariableStep.swift */,
 				FCCB8F4E2B18C15E00233D1F /* GetNumberStep.swift */,
+				FC0CF56E2B24BC9600995F30 /* URLEncodeStep.swift */,
 				FC4635062B0C980A00B8DCBE /* StaticValueStep.swift */,
 				FC46350B2B0C983D00B8DCBE /* APIValueStep.swift */,
 				FC4C2C282B0CBCF1008217AC /* DecodeDictionaryStep.swift */,
@@ -706,6 +711,7 @@
 				FCD3B2562B0C95B30054371B /* View+OnEdit.swift */,
 				FCCB8F422B1892A100233D1F /* String+TitleCase.swift */,
 				FCCB8F482B18B9B800233D1F /* Numbers+Pow.swift */,
+				FC0CF56C2B24B97800995F30 /* CLLocation+Region.swift */,
 				FC2B8A9E2B10ACD5003FAB86 /* Binding+Nil.swift */,
 				FCD3B2412B0BB3360054371B /* Int+Identifiable.swift */,
 				FCD3B24A2B0C948C0054371B /* Array+Safe.swift */,
@@ -967,6 +973,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC2B8A912B108FA0003FAB86 /* CodableStep.swift in Sources */,
+				FC0CF56D2B24B97800995F30 /* CLLocation+Region.swift in Sources */,
 				FCCB8F4B2B18B9D100233D1F /* Numeric.swift in Sources */,
 				FCD3B2492B0C69070054371B /* EditVariableView.swift in Sources */,
 				FCD3B25B2B0C96170054371B /* DoView.swift in Sources */,
@@ -1081,6 +1088,7 @@
 				FCBF55B52B244FC00048407F /* AsyncMap.swift in Sources */,
 				FC9C41CC2B12C69400E51957 /* Generated.swift in Sources */,
 				FCCB8F432B1892A100233D1F /* String+TitleCase.swift in Sources */,
+				FC0CF56F2B24BC9700995F30 /* URLEncodeStep.swift in Sources */,
 				FCD3B2442B0C31C40054371B /* ValueStep.swift in Sources */,
 				FC9047B72B14A01800B599BE /* IfStep.swift in Sources */,
 				FCD3B2352B0B9FF90054371B /* ViewProperty.swift in Sources */,

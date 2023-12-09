@@ -18,6 +18,14 @@ final class BoolValue: EditableVariableValue, Codable {
         self.value = value
     }
     
+    static var `true`: BoolValue {
+        .init(value: true)
+    }
+    
+    static var `false`: BoolValue {
+        .init(value: false)
+    }
+    
     static func makeDefault() -> BoolValue {
         .init(value: false)
     }

@@ -66,7 +66,7 @@ class ViewMakerViewModel: ObservableObject {
             self?.objectWillChange.send()
         }.store(in: &cancellables)
         
-        $makeMode.sink { [weak self] _ in
+        $makeMode.dropFirst().sink { [weak self] _ in
             Task {
                 await self?.makeNewVariables()
             }

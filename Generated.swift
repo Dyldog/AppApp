@@ -157,6 +157,7 @@ extension IfStep: Copying {
 extension LocationValue: Copying {
     func copy() -> LocationValue {
         return LocationValue(
+                    name: name.copy() as! TypedValue<StringValue>,
                     latitude: latitude.copy() as! TypedValue<FloatValue>,
                     longitude: longitude.copy() as! TypedValue<FloatValue>
         )
@@ -222,7 +223,8 @@ extension MakeableList: Copying {
 extension MakeableMap: Copying {
     func copy() -> MakeableMap {
         return MakeableMap(
-                    locations: locations.copy() as! TypedValue<ArrayValue>
+                    locations: locations.copy() as! TypedValue<ArrayValue>,
+                    zoomFollowsNewAnnotations: zoomFollowsNewAnnotations.copy() as! BoolValue
         )
     }
 }
@@ -335,6 +337,13 @@ extension TypedValue: Copying {
     func copy() -> TypedValue {
         return TypedValue(
                     value: value
+        )
+    }
+}
+extension URLEncodeStep: Copying {
+    func copy() -> URLEncodeStep {
+        return URLEncodeStep(
+                    value: value.copy() as! AnyValue
         )
     }
 }
@@ -1225,10 +1234,12 @@ extension IfStep {
 }
 extension LocationValue {
 	 enum Properties: String, ViewProperty {
+        case name
         case latitude
         case longitude
         var defaultValue: any EditableVariableValue {
             switch self {
+            case .name: return LocationValue.defaultValue(for: .name)
             case .latitude: return LocationValue.defaultValue(for: .latitude)
             case .longitude: return LocationValue.defaultValue(for: .longitude)
             }
@@ -1236,6 +1247,7 @@ extension LocationValue {
     }
     static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
+            name: factory(.name) as! TypedValue<StringValue>,
             latitude: factory(.latitude) as! TypedValue<FloatValue>,
             longitude: factory(.longitude) as! TypedValue<FloatValue>
         )
@@ -1243,12 +1255,14 @@ extension LocationValue {
 
     static func makeDefault() -> Self {
         .init(
+            name: Properties.name.defaultValue as! TypedValue<StringValue>,
             latitude: Properties.latitude.defaultValue as! TypedValue<FloatValue>,
             longitude: Properties.longitude.defaultValue as! TypedValue<FloatValue>
 		)
     }
     func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
+	        case .name: return name
 	        case .latitude: return latitude
 	        case .longitude: return longitude
         }
@@ -1256,6 +1270,7 @@ extension LocationValue {
 
 	func set(_ value: Any, for property: Properties) {
 		switch property {
+	        case .name: self.name = value as! TypedValue<StringValue>
 	        case .latitude: self.latitude = value as! TypedValue<FloatValue>
 	        case .longitude: self.longitude = value as! TypedValue<FloatValue>
 	    }
@@ -1508,32 +1523,38 @@ extension MakeableList {
 extension MakeableMap {
 	 enum Properties: String, ViewProperty {
         case locations
+        case zoomFollowsNewAnnotations
         var defaultValue: any EditableVariableValue {
             switch self {
             case .locations: return MakeableMap.defaultValue(for: .locations)
+            case .zoomFollowsNewAnnotations: return MakeableMap.defaultValue(for: .zoomFollowsNewAnnotations)
             }
         }
     }
     static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
-            locations: factory(.locations) as! TypedValue<ArrayValue>
+            locations: factory(.locations) as! TypedValue<ArrayValue>,
+            zoomFollowsNewAnnotations: factory(.zoomFollowsNewAnnotations) as! BoolValue
         )
     }
 
     static func makeDefault() -> Self {
         .init(
-            locations: Properties.locations.defaultValue as! TypedValue<ArrayValue>
+            locations: Properties.locations.defaultValue as! TypedValue<ArrayValue>,
+            zoomFollowsNewAnnotations: Properties.zoomFollowsNewAnnotations.defaultValue as! BoolValue
 		)
     }
     func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .locations: return locations
+	        case .zoomFollowsNewAnnotations: return zoomFollowsNewAnnotations
         }
     }
 
 	func set(_ value: Any, for property: Properties) {
 		switch property {
 	        case .locations: self.locations = value as! TypedValue<ArrayValue>
+	        case .zoomFollowsNewAnnotations: self.zoomFollowsNewAnnotations = value as! BoolValue
 	    }
 	}
 }
@@ -1841,6 +1862,38 @@ extension TemporaryValue {
 	    }
 	}
 }
+extension URLEncodeStep {
+	 enum Properties: String, ViewProperty {
+        case value
+        var defaultValue: any EditableVariableValue {
+            switch self {
+            case .value: return URLEncodeStep.defaultValue(for: .value)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+        .init(
+            value: factory(.value) as! AnyValue
+        )
+    }
+
+    static func makeDefault() -> Self {
+        .init(
+            value: Properties.value.defaultValue as! AnyValue
+		)
+    }
+    func value(for property: Properties) -> any EditableVariableValue {
+		switch property {
+	        case .value: return value
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .value: self.value = value as! AnyValue
+	    }
+	}
+}
 extension VariableStep {
 	 enum Properties: String, ViewProperty {
         case varName
@@ -1976,6 +2029,8 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(StringValue.self, forKey: .value)
         case typeString(TemporaryValue.self):
             self.value = try valueContainer.decode(TemporaryValue.self, forKey: .value)
+        case typeString(URLEncodeStep.self):
+            self.value = try valueContainer.decode(URLEncodeStep.self, forKey: .value)
         case typeString(Variable.self):
             self.value = try valueContainer.decode(Variable.self, forKey: .value)
         case typeString(VariableStep.self):
@@ -2088,6 +2143,8 @@ extension CodableVariableValue: Codable {
         case let value as StringValue:
             try container.encode(value, forKey: .value)
         case let value as TemporaryValue:
+            try container.encode(value, forKey: .value)
+        case let value as URLEncodeStep:
             try container.encode(value, forKey: .value)
         case let value as Variable:
             try container.encode(value, forKey: .value)
@@ -2371,6 +2428,7 @@ extension AddActionView {
 		case PrintVar
 		case SetVar
 		case StaticValue
+		case URLEncode
 		case Variable
         var title: String {
             switch self {
@@ -2389,6 +2447,7 @@ extension AddActionView {
             case .PrintVar: return PrintVarStep.title
             case .SetVar: return SetVarStep.title
             case .StaticValue: return StaticValueStep.title
+            case .URLEncode: return URLEncodeStep.title
             case .Variable: return VariableStep.title
             }
         }
@@ -2409,6 +2468,7 @@ extension AddActionView {
             case .PrintVar: PrintVarStep.makeDefault()
             case .SetVar: SetVarStep.makeDefault()
             case .StaticValue: StaticValueStep.makeDefault()
+            case .URLEncode: URLEncodeStep.makeDefault()
             case .Variable: VariableStep.makeDefault()
             }
         }
@@ -2450,6 +2510,8 @@ extension CodableStep: Codable {
 			self.value = try valueContainer.decode(SetVarStep.self, forKey: .value)
         case typeString(StaticValueStep.self):
 			self.value = try valueContainer.decode(StaticValueStep.self, forKey: .value)
+        case typeString(URLEncodeStep.self):
+			self.value = try valueContainer.decode(URLEncodeStep.self, forKey: .value)
         case typeString(VariableStep.self):
 			self.value = try valueContainer.decode(VariableStep.self, forKey: .value)
         default:
@@ -2489,6 +2551,8 @@ extension CodableStep: Codable {
 		case let value as SetVarStep:
 			try container.encode(value, forKey: .value)
 		case let value as StaticValueStep:
+			try container.encode(value, forKey: .value)
+		case let value as URLEncodeStep:
 			try container.encode(value, forKey: .value)
 		case let value as VariableStep:
 			try container.encode(value, forKey: .value)
