@@ -9,7 +9,7 @@ import SwiftUI
 
 final class ColorValue: EditableVariableValue {
     
-    static var type: VariableType { .nil }
+    static var type: VariableType { .color }
     
     var value: Color
     

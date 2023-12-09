@@ -74,6 +74,34 @@ final class ArrayValue: EditableVariableValue, ObservableObject {
     }
 }
 
+extension ArrayValue {
+    static func from(_ array: [Any]) -> ArrayValue {
+        let type: VariableType
+        let elements: [any EditableVariableValue]
+        
+        switch array {
+        case let strings as [String]:
+            type = .string
+            elements = strings.map { StringValue(value: $0) }
+        case let ints as [Int]:
+            type = .int
+            elements = ints.map { IntValue(value: $0) }
+        case let floats as [Float]:
+            type = .float
+            elements = floats.map { FloatValue(value: $0) }
+        case let nsNumbers as [NSNumber]:
+            type = .float
+            elements = nsNumbers.map { FloatValue(value: $0.floatValue) }
+        case let dictionaries as [[String: Any]]:
+            type = .dictionary
+            elements = dictionaries.map { DictionaryValue.from($0) }
+        default:
+            fatalError()
+        }
+        
+        return ArrayValue(type: type, elements: elements)
+    }
+}
 extension ArrayValue: Codable {
     enum CodingKeys: String, CodingKey {
         case type

@@ -46,6 +46,7 @@ struct MakeableFieldView: View {
     }
     
     func onTextUpdate(_ string: String) {
+        guard self.text != string else { return }
         self.text = string
         
         Task { @MainActor in
@@ -58,7 +59,7 @@ struct MakeableFieldView: View {
             } catch let error as VariableValueError {
                 self.error = error
             } catch {
-                fatalError(error.localizedDescription)
+                print(error.localizedDescription)
             }
             
             onRuntimeUpdate()

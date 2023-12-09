@@ -11,7 +11,8 @@ import DylKit
 @main
 struct AppAppApp: App {
     @State var alert: Alert?
-    @State var deepLink: Screen?
+    @State var deepLink: Screen? // = .mappyBoy
+    
     var body: some Scene {
         WindowGroup {
             if let deepLink = deepLink {

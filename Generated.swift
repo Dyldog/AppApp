@@ -86,6 +86,13 @@ extension ConditionalActionValue: Copying {
         )
     }
 }
+extension DecodeArrayStep: Copying {
+    func copy() -> DecodeArrayStep {
+        return DecodeArrayStep(
+                    value: value.copy() as! TypedValue<IntValue>
+        )
+    }
+}
 extension DecodeDictionaryStep: Copying {
     func copy() -> DecodeDictionaryStep {
         return DecodeDictionaryStep(
@@ -116,6 +123,14 @@ extension DictionaryValueForKeyStep: Copying {
         )
     }
 }
+extension ForEachStep: Copying {
+    func copy() -> ForEachStep {
+        return ForEachStep(
+                    values: values.copy() as! TypedValue<ArrayValue>,
+                    loop: loop.copy() as! StepArray
+        )
+    }
+}
 extension FunctionStep: Copying {
     func copy() -> FunctionStep {
         return FunctionStep(
@@ -136,6 +151,14 @@ extension IfStep: Copying {
         return IfStep(
                     ifAction: ifAction.copy() as! ConditionalActionValue,
                     elseAction: elseAction.copy() as! StepArray
+        )
+    }
+}
+extension LocationValue: Copying {
+    func copy() -> LocationValue {
+        return LocationValue(
+                    latitude: latitude.copy() as! TypedValue<FloatValue>,
+                    longitude: longitude.copy() as! TypedValue<FloatValue>
         )
     }
 }
@@ -196,6 +219,13 @@ extension MakeableList: Copying {
         )
     }
 }
+extension MakeableMap: Copying {
+    func copy() -> MakeableMap {
+        return MakeableMap(
+                    locations: locations.copy() as! TypedValue<ArrayValue>
+        )
+    }
+}
 extension MakeableStack: Copying {
     func copy() -> MakeableStack {
         return MakeableStack(
@@ -210,6 +240,14 @@ extension MakeableToggle: Copying {
                     isOn: isOn.copy() as! TemporaryValue,
                     onToggleUpdate: onToggleUpdate.copy() as! StepArray,
                     padding: padding
+        )
+    }
+}
+extension MapStep: Copying {
+    func copy() -> MapStep {
+        return MapStep(
+                    value: value.copy() as! TypedValue<ArrayValue>,
+                    mapper: mapper.copy() as! StepArray
         )
     }
 }
@@ -267,8 +305,7 @@ extension SetVarStep: Copying {
 extension StaticValueStep: Copying {
     func copy() -> StaticValueStep {
         return StaticValueStep(
-                    value: value.copy() as! AnyValue,
-                    type: type.copy() as! VariableTypeValue
+                    value: value.copy() as! AnyValue
         )
     }
 }
@@ -345,6 +382,8 @@ extension CodableMakeableView: Codable {
             self.value = try valueContainer.decode(MakeableLabel.self, forKey: .value)
         case typeString(MakeableList.self):
             self.value = try valueContainer.decode(MakeableList.self, forKey: .value)
+        case typeString(MakeableMap.self):
+            self.value = try valueContainer.decode(MakeableMap.self, forKey: .value)
         case typeString(MakeableStack.self):
             self.value = try valueContainer.decode(MakeableStack.self, forKey: .value)
         case typeString(MakeableToggle.self):
@@ -367,6 +406,8 @@ extension CodableMakeableView: Codable {
             try container.encode(value, forKey: .value)
         case let value as MakeableList:
             try container.encode(value, forKey: .value)
+        case let value as MakeableMap:
+            try container.encode(value, forKey: .value)
         case let value as MakeableStack:
             try container.encode(value, forKey: .value)
         case let value as MakeableToggle:
@@ -385,6 +426,7 @@ extension VariableType {
         .field, // MakeableField
         .label, // MakeableLabel
         .listView, // MakeableList
+        .map, // MakeableMap
         .stack, // MakeableStack
         .toggle, // MakeableToggle
     ] }
@@ -901,6 +943,38 @@ extension ConditionalActionValue {
 	    }
 	}
 }
+extension DecodeArrayStep {
+	 enum Properties: String, ViewProperty {
+        case value
+        var defaultValue: any EditableVariableValue {
+            switch self {
+            case .value: return DecodeArrayStep.defaultValue(for: .value)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+        .init(
+            value: factory(.value) as! TypedValue<IntValue>
+        )
+    }
+
+    static func makeDefault() -> Self {
+        .init(
+            value: Properties.value.defaultValue as! TypedValue<IntValue>
+		)
+    }
+    func value(for property: Properties) -> any EditableVariableValue {
+		switch property {
+	        case .value: return value
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .value: self.value = value as! TypedValue<IntValue>
+	    }
+	}
+}
 extension DecodeDictionaryStep {
 	 enum Properties: String, ViewProperty {
         case value
@@ -1000,6 +1074,44 @@ extension DictionaryValueForKeyStep {
 		switch property {
 	        case .dictionary: self.dictionary = value as! TypedValue<DictionaryValue>
 	        case .key: self.key = value as! AnyValue
+	    }
+	}
+}
+extension ForEachStep {
+	 enum Properties: String, ViewProperty {
+        case values
+        case loop
+        var defaultValue: any EditableVariableValue {
+            switch self {
+            case .values: return ForEachStep.defaultValue(for: .values)
+            case .loop: return ForEachStep.defaultValue(for: .loop)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+        .init(
+            values: factory(.values) as! TypedValue<ArrayValue>,
+            loop: factory(.loop) as! StepArray
+        )
+    }
+
+    static func makeDefault() -> Self {
+        .init(
+            values: Properties.values.defaultValue as! TypedValue<ArrayValue>,
+            loop: Properties.loop.defaultValue as! StepArray
+		)
+    }
+    func value(for property: Properties) -> any EditableVariableValue {
+		switch property {
+	        case .values: return values
+	        case .loop: return loop
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .values: self.values = value as! TypedValue<ArrayValue>
+	        case .loop: self.loop = value as! StepArray
 	    }
 	}
 }
@@ -1108,6 +1220,44 @@ extension IfStep {
 		switch property {
 	        case .ifAction: self.ifAction = value as! ConditionalActionValue
 	        case .elseAction: self.elseAction = value as! StepArray
+	    }
+	}
+}
+extension LocationValue {
+	 enum Properties: String, ViewProperty {
+        case latitude
+        case longitude
+        var defaultValue: any EditableVariableValue {
+            switch self {
+            case .latitude: return LocationValue.defaultValue(for: .latitude)
+            case .longitude: return LocationValue.defaultValue(for: .longitude)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+        .init(
+            latitude: factory(.latitude) as! TypedValue<FloatValue>,
+            longitude: factory(.longitude) as! TypedValue<FloatValue>
+        )
+    }
+
+    static func makeDefault() -> Self {
+        .init(
+            latitude: Properties.latitude.defaultValue as! TypedValue<FloatValue>,
+            longitude: Properties.longitude.defaultValue as! TypedValue<FloatValue>
+		)
+    }
+    func value(for property: Properties) -> any EditableVariableValue {
+		switch property {
+	        case .latitude: return latitude
+	        case .longitude: return longitude
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .latitude: self.latitude = value as! TypedValue<FloatValue>
+	        case .longitude: self.longitude = value as! TypedValue<FloatValue>
 	    }
 	}
 }
@@ -1355,6 +1505,38 @@ extension MakeableList {
 	    }
 	}
 }
+extension MakeableMap {
+	 enum Properties: String, ViewProperty {
+        case locations
+        var defaultValue: any EditableVariableValue {
+            switch self {
+            case .locations: return MakeableMap.defaultValue(for: .locations)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+        .init(
+            locations: factory(.locations) as! TypedValue<ArrayValue>
+        )
+    }
+
+    static func makeDefault() -> Self {
+        .init(
+            locations: Properties.locations.defaultValue as! TypedValue<ArrayValue>
+		)
+    }
+    func value(for property: Properties) -> any EditableVariableValue {
+		switch property {
+	        case .locations: return locations
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .locations: self.locations = value as! TypedValue<ArrayValue>
+	    }
+	}
+}
 extension MakeableStack {
 	 enum Properties: String, ViewProperty {
         case content
@@ -1434,6 +1616,44 @@ extension MakeableToggle {
 	        case .isOn: self.isOn = value as! TemporaryValue
 	        case .onToggleUpdate: self.onToggleUpdate = value as! StepArray
 	        case .padding: self.padding = value as! IntValue
+	    }
+	}
+}
+extension MapStep {
+	 enum Properties: String, ViewProperty {
+        case value
+        case mapper
+        var defaultValue: any EditableVariableValue {
+            switch self {
+            case .value: return MapStep.defaultValue(for: .value)
+            case .mapper: return MapStep.defaultValue(for: .mapper)
+            }
+        }
+    }
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+        .init(
+            value: factory(.value) as! TypedValue<ArrayValue>,
+            mapper: factory(.mapper) as! StepArray
+        )
+    }
+
+    static func makeDefault() -> Self {
+        .init(
+            value: Properties.value.defaultValue as! TypedValue<ArrayValue>,
+            mapper: Properties.mapper.defaultValue as! StepArray
+		)
+    }
+    func value(for property: Properties) -> any EditableVariableValue {
+		switch property {
+	        case .value: return value
+	        case .mapper: return mapper
+        }
+    }
+
+	func set(_ value: Any, for property: Properties) {
+		switch property {
+	        case .value: self.value = value as! TypedValue<ArrayValue>
+	        case .mapper: self.mapper = value as! StepArray
 	    }
 	}
 }
@@ -1554,38 +1774,32 @@ extension SetVarStep {
 extension StaticValueStep {
 	 enum Properties: String, ViewProperty {
         case value
-        case type
         var defaultValue: any EditableVariableValue {
             switch self {
             case .value: return StaticValueStep.defaultValue(for: .value)
-            case .type: return StaticValueStep.defaultValue(for: .type)
             }
         }
     }
     static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
-            value: factory(.value) as! AnyValue,
-            type: factory(.type) as! VariableTypeValue
+            value: factory(.value) as! AnyValue
         )
     }
 
     static func makeDefault() -> Self {
         .init(
-            value: Properties.value.defaultValue as! AnyValue,
-            type: Properties.type.defaultValue as! VariableTypeValue
+            value: Properties.value.defaultValue as! AnyValue
 		)
     }
     func value(for property: Properties) -> any EditableVariableValue {
 		switch property {
 	        case .value: return value
-	        case .type: return type
         }
     }
 
 	func set(_ value: Any, for property: Properties) {
 		switch property {
 	        case .value: self.value = value as! AnyValue
-	        case .type: self.type = value as! VariableTypeValue
 	    }
 	}
 }
@@ -1700,6 +1914,8 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(ComparisonValue.self, forKey: .value)
         case typeString(ConditionalActionValue.self):
             self.value = try valueContainer.decode(ConditionalActionValue.self, forKey: .value)
+        case typeString(DecodeArrayStep.self):
+            self.value = try valueContainer.decode(DecodeArrayStep.self, forKey: .value)
         case typeString(DecodeDictionaryStep.self):
             self.value = try valueContainer.decode(DecodeDictionaryStep.self, forKey: .value)
         case typeString(DictionaryKeysStep.self):
@@ -1708,12 +1924,16 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(DictionaryValue.self, forKey: .value)
         case typeString(DictionaryValueForKeyStep.self):
             self.value = try valueContainer.decode(DictionaryValueForKeyStep.self, forKey: .value)
+        case typeString(ForEachStep.self):
+            self.value = try valueContainer.decode(ForEachStep.self, forKey: .value)
         case typeString(FunctionStep.self):
             self.value = try valueContainer.decode(FunctionStep.self, forKey: .value)
         case typeString(GetNumberStep.self):
             self.value = try valueContainer.decode(GetNumberStep.self, forKey: .value)
         case typeString(IfStep.self):
             self.value = try valueContainer.decode(IfStep.self, forKey: .value)
+        case typeString(LocationValue.self):
+            self.value = try valueContainer.decode(LocationValue.self, forKey: .value)
         case typeString(MakeableArray.self):
             self.value = try valueContainer.decode(MakeableArray.self, forKey: .value)
         case typeString(MakeableBase.self):
@@ -1726,10 +1946,14 @@ extension CodableVariableValue: Codable {
             self.value = try valueContainer.decode(MakeableLabel.self, forKey: .value)
         case typeString(MakeableList.self):
             self.value = try valueContainer.decode(MakeableList.self, forKey: .value)
+        case typeString(MakeableMap.self):
+            self.value = try valueContainer.decode(MakeableMap.self, forKey: .value)
         case typeString(MakeableStack.self):
             self.value = try valueContainer.decode(MakeableStack.self, forKey: .value)
         case typeString(MakeableToggle.self):
             self.value = try valueContainer.decode(MakeableToggle.self, forKey: .value)
+        case typeString(MapStep.self):
+            self.value = try valueContainer.decode(MapStep.self, forKey: .value)
         case typeString(NilValue.self):
             self.value = try valueContainer.decode(NilValue.self, forKey: .value)
         case typeString(NumericalOperationTypeValue.self):
@@ -1803,6 +2027,8 @@ extension CodableVariableValue: Codable {
             try container.encode(value, forKey: .value)
         case let value as ConditionalActionValue:
             try container.encode(value, forKey: .value)
+        case let value as DecodeArrayStep:
+            try container.encode(value, forKey: .value)
         case let value as DecodeDictionaryStep:
             try container.encode(value, forKey: .value)
         case let value as DictionaryKeysStep:
@@ -1811,11 +2037,15 @@ extension CodableVariableValue: Codable {
             try container.encode(value, forKey: .value)
         case let value as DictionaryValueForKeyStep:
             try container.encode(value, forKey: .value)
+        case let value as ForEachStep:
+            try container.encode(value, forKey: .value)
         case let value as FunctionStep:
             try container.encode(value, forKey: .value)
         case let value as GetNumberStep:
             try container.encode(value, forKey: .value)
         case let value as IfStep:
+            try container.encode(value, forKey: .value)
+        case let value as LocationValue:
             try container.encode(value, forKey: .value)
         case let value as MakeableArray:
             try container.encode(value, forKey: .value)
@@ -1829,9 +2059,13 @@ extension CodableVariableValue: Codable {
             try container.encode(value, forKey: .value)
         case let value as MakeableList:
             try container.encode(value, forKey: .value)
+        case let value as MakeableMap:
+            try container.encode(value, forKey: .value)
         case let value as MakeableStack:
             try container.encode(value, forKey: .value)
         case let value as MakeableToggle:
+            try container.encode(value, forKey: .value)
+        case let value as MapStep:
             try container.encode(value, forKey: .value)
         case let value as NilValue:
             try container.encode(value, forKey: .value)
@@ -1907,6 +2141,10 @@ extension AddViewViewModel {
                 onSelect(MakeableList.makeDefault())
             }),
 
+            .init(title: "Map", onTap: {
+                onSelect(MakeableMap.makeDefault())
+            }),
+
             .init(title: "Stack", onTap: {
                 onSelect(MakeableStack.makeDefault())
             }),
@@ -1931,12 +2169,14 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable, CodeRepr
 	case comparison // ComparisonValue
 	case conditionalAction // ConditionalActionValue
 	case dictionary // DictionaryValue
+	case location // LocationValue
 	case makeableArray // MakeableArray
 	case base // MakeableBase
 	case button // MakeableButton
 	case field // MakeableField
 	case label // MakeableLabel
 	case listView // MakeableList
+	case map // MakeableMap
 	case stack // MakeableStack
 	case toggle // MakeableToggle
 	case `nil` // NilValue
@@ -1970,12 +2210,14 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable, CodeRepr
         case .comparison: return ComparisonValue.makeDefault()
         case .conditionalAction: return ConditionalActionValue.makeDefault()
         case .dictionary: return DictionaryValue.makeDefault()
+        case .location: return LocationValue.makeDefault()
         case .makeableArray: return MakeableArray.makeDefault()
         case .base: return MakeableBase.makeDefault()
         case .button: return MakeableButton.makeDefault()
         case .field: return MakeableField.makeDefault()
         case .label: return MakeableLabel.makeDefault()
         case .listView: return MakeableList.makeDefault()
+        case .map: return MakeableMap.makeDefault()
         case .stack: return MakeableStack.makeDefault()
         case .toggle: return MakeableToggle.makeDefault()
         case .`nil`: return NilValue.makeDefault()
@@ -2010,12 +2252,14 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable, CodeRepr
         case .comparison: return "comparison"
         case .conditionalAction: return "conditionalAction"
         case .dictionary: return "dictionary"
+        case .location: return "location"
         case .makeableArray: return "makeableArray"
         case .base: return "base"
         case .button: return "button"
         case .field: return "field"
         case .label: return "label"
         case .listView: return "listView"
+        case .map: return "map"
         case .stack: return "stack"
         case .toggle: return "toggle"
         case .`nil`: return "`nil`"
@@ -2048,12 +2292,14 @@ enum VariableType: String, CaseIterable, Equatable, Codable, Titleable, CodeRepr
         case .comparison: return "ComparisonValue"
         case .conditionalAction: return "ConditionalActionValue"
         case .dictionary: return "DictionaryValue"
+        case .location: return "LocationValue"
         case .makeableArray: return "MakeableArray"
         case .base: return "MakeableBase"
         case .button: return "MakeableButton"
         case .field: return "MakeableField"
         case .label: return "MakeableLabel"
         case .listView: return "MakeableList"
+        case .map: return "MakeableMap"
         case .stack: return "MakeableStack"
         case .toggle: return "MakeableToggle"
         case .`nil`: return "NilValue"
@@ -2095,6 +2341,8 @@ extension MakeableWrapperView {
             return MakeableLabelView(isRunning: isRunning, showEditControls: showEditControls, label: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
         case let value as MakeableList:
             return MakeableListView(isRunning: isRunning, showEditControls: showEditControls, listView: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
+        case let value as MakeableMap:
+            return MakeableMapView(isRunning: isRunning, showEditControls: showEditControls, map: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
         case let value as MakeableStack:
             return MakeableStackView(isRunning: isRunning, showEditControls: showEditControls, stack: value, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: $error).any
         case let value as MakeableToggle:
@@ -2111,12 +2359,15 @@ extension AddActionView {
 		case APIValue
 		case AddToVar
 		case ArrayValue
+		case DecodeArray
 		case DecodeDictionary
 		case DictionaryKeys
 		case DictionaryValueForKey
+		case ForEach
 		case Function
 		case GetNumber
 		case If
+		case Map
 		case PrintVar
 		case SetVar
 		case StaticValue
@@ -2126,12 +2377,15 @@ extension AddActionView {
             case .APIValue: return APIValueStep.title
             case .AddToVar: return AddToVarStep.title
             case .ArrayValue: return ArrayValueStep.title
+            case .DecodeArray: return DecodeArrayStep.title
             case .DecodeDictionary: return DecodeDictionaryStep.title
             case .DictionaryKeys: return DictionaryKeysStep.title
             case .DictionaryValueForKey: return DictionaryValueForKeyStep.title
+            case .ForEach: return ForEachStep.title
             case .Function: return FunctionStep.title
             case .GetNumber: return GetNumberStep.title
             case .If: return IfStep.title
+            case .Map: return MapStep.title
             case .PrintVar: return PrintVarStep.title
             case .SetVar: return SetVarStep.title
             case .StaticValue: return StaticValueStep.title
@@ -2143,12 +2397,15 @@ extension AddActionView {
             case .APIValue: APIValueStep.makeDefault()
             case .AddToVar: AddToVarStep.makeDefault()
             case .ArrayValue: ArrayValueStep.makeDefault()
+            case .DecodeArray: DecodeArrayStep.makeDefault()
             case .DecodeDictionary: DecodeDictionaryStep.makeDefault()
             case .DictionaryKeys: DictionaryKeysStep.makeDefault()
             case .DictionaryValueForKey: DictionaryValueForKeyStep.makeDefault()
+            case .ForEach: ForEachStep.makeDefault()
             case .Function: FunctionStep.makeDefault()
             case .GetNumber: GetNumberStep.makeDefault()
             case .If: IfStep.makeDefault()
+            case .Map: MapStep.makeDefault()
             case .PrintVar: PrintVarStep.makeDefault()
             case .SetVar: SetVarStep.makeDefault()
             case .StaticValue: StaticValueStep.makeDefault()
@@ -2169,18 +2426,24 @@ extension CodableStep: Codable {
 			self.value = try valueContainer.decode(AddToVarStep.self, forKey: .value)
         case typeString(ArrayValueStep.self):
 			self.value = try valueContainer.decode(ArrayValueStep.self, forKey: .value)
+        case typeString(DecodeArrayStep.self):
+			self.value = try valueContainer.decode(DecodeArrayStep.self, forKey: .value)
         case typeString(DecodeDictionaryStep.self):
 			self.value = try valueContainer.decode(DecodeDictionaryStep.self, forKey: .value)
         case typeString(DictionaryKeysStep.self):
 			self.value = try valueContainer.decode(DictionaryKeysStep.self, forKey: .value)
         case typeString(DictionaryValueForKeyStep.self):
 			self.value = try valueContainer.decode(DictionaryValueForKeyStep.self, forKey: .value)
+        case typeString(ForEachStep.self):
+			self.value = try valueContainer.decode(ForEachStep.self, forKey: .value)
         case typeString(FunctionStep.self):
 			self.value = try valueContainer.decode(FunctionStep.self, forKey: .value)
         case typeString(GetNumberStep.self):
 			self.value = try valueContainer.decode(GetNumberStep.self, forKey: .value)
         case typeString(IfStep.self):
 			self.value = try valueContainer.decode(IfStep.self, forKey: .value)
+        case typeString(MapStep.self):
+			self.value = try valueContainer.decode(MapStep.self, forKey: .value)
         case typeString(PrintVarStep.self):
 			self.value = try valueContainer.decode(PrintVarStep.self, forKey: .value)
         case typeString(SetVarStep.self):
@@ -2203,17 +2466,23 @@ extension CodableStep: Codable {
 			try container.encode(value, forKey: .value)
 		case let value as ArrayValueStep:
 			try container.encode(value, forKey: .value)
+		case let value as DecodeArrayStep:
+			try container.encode(value, forKey: .value)
 		case let value as DecodeDictionaryStep:
 			try container.encode(value, forKey: .value)
 		case let value as DictionaryKeysStep:
 			try container.encode(value, forKey: .value)
 		case let value as DictionaryValueForKeyStep:
 			try container.encode(value, forKey: .value)
+		case let value as ForEachStep:
+			try container.encode(value, forKey: .value)
 		case let value as FunctionStep:
 			try container.encode(value, forKey: .value)
 		case let value as GetNumberStep:
 			try container.encode(value, forKey: .value)
 		case let value as IfStep:
+			try container.encode(value, forKey: .value)
+		case let value as MapStep:
 			try container.encode(value, forKey: .value)
 		case let value as PrintVarStep:
 			try container.encode(value, forKey: .value)

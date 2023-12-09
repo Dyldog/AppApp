@@ -8,7 +8,7 @@
 import Foundation
 
 extension Screen {
-    static let defaults: [Screen] = [.internetDictionary, .countingButton, .currencyConverter]
+    static let defaults: [Screen] = [.internetDictionary, .countingButton, .currencyConverter, .mappyBoy]
     
     private static let internetDictionary: Screen = .init(
         id: .init(),
@@ -109,4 +109,38 @@ extension Screen {
             ])
         ])
     )
+    
+    static let mappyBoy: Screen = .init(
+        id: .init(), name: "Mappy Boy", 
+        initActions: .init(value: []),
+        content: .init([
+            MakeableField(
+                text: .init(initial: .string("Australia"), output: .named("SEARCH")),
+                fontSize: .int(16),
+                onTextUpdate: .init(value: [
+                    SetVarStep(varName: .string("URL"), value: .string("https://geocode.maps.co/search?q=")),
+                    AddToVarStep(varName: .string("URL"), value: .variable(named: "SEARCH")),
+                    APIValueStep(url: .variable(named: "URL")),
+                    DecodeArrayStep(value: .variable(.named("$0"))),
+                    MapStep(value: .variable(.named("$0")), mapper: .init(value: [
+                        DictionaryValueForKeyStep(dictionary: .variable(.named("$INPUT")), key: .string("lat")),
+                        GetNumberStep(value: .variable(named: "$0"), numberType: .init(value: .float)),
+                        SetVarStep(varName: .string("LAT"), value: .variable(named: "$0")),
+                        DictionaryValueForKeyStep(dictionary: .variable(.named("$INPUT")), key: .string("lon")),
+                        GetNumberStep(value: .variable(named: "$0"), numberType: .init(value: .float)),
+                        SetVarStep(varName: .string("LNG"), value: .variable(named: "$0")),
+                        StaticValueStep(value: .init(value: LocationValue(
+                            latitude: .variable(.named("LAT")),
+                            longitude: .variable(.named("LNG"))
+                        )))
+                    ])),
+                    SetVarStep(varName: .string("LOCATIONS"), value: .variable(named: "$0"))
+                ]),
+                padding: .init(value: 5),
+                alignment: .init(value: .center)
+            ),
+            MakeableMap(locations: .variable(.named("LOCATIONS")))
+        ])
+    )
+    
 }

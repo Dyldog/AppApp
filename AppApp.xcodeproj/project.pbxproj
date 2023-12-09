@@ -17,6 +17,8 @@
 		FC0BE63D2B1C93600087EE00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC0BE63C2B1C93600087EE00 /* Assets.xcassets */; };
 		FC0BE6402B1C93600087EE00 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC0BE63F2B1C93600087EE00 /* Preview Assets.xcassets */; };
 		FC0BE6462B1C95A20087EE00 /* DylKit in Frameworks */ = {isa = PBXBuildFile; productRef = FC0BE6452B1C95A20087EE00 /* DylKit */; };
+		FC0CF5692B2492FB00995F30 /* MapStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0CF5682B2492FB00995F30 /* MapStep.swift */; };
+		FC0CF56B2B24941600995F30 /* ForEachStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0CF56A2B24941600995F30 /* ForEachStep.swift */; };
 		FC18BAD02B15468E007838AA /* MakeablePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BACF2B15468E007838AA /* MakeablePicker.swift */; };
 		FC18BAD22B156D90007838AA /* ComparisonTypeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */; };
 		FC18BAD42B157F44007838AA /* NilValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD32B157F44007838AA /* NilValue.swift */; };
@@ -88,6 +90,10 @@
 		FC9047B92B14A1D900B599BE /* ConditionalActionValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */; };
 		FC9C41C92B12AC3300E51957 /* EditableVariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */; };
 		FC9C41CC2B12C69400E51957 /* Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C41CB2B12C69400E51957 /* Generated.swift */; };
+		FCBF55B12B2439260048407F /* MakeableMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBF55B02B2439260048407F /* MakeableMap.swift */; };
+		FCBF55B32B24466B0048407F /* LocationValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBF55B22B24466B0048407F /* LocationValue.swift */; };
+		FCBF55B52B244FC00048407F /* AsyncMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBF55B42B244FC00048407F /* AsyncMap.swift */; };
+		FCBF55B72B2455920048407F /* DecodeArrayStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBF55B62B2455920048407F /* DecodeArrayStep.swift */; };
 		FCCB8F432B1892A100233D1F /* String+TitleCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F422B1892A100233D1F /* String+TitleCase.swift */; };
 		FCCB8F452B18AC3100233D1F /* Float+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F442B18AC3100233D1F /* Float+VariableValue.swift */; };
 		FCCB8F472B18B52600233D1F /* StringRepresentableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F462B18B52600233D1F /* StringRepresentableValue.swift */; };
@@ -167,6 +173,8 @@
 		FC0BE63A2B1C935E0087EE00 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FC0BE63C2B1C93600087EE00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC0BE63F2B1C93600087EE00 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FC0CF5682B2492FB00995F30 /* MapStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStep.swift; sourceTree = "<group>"; };
+		FC0CF56A2B24941600995F30 /* ForEachStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForEachStep.swift; sourceTree = "<group>"; };
 		FC18BACF2B15468E007838AA /* MakeablePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeablePicker.swift; sourceTree = "<group>"; };
 		FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonTypeValue.swift; sourceTree = "<group>"; };
 		FC18BAD32B157F44007838AA /* NilValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NilValue.swift; sourceTree = "<group>"; };
@@ -239,6 +247,10 @@
 		FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalActionValue.swift; sourceTree = "<group>"; };
 		FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableVariableValue.swift; sourceTree = "<group>"; };
 		FC9C41CB2B12C69400E51957 /* Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generated.swift; sourceTree = "<group>"; };
+		FCBF55B02B2439260048407F /* MakeableMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableMap.swift; sourceTree = "<group>"; };
+		FCBF55B22B24466B0048407F /* LocationValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationValue.swift; sourceTree = "<group>"; };
+		FCBF55B42B244FC00048407F /* AsyncMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncMap.swift; sourceTree = "<group>"; };
+		FCBF55B62B2455920048407F /* DecodeArrayStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeArrayStep.swift; sourceTree = "<group>"; };
 		FCCB8F422B1892A100233D1F /* String+TitleCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+TitleCase.swift"; sourceTree = "<group>"; };
 		FCCB8F442B18AC3100233D1F /* Float+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+VariableValue.swift"; sourceTree = "<group>"; };
 		FCCB8F462B18B52600233D1F /* StringRepresentableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringRepresentableValue.swift; sourceTree = "<group>"; };
@@ -412,9 +424,12 @@
 				FC4635062B0C980A00B8DCBE /* StaticValueStep.swift */,
 				FC46350B2B0C983D00B8DCBE /* APIValueStep.swift */,
 				FC4C2C282B0CBCF1008217AC /* DecodeDictionaryStep.swift */,
+				FCBF55B62B2455920048407F /* DecodeArrayStep.swift */,
 				FC2B8A9A2B109C3C003FAB86 /* ArrayValueStep.swift */,
 				FC4C2C2F2B0CCBE0008217AC /* DictionaryValueForKeyStep.swift */,
 				FC18BAF72B175510007838AA /* DictionaryKeysStep.swift */,
+				FC0CF5682B2492FB00995F30 /* MapStep.swift */,
+				FC0CF56A2B24941600995F30 /* ForEachStep.swift */,
 			);
 			path = "Value Steps";
 			sourceTree = "<group>";
@@ -462,6 +477,7 @@
 			children = (
 				FC4635212B0C99CF00B8DCBE /* Makeable View */,
 				FCD3B2302B0B9FCB0054371B /* MakeableStack.swift */,
+				FCBF55B02B2439260048407F /* MakeableMap.swift */,
 				FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */,
 				FCD3B22E2B0B9FBA0054371B /* MakeableLabel.swift */,
 				FCD3B22C2B0B9FA70054371B /* MakeableButton.swift */,
@@ -477,6 +493,7 @@
 			isa = PBXGroup;
 			children = (
 				FC4635182B0C98EE00B8DCBE /* AnyValue.swift */,
+				FCBF55B22B24466B0048407F /* LocationValue.swift */,
 				FC18BAF02B172564007838AA /* AnyMakeableView.swift */,
 				FCCB8F502B18D1F900233D1F /* TextAlignmentValue.swift */,
 				FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */,
@@ -694,6 +711,7 @@
 				FCD3B24A2B0C948C0054371B /* Array+Safe.swift */,
 				FCD3B24C2B0C94A10054371B /* Array+Ing.swift */,
 				FC18BAE22B169F02007838AA /* PrimitiveCopying.swift */,
+				FCBF55B42B244FC00048407F /* AsyncMap.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -960,6 +978,7 @@
 				FCD3B21C2B0B639F0054371B /* StepButton.swift in Sources */,
 				FC18BADF2B159642007838AA /* NumericalOperationValue.swift in Sources */,
 				FCD3B2612B0C96890054371B /* EditableViewConstructor.swift in Sources */,
+				FC0CF5692B2492FB00995F30 /* MapStep.swift in Sources */,
 				FCD3B2232B0B77C50054371B /* AddViewView.swift in Sources */,
 				FC18BADB2B159218007838AA /* ComparisonValue.swift in Sources */,
 				FC18BAED2B16F5B4007838AA /* Copying.swift in Sources */,
@@ -968,6 +987,7 @@
 				FCD3B24B2B0C948C0054371B /* Array+Safe.swift in Sources */,
 				FC4C15C92B0C974E0010BB1A /* StepType.swift in Sources */,
 				FC2B8A8B2B108F6B003FAB86 /* CodableVariableValue.swift in Sources */,
+				FCBF55B32B24466B0048407F /* LocationValue.swift in Sources */,
 				FC18BAF82B175510007838AA /* DictionaryKeysStep.swift in Sources */,
 				FC18BADD2B159593007838AA /* NumericalOperationTypeValue.swift in Sources */,
 				FC062FA22B187C18009ECA24 /* Style.swift in Sources */,
@@ -982,6 +1002,7 @@
 				FCD3B25F2B0C96790054371B /* MakeableConstructor.swift in Sources */,
 				FCCB8F452B18AC3100233D1F /* Float+VariableValue.swift in Sources */,
 				FC2B8A992B109038003FAB86 /* MakeableArray.swift in Sources */,
+				FC0CF56B2B24941600995F30 /* ForEachStep.swift in Sources */,
 				FC4C15D12B0C97B20010BB1A /* Array_StepType+VariableValue.swift in Sources */,
 				FC2B8A9F2B10ACD5003FAB86 /* Binding+Nil.swift in Sources */,
 				FC18BAEF2B16FE81007838AA /* CodableMakeableView.swift in Sources */,
@@ -1032,6 +1053,7 @@
 				FC9047B92B14A1D900B599BE /* ConditionalActionValue.swift in Sources */,
 				FCD3B23F2B0BB31F0054371B /* AddActionView.swift in Sources */,
 				FC18BAF32B174656007838AA /* ButtonStyleValue.swift in Sources */,
+				FCBF55B12B2439260048407F /* MakeableMap.swift in Sources */,
 				FC2B8A9B2B109C3C003FAB86 /* ArrayValueStep.swift in Sources */,
 				FC46350F2B0C987100B8DCBE /* VariableType.swift in Sources */,
 				FCCB8F4F2B18C15E00233D1F /* GetNumberStep.swift in Sources */,
@@ -1041,6 +1063,7 @@
 				FC4C15C12B0C96E60010BB1A /* ActionValue.swift in Sources */,
 				FC4635172B0C98C000B8DCBE /* Variable+VariableValue.swift in Sources */,
 				FC062FA52B187DB5009ECA24 /* ElementDeleteButton.swift in Sources */,
+				FCBF55B72B2455920048407F /* DecodeArrayStep.swift in Sources */,
 				FCD3B2382B0BA01D0054371B /* ViewMakerViewModel.swift in Sources */,
 				FC2B8A8F2B108F90003FAB86 /* CodableVariableDictionary.swift in Sources */,
 				FC4C2C242B0C9B7F008217AC /* ArrayValue.swift in Sources */,
@@ -1055,6 +1078,7 @@
 				FC4C15CD2B0C97700010BB1A /* StepError.swift in Sources */,
 				FC4C15C72B0C97390010BB1A /* ViewEditable+Constructor.swift in Sources */,
 				FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */,
+				FCBF55B52B244FC00048407F /* AsyncMap.swift in Sources */,
 				FC9C41CC2B12C69400E51957 /* Generated.swift in Sources */,
 				FCCB8F432B1892A100233D1F /* String+TitleCase.swift in Sources */,
 				FCD3B2442B0C31C40054371B /* ValueStep.swift in Sources */,

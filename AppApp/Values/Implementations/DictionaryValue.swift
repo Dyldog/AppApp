@@ -113,19 +113,14 @@ extension DictionaryValue {
             elements: dictionary.reduce(into: [StringValue: any EditableVariableValue](), {
                 let value: VariableValue
                 switch $1.value {
-                case let string as String: value = StringValue(value: string)
                 case let float as Float: value = FloatValue(value: float)
                 case let int as Int: value = IntValue(value: int)
                 case let nsNumber as NSNumber: value = FloatValue(value: nsNumber.floatValue)
-                // TODO: Handle array generically
-                case let array as Array<String>:
-                    value = ArrayValue(type: .string, elements: array.map { StringValue(value: $0) })
-                case let array as Array<Int>:
-                    value = ArrayValue(type: .int, elements: array.map { IntValue(value: $0) })
-                case let array as Array<Float>:
-                    value = ArrayValue(type: .float, elements: array.map { FloatValue(value: $0) })
+                case let array as [Any]:
+                    value = ArrayValue.from(array)
                 case let dictionary as [String: Any]:
                     value = DictionaryValue.from(dictionary)
+                case let string as String: value = StringValue(value: string)
                 default: fatalError()
                 }
                 
@@ -133,11 +128,6 @@ extension DictionaryValue {
             })
         )
     }
-    
-    // (try JSONSerialization.jsonObject(
-//with: value.valueString.data(using: .utf8)!,
-//options: []
-//) as! [String: Any])
 }
 
 extension DictionaryValue: CodeRepresentable {

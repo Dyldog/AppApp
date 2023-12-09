@@ -10,19 +10,16 @@ import SwiftUI
 final class StaticValueStep: ValueStep {
     static var title: String { "Static value" }
     var value: AnyValue
-    var type: VariableTypeValue
     
     var protoString: String { value.protoString }
     var valueString: String { value.valueString }
     
-    init(value: AnyValue, type: VariableTypeValue) {
+    init(value: AnyValue) {
         self.value = value
-        self.type = type
     }
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
-        case .type: return VariableTypeValue(value: .string)
         case .value: return Variable(value: StringValue(value: "TEXT"))
         }
     }

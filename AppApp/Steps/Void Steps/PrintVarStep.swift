@@ -21,8 +21,8 @@ final class PrintVarStep: Step, Codable {
     }
     
     func run(with variables: Variables) async throws {
-        let nameValue = try await varName.value(with: variables)
-        print("\(varName): \(await variables.value(for: nameValue.valueString) as Any)")
+        let value = try await varName.value(with: variables)
+        print("\(varName.valueString): \(value.valueString)")
     }
     
     static func defaultValue(for property: Properties) -> any EditableVariableValue {

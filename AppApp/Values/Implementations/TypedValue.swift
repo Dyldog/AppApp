@@ -84,6 +84,14 @@ final class TypedValue<T: TypeableValue>: EditableVariableValue, Codable {
         self.value = value
     }
     
+    static func variable(_ variable: Variable) -> TypedValue {
+        .init(value: .variable(variable))
+    }
+    
+    static func value(_ value: T) -> TypedValue {
+        .init(value: .constant(value))
+    }
+    
     static func makeDefault() -> TypedValue<T> {
         .init(value: .constant(T.makeDefault()))
     }
