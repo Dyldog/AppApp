@@ -7,14 +7,23 @@
 
 import SwiftUI
 import DylKit
+
 import Armstrong
+import Alexandria
 
 @main
 struct AppAppApp: App {
     @State var alert: Alert?
     @State var deepLink: Screen? // = .mappyBoy
     
-    var providers: [AAProvider] = []
+    var providers: [any AAProvider.Type] = [
+        Armstrong.self,
+        Alexandria.self
+    ]
+    
+    init() {
+        AALibrary.shared.addProviders(providers)
+    }
     
     var body: some Scene {
         WindowGroup {

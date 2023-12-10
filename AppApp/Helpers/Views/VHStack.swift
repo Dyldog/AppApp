@@ -7,11 +7,16 @@
 
 import SwiftUI
 
-struct Stack<Content: View>: View {
+public struct Stack<Content: View>: View {
     let axis: Axis
     @ViewBuilder var content: () -> Content
+    
+    public init(axis: Axis, @ViewBuilder content: @escaping () -> Content) {
+        self.axis = axis
+        self.content = content
+    }
 
-    var body: some View {
+    public var body: some View {
         if axis == .vertical {
             VStack(content: content)
         } else {
@@ -21,11 +26,15 @@ struct Stack<Content: View>: View {
 }
 
 
-struct VHStack<Content: View>: View {
+public struct VHStack<Content: View>: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @ViewBuilder var content: () -> Content
 
-    var body: some View {
+    public init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content
+    }
+    
+    public var body: some View {
         if horizontalSizeClass == .compact {
             VStack(content: content)
         } else {

@@ -7,6 +7,7 @@
 
 import Foundation
 import Armstrong
+import Alexandria
 
 extension Screen {
     static let defaults: [Screen] = [.internetDictionary, .countingButton, .currencyConverter, .mappyBoy]
@@ -46,11 +47,10 @@ extension Screen {
                                 key: .variable(named: "$0")
                             )
                         ])).any)
-                    ], axis: .init(value: .horizontal)),
-                    padding: .int(5)
+                    ], axis: .init(value: .horizontal))
                 ).any
             )
-        ], axis: .init(value: .vertical)), padding: .init(value: 5)))
+        ], axis: .init(value: .vertical))))
     
     private static let countingButton: Screen = .init(
         id: .init(),
@@ -61,7 +61,7 @@ extension Screen {
             MakeableButton(title: .text(.variable(named: "COUNT"), size: 120), style: .makeDefault(), action: .init(value: [
                 AddToVarStep(varName: .string("COUNT"), value: .int(1))
             ]))
-        ], axis: .init(value: .vertical)), padding: .int(5)))
+        ], axis: .init(value: .vertical))))
     
     private static let currencyConverter: Screen = .init(
         id: .init(),

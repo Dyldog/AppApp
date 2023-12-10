@@ -7,6 +7,7 @@
 
 import Foundation
 import Armstrong
+import Alexandria
 
 struct CodableVariableDictionary: Codable {
     let variables: [StringValue: CodableVariableValue]

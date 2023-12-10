@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DylKit
+import Armstrong
 
 class ScreenListViewModel: ObservableObject {
     var screens: [Screen] {
@@ -92,8 +93,7 @@ struct ScreenListView: View {
                             content: .init(
                                 value: [],
                                 axis: .init(value: .vertical)
-                            ),
-                            padding: .init(value: 5)
+                            )
                         )
                     ))
                     viewModel.objectWillChange.send()

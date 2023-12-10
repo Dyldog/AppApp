@@ -8,94 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		FC062FA22B187C18009ECA24 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC062FA12B187C18009ECA24 /* Style.swift */; };
-		FC062FA52B187DB5009ECA24 /* ElementDeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC062FA42B187DB5009ECA24 /* ElementDeleteButton.swift */; };
 		FC0BE62F2B1C7A380087EE00 /* Screen+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0BE62E2B1C7A380087EE00 /* Screen+Defaults.swift */; };
-		FC0BE6312B1C7A6B0087EE00 /* Screen+CodeRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0BE6302B1C7A6B0087EE00 /* Screen+CodeRepresentable.swift */; };
 		FC0BE6392B1C935E0087EE00 /* AATestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0BE6382B1C935E0087EE00 /* AATestApp.swift */; };
 		FC0BE63B2B1C935E0087EE00 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0BE63A2B1C935E0087EE00 /* ContentView.swift */; };
 		FC0BE63D2B1C93600087EE00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC0BE63C2B1C93600087EE00 /* Assets.xcassets */; };
 		FC0BE6402B1C93600087EE00 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC0BE63F2B1C93600087EE00 /* Preview Assets.xcassets */; };
 		FC0BE6462B1C95A20087EE00 /* DylKit in Frameworks */ = {isa = PBXBuildFile; productRef = FC0BE6452B1C95A20087EE00 /* DylKit */; };
-		FC0CF5692B2492FB00995F30 /* MapStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0CF5682B2492FB00995F30 /* MapStep.swift */; };
-		FC0CF56B2B24941600995F30 /* ForEachStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0CF56A2B24941600995F30 /* ForEachStep.swift */; };
-		FC0CF56D2B24B97800995F30 /* CLLocation+Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0CF56C2B24B97800995F30 /* CLLocation+Region.swift */; };
-		FC0CF56F2B24BC9700995F30 /* URLEncodeStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0CF56E2B24BC9600995F30 /* URLEncodeStep.swift */; };
 		FC0CF5962B25593800995F30 /* Armstrong in Frameworks */ = {isa = PBXBuildFile; productRef = FC0CF5952B25593800995F30 /* Armstrong */; };
-		FC18BAD02B15468E007838AA /* MakeablePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BACF2B15468E007838AA /* MakeablePicker.swift */; };
-		FC18BAD22B156D90007838AA /* ComparisonTypeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */; };
-		FC18BAD42B157F44007838AA /* NilValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD32B157F44007838AA /* NilValue.swift */; };
-		FC18BAD62B157F56007838AA /* OptionalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAD52B157F56007838AA /* OptionalValue.swift */; };
-		FC18BADB2B159218007838AA /* ComparisonValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BADA2B159218007838AA /* ComparisonValue.swift */; };
-		FC18BADD2B159593007838AA /* NumericalOperationTypeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BADC2B159593007838AA /* NumericalOperationTypeValue.swift */; };
-		FC18BADF2B159642007838AA /* NumericalOperationValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BADE2B159642007838AA /* NumericalOperationValue.swift */; };
-		FC18BAE12B1695A6007838AA /* FunctionStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAE02B1695A6007838AA /* FunctionStep.swift */; };
-		FC18BAE32B169F02007838AA /* PrimitiveCopying.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAE22B169F02007838AA /* PrimitiveCopying.swift */; };
-		FC18BAE52B16BA14007838AA /* MakeableBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAE42B16BA14007838AA /* MakeableBase.swift */; };
-		FC18BAE72B16CD5F007838AA /* ColorValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAE62B16CD5F007838AA /* ColorValue.swift */; };
-		FC18BAE92B16E1EF007838AA /* MakeableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAE82B16E1EF007838AA /* MakeableList.swift */; };
-		FC18BAEB2B16EADE007838AA /* TypedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAEA2B16EADE007838AA /* TypedValue.swift */; };
-		FC18BAEF2B16FE81007838AA /* CodableMakeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAEE2B16FE81007838AA /* CodableMakeableView.swift */; };
-		FC18BAF12B172564007838AA /* AnyMakeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAF02B172564007838AA /* AnyMakeableView.swift */; };
-		FC18BAF32B174656007838AA /* ButtonStyleValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAF22B174656007838AA /* ButtonStyleValue.swift */; };
-		FC18BAF52B1747A6007838AA /* CaseIterable+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAF42B1747A6007838AA /* CaseIterable+Codable.swift */; };
-		FC18BAF82B175510007838AA /* DictionaryKeysStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAF72B175510007838AA /* DictionaryKeysStep.swift */; };
-		FC18BAFA2B1762B5007838AA /* ResultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAF92B1762B4007838AA /* ResultValue.swift */; };
 		FC18BAFD2B177199007838AA /* SetVarStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAFC2B177199007838AA /* SetVarStep.swift */; };
-		FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */; };
-		FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */; };
-		FC2B8A892B108F3F003FAB86 /* CodableMakeableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */; };
-		FC2B8A8B2B108F6B003FAB86 /* CodableVariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A8A2B108F6B003FAB86 /* CodableVariableValue.swift */; };
-		FC2B8A8D2B108F7C003FAB86 /* CodableVariableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A8C2B108F7C003FAB86 /* CodableVariableList.swift */; };
-		FC2B8A8F2B108F90003FAB86 /* CodableVariableDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A8E2B108F90003FAB86 /* CodableVariableDictionary.swift */; };
-		FC2B8A912B108FA0003FAB86 /* CodableStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A902B108FA0003FAB86 /* CodableStep.swift */; };
-		FC2B8A932B108FAE003FAB86 /* CodableStepList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A922B108FAE003FAB86 /* CodableStepList.swift */; };
-		FC2B8A952B108FC0003FAB86 /* CodableTypeString.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A942B108FC0003FAB86 /* CodableTypeString.swift */; };
-		FC2B8A972B10900C003FAB86 /* StepArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A962B10900C003FAB86 /* StepArray.swift */; };
-		FC2B8A992B109038003FAB86 /* MakeableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A982B109038003FAB86 /* MakeableArray.swift */; };
-		FC2B8A9B2B109C3C003FAB86 /* ArrayValueStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A9A2B109C3C003FAB86 /* ArrayValueStep.swift */; };
-		FC2B8A9D2B10A2CA003FAB86 /* FontWeightValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A9C2B10A2CA003FAB86 /* FontWeightValue.swift */; };
-		FC2B8A9F2B10ACD5003FAB86 /* Binding+Nil.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8A9E2B10ACD5003FAB86 /* Binding+Nil.swift */; };
-		FC2B8AA12B10AE12003FAB86 /* Bool+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B8AA02B10AE12003FAB86 /* Bool+VariableValue.swift */; };
-		FC4635072B0C980A00B8DCBE /* StaticValueStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635062B0C980A00B8DCBE /* StaticValueStep.swift */; };
-		FC46350A2B0C982E00B8DCBE /* VariableStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635092B0C982E00B8DCBE /* VariableStep.swift */; };
-		FC46350C2B0C983D00B8DCBE /* APIValueStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC46350B2B0C983D00B8DCBE /* APIValueStep.swift */; };
-		FC46350F2B0C987100B8DCBE /* VariableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC46350E2B0C987100B8DCBE /* VariableType.swift */; };
-		FC4635152B0C98A300B8DCBE /* Int+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635142B0C98A300B8DCBE /* Int+VariableValue.swift */; };
-		FC4635172B0C98C000B8DCBE /* Variable+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635162B0C98C000B8DCBE /* Variable+VariableValue.swift */; };
-		FC4635192B0C98EE00B8DCBE /* AnyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4635182B0C98EE00B8DCBE /* AnyValue.swift */; };
-		FC46351C2B0C993600B8DCBE /* SetVarStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC46351B2B0C993600B8DCBE /* SetVarStep.swift */; };
-		FC46351E2B0C997700B8DCBE /* AddToVarStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC46351D2B0C997700B8DCBE /* AddToVarStep.swift */; };
-		FC4635202B0C998B00B8DCBE /* PrintVarStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC46351F2B0C998B00B8DCBE /* PrintVarStep.swift */; };
-		FC4C15C72B0C97390010BB1A /* ViewEditable+Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15C62B0C97390010BB1A /* ViewEditable+Constructor.swift */; };
-		FC4C15CD2B0C97700010BB1A /* StepError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15CC2B0C97700010BB1A /* StepError.swift */; };
-		FC4C15D12B0C97B20010BB1A /* Array_StepType+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15D02B0C97B20010BB1A /* Array_StepType+VariableValue.swift */; };
-		FC4C15D32B0C97CC0010BB1A /* SheetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C15D22B0C97CC0010BB1A /* SheetButton.swift */; };
-		FC4C2C242B0C9B7F008217AC /* ArrayValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C232B0C9B7F008217AC /* ArrayValue.swift */; };
-		FC4C2C272B0CA872008217AC /* ListEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C262B0CA872008217AC /* ListEditView.swift */; };
-		FC4C2C292B0CBCF1008217AC /* DecodeDictionaryStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C282B0CBCF1008217AC /* DecodeDictionaryStep.swift */; };
-		FC4C2C2B2B0CBD01008217AC /* DictionaryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C2A2B0CBD01008217AC /* DictionaryValue.swift */; };
-		FC4C2C2E2B0CBE76008217AC /* DictionaryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C2D2B0CBE76008217AC /* DictionaryEditView.swift */; };
-		FC4C2C302B0CCBE0008217AC /* DictionaryValueForKeyStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C2F2B0CCBE0008217AC /* DictionaryValueForKeyStep.swift */; };
-		FC4C2C322B0CD657008217AC /* MakeableField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4C2C312B0CD657008217AC /* MakeableField.swift */; };
-		FC9047B32B14806C00B599BE /* Templates in Resources */ = {isa = PBXBuildFile; fileRef = FC9047B22B14806C00B599BE /* Templates */; };
-		FC9047B52B14872B00B599BE /* AxisValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9047B42B14872B00B599BE /* AxisValue.swift */; };
-		FC9047B72B14A01800B599BE /* IfStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9047B62B14A01700B599BE /* IfStep.swift */; };
-		FC9047B92B14A1D900B599BE /* ConditionalActionValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */; };
-		FC9C41C92B12AC3300E51957 /* EditableVariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */; };
-		FC9C41CC2B12C69400E51957 /* Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9C41CB2B12C69400E51957 /* Generated.swift */; };
 		FCA175E42B256D42002AC37B /* Alexandria in Frameworks */ = {isa = PBXBuildFile; productRef = FCA175E32B256D42002AC37B /* Alexandria */; };
-		FCBF55B12B2439260048407F /* MakeableMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBF55B02B2439260048407F /* MakeableMap.swift */; };
-		FCBF55B32B24466B0048407F /* LocationValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBF55B22B24466B0048407F /* LocationValue.swift */; };
-		FCBF55B52B244FC00048407F /* AsyncMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBF55B42B244FC00048407F /* AsyncMap.swift */; };
-		FCBF55B72B2455920048407F /* DecodeArrayStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBF55B62B2455920048407F /* DecodeArrayStep.swift */; };
-		FCCB8F432B1892A100233D1F /* String+TitleCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F422B1892A100233D1F /* String+TitleCase.swift */; };
-		FCCB8F452B18AC3100233D1F /* Float+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F442B18AC3100233D1F /* Float+VariableValue.swift */; };
-		FCCB8F472B18B52600233D1F /* StringRepresentableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F462B18B52600233D1F /* StringRepresentableValue.swift */; };
-		FCCB8F492B18B9B800233D1F /* Numbers+Pow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F482B18B9B800233D1F /* Numbers+Pow.swift */; };
-		FCCB8F4B2B18B9D100233D1F /* Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F4A2B18B9D100233D1F /* Numeric.swift */; };
-		FCCB8F4D2B18BA1700233D1F /* NumericValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F4C2B18BA1700233D1F /* NumericValue.swift */; };
-		FCCB8F4F2B18C15E00233D1F /* GetNumberStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F4E2B18C15E00233D1F /* GetNumberStep.swift */; };
-		FCCB8F512B18D1F900233D1F /* TextAlignmentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCB8F502B18D1F900233D1F /* TextAlignmentValue.swift */; };
+		FCA175EA2B25A461002AC37B /* ScreenListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA175E92B25A461002AC37B /* ScreenListView.swift */; };
 		FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B1E82B0B584B0054371B /* AppAppApp.swift */; };
 		FCD3B1ED2B0B584D0054371B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD3B1EC2B0B584D0054371B /* Assets.xcassets */; };
 		FCD3B1F12B0B584D0054371B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD3B1F02B0B584D0054371B /* Preview Assets.xcassets */; };
@@ -104,32 +26,7 @@
 		FCD3B2072B0B584E0054371B /* AppAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2062B0B584E0054371B /* AppAppUITestsLaunchTests.swift */; };
 		FCD3B21C2B0B639F0054371B /* StepButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B21B2B0B639F0054371B /* StepButton.swift */; };
 		FCD3B21F2B0B67060054371B /* DylKit in Frameworks */ = {isa = PBXBuildFile; productRef = FCD3B21E2B0B67060054371B /* DylKit */; };
-		FCD3B2212B0B6FCB0054371B /* ViewMakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2202B0B6FCB0054371B /* ViewMakerView.swift */; };
-		FCD3B2232B0B77C50054371B /* AddViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2222B0B77C50054371B /* AddViewView.swift */; };
-		FCD3B2252B0B7C9F0054371B /* EditViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2242B0B7C9F0054371B /* EditViewView.swift */; };
-		FCD3B2282B0B9F650054371B /* AddViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2272B0B9F650054371B /* AddViewViewModel.swift */; };
-		FCD3B22A2B0B9F7D0054371B /* EditViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2292B0B9F7C0054371B /* EditViewViewModel.swift */; };
-		FCD3B22D2B0B9FA70054371B /* MakeableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B22C2B0B9FA70054371B /* MakeableButton.swift */; };
-		FCD3B22F2B0B9FBA0054371B /* MakeableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B22E2B0B9FBA0054371B /* MakeableLabel.swift */; };
-		FCD3B2312B0B9FCB0054371B /* MakeableStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2302B0B9FCB0054371B /* MakeableStack.swift */; };
-		FCD3B2332B0B9FE90054371B /* MakeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2322B0B9FE90054371B /* MakeableView.swift */; };
-		FCD3B2382B0BA01D0054371B /* ViewMakerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2372B0BA01D0054371B /* ViewMakerViewModel.swift */; };
-		FCD3B23B2B0BA8580054371B /* ActionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B23A2B0BA8580054371B /* ActionListView.swift */; };
-		FCD3B23D2B0BB2020054371B /* String+VariableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B23C2B0BB2020054371B /* String+VariableValue.swift */; };
-		FCD3B23F2B0BB31F0054371B /* AddActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B23E2B0BB31F0054371B /* AddActionView.swift */; };
-		FCD3B2422B0BB3360054371B /* Int+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2412B0BB3360054371B /* Int+Identifiable.swift */; };
-		FCD3B2462B0C50090054371B /* VHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2452B0C50090054371B /* VHStack.swift */; };
-		FCD3B2492B0C69070054371B /* EditVariableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2482B0C69070054371B /* EditVariableView.swift */; };
-		FCD3B24B2B0C948C0054371B /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B24A2B0C948C0054371B /* Array+Safe.swift */; };
-		FCD3B24D2B0C94A10054371B /* Array+Ing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B24C2B0C94A10054371B /* Array+Ing.swift */; };
-		FCD3B24F2B0C94C10054371B /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B24E2B0C94C10054371B /* Screen.swift */; };
-		FCD3B2532B0C95360054371B /* MakableView+MakeableConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2522B0C95360054371B /* MakableView+MakeableConstructor.swift */; };
-		FCD3B2572B0C95B30054371B /* View+OnEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2562B0C95B30054371B /* View+OnEdit.swift */; };
 		FCD3B25B2B0C96170054371B /* DoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B25A2B0C96170054371B /* DoView.swift */; };
-		FCD3B25D2B0C964D0054371B /* ViewContructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B25C2B0C964D0054371B /* ViewContructor.swift */; };
-		FCD3B25F2B0C96790054371B /* MakeableConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B25E2B0C96790054371B /* MakeableConstructor.swift */; };
-		FCD3B2612B0C96890054371B /* EditableViewConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B2602B0C96890054371B /* EditableViewConstructor.swift */; };
-		FCE36F4C2B0D752200E247D8 /* ScreenListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE36F4B2B0D752200E247D8 /* ScreenListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,93 +48,15 @@
 
 /* Begin PBXFileReference section */
 		FC062FA12B187C18009ECA24 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
-		FC062FA42B187DB5009ECA24 /* ElementDeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementDeleteButton.swift; sourceTree = "<group>"; };
 		FC0BE62E2B1C7A380087EE00 /* Screen+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Screen+Defaults.swift"; sourceTree = "<group>"; };
-		FC0BE6302B1C7A6B0087EE00 /* Screen+CodeRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Screen+CodeRepresentable.swift"; sourceTree = "<group>"; };
 		FC0BE6362B1C935E0087EE00 /* AATest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AATest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0BE6382B1C935E0087EE00 /* AATestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AATestApp.swift; sourceTree = "<group>"; };
 		FC0BE63A2B1C935E0087EE00 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FC0BE63C2B1C93600087EE00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC0BE63F2B1C93600087EE00 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		FC0CF5682B2492FB00995F30 /* MapStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStep.swift; sourceTree = "<group>"; };
-		FC0CF56A2B24941600995F30 /* ForEachStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForEachStep.swift; sourceTree = "<group>"; };
-		FC0CF56C2B24B97800995F30 /* CLLocation+Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Region.swift"; sourceTree = "<group>"; };
-		FC0CF56E2B24BC9600995F30 /* URLEncodeStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLEncodeStep.swift; sourceTree = "<group>"; };
-		FC18BACF2B15468E007838AA /* MakeablePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeablePicker.swift; sourceTree = "<group>"; };
-		FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonTypeValue.swift; sourceTree = "<group>"; };
-		FC18BAD32B157F44007838AA /* NilValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NilValue.swift; sourceTree = "<group>"; };
-		FC18BAD52B157F56007838AA /* OptionalValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalValue.swift; sourceTree = "<group>"; };
-		FC18BADA2B159218007838AA /* ComparisonValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonValue.swift; sourceTree = "<group>"; };
-		FC18BADC2B159593007838AA /* NumericalOperationTypeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericalOperationTypeValue.swift; sourceTree = "<group>"; };
-		FC18BADE2B159642007838AA /* NumericalOperationValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericalOperationValue.swift; sourceTree = "<group>"; };
-		FC18BAE02B1695A6007838AA /* FunctionStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionStep.swift; sourceTree = "<group>"; };
-		FC18BAE22B169F02007838AA /* PrimitiveCopying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimitiveCopying.swift; sourceTree = "<group>"; };
-		FC18BAE42B16BA14007838AA /* MakeableBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableBase.swift; sourceTree = "<group>"; };
-		FC18BAE62B16CD5F007838AA /* ColorValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorValue.swift; sourceTree = "<group>"; };
-		FC18BAE82B16E1EF007838AA /* MakeableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableList.swift; sourceTree = "<group>"; };
-		FC18BAEA2B16EADE007838AA /* TypedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedValue.swift; sourceTree = "<group>"; };
-		FC18BAEE2B16FE81007838AA /* CodableMakeableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMakeableView.swift; sourceTree = "<group>"; };
-		FC18BAF02B172564007838AA /* AnyMakeableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyMakeableView.swift; sourceTree = "<group>"; };
-		FC18BAF22B174656007838AA /* ButtonStyleValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyleValue.swift; sourceTree = "<group>"; };
-		FC18BAF42B1747A6007838AA /* CaseIterable+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CaseIterable+Codable.swift"; sourceTree = "<group>"; };
 		FC18BAF62B1752C7007838AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		FC18BAF72B175510007838AA /* DictionaryKeysStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryKeysStep.swift; sourceTree = "<group>"; };
-		FC18BAF92B1762B4007838AA /* ResultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultValue.swift; sourceTree = "<group>"; };
 		FC18BAFC2B177199007838AA /* SetVarStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVarStep.swift; sourceTree = "<group>"; };
-		FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableWrapperView.swift; sourceTree = "<group>"; };
-		FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryValue.swift; sourceTree = "<group>"; };
-		FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMakeableList.swift; sourceTree = "<group>"; };
-		FC2B8A8A2B108F6B003FAB86 /* CodableVariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableVariableValue.swift; sourceTree = "<group>"; };
-		FC2B8A8C2B108F7C003FAB86 /* CodableVariableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableVariableList.swift; sourceTree = "<group>"; };
-		FC2B8A8E2B108F90003FAB86 /* CodableVariableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableVariableDictionary.swift; sourceTree = "<group>"; };
-		FC2B8A902B108FA0003FAB86 /* CodableStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableStep.swift; sourceTree = "<group>"; };
-		FC2B8A922B108FAE003FAB86 /* CodableStepList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableStepList.swift; sourceTree = "<group>"; };
-		FC2B8A942B108FC0003FAB86 /* CodableTypeString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableTypeString.swift; sourceTree = "<group>"; };
-		FC2B8A962B10900C003FAB86 /* StepArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepArray.swift; sourceTree = "<group>"; };
-		FC2B8A982B109038003FAB86 /* MakeableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableArray.swift; sourceTree = "<group>"; };
-		FC2B8A9A2B109C3C003FAB86 /* ArrayValueStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayValueStep.swift; sourceTree = "<group>"; };
-		FC2B8A9C2B10A2CA003FAB86 /* FontWeightValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeightValue.swift; sourceTree = "<group>"; };
-		FC2B8A9E2B10ACD5003FAB86 /* Binding+Nil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Nil.swift"; sourceTree = "<group>"; };
-		FC2B8AA02B10AE12003FAB86 /* Bool+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+VariableValue.swift"; sourceTree = "<group>"; };
-		FC4635062B0C980A00B8DCBE /* StaticValueStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticValueStep.swift; sourceTree = "<group>"; };
-		FC4635092B0C982E00B8DCBE /* VariableStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableStep.swift; sourceTree = "<group>"; };
-		FC46350B2B0C983D00B8DCBE /* APIValueStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIValueStep.swift; sourceTree = "<group>"; };
-		FC46350E2B0C987100B8DCBE /* VariableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableType.swift; sourceTree = "<group>"; };
-		FC4635142B0C98A300B8DCBE /* Int+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+VariableValue.swift"; sourceTree = "<group>"; };
-		FC4635162B0C98C000B8DCBE /* Variable+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Variable+VariableValue.swift"; sourceTree = "<group>"; };
-		FC4635182B0C98EE00B8DCBE /* AnyValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyValue.swift; sourceTree = "<group>"; };
-		FC46351B2B0C993600B8DCBE /* SetVarStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVarStep.swift; sourceTree = "<group>"; };
-		FC46351D2B0C997700B8DCBE /* AddToVarStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToVarStep.swift; sourceTree = "<group>"; };
-		FC46351F2B0C998B00B8DCBE /* PrintVarStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintVarStep.swift; sourceTree = "<group>"; };
-		FC4C15C62B0C97390010BB1A /* ViewEditable+Constructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewEditable+Constructor.swift"; sourceTree = "<group>"; };
-		FC4C15CC2B0C97700010BB1A /* StepError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepError.swift; sourceTree = "<group>"; };
-		FC4C15D02B0C97B20010BB1A /* Array_StepType+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array_StepType+VariableValue.swift"; sourceTree = "<group>"; };
-		FC4C15D22B0C97CC0010BB1A /* SheetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetButton.swift; sourceTree = "<group>"; };
-		FC4C2C232B0C9B7F008217AC /* ArrayValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayValue.swift; sourceTree = "<group>"; };
-		FC4C2C262B0CA872008217AC /* ListEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEditView.swift; sourceTree = "<group>"; };
-		FC4C2C282B0CBCF1008217AC /* DecodeDictionaryStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeDictionaryStep.swift; sourceTree = "<group>"; };
-		FC4C2C2A2B0CBD01008217AC /* DictionaryValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryValue.swift; sourceTree = "<group>"; };
-		FC4C2C2D2B0CBE76008217AC /* DictionaryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEditView.swift; sourceTree = "<group>"; };
-		FC4C2C2F2B0CCBE0008217AC /* DictionaryValueForKeyStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryValueForKeyStep.swift; sourceTree = "<group>"; };
-		FC4C2C312B0CD657008217AC /* MakeableField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableField.swift; sourceTree = "<group>"; };
-		FC9047B22B14806C00B599BE /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Templates; sourceTree = "<group>"; };
-		FC9047B42B14872B00B599BE /* AxisValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisValue.swift; sourceTree = "<group>"; };
-		FC9047B62B14A01700B599BE /* IfStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfStep.swift; sourceTree = "<group>"; };
-		FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalActionValue.swift; sourceTree = "<group>"; };
-		FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableVariableValue.swift; sourceTree = "<group>"; };
-		FC9C41CB2B12C69400E51957 /* Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generated.swift; sourceTree = "<group>"; };
-		FCBF55B02B2439260048407F /* MakeableMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableMap.swift; sourceTree = "<group>"; };
-		FCBF55B22B24466B0048407F /* LocationValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationValue.swift; sourceTree = "<group>"; };
-		FCBF55B42B244FC00048407F /* AsyncMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncMap.swift; sourceTree = "<group>"; };
-		FCBF55B62B2455920048407F /* DecodeArrayStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeArrayStep.swift; sourceTree = "<group>"; };
-		FCCB8F422B1892A100233D1F /* String+TitleCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+TitleCase.swift"; sourceTree = "<group>"; };
-		FCCB8F442B18AC3100233D1F /* Float+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+VariableValue.swift"; sourceTree = "<group>"; };
-		FCCB8F462B18B52600233D1F /* StringRepresentableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringRepresentableValue.swift; sourceTree = "<group>"; };
-		FCCB8F482B18B9B800233D1F /* Numbers+Pow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numbers+Pow.swift"; sourceTree = "<group>"; };
-		FCCB8F4A2B18B9D100233D1F /* Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numeric.swift; sourceTree = "<group>"; };
-		FCCB8F4C2B18BA1700233D1F /* NumericValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericValue.swift; sourceTree = "<group>"; };
-		FCCB8F4E2B18C15E00233D1F /* GetNumberStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNumberStep.swift; sourceTree = "<group>"; };
-		FCCB8F502B18D1F900233D1F /* TextAlignmentValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAlignmentValue.swift; sourceTree = "<group>"; };
+		FCA175E92B25A461002AC37B /* ScreenListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenListView.swift; sourceTree = "<group>"; };
 		FCD3B1E52B0B584B0054371B /* AppApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD3B1E82B0B584B0054371B /* AppAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppApp.swift; sourceTree = "<group>"; };
 		FCD3B1EC2B0B584D0054371B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -249,32 +68,7 @@
 		FCD3B2042B0B584E0054371B /* AppAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppUITests.swift; sourceTree = "<group>"; };
 		FCD3B2062B0B584E0054371B /* AppAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FCD3B21B2B0B639F0054371B /* StepButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepButton.swift; sourceTree = "<group>"; };
-		FCD3B2202B0B6FCB0054371B /* ViewMakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMakerView.swift; sourceTree = "<group>"; };
-		FCD3B2222B0B77C50054371B /* AddViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewView.swift; sourceTree = "<group>"; };
-		FCD3B2242B0B7C9F0054371B /* EditViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewView.swift; sourceTree = "<group>"; };
-		FCD3B2272B0B9F650054371B /* AddViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewViewModel.swift; sourceTree = "<group>"; };
-		FCD3B2292B0B9F7C0054371B /* EditViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewViewModel.swift; sourceTree = "<group>"; };
-		FCD3B22C2B0B9FA70054371B /* MakeableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableButton.swift; sourceTree = "<group>"; };
-		FCD3B22E2B0B9FBA0054371B /* MakeableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableLabel.swift; sourceTree = "<group>"; };
-		FCD3B2302B0B9FCB0054371B /* MakeableStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableStack.swift; sourceTree = "<group>"; };
-		FCD3B2322B0B9FE90054371B /* MakeableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableView.swift; sourceTree = "<group>"; };
-		FCD3B2372B0BA01D0054371B /* ViewMakerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMakerViewModel.swift; sourceTree = "<group>"; };
-		FCD3B23A2B0BA8580054371B /* ActionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionListView.swift; sourceTree = "<group>"; };
-		FCD3B23C2B0BB2020054371B /* String+VariableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+VariableValue.swift"; sourceTree = "<group>"; };
-		FCD3B23E2B0BB31F0054371B /* AddActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActionView.swift; sourceTree = "<group>"; };
-		FCD3B2412B0BB3360054371B /* Int+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Identifiable.swift"; sourceTree = "<group>"; };
-		FCD3B2452B0C50090054371B /* VHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHStack.swift; sourceTree = "<group>"; };
-		FCD3B2482B0C69070054371B /* EditVariableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVariableView.swift; sourceTree = "<group>"; };
-		FCD3B24A2B0C948C0054371B /* Array+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Safe.swift"; sourceTree = "<group>"; };
-		FCD3B24C2B0C94A10054371B /* Array+Ing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ing.swift"; sourceTree = "<group>"; };
-		FCD3B24E2B0C94C10054371B /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
-		FCD3B2522B0C95360054371B /* MakableView+MakeableConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MakableView+MakeableConstructor.swift"; sourceTree = "<group>"; };
-		FCD3B2562B0C95B30054371B /* View+OnEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+OnEdit.swift"; sourceTree = "<group>"; };
 		FCD3B25A2B0C96170054371B /* DoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoView.swift; sourceTree = "<group>"; };
-		FCD3B25C2B0C964D0054371B /* ViewContructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewContructor.swift; sourceTree = "<group>"; };
-		FCD3B25E2B0C96790054371B /* MakeableConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableConstructor.swift; sourceTree = "<group>"; };
-		FCD3B2602B0C96890054371B /* EditableViewConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableViewConstructor.swift; sourceTree = "<group>"; };
-		FCE36F4B2B0D752200E247D8 /* ScreenListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,14 +107,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FC062FA32B187DAC009ECA24 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				FC062FA42B187DB5009ECA24 /* ElementDeleteButton.swift */,
-			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
 		FC0BE6372B1C935E0087EE00 /* AATest */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,13 +133,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FC18BAD72B1581C8007838AA /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		FC18BAFB2B177190007838AA /* Steps */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,183 +141,25 @@
 			path = Steps;
 			sourceTree = "<group>";
 		};
-		FC2B8A872B108F2E003FAB86 /* Codable */ = {
+		FCA175E72B25A415002AC37B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				FC2B8A922B108FAE003FAB86 /* CodableStepList.swift */,
-				FC2B8A902B108FA0003FAB86 /* CodableStep.swift */,
-				FC2B8A882B108F3F003FAB86 /* CodableMakeableList.swift */,
-				FC18BAEE2B16FE81007838AA /* CodableMakeableView.swift */,
-				FC2B8A942B108FC0003FAB86 /* CodableTypeString.swift */,
-				FC2B8A8A2B108F6B003FAB86 /* CodableVariableValue.swift */,
-				FC2B8A8C2B108F7C003FAB86 /* CodableVariableList.swift */,
-				FC2B8A8E2B108F90003FAB86 /* CodableVariableDictionary.swift */,
-				FC18BAF42B1747A6007838AA /* CaseIterable+Codable.swift */,
-			);
-			path = Codable;
-			sourceTree = "<group>";
-		};
-		FC4635082B0C981600B8DCBE /* Value Steps */ = {
-			isa = PBXGroup;
-			children = (
-				FC18BAE02B1695A6007838AA /* FunctionStep.swift */,
-				FC4635092B0C982E00B8DCBE /* VariableStep.swift */,
-				FCCB8F4E2B18C15E00233D1F /* GetNumberStep.swift */,
-				FC0CF56E2B24BC9600995F30 /* URLEncodeStep.swift */,
-				FC4635062B0C980A00B8DCBE /* StaticValueStep.swift */,
-				FC46350B2B0C983D00B8DCBE /* APIValueStep.swift */,
-				FC4C2C282B0CBCF1008217AC /* DecodeDictionaryStep.swift */,
-				FCBF55B62B2455920048407F /* DecodeArrayStep.swift */,
-				FC2B8A9A2B109C3C003FAB86 /* ArrayValueStep.swift */,
-				FC4C2C2F2B0CCBE0008217AC /* DictionaryValueForKeyStep.swift */,
-				FC18BAF72B175510007838AA /* DictionaryKeysStep.swift */,
-				FC0CF5682B2492FB00995F30 /* MapStep.swift */,
-				FC0CF56A2B24941600995F30 /* ForEachStep.swift */,
-			);
-			path = "Value Steps";
-			sourceTree = "<group>";
-		};
-		FC46350D2B0C985E00B8DCBE /* Values */ = {
-			isa = PBXGroup;
-			children = (
-				FC9C41C82B12AC3300E51957 /* EditableVariableValue.swift */,
-				FCCB8F462B18B52600233D1F /* StringRepresentableValue.swift */,
-				FCCB8F4A2B18B9D100233D1F /* Numeric.swift */,
-				FCCB8F4C2B18BA1700233D1F /* NumericValue.swift */,
-				FC4635232B0C9ACD00B8DCBE /* Implementations */,
-			);
-			path = Values;
-			sourceTree = "<group>";
-		};
-		FC46351A2B0C992000B8DCBE /* Void Steps */ = {
-			isa = PBXGroup;
-			children = (
-				FC46351B2B0C993600B8DCBE /* SetVarStep.swift */,
-				FC46351D2B0C997700B8DCBE /* AddToVarStep.swift */,
-				FC46351F2B0C998B00B8DCBE /* PrintVarStep.swift */,
-				FC9047B62B14A01700B599BE /* IfStep.swift */,
-			);
-			path = "Void Steps";
-			sourceTree = "<group>";
-		};
-		FC4635212B0C99CF00B8DCBE /* Makeable View */ = {
-			isa = PBXGroup;
-			children = (
-				FCD3B2322B0B9FE90054371B /* MakeableView.swift */,
-				FCD3B2522B0C95360054371B /* MakableView+MakeableConstructor.swift */,
-				FC2B8A982B109038003FAB86 /* MakeableArray.swift */,
-			);
-			path = "Makeable View";
-			sourceTree = "<group>";
-		};
-		FC4635222B0C9A3200B8DCBE /* UI Elements */ = {
-			isa = PBXGroup;
-			children = (
-				FC4635212B0C99CF00B8DCBE /* Makeable View */,
-				FCD3B2302B0B9FCB0054371B /* MakeableStack.swift */,
-				FCBF55B02B2439260048407F /* MakeableMap.swift */,
-				FC2B8A832B1020B4003FAB86 /* MakeableWrapperView.swift */,
-				FCD3B22E2B0B9FBA0054371B /* MakeableLabel.swift */,
-				FCD3B22C2B0B9FA70054371B /* MakeableButton.swift */,
-				FC4C2C312B0CD657008217AC /* MakeableField.swift */,
-				FC18BACF2B15468E007838AA /* MakeablePicker.swift */,
-				FC18BAE42B16BA14007838AA /* MakeableBase.swift */,
-				FC18BAE82B16E1EF007838AA /* MakeableList.swift */,
-			);
-			path = "UI Elements";
-			sourceTree = "<group>";
-		};
-		FC4635232B0C9ACD00B8DCBE /* Implementations */ = {
-			isa = PBXGroup;
-			children = (
-				FC4635182B0C98EE00B8DCBE /* AnyValue.swift */,
-				FCBF55B22B24466B0048407F /* LocationValue.swift */,
-				FC18BAF02B172564007838AA /* AnyMakeableView.swift */,
-				FCCB8F502B18D1F900233D1F /* TextAlignmentValue.swift */,
-				FC9047B82B14A1D900B599BE /* ConditionalActionValue.swift */,
-				FC18BAD12B156D90007838AA /* ComparisonTypeValue.swift */,
-				FC18BADC2B159593007838AA /* NumericalOperationTypeValue.swift */,
-				FC18BADA2B159218007838AA /* ComparisonValue.swift */,
-				FC18BAE62B16CD5F007838AA /* ColorValue.swift */,
-				FC18BADE2B159642007838AA /* NumericalOperationValue.swift */,
-				FC18BAD52B157F56007838AA /* OptionalValue.swift */,
-				FC18BAD32B157F44007838AA /* NilValue.swift */,
-				FC9047B42B14872B00B599BE /* AxisValue.swift */,
-				FC2B8A9C2B10A2CA003FAB86 /* FontWeightValue.swift */,
-				FC18BAF22B174656007838AA /* ButtonStyleValue.swift */,
-				FC2B8A852B103DF6003FAB86 /* TemporaryValue.swift */,
-				FC4C2C232B0C9B7F008217AC /* ArrayValue.swift */,
-				FC4C2C2A2B0CBD01008217AC /* DictionaryValue.swift */,
-				FC4635162B0C98C000B8DCBE /* Variable+VariableValue.swift */,
-				FC4635142B0C98A300B8DCBE /* Int+VariableValue.swift */,
-				FCCB8F442B18AC3100233D1F /* Float+VariableValue.swift */,
-				FC2B8AA02B10AE12003FAB86 /* Bool+VariableValue.swift */,
-				FCD3B23C2B0BB2020054371B /* String+VariableValue.swift */,
-				FC46350E2B0C987100B8DCBE /* VariableType.swift */,
-				FC18BAEA2B16EADE007838AA /* TypedValue.swift */,
-				FC18BAF92B1762B4007838AA /* ResultValue.swift */,
-			);
-			path = Implementations;
-			sourceTree = "<group>";
-		};
-		FC4635242B0C9B0900B8DCBE /* Screens */ = {
-			isa = PBXGroup;
-			children = (
-				FC062FA32B187DAC009ECA24 /* Shared */,
-				FCE36F4A2B0D751800E247D8 /* Screen List */,
-				FC4C2C2C2B0CBE5E008217AC /* Dictionary Edit */,
-				FC4C2C252B0CA869008217AC /* List Edit */,
-				FCD3B2472B0C68D50054371B /* Edit Variable */,
-				FCD3B2392B0BA8440054371B /* Action List */,
-				FCD3B2362B0BA0010054371B /* View Maker */,
-				FCD3B2262B0B9F510054371B /* Add View */,
-				FCD3B22B2B0B9F840054371B /* Edit View */,
+				FCA175E82B25A44B002AC37B /* Screen List */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
 		};
-		FC4C15C52B0C97150010BB1A /* View Creation */ = {
+		FCA175E82B25A44B002AC37B /* Screen List */ = {
 			isa = PBXGroup;
 			children = (
-				FC4635222B0C9A3200B8DCBE /* UI Elements */,
-				FCD3B2622B0C96980054371B /* View Constructor */,
+				FCA175E92B25A461002AC37B /* ScreenListView.swift */,
 			);
-			path = "View Creation";
-			sourceTree = "<group>";
-		};
-		FC4C15D42B0C97DA0010BB1A /* Steps */ = {
-			isa = PBXGroup;
-			children = (
-				FC2B8A962B10900C003FAB86 /* StepArray.swift */,
-				FC4C15CC2B0C97700010BB1A /* StepError.swift */,
-				FC4C15D02B0C97B20010BB1A /* Array_StepType+VariableValue.swift */,
-				FC46351A2B0C992000B8DCBE /* Void Steps */,
-				FC4635082B0C981600B8DCBE /* Value Steps */,
-			);
-			path = Steps;
-			sourceTree = "<group>";
-		};
-		FC4C2C252B0CA869008217AC /* List Edit */ = {
-			isa = PBXGroup;
-			children = (
-				FC4C2C262B0CA872008217AC /* ListEditView.swift */,
-			);
-			path = "List Edit";
-			sourceTree = "<group>";
-		};
-		FC4C2C2C2B0CBE5E008217AC /* Dictionary Edit */ = {
-			isa = PBXGroup;
-			children = (
-				FC4C2C2D2B0CBE76008217AC /* DictionaryEditView.swift */,
-			);
-			path = "Dictionary Edit";
+			path = "Screen List";
 			sourceTree = "<group>";
 		};
 		FCD3B1DC2B0B584B0054371B = {
 			isa = PBXGroup;
 			children = (
-				FC9C41CB2B12C69400E51957 /* Generated.swift */,
-				FC9047B22B14806C00B599BE /* Templates */,
 				FCD3B1E72B0B584B0054371B /* AppApp */,
 				FCD3B1F92B0B584E0054371B /* AppAppTests */,
 				FCD3B2032B0B584E0054371B /* AppAppUITests */,
@@ -565,13 +186,8 @@
 				FC18BAF62B1752C7007838AA /* Info.plist */,
 				FCD3B1E82B0B584B0054371B /* AppAppApp.swift */,
 				FC062FA12B187C18009ECA24 /* Style.swift */,
-				FCD3B24E2B0C94C10054371B /* Screen.swift */,
-				FC0BE6302B1C7A6B0087EE00 /* Screen+CodeRepresentable.swift */,
 				FC0BE62E2B1C7A380087EE00 /* Screen+Defaults.swift */,
-				FC4635242B0C9B0900B8DCBE /* Screens */,
-				FC4C15D42B0C97DA0010BB1A /* Steps */,
-				FC4C15C52B0C97150010BB1A /* View Creation */,
-				FC46350D2B0C985E00B8DCBE /* Values */,
+				FCA175E72B25A415002AC37B /* Screens */,
 				FCD3B2582B0C960D0054371B /* Helpers */,
 				FCD3B1EC2B0B584D0054371B /* Assets.xcassets */,
 				FCD3B1EE2B0B584D0054371B /* AppApp.entitlements */,
@@ -606,72 +222,16 @@
 			path = AppAppUITests;
 			sourceTree = "<group>";
 		};
-		FCD3B2262B0B9F510054371B /* Add View */ = {
-			isa = PBXGroup;
-			children = (
-				FCD3B2222B0B77C50054371B /* AddViewView.swift */,
-				FCD3B2272B0B9F650054371B /* AddViewViewModel.swift */,
-			);
-			path = "Add View";
-			sourceTree = "<group>";
-		};
-		FCD3B22B2B0B9F840054371B /* Edit View */ = {
-			isa = PBXGroup;
-			children = (
-				FCD3B2242B0B7C9F0054371B /* EditViewView.swift */,
-				FCD3B2292B0B9F7C0054371B /* EditViewViewModel.swift */,
-			);
-			path = "Edit View";
-			sourceTree = "<group>";
-		};
-		FCD3B2362B0BA0010054371B /* View Maker */ = {
-			isa = PBXGroup;
-			children = (
-				FCD3B2202B0B6FCB0054371B /* ViewMakerView.swift */,
-				FCD3B2372B0BA01D0054371B /* ViewMakerViewModel.swift */,
-			);
-			path = "View Maker";
-			sourceTree = "<group>";
-		};
-		FCD3B2392B0BA8440054371B /* Action List */ = {
-			isa = PBXGroup;
-			children = (
-				FCD3B23A2B0BA8580054371B /* ActionListView.swift */,
-				FCD3B23E2B0BB31F0054371B /* AddActionView.swift */,
-			);
-			path = "Action List";
-			sourceTree = "<group>";
-		};
 		FCD3B2402B0BB32E0054371B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				FCD3B2562B0C95B30054371B /* View+OnEdit.swift */,
-				FCCB8F422B1892A100233D1F /* String+TitleCase.swift */,
-				FCCB8F482B18B9B800233D1F /* Numbers+Pow.swift */,
-				FC0CF56C2B24B97800995F30 /* CLLocation+Region.swift */,
-				FC2B8A9E2B10ACD5003FAB86 /* Binding+Nil.swift */,
-				FCD3B2412B0BB3360054371B /* Int+Identifiable.swift */,
-				FCD3B24A2B0C948C0054371B /* Array+Safe.swift */,
-				FCD3B24C2B0C94A10054371B /* Array+Ing.swift */,
-				FC18BAE22B169F02007838AA /* PrimitiveCopying.swift */,
-				FCBF55B42B244FC00048407F /* AsyncMap.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		FCD3B2472B0C68D50054371B /* Edit Variable */ = {
-			isa = PBXGroup;
-			children = (
-				FCD3B2482B0C69070054371B /* EditVariableView.swift */,
-			);
-			path = "Edit Variable";
 			sourceTree = "<group>";
 		};
 		FCD3B2582B0C960D0054371B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				FC18BAD72B1581C8007838AA /* Protocols */,
-				FC2B8A872B108F2E003FAB86 /* Codable */,
 				FCD3B2402B0BB32E0054371B /* Extensions */,
 				FCD3B2592B0C96110054371B /* Views */,
 			);
@@ -681,31 +241,10 @@
 		FCD3B2592B0C96110054371B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FCD3B2452B0C50090054371B /* VHStack.swift */,
 				FCD3B25A2B0C96170054371B /* DoView.swift */,
-				FC4C15D22B0C97CC0010BB1A /* SheetButton.swift */,
 				FCD3B21B2B0B639F0054371B /* StepButton.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		FCD3B2622B0C96980054371B /* View Constructor */ = {
-			isa = PBXGroup;
-			children = (
-				FCD3B2602B0C96890054371B /* EditableViewConstructor.swift */,
-				FCD3B25E2B0C96790054371B /* MakeableConstructor.swift */,
-				FCD3B25C2B0C964D0054371B /* ViewContructor.swift */,
-				FC4C15C62B0C97390010BB1A /* ViewEditable+Constructor.swift */,
-			);
-			path = "View Constructor";
-			sourceTree = "<group>";
-		};
-		FCE36F4A2B0D751800E247D8 /* Screen List */ = {
-			isa = PBXGroup;
-			children = (
-				FCE36F4B2B0D752200E247D8 /* ScreenListView.swift */,
-			);
-			path = "Screen List";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -735,7 +274,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FCD3B20A2B0B584E0054371B /* Build configuration list for PBXNativeTarget "AppApp" */;
 			buildPhases = (
-				FC9C41CA2B12C5DD00E51957 /* Sourcery */,
 				FCD3B1E12B0B584B0054371B /* Sources */,
 				FCD3B1E22B0B584B0054371B /* Frameworks */,
 				FCD3B1E32B0B584B0054371B /* Resources */,
@@ -743,6 +281,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				FCA175E62B256DC2002AC37B /* PBXTargetDependency */,
 				FC8CF6692B255A7A007E3793 /* PBXTargetDependency */,
 				FC8CF66B2B255A7A007E3793 /* PBXTargetDependency */,
 			);
@@ -858,7 +397,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC9047B32B14806C00B599BE /* Templates in Resources */,
 				FCD3B1F12B0B584D0054371B /* Preview Assets.xcassets in Resources */,
 				FCD3B1ED2B0B584D0054371B /* Assets.xcassets in Resources */,
 			);
@@ -880,27 +418,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		FC9C41CA2B12C5DD00E51957 /* Sourcery */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Sourcery;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "Scripts/sourcery\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		FC0BE6322B1C935E0087EE00 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -915,114 +432,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC2B8A912B108FA0003FAB86 /* CodableStep.swift in Sources */,
-				FC0CF56D2B24B97800995F30 /* CLLocation+Region.swift in Sources */,
-				FCCB8F4B2B18B9D100233D1F /* Numeric.swift in Sources */,
-				FCD3B2492B0C69070054371B /* EditVariableView.swift in Sources */,
 				FCD3B25B2B0C96170054371B /* DoView.swift in Sources */,
-				FCCB8F492B18B9B800233D1F /* Numbers+Pow.swift in Sources */,
-				FC18BAE32B169F02007838AA /* PrimitiveCopying.swift in Sources */,
-				FC2B8A842B1020B4003FAB86 /* MakeableWrapperView.swift in Sources */,
-				FC18BAD62B157F56007838AA /* OptionalValue.swift in Sources */,
-				FCCB8F512B18D1F900233D1F /* TextAlignmentValue.swift in Sources */,
 				FCD3B21C2B0B639F0054371B /* StepButton.swift in Sources */,
-				FC18BADF2B159642007838AA /* NumericalOperationValue.swift in Sources */,
-				FCD3B2612B0C96890054371B /* EditableViewConstructor.swift in Sources */,
-				FC0CF5692B2492FB00995F30 /* MapStep.swift in Sources */,
-				FCD3B2232B0B77C50054371B /* AddViewView.swift in Sources */,
-				FC18BADB2B159218007838AA /* ComparisonValue.swift in Sources */,
-				FC4635192B0C98EE00B8DCBE /* AnyValue.swift in Sources */,
-				FCD3B23D2B0BB2020054371B /* String+VariableValue.swift in Sources */,
-				FCD3B24B2B0C948C0054371B /* Array+Safe.swift in Sources */,
-				FC2B8A8B2B108F6B003FAB86 /* CodableVariableValue.swift in Sources */,
-				FCBF55B32B24466B0048407F /* LocationValue.swift in Sources */,
-				FC18BAF82B175510007838AA /* DictionaryKeysStep.swift in Sources */,
-				FC18BADD2B159593007838AA /* NumericalOperationTypeValue.swift in Sources */,
 				FC062FA22B187C18009ECA24 /* Style.swift in Sources */,
-				FC2B8A9D2B10A2CA003FAB86 /* FontWeightValue.swift in Sources */,
-				FCD3B24F2B0C94C10054371B /* Screen.swift in Sources */,
-				FCD3B25F2B0C96790054371B /* MakeableConstructor.swift in Sources */,
-				FCCB8F452B18AC3100233D1F /* Float+VariableValue.swift in Sources */,
-				FC2B8A992B109038003FAB86 /* MakeableArray.swift in Sources */,
-				FC0CF56B2B24941600995F30 /* ForEachStep.swift in Sources */,
-				FC4C15D12B0C97B20010BB1A /* Array_StepType+VariableValue.swift in Sources */,
-				FC2B8A9F2B10ACD5003FAB86 /* Binding+Nil.swift in Sources */,
-				FC18BAEF2B16FE81007838AA /* CodableMakeableView.swift in Sources */,
-				FC18BAE52B16BA14007838AA /* MakeableBase.swift in Sources */,
-				FCCB8F4D2B18BA1700233D1F /* NumericValue.swift in Sources */,
-				FC4C2C302B0CCBE0008217AC /* DictionaryValueForKeyStep.swift in Sources */,
-				FC18BAF12B172564007838AA /* AnyMakeableView.swift in Sources */,
-				FC46350C2B0C983D00B8DCBE /* APIValueStep.swift in Sources */,
-				FC2B8A892B108F3F003FAB86 /* CodableMakeableList.swift in Sources */,
-				FCD3B2252B0B7C9F0054371B /* EditViewView.swift in Sources */,
-				FC18BAD42B157F44007838AA /* NilValue.swift in Sources */,
-				FCD3B2212B0B6FCB0054371B /* ViewMakerView.swift in Sources */,
-				FC9047B52B14872B00B599BE /* AxisValue.swift in Sources */,
-				FCD3B22A2B0B9F7D0054371B /* EditViewViewModel.swift in Sources */,
 				FC0BE62F2B1C7A380087EE00 /* Screen+Defaults.swift in Sources */,
-				FCD3B2312B0B9FCB0054371B /* MakeableStack.swift in Sources */,
-				FC2B8A952B108FC0003FAB86 /* CodableTypeString.swift in Sources */,
-				FC18BAEB2B16EADE007838AA /* TypedValue.swift in Sources */,
-				FC4635202B0C998B00B8DCBE /* PrintVarStep.swift in Sources */,
-				FCD3B2532B0C95360054371B /* MakableView+MakeableConstructor.swift in Sources */,
-				FC4C2C2B2B0CBD01008217AC /* DictionaryValue.swift in Sources */,
-				FC4635072B0C980A00B8DCBE /* StaticValueStep.swift in Sources */,
-				FCD3B2332B0B9FE90054371B /* MakeableView.swift in Sources */,
-				FCD3B24D2B0C94A10054371B /* Array+Ing.swift in Sources */,
-				FC4C15D32B0C97CC0010BB1A /* SheetButton.swift in Sources */,
-				FCD3B2462B0C50090054371B /* VHStack.swift in Sources */,
-				FC4635152B0C98A300B8DCBE /* Int+VariableValue.swift in Sources */,
-				FCD3B25D2B0C964D0054371B /* ViewContructor.swift in Sources */,
-				FCD3B2282B0B9F650054371B /* AddViewViewModel.swift in Sources */,
-				FC46351C2B0C993600B8DCBE /* SetVarStep.swift in Sources */,
-				FC2B8A932B108FAE003FAB86 /* CodableStepList.swift in Sources */,
-				FC4C2C322B0CD657008217AC /* MakeableField.swift in Sources */,
-				FC18BAE72B16CD5F007838AA /* ColorValue.swift in Sources */,
-				FCD3B2572B0C95B30054371B /* View+OnEdit.swift in Sources */,
-				FCD3B22F2B0B9FBA0054371B /* MakeableLabel.swift in Sources */,
-				FCD3B23B2B0BA8580054371B /* ActionListView.swift in Sources */,
-				FCCB8F472B18B52600233D1F /* StringRepresentableValue.swift in Sources */,
-				FCD3B2422B0BB3360054371B /* Int+Identifiable.swift in Sources */,
-				FC2B8A972B10900C003FAB86 /* StepArray.swift in Sources */,
-				FC18BAF52B1747A6007838AA /* CaseIterable+Codable.swift in Sources */,
-				FC18BAD02B15468E007838AA /* MakeablePicker.swift in Sources */,
-				FC4C2C292B0CBCF1008217AC /* DecodeDictionaryStep.swift in Sources */,
-				FC9047B92B14A1D900B599BE /* ConditionalActionValue.swift in Sources */,
-				FCD3B23F2B0BB31F0054371B /* AddActionView.swift in Sources */,
-				FC18BAF32B174656007838AA /* ButtonStyleValue.swift in Sources */,
-				FCBF55B12B2439260048407F /* MakeableMap.swift in Sources */,
-				FC2B8A9B2B109C3C003FAB86 /* ArrayValueStep.swift in Sources */,
-				FC46350F2B0C987100B8DCBE /* VariableType.swift in Sources */,
-				FCCB8F4F2B18C15E00233D1F /* GetNumberStep.swift in Sources */,
-				FC18BAE12B1695A6007838AA /* FunctionStep.swift in Sources */,
-				FCD3B22D2B0B9FA70054371B /* MakeableButton.swift in Sources */,
-				FC4C2C2E2B0CBE76008217AC /* DictionaryEditView.swift in Sources */,
-				FC4635172B0C98C000B8DCBE /* Variable+VariableValue.swift in Sources */,
-				FC062FA52B187DB5009ECA24 /* ElementDeleteButton.swift in Sources */,
-				FCBF55B72B2455920048407F /* DecodeArrayStep.swift in Sources */,
-				FCD3B2382B0BA01D0054371B /* ViewMakerViewModel.swift in Sources */,
-				FC2B8A8F2B108F90003FAB86 /* CodableVariableDictionary.swift in Sources */,
-				FC4C2C242B0C9B7F008217AC /* ArrayValue.swift in Sources */,
-				FC2B8A8D2B108F7C003FAB86 /* CodableVariableList.swift in Sources */,
 				FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */,
-				FC18BAD22B156D90007838AA /* ComparisonTypeValue.swift in Sources */,
-				FCE36F4C2B0D752200E247D8 /* ScreenListView.swift in Sources */,
-				FC9C41C92B12AC3300E51957 /* EditableVariableValue.swift in Sources */,
-				FC0BE6312B1C7A6B0087EE00 /* Screen+CodeRepresentable.swift in Sources */,
-				FC18BAFA2B1762B5007838AA /* ResultValue.swift in Sources */,
-				FC4C15CD2B0C97700010BB1A /* StepError.swift in Sources */,
-				FC4C15C72B0C97390010BB1A /* ViewEditable+Constructor.swift in Sources */,
-				FC2B8A862B103DF6003FAB86 /* TemporaryValue.swift in Sources */,
-				FCBF55B52B244FC00048407F /* AsyncMap.swift in Sources */,
-				FC9C41CC2B12C69400E51957 /* Generated.swift in Sources */,
-				FCCB8F432B1892A100233D1F /* String+TitleCase.swift in Sources */,
-				FC0CF56F2B24BC9700995F30 /* URLEncodeStep.swift in Sources */,
-				FC9047B72B14A01800B599BE /* IfStep.swift in Sources */,
-				FC18BAE92B16E1EF007838AA /* MakeableList.swift in Sources */,
-				FC4C2C272B0CA872008217AC /* ListEditView.swift in Sources */,
-				FC46351E2B0C997700B8DCBE /* AddToVarStep.swift in Sources */,
-				FC46350A2B0C982E00B8DCBE /* VariableStep.swift in Sources */,
-				FC2B8AA12B10AE12003FAB86 /* Bool+VariableValue.swift in Sources */,
+				FCA175EA2B25A461002AC37B /* ScreenListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1054,6 +469,10 @@
 		FC8CF66B2B255A7A007E3793 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = FC8CF66A2B255A7A007E3793 /* Armstrong */;
+		};
+		FCA175E62B256DC2002AC37B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = FCA175E52B256DC2002AC37B /* Alexandria */;
 		};
 		FCD3B1F82B0B584E0054371B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1502,6 +921,11 @@
 		};
 		FCA175E32B256D42002AC37B /* Alexandria */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = Alexandria;
+		};
+		FCA175E52B256DC2002AC37B /* Alexandria */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FCA175E22B256D42002AC37B /* XCLocalSwiftPackageReference "../Alexandria" */;
 			productName = Alexandria;
 		};
 		FCD3B21E2B0B67060054371B /* DylKit */ = {

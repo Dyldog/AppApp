@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:AppApp.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../Alexandria">
+   </FileRef>
+   <FileRef
+      location = "group:../Armstrong">
+   </FileRef>
+   <FileRef
+      location = "group:../DylKit">
+   </FileRef>
+</Workspace>

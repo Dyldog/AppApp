@@ -8,6 +8,7 @@
 import Foundation
 import DylKit
 import SwiftUI
+import Alexandria
 
 struct Screen: Codable, Identifiable {
     @UserDefaultable(key: "SCREENS") static var screens: [Screen] = []

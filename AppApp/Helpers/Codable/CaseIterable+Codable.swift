@@ -7,6 +7,7 @@
 
 import Foundation
 import Armstrong
+import Alexandria
 
 extension PickableValue {
     public init(from decoder: Decoder) throws {
