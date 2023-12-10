@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 extension Float: StringRepresentableValue, Numeric {
     static var defaultValue: Float = 0

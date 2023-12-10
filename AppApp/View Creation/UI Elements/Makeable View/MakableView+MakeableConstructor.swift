@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Armstrong
 
 extension MakeableView {
     /// A constructor that allows the building of a `MakeableView`

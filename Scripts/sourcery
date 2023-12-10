@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sourcery --sources AppApp --templates Templates --output Generated.swift
+sourcery --sources AppApp --sources ../Armstrong/Sources --templates Templates --output Generated.swift

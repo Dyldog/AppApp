@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 enum ComparisonType: String, Codable, CaseIterable, Titleable, CodeRepresentable {
     case equals

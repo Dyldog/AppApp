@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 enum NumericalOperationType: String, Codable, CaseIterable, Titleable, CodeRepresentable {
     case add

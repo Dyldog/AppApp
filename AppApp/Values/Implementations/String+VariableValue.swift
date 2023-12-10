@@ -6,27 +6,7 @@
 //
 
 import SwiftUI
-
-//extension String: VariableValue {
-//    static var type: VariableType { .string }
-//    
-//    func add(_ other: VariableValue) throws -> VariableValue {
-//        guard let other = other as? String else { throw VariableValueError.wrongTypeForOperation }
-//        return self + other
-//    }
-//    
-//    var protoString: String { self }
-//    var valueString: String { self }
-//    func value(with variables: Variables) throws -> VariableValue { self }
-//    
-//    func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView {
-//        TextField("", text: .init(get: {
-//            self
-//        }, set: {
-//            onUpdate($0)
-//        })).any
-//    }
-//}
+import Armstrong
 
 final class StringValue: EditableVariableValue {
     

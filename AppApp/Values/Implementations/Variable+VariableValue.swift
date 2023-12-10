@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 /// A value that provides a value from the variables
 final class Variable: EditableVariableValue {

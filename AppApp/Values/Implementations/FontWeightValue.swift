@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 protocol PickableValue: CaseIterable, Titleable, Codable, CodeRepresentable {
     static var defaultValue: Self { get }
@@ -22,7 +23,7 @@ extension Font.Weight: PickableValue {
         .black, .heavy, .light, .ultraLight, .thin,
     ] }
     
-    var title: String {
+    public var title: String {
         switch self {
         case .black: return "Black"
         case .bold: return "Bold"
@@ -53,7 +54,7 @@ extension Font.Weight: Codable {
 }
 
 extension Font.Weight: CodeRepresentable {
-    var codeRepresentation: String {
+    public var codeRepresentation: String {
         switch self {
         case .black: return ".black"
         case .bold: return ".bold"

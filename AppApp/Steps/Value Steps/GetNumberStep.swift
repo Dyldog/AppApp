@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Armstrong
 
 final class GetNumberStep: ValueStep {
     static var title: String { "Get number from value" }

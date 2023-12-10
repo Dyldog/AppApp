@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 // sourcery: skipCopying, skipVariableType, skipCodable
 typealias MakeableListRow = MakeableView & Codable

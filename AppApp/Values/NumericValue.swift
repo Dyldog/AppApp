@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Armstrong
 
 protocol NumericValue: VariableValue {
     associatedtype NValue: Numeric

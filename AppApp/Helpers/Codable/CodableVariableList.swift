@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Armstrong
 
 struct CodableVariableList: Codable {
     let variables: [CodableVariableValue]

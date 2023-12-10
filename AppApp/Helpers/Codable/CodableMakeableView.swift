@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Armstrong
 
 struct CodableMakeableView {
     let type: String

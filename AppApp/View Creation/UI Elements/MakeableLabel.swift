@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 struct MakeableLabelView: View {
     let isRunning: Bool

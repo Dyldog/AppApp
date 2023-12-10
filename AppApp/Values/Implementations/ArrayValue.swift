@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 // sourcery: variableTypeName = "list"
 final class ArrayValue: EditableVariableValue, ObservableObject {

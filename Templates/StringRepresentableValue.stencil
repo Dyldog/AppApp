@@ -1,7 +1,7 @@
 {% macro AutoCopy type %}
     {% if type|!annotated:"skipCopying" %}
 extension {{ type.name }}: Copying {
-    func copy() -> {{ type.name }} {
+    public func copy() -> {{ type.name }} {
         return self
     }
 }
@@ -50,7 +50,7 @@ final class {{ type.name }}Value: EditableVariableValue, Codable, Copying, Numer
         self
     }
     
-    func copy() -> {% call ValueTypeName type %}Value {
+    public func copy() -> {% call ValueTypeName type %}Value {
         .init(
             value: value
         )

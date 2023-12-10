@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Armstrong
 
 extension Screen {
     static let defaults: [Screen] = [.internetDictionary, .countingButton, .currencyConverter, .mappyBoy]

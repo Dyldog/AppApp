@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 final class StaticValueStep: ValueStep {
     static var title: String { "Static value" }

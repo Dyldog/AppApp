@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Armstrong
 
 final class URLEncodeStep: ValueStep {
     static var title: String { "URL encode a string" }

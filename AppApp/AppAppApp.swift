@@ -7,11 +7,14 @@
 
 import SwiftUI
 import DylKit
+import Armstrong
 
 @main
 struct AppAppApp: App {
     @State var alert: Alert?
     @State var deepLink: Screen? // = .mappyBoy
+    
+    var providers: [AAProvider] = []
     
     var body: some Scene {
         WindowGroup {

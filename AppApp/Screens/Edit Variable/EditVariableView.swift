@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 struct EditVariableView: View {
     let name: String

@@ -1,0 +1,96 @@
+
+enum VariableType: String, CaseIterable, Equatable, Codable, Titleable, CodeRepresentable {
+
+{% for type in types.implementing.EditableVariableValue|!protocol %}
+    {% if not type.implements.StepType %}
+        {% if type|!annotated:"skipVariableType" %}
+    case {%+ call VariableTypeName type +%} // {{ type.name }}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+{% for type in types.implementing.PickableValue|!protocol %}
+    {% if type|!annotated:"skipVariableType" %}
+    case {%+ call TypeNameCase type +%} // {{ type.name }}
+    {% endif %}
+{% endfor %}
+
+{% for type in types.implementing.StringRepresentableValue|!protocol %}
+    {% if type|!annotated:"skipVariableType" %}
+    case {%+ call TypeNameCase type +%} // {{ type.name }}
+    {% endif %}
+{% endfor %}
+
+    var defaultView: any EditableVariableValue {
+        switch self {
+        
+{% for type in types.implementing.EditableVariableValue|!protocol %}
+    {% if not type.implements.StepType %}
+        {% if type|!annotated:"skipVariableType" %}
+        case .{%+ call VariableTypeName type +%}: return {{ type.name }}.makeDefault()
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+{% for type in types.implementing.PickableValue|!protocol %}
+    {% if type|!annotated:"skipVariableType" %}
+    case .{%+ call TypeNameCase type +%}: return {% call TypeNameCaseType type %}Value.makeDefault()
+    {% endif %}
+{% endfor %}
+
+{% for type in types.implementing.StringRepresentableValue|!protocol %}
+    {% if type|!annotated:"skipVariableType" %}
+    case .{%+ call TypeNameCase type +%}: return {% call TypeNameCaseType type %}Value.makeDefault()
+    {% endif %}
+{% endfor %}
+        }
+    }
+    
+    var title: String {
+        switch self {
+        {% for type in types.implementing.EditableVariableValue|!protocol %}
+            {% if not type.implements.StepType %}
+                {% if type|!annotated:"skipVariableType" %}
+        case .{%+ call VariableTypeName type +%}: return "{%+ call VariableTypeName type +%}"
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        
+        {% for type in types.implementing.PickableValue|!protocol %}
+            {% if type|!annotated:"skipVariableType" %}
+        case .{%+ call TypeNameCase type +%}: return "{% call TypeNameCase type %}"
+            {% endif %}
+        {% endfor %}
+        
+        {% for type in types.implementing.StringRepresentableValue|!protocol %}
+            {% if type|!annotated:"skipVariableType" %}
+        case .{%+ call TypeNameCase type +%}: return "{% call TypeNameCase type %}"
+            {% endif %}
+        {% endfor %}
+        }
+    }
+    
+    var codeRepresentation: String {
+        switch self {
+        {% for type in types.implementing.EditableVariableValue|!protocol %}
+            {% if not type.implements.StepType %}
+                {% if type|!annotated:"skipVariableType" %}
+        case .{%+ call VariableTypeName type +%}: return "{{ type.name }}"
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        
+        {% for type in types.implementing.PickableValue|!protocol %}
+            {% if type|!annotated:"skipVariableType" %}
+        case .{%+ call TypeNameCase type +%}: return "{{ type.name }}"
+            {% endif %}
+        {% endfor %}
+        
+        {% for type in types.implementing.StringRepresentableValue|!protocol %}
+            {% if type|!annotated:"skipVariableType" %}
+        case .{%+ call TypeNameCase type +%}: return "{{ type.name }}"
+            {% endif %}
+        {% endfor %}
+        }
+    }
+}

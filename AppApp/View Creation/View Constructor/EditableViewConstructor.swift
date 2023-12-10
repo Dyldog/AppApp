@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Armstrong
 
 struct EditableViewConstructor<T: CompositeEditableVariableValue>: ViewConstructor {
     let properties: [T.Properties: any EditableVariableValue]

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 final class ArrayValueStep: ValueStep {
     static var title: String { "Get value from array" }

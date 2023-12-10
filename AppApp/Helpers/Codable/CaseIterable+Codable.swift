@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Armstrong
 
 extension PickableValue {
     public init(from decoder: Decoder) throws {

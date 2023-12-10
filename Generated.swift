@@ -4,14 +4,14 @@
 
 
 extension APIValueStep: Copying {
-    func copy() -> APIValueStep {
+    public func copy() -> APIValueStep {
         return APIValueStep(
                     url: url.copy() as! AnyValue
         )
     }
 }
 extension AddToVarStep: Copying {
-    func copy() -> AddToVarStep {
+    public func copy() -> AddToVarStep {
         return AddToVarStep(
                     varName: varName.copy() as! AnyValue,
                     value: value.copy() as! AnyValue
@@ -19,21 +19,21 @@ extension AddToVarStep: Copying {
     }
 }
 extension AnyMakeableView: Copying {
-    func copy() -> AnyMakeableView {
+    public func copy() -> AnyMakeableView {
         return AnyMakeableView(
                     value: value
         )
     }
 }
 extension AnyValue: Copying {
-    func copy() -> AnyValue {
+    public func copy() -> AnyValue {
         return AnyValue(
                     value: value
         )
     }
 }
 extension ArrayValue: Copying {
-    func copy() -> ArrayValue {
+    public func copy() -> ArrayValue {
         return ArrayValue(
                     type: type,
                     elements: elements
@@ -41,7 +41,7 @@ extension ArrayValue: Copying {
     }
 }
 extension ArrayValueStep: Copying {
-    func copy() -> ArrayValueStep {
+    public func copy() -> ArrayValueStep {
         return ArrayValueStep(
                     array: array.copy() as! AnyValue,
                     index: index.copy() as! AnyValue
@@ -49,28 +49,28 @@ extension ArrayValueStep: Copying {
     }
 }
 extension BoolValue: Copying {
-    func copy() -> BoolValue {
+    public func copy() -> BoolValue {
         return BoolValue(
                     value: value
         )
     }
 }
 extension ColorValue: Copying {
-    func copy() -> ColorValue {
+    public func copy() -> ColorValue {
         return ColorValue(
                     value: value
         )
     }
 }
 extension ComparisonTypeValue: Copying {
-    func copy() -> ComparisonTypeValue {
+    public func copy() -> ComparisonTypeValue {
         return ComparisonTypeValue(
                     value: value
         )
     }
 }
 extension ComparisonValue: Copying {
-    func copy() -> ComparisonValue {
+    public func copy() -> ComparisonValue {
         return ComparisonValue(
                     lhs: lhs.copy() as! AnyValue,
                     rhs: rhs.copy() as! AnyValue,
@@ -79,7 +79,7 @@ extension ComparisonValue: Copying {
     }
 }
 extension ConditionalActionValue: Copying {
-    func copy() -> ConditionalActionValue {
+    public func copy() -> ConditionalActionValue {
         return ConditionalActionValue(
                     ifCondition: ifCondition.copy() as! ComparisonValue,
                     ifSteps: ifSteps.copy() as! StepArray
@@ -87,28 +87,28 @@ extension ConditionalActionValue: Copying {
     }
 }
 extension DecodeArrayStep: Copying {
-    func copy() -> DecodeArrayStep {
+    public func copy() -> DecodeArrayStep {
         return DecodeArrayStep(
                     value: value.copy() as! TypedValue<IntValue>
         )
     }
 }
 extension DecodeDictionaryStep: Copying {
-    func copy() -> DecodeDictionaryStep {
+    public func copy() -> DecodeDictionaryStep {
         return DecodeDictionaryStep(
                     value: value.copy() as! AnyValue
         )
     }
 }
 extension DictionaryKeysStep: Copying {
-    func copy() -> DictionaryKeysStep {
+    public func copy() -> DictionaryKeysStep {
         return DictionaryKeysStep(
                     dictionary: dictionary.copy() as! TypedValue<DictionaryValue>
         )
     }
 }
 extension DictionaryValue: Copying {
-    func copy() -> DictionaryValue {
+    public func copy() -> DictionaryValue {
         return DictionaryValue(
                     type: type.copy() as! VariableTypeValue,
                     elements: elements
@@ -116,7 +116,7 @@ extension DictionaryValue: Copying {
     }
 }
 extension DictionaryValueForKeyStep: Copying {
-    func copy() -> DictionaryValueForKeyStep {
+    public func copy() -> DictionaryValueForKeyStep {
         return DictionaryValueForKeyStep(
                     dictionary: dictionary.copy() as! TypedValue<DictionaryValue>,
                     key: key.copy() as! AnyValue
@@ -124,7 +124,7 @@ extension DictionaryValueForKeyStep: Copying {
     }
 }
 extension ForEachStep: Copying {
-    func copy() -> ForEachStep {
+    public func copy() -> ForEachStep {
         return ForEachStep(
                     values: values.copy() as! TypedValue<ArrayValue>,
                     loop: loop.copy() as! StepArray
@@ -132,14 +132,14 @@ extension ForEachStep: Copying {
     }
 }
 extension FunctionStep: Copying {
-    func copy() -> FunctionStep {
+    public func copy() -> FunctionStep {
         return FunctionStep(
                     functionName: functionName.copy() as! AnyValue
         )
     }
 }
 extension GetNumberStep: Copying {
-    func copy() -> GetNumberStep {
+    public func copy() -> GetNumberStep {
         return GetNumberStep(
                     value: value.copy() as! AnyValue,
                     numberType: numberType
@@ -147,7 +147,7 @@ extension GetNumberStep: Copying {
     }
 }
 extension IfStep: Copying {
-    func copy() -> IfStep {
+    public func copy() -> IfStep {
         return IfStep(
                     ifAction: ifAction.copy() as! ConditionalActionValue,
                     elseAction: elseAction.copy() as! StepArray
@@ -155,7 +155,7 @@ extension IfStep: Copying {
     }
 }
 extension LocationValue: Copying {
-    func copy() -> LocationValue {
+    public func copy() -> LocationValue {
         return LocationValue(
                     name: name.copy() as! TypedValue<StringValue>,
                     latitude: latitude.copy() as! TypedValue<FloatValue>,
@@ -164,7 +164,7 @@ extension LocationValue: Copying {
     }
 }
 extension MakeableArray: Copying {
-    func copy() -> MakeableArray {
+    public func copy() -> MakeableArray {
         return MakeableArray(
                     value: value,
                     axis: axis
@@ -172,7 +172,7 @@ extension MakeableArray: Copying {
     }
 }
 extension MakeableBase: Copying {
-    func copy() -> MakeableBase {
+    public func copy() -> MakeableBase {
         return MakeableBase(
                     padding: padding,
                     backgroundColor: backgroundColor.copy() as! ColorValue,
@@ -181,7 +181,7 @@ extension MakeableBase: Copying {
     }
 }
 extension MakeableButton: Copying {
-    func copy() -> MakeableButton {
+    public func copy() -> MakeableButton {
         return MakeableButton(
                     title: title.copy() as! MakeableLabel,
                     style: style,
@@ -190,7 +190,7 @@ extension MakeableButton: Copying {
     }
 }
 extension MakeableField: Copying {
-    func copy() -> MakeableField {
+    public func copy() -> MakeableField {
         return MakeableField(
                     text: text.copy() as! TemporaryValue,
                     fontSize: fontSize,
@@ -201,7 +201,7 @@ extension MakeableField: Copying {
     }
 }
 extension MakeableLabel: Copying {
-    func copy() -> MakeableLabel {
+    public func copy() -> MakeableLabel {
         return MakeableLabel(
                     text: text.copy() as! AnyValue,
                     fontSize: fontSize,
@@ -213,7 +213,7 @@ extension MakeableLabel: Copying {
     }
 }
 extension MakeableList: Copying {
-    func copy() -> MakeableList {
+    public func copy() -> MakeableList {
         return MakeableList(
                     data: data.copy() as! TypedValue<ArrayValue>,
                     view: view.copy() as! AnyMakeableView
@@ -221,7 +221,7 @@ extension MakeableList: Copying {
     }
 }
 extension MakeableMap: Copying {
-    func copy() -> MakeableMap {
+    public func copy() -> MakeableMap {
         return MakeableMap(
                     locations: locations.copy() as! TypedValue<ArrayValue>,
                     zoomFollowsNewAnnotations: zoomFollowsNewAnnotations.copy() as! BoolValue
@@ -229,7 +229,7 @@ extension MakeableMap: Copying {
     }
 }
 extension MakeableStack: Copying {
-    func copy() -> MakeableStack {
+    public func copy() -> MakeableStack {
         return MakeableStack(
                     content: content.copy() as! MakeableArray,
                     padding: padding
@@ -237,7 +237,7 @@ extension MakeableStack: Copying {
     }
 }
 extension MakeableToggle: Copying {
-    func copy() -> MakeableToggle {
+    public func copy() -> MakeableToggle {
         return MakeableToggle(
                     isOn: isOn.copy() as! TemporaryValue,
                     onToggleUpdate: onToggleUpdate.copy() as! StepArray,
@@ -246,7 +246,7 @@ extension MakeableToggle: Copying {
     }
 }
 extension MapStep: Copying {
-    func copy() -> MapStep {
+    public func copy() -> MapStep {
         return MapStep(
                     value: value.copy() as! TypedValue<ArrayValue>,
                     mapper: mapper.copy() as! StepArray
@@ -254,20 +254,20 @@ extension MapStep: Copying {
     }
 }
 extension NilValue: Copying {
-    func copy() -> NilValue {
+    public func copy() -> NilValue {
         return NilValue(
         )
     }
 }
 extension NumericalOperationTypeValue: Copying {
-    func copy() -> NumericalOperationTypeValue {
+    public func copy() -> NumericalOperationTypeValue {
         return NumericalOperationTypeValue(
                     value: value
         )
     }
 }
 extension NumericalOperationValue: Copying {
-    func copy() -> NumericalOperationValue {
+    public func copy() -> NumericalOperationValue {
         return NumericalOperationValue(
                     lhs: lhs.copy() as! AnyValue,
                     rhs: rhs.copy() as! AnyValue,
@@ -276,28 +276,28 @@ extension NumericalOperationValue: Copying {
     }
 }
 extension OptionalValue: Copying {
-    func copy() -> OptionalValue {
+    public func copy() -> OptionalValue {
         return OptionalValue(
                     value: value.copy() as! AnyValue
         )
     }
 }
 extension PrintVarStep: Copying {
-    func copy() -> PrintVarStep {
+    public func copy() -> PrintVarStep {
         return PrintVarStep(
                     varName: varName.copy() as! AnyValue
         )
     }
 }
 extension ResultValue: Copying {
-    func copy() -> ResultValue {
+    public func copy() -> ResultValue {
         return ResultValue(
                     steps: steps.copy() as! StepArray
         )
     }
 }
 extension SetVarStep: Copying {
-    func copy() -> SetVarStep {
+    public func copy() -> SetVarStep {
         return SetVarStep(
                     varName: varName.copy() as! AnyValue,
                     value: value.copy() as! AnyValue
@@ -305,28 +305,28 @@ extension SetVarStep: Copying {
     }
 }
 extension StaticValueStep: Copying {
-    func copy() -> StaticValueStep {
+    public func copy() -> StaticValueStep {
         return StaticValueStep(
                     value: value.copy() as! AnyValue
         )
     }
 }
 extension StepArray: Copying {
-    func copy() -> StepArray {
+    public func copy() -> StepArray {
         return StepArray(
                     value: value
         )
     }
 }
 extension StringValue: Copying {
-    func copy() -> StringValue {
+    public func copy() -> StringValue {
         return StringValue(
                     value: value
         )
     }
 }
 extension TemporaryValue: Copying {
-    func copy() -> TemporaryValue {
+    public func copy() -> TemporaryValue {
         return TemporaryValue(
                     initial: initial.copy() as! AnyValue,
                     output: output.copy() as! Variable
@@ -334,28 +334,28 @@ extension TemporaryValue: Copying {
     }
 }
 extension TypedValue: Copying {
-    func copy() -> TypedValue {
+    public func copy() -> TypedValue {
         return TypedValue(
                     value: value
         )
     }
 }
 extension URLEncodeStep: Copying {
-    func copy() -> URLEncodeStep {
+    public func copy() -> URLEncodeStep {
         return URLEncodeStep(
                     value: value.copy() as! AnyValue
         )
     }
 }
 extension Variable: Copying {
-    func copy() -> Variable {
+    public func copy() -> Variable {
         return Variable(
                     value: value
         )
     }
 }
 extension VariableStep: Copying {
-    func copy() -> VariableStep {
+    public func copy() -> VariableStep {
         return VariableStep(
                     varName: varName.copy() as! AnyValue,
                     type: type.copy() as! VariableTypeValue
@@ -363,7 +363,7 @@ extension VariableStep: Copying {
     }
 }
 extension VariableTypeValue: Copying {
-    func copy() -> VariableTypeValue {
+    public func copy() -> VariableTypeValue {
         return VariableTypeValue(
                     value: value
         )
@@ -487,7 +487,7 @@ final class AxisValue: PrimitiveEditableVariableValue, Codable, Copying {
     func value(with variables: Variables) async throws -> VariableValue {
         self
     }
-    func copy() -> AxisValue {
+    public func copy() -> AxisValue {
         .init(
             value: value
         )
@@ -501,7 +501,7 @@ extension AxisValue: CodeRepresentable {
 }
 
 extension Axis: Copying {
-    func copy() -> Axis {
+    public func copy() -> Axis {
         return self
     }
 }
@@ -525,7 +525,7 @@ final class ButtonStyleValue: PrimitiveEditableVariableValue, Codable, Copying {
     func value(with variables: Variables) async throws -> VariableValue {
         self
     }
-    func copy() -> ButtonStyleValue {
+    public func copy() -> ButtonStyleValue {
         .init(
             value: value
         )
@@ -539,7 +539,7 @@ extension ButtonStyleValue: CodeRepresentable {
 }
 
 extension ButtonStyle: Copying {
-    func copy() -> ButtonStyle {
+    public func copy() -> ButtonStyle {
         return self
     }
 }
@@ -563,7 +563,7 @@ final class FontWeightValue: PrimitiveEditableVariableValue, Codable, Copying {
     func value(with variables: Variables) async throws -> VariableValue {
         self
     }
-    func copy() -> FontWeightValue {
+    public func copy() -> FontWeightValue {
         .init(
             value: value
         )
@@ -577,7 +577,7 @@ extension FontWeightValue: CodeRepresentable {
 }
 
 extension Font.Weight: Copying {
-    func copy() -> Font.Weight {
+    public func copy() -> Font.Weight {
         return self
     }
 }
@@ -601,7 +601,7 @@ final class NumericTypeValue: PrimitiveEditableVariableValue, Codable, Copying {
     func value(with variables: Variables) async throws -> VariableValue {
         self
     }
-    func copy() -> NumericTypeValue {
+    public func copy() -> NumericTypeValue {
         .init(
             value: value
         )
@@ -615,7 +615,7 @@ extension NumericTypeValue: CodeRepresentable {
 }
 
 extension NumericType: Copying {
-    func copy() -> NumericType {
+    public func copy() -> NumericType {
         return self
     }
 }
@@ -639,7 +639,7 @@ final class TextAlignmentValue: PrimitiveEditableVariableValue, Codable, Copying
     func value(with variables: Variables) async throws -> VariableValue {
         self
     }
-    func copy() -> TextAlignmentValue {
+    public func copy() -> TextAlignmentValue {
         .init(
             value: value
         )
@@ -653,7 +653,7 @@ extension TextAlignmentValue: CodeRepresentable {
 }
 
 extension TextAlignment: Copying {
-    func copy() -> TextAlignment {
+    public func copy() -> TextAlignment {
         return self
     }
 }
@@ -691,7 +691,7 @@ final class FloatValue: EditableVariableValue, Codable, Copying, NumericValue {
     func value(with variables: Variables) throws -> VariableValue {
         self
     }
-    func copy() -> FloatValue {
+    public func copy() -> FloatValue {
         .init(
             value: value
         )
@@ -705,7 +705,7 @@ extension FloatValue: CodeRepresentable {
 }
 
 extension Float: Copying {
-    func copy() -> Float {
+    public func copy() -> Float {
         return self
     }
 }
@@ -739,7 +739,7 @@ final class IntValue: EditableVariableValue, Codable, Copying, NumericValue {
     func value(with variables: Variables) throws -> VariableValue {
         self
     }
-    func copy() -> IntValue {
+    public func copy() -> IntValue {
         .init(
             value: value
         )
@@ -753,13 +753,14 @@ extension IntValue: CodeRepresentable {
 }
 
 extension Int: Copying {
-    func copy() -> Int {
+    public func copy() -> Int {
         return self
     }
 }
 
 
 import SwiftUI
+import Armstrong
 
 
 extension APIValueStep {
@@ -2215,169 +2216,46 @@ extension AddViewViewModel {
 
 
 
-enum VariableType: String, CaseIterable, Equatable, Codable, Titleable, CodeRepresentable {
+extension VariableType {
 
-	case view // AnyMakeableView
-	case anyValue // AnyValue
-	case list // ArrayValue
-	case boolean // BoolValue
-	case color // ColorValue
-	case comparisonType // ComparisonTypeValue
-	case comparison // ComparisonValue
-	case conditionalAction // ConditionalActionValue
-	case dictionary // DictionaryValue
-	case location // LocationValue
-	case makeableArray // MakeableArray
-	case base // MakeableBase
-	case button // MakeableButton
-	case field // MakeableField
-	case label // MakeableLabel
-	case listView // MakeableList
-	case map // MakeableMap
-	case stack // MakeableStack
-	case toggle // MakeableToggle
-	case `nil` // NilValue
-	case numericalOperationType // NumericalOperationTypeValue
-	case numericalOperation // NumericalOperationValue
-	case optional // OptionalValue
-	case result // ResultValue
-	case stepArray // StepArray
-	case string // StringValue
-	case temporary // TemporaryValue
-	case variable // Variable
-	case type // VariableTypeValue
+	static var view: VariableType { .init() } // AnyMakeableView
+	static var anyValue: VariableType { .init() } // AnyValue
+	static var list: VariableType { .init() } // ArrayValue
+	static var boolean: VariableType { .init() } // BoolValue
+	static var color: VariableType { .init() } // ColorValue
+	static var comparisonType: VariableType { .init() } // ComparisonTypeValue
+	static var comparison: VariableType { .init() } // ComparisonValue
+	static var conditionalAction: VariableType { .init() } // ConditionalActionValue
+	static var dictionary: VariableType { .init() } // DictionaryValue
+	static var location: VariableType { .init() } // LocationValue
+	static var makeableArray: VariableType { .init() } // MakeableArray
+	static var base: VariableType { .init() } // MakeableBase
+	static var button: VariableType { .init() } // MakeableButton
+	static var field: VariableType { .init() } // MakeableField
+	static var label: VariableType { .init() } // MakeableLabel
+	static var listView: VariableType { .init() } // MakeableList
+	static var map: VariableType { .init() } // MakeableMap
+	static var stack: VariableType { .init() } // MakeableStack
+	static var toggle: VariableType { .init() } // MakeableToggle
+	static var `nil`: VariableType { .init() } // NilValue
+	static var numericalOperationType: VariableType { .init() } // NumericalOperationTypeValue
+	static var numericalOperation: VariableType { .init() } // NumericalOperationValue
+	static var optional: VariableType { .init() } // OptionalValue
+	static var result: VariableType { .init() } // ResultValue
+	static var stepArray: VariableType { .init() } // StepArray
+	static var string: VariableType { .init() } // StringValue
+	static var temporary: VariableType { .init() } // TemporaryValue
+	static var variable: VariableType { .init() } // Variable
+	static var type: VariableType { .init() } // VariableTypeValue
 
-    case axis // Axis
-    case buttonStyle // ButtonStyle
-    case fontWeight // Font.Weight
-    case numericType // NumericType
-    case textAlignment // TextAlignment
+        static var axis: VariableType { .init() } // Axis
+        static var buttonStyle: VariableType { .init() } // ButtonStyle
+        static var fontWeight: VariableType { .init() } // Font.Weight
+        static var numericType: VariableType { .init() } // NumericType
+        static var textAlignment: VariableType { .init() } // TextAlignment
 
-    case float // Float
-    case int // Int
-
-	var defaultView: any EditableVariableValue {
-        switch self {
-        case .view: return AnyMakeableView.makeDefault()
-        case .anyValue: return AnyValue.makeDefault()
-        case .list: return ArrayValue.makeDefault()
-        case .boolean: return BoolValue.makeDefault()
-        case .color: return ColorValue.makeDefault()
-        case .comparisonType: return ComparisonTypeValue.makeDefault()
-        case .comparison: return ComparisonValue.makeDefault()
-        case .conditionalAction: return ConditionalActionValue.makeDefault()
-        case .dictionary: return DictionaryValue.makeDefault()
-        case .location: return LocationValue.makeDefault()
-        case .makeableArray: return MakeableArray.makeDefault()
-        case .base: return MakeableBase.makeDefault()
-        case .button: return MakeableButton.makeDefault()
-        case .field: return MakeableField.makeDefault()
-        case .label: return MakeableLabel.makeDefault()
-        case .listView: return MakeableList.makeDefault()
-        case .map: return MakeableMap.makeDefault()
-        case .stack: return MakeableStack.makeDefault()
-        case .toggle: return MakeableToggle.makeDefault()
-        case .`nil`: return NilValue.makeDefault()
-        case .numericalOperationType: return NumericalOperationTypeValue.makeDefault()
-        case .numericalOperation: return NumericalOperationValue.makeDefault()
-        case .optional: return OptionalValue.makeDefault()
-        case .result: return ResultValue.makeDefault()
-        case .stepArray: return StepArray.makeDefault()
-        case .string: return StringValue.makeDefault()
-        case .temporary: return TemporaryValue.makeDefault()
-        case .variable: return Variable.makeDefault()
-        case .type: return VariableTypeValue.makeDefault()
-
-    case .axis: return AxisValue.makeDefault()
-    case .buttonStyle: return ButtonStyleValue.makeDefault()
-    case .fontWeight: return FontWeightValue.makeDefault()
-    case .numericType: return NumericTypeValue.makeDefault()
-    case .textAlignment: return TextAlignmentValue.makeDefault()
-
-    case .float: return FloatValue.makeDefault()
-    case .int: return IntValue.makeDefault()
-        }
-    }
-    var title: String {
-        switch self {
-        case .view: return "view"
-        case .anyValue: return "anyValue"
-        case .list: return "list"
-        case .boolean: return "boolean"
-        case .color: return "color"
-        case .comparisonType: return "comparisonType"
-        case .comparison: return "comparison"
-        case .conditionalAction: return "conditionalAction"
-        case .dictionary: return "dictionary"
-        case .location: return "location"
-        case .makeableArray: return "makeableArray"
-        case .base: return "base"
-        case .button: return "button"
-        case .field: return "field"
-        case .label: return "label"
-        case .listView: return "listView"
-        case .map: return "map"
-        case .stack: return "stack"
-        case .toggle: return "toggle"
-        case .`nil`: return "`nil`"
-        case .numericalOperationType: return "numericalOperationType"
-        case .numericalOperation: return "numericalOperation"
-        case .optional: return "optional"
-        case .result: return "result"
-        case .stepArray: return "stepArray"
-        case .string: return "string"
-        case .temporary: return "temporary"
-        case .variable: return "variable"
-        case .type: return "type"
-        case .axis: return "axis"
-        case .buttonStyle: return "buttonStyle"
-        case .fontWeight: return "fontWeight"
-        case .numericType: return "numericType"
-        case .textAlignment: return "textAlignment"
-        case .float: return "float"
-        case .int: return "int"
-        }
-    }
-    var codeRepresentation: String {
-        switch self {
-        case .view: return "AnyMakeableView"
-        case .anyValue: return "AnyValue"
-        case .list: return "ArrayValue"
-        case .boolean: return "BoolValue"
-        case .color: return "ColorValue"
-        case .comparisonType: return "ComparisonTypeValue"
-        case .comparison: return "ComparisonValue"
-        case .conditionalAction: return "ConditionalActionValue"
-        case .dictionary: return "DictionaryValue"
-        case .location: return "LocationValue"
-        case .makeableArray: return "MakeableArray"
-        case .base: return "MakeableBase"
-        case .button: return "MakeableButton"
-        case .field: return "MakeableField"
-        case .label: return "MakeableLabel"
-        case .listView: return "MakeableList"
-        case .map: return "MakeableMap"
-        case .stack: return "MakeableStack"
-        case .toggle: return "MakeableToggle"
-        case .`nil`: return "NilValue"
-        case .numericalOperationType: return "NumericalOperationTypeValue"
-        case .numericalOperation: return "NumericalOperationValue"
-        case .optional: return "OptionalValue"
-        case .result: return "ResultValue"
-        case .stepArray: return "StepArray"
-        case .string: return "StringValue"
-        case .temporary: return "TemporaryValue"
-        case .variable: return "Variable"
-        case .type: return "VariableTypeValue"
-        case .axis: return "Axis"
-        case .buttonStyle: return "ButtonStyle"
-        case .fontWeight: return "Font.Weight"
-        case .numericType: return "NumericType"
-        case .textAlignment: return "TextAlignment"
-        case .float: return "Float"
-        case .int: return "Int"
-        }
-    }
+        static var float: VariableType { .init() } // Float
+        static var int: VariableType { .init() } // Int
 }
 
 extension MakeableWrapperView {

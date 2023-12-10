@@ -6,11 +6,7 @@
 //
 
 import SwiftUI
-
-protocol EditableVariableValue: AnyObject, VariableValue, ViewEditable {
-    static func makeDefault() -> Self
-    func editView(title: String, onUpdate: @escaping (Self) -> Void) -> AnyView
-}
+import Armstrong
 
 protocol PrimitiveEditableVariableValue: EditableVariableValue where Primitive.AllCases: RandomAccessCollection {
     associatedtype Primitive: CaseIterable & Hashable & Titleable & CodeRepresentable
@@ -37,17 +33,6 @@ extension PrimitiveEditableVariableValue {
     }
 }
 
-protocol CompositeEditableVariableValue: EditableVariableValue {
-    func propertyRows(onUpdate: @escaping (Self) -> Void) -> [(String, any EditableVariableValue, VariableUpdater)]
-    
-    associatedtype Properties: ViewProperty
-    static func make(factory: (Properties) -> any EditableVariableValue) -> Self
-    func value(for property: Properties) -> any EditableVariableValue
-    func set(_ value: Any, for property: Properties)
-    static func defaultValue(for property: Properties) -> any EditableVariableValue
-}
-
-typealias VariableUpdater = (any EditableVariableValue) -> Void
 extension CompositeEditableVariableValue {
     func propertyRows(
         onUpdate: @escaping (Self) -> Void

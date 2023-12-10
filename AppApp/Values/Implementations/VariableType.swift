@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 // sourcery: variableTypeName = "type"
 final class VariableTypeValue: PrimitiveEditableVariableValue {
@@ -43,7 +44,7 @@ final class VariableTypeValue: PrimitiveEditableVariableValue {
     
 }
 extension VariableType {
-    var protoString: String { rawValue.capitalized }
+    var protoString: String { title }
 
     var valueString: String { protoString }
     

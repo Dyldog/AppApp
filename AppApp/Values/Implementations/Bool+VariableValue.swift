@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 // sourcery: variableTypeName = "boolean"
 final class BoolValue: EditableVariableValue, Codable {

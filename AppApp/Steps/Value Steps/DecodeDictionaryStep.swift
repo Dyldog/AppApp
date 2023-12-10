@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 final class DecodeDictionaryStep: ValueStep {
     static var title: String { "Decode a dictionary from JSON" }

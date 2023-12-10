@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import Armstrong
 
 extension Axis: Codable, PickableValue {
     static var defaultValue: Axis = .vertical
-    var title: String { description }
+    public var title: String { description }
     
-    var codeRepresentation: String {
+    public var codeRepresentation: String {
         switch self {
         case .horizontal: return ".horizontal"
         case .vertical: return ".vertical"

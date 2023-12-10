@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Armstrong
 
 extension CompositeEditableVariableValue {
     var properties: [Properties: any EditableVariableValue] {

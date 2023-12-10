@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import Armstrong
 
 extension TextAlignment: PickableValue, Codable {
     
     static var defaultValue: TextAlignment = .center
     
-    var title: String {
+    public var title: String {
         switch self {
         case .center: return "Center"
         case .leading: return "Leading"
@@ -23,7 +24,7 @@ extension TextAlignment: PickableValue, Codable {
         hasher.combine(title)
     }
     
-    var codeRepresentation: String {
+    public var codeRepresentation: String {
         switch self {
         case .center: return ".center"
         case .leading: return ".leading"

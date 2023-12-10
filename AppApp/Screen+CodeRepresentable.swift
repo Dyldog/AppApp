@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Armstrong
 
 extension Screen: CodeRepresentable {
     private var codeStructName: String { name.replacingOccurrences(of: " ", with: "") + "View" }

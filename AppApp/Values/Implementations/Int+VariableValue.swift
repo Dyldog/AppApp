@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Armstrong
 
 extension Int: StringRepresentableValue, Numeric {
     static var defaultValue: Int = 69

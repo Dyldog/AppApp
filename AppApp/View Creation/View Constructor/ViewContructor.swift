@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Armstrong
 
 /// Produces a `ViewEditable` without arguments
 protocol ViewConstructor {
