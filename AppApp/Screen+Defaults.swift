@@ -10,7 +10,7 @@ import Armstrong
 import Alexandria
 
 extension Screen {
-    static let defaults: [Screen] = [.internetDictionary, .countingButton, .currencyConverter, .mappyBoy]
+    static let defaults: [Screen] = [.appNotes, .internetDictionary, .countingButton, .currencyConverter, .mappyBoy]
     
     private static let internetDictionary: Screen = .init(
         id: .init(),
@@ -34,7 +34,8 @@ extension Screen {
                 fontWeight: .init(value: .semibold),
                 italic: .init(value: true),
                 base: .makeDefault(),
-                textColor: .init(value: .black)
+                textColor: .init(value: .black), 
+                isMultiline: .false
             ),
             MakeableList(
                 data: .init(value: .variable(.named("KEYS"))),
@@ -81,7 +82,8 @@ extension Screen {
                     fontSize: .init(value: 48),
                     onTextUpdate: .init(value: []),
                     padding: .int(5),
-                    alignment: .init(value: .center)
+                    alignment: .init(value: .center), 
+                    isMultiline: .false
                 )
             ]),
             MakeableStack([
@@ -93,7 +95,8 @@ extension Screen {
                     fontSize: .init(value: 24),
                     onTextUpdate: .init(value: []),
                     padding: .int(5),
-                    alignment: .init(value: .center)
+                    alignment: .init(value: .center),
+                    isMultiline: .false
                 ),
                 MakeableLabel.text(NumericalOperationValue(
                     lhs: ResultValue(steps: .init(value: [
@@ -142,10 +145,32 @@ extension Screen {
                     SetVarStep(varName: .string("LOCATIONS"), value: .variable(named: "$0"))
                 ]),
                 padding: .init(value: 5),
-                alignment: .init(value: .center)
+                alignment: .init(value: .center),
+                isMultiline: .false
             ),
             MakeableMap(locations: .variable(.named("LOCATIONS")), zoomFollowsNewAnnotations: .true)
         ])
     )
+    
+    static let appNotes: Screen = .init(
+        id: .init(),
+        name: "App Notes",
+        initActions: .init(value: [
+            GetSavedDataStep(key: .value(.init(value: "KEY"))),
+            SetVarStep(varName: .string("FIELDTEXT"), value: .variable(named: "$0"))
+        ]),
+        content: .init([
+            MakeableLabel.text(.string("App Notes"), size: 36),
+            MakeableField(
+                text: .init(initial: .variable(named: "FIELDTEXT"), output: .named("FIELDTEXT")),
+                fontSize: .int(16),
+                onTextUpdate: .init(value: [
+                    SaveDataStep(key: .value(.init(value: "KEY")), data: .variable(named: "FIELDTEXT"))
+                ]),
+                padding: .int(5),
+                alignment: .init(value: .leading),
+                isMultiline: .true
+            )
+        ]))
     
 }
