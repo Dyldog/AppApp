@@ -89,12 +89,7 @@ struct ScreenListView: View {
                         id: .init(),
                         name: randomString(length: 5).uppercased(),
                         initActions: .init(value: []),
-                        content: .init(
-                            content: .init(
-                                value: [],
-                                axis: .init(value: .vertical)
-                            )
-                        )
+                        content: .makeDefault()
                     ))
                     viewModel.objectWillChange.send()
                 } label: {

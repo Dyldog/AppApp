@@ -27,20 +27,21 @@ extension Screen {
             SetVarStep(varName: .string("LOCATION"), value: .variable(named: "$0")),
             DictionaryKeysStep(dictionary: .init(value: .variable(.named("$0")))),
             SetVarStep(varName: .string("KEYS"), value: .variable(named: "$0"))
-        ]), content: .init(content: .init(value: [
+        ]),
+        content: MakeableStack(content: .value(ArrayValue(type: .base, elements: [
             MakeableLabel(
                 text: .variable(named: "IP"),
                 fontSize: .int(24),
                 fontWeight: .init(value: .semibold),
                 italic: .init(value: true),
                 base: .makeDefault(),
-                textColor: .init(value: .black), 
+                textColor: .init(value: .black),
                 isMultiline: .false
             ),
             MakeableList(
                 data: .init(value: .variable(.named("KEYS"))),
                 view: MakeableStack(
-                    content: .init(value: [
+                    content: .value(.init(type: .base, elements: [
                         MakeableLabel.text(.variable(named: "$0")),
                         MakeableLabel.text(ResultValue(steps: .init(value: [
                             DictionaryValueForKeyStep(
@@ -48,21 +49,23 @@ extension Screen {
                                 key: .variable(named: "$0")
                             )
                         ])).any)
-                    ], axis: .init(value: .horizontal))
+                    ]))
                 ).any
             )
-        ], axis: .init(value: .vertical))))
+        ]
+    ))))
     
     private static let countingButton: Screen = .init(
         id: .init(),
         name: "Counting Button",
         initActions: .init(value: [
             SetVarStep(varName: .string("COUNT"), value: .int(0))
-        ]), content: .init(content: .init(value: [
+        ]), content: MakeableStack(content: .value(ArrayValue(type: .base, elements: [
             MakeableButton(title: .text(.variable(named: "COUNT"), size: 120), style: .makeDefault(), action: .init(value: [
                 AddToVarStep(varName: .string("COUNT"), value: .int(1))
             ]))
-        ], axis: .init(value: .vertical))))
+        ])))
+    )
     
     private static let currencyConverter: Screen = .init(
         id: .init(),
@@ -82,7 +85,7 @@ extension Screen {
                     fontSize: .init(value: 48),
                     onTextUpdate: .init(value: []),
                     padding: .int(5),
-                    alignment: .init(value: .center), 
+                    alignment: .init(value: .center),
                     isMultiline: .false
                 )
             ]),
@@ -115,7 +118,7 @@ extension Screen {
     )
     
     static let mappyBoy: Screen = .init(
-        id: .init(), name: "Mappy Boy", 
+        id: .init(), name: "Mappy Boy",
         initActions: .init(value: []),
         content: .init([
             MakeableField(
