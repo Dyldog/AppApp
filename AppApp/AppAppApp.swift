@@ -59,6 +59,6 @@ struct AppAppApp: App {
             return
         }
         
-        deepLink = Screen.screens.first(where: { $0.name == recipeName })
+        deepLink = (Screen.screens + Screen.defaults).first(where: { $0.name == recipeName })
     }
 }
