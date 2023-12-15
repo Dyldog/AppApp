@@ -41,6 +41,7 @@ extension Screen {
             MakeableList(
                 data: .init(value: .variable(.named("KEYS"))),
                 view: MakeableStack(
+                    axis: .init(value: .horizontal),
                     content: .value(.init(type: .base, elements: [
                         MakeableLabel.text(.variable(named: "$0")),
                         MakeableLabel.text(ResultValue(steps: .init(value: [
