@@ -17,7 +17,7 @@ extension Screen {
         name: "Internet Dictionary",
         initActions: .init(value: [
             APIValueStep(url: StringValue(value: "https://api.ipify.org?format=json").any),
-            DecodeDictionaryStep(value: Variable(value: StringValue(value: "$0")).any),
+            DecodeDictionaryStep(value: Variable(value: StringValue(value: "$0").any).any),
             DictionaryValueForKeyStep(dictionary: .init(value: .variable(.named("$0"))), key: .string("ip")),
             SetVarStep(varName: .string("IP"), value: .variable(named: "$0")),
             SetVarStep(varName: .string("LOCATIONURL"), value: .string("http://ip-api.com/json/")),
