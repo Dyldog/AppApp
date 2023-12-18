@@ -14,8 +14,22 @@ import Greg
 
 @main
 struct AppAppApp: App {
+    var body: some Scene {
+        WindowGroup {
+            AppAppAppView()
+        }
+    }
+}
+
+struct AppAppAppView: View {
+    enum Constants {
+        static let autoLoadKey = "auto_load_app"
+        static let marqueeFileExtension = "marqueescreen"
+    }
+    
     @State var alert: Alert?
     @State var deepLink: Screen? // = .mappyBoy
+    @StateObject var listViewModel: ScreenListViewModel = .init()
     
     var providers: [any AAProvider.Type] = [
         Armstrong.self,
@@ -27,15 +41,18 @@ struct AppAppApp: App {
         AALibrary.shared.addProviders(providers)
     }
     
-    var body: some Scene {
-        WindowGroup {
-            if let autoLoadScreenName = UserDefaults.standard.string(forKey: "auto_load_app"), let screen = screen(named: autoLoadScreenName) {
+    var body: some View {
+        Group {
+            if
+                let autoLoadScreenName = UserDefaults.standard.string(forKey: Constants.autoLoadKey),
+                let screen = screen(named: autoLoadScreenName)
+            {
                 ViewMakerView(viewModel: .init(screen: screen, makeMode: false, onUpdate: nil))
             } else if let deepLink = deepLink {
                 ViewMakerView(viewModel: .init(screen: deepLink, makeMode: false, onUpdate: nil))
             } else {
                 NavigationView {
-                    ScreenListView()
+                    ScreenListView(viewModel: listViewModel)
                 }.onOpenURL { incomingURL in
                     print("App was opened via URL: \(incomingURL)")
                     handleIncomingURL(incomingURL)
@@ -45,9 +62,37 @@ struct AppAppApp: App {
     }
     
     private func handleIncomingURL(_ url: URL) {
-        guard url.scheme == "appapp" else {
-            return
+        if url.scheme == "appapp"{
+            handleDeeplink(url)
+        } else if url.isFileURL {
+            importScreen(url)
         }
+        
+    }
+    
+    private func importScreen(_ url: URL) {
+        do {
+            guard let data = FileManager().contents(atPath: url.path) else { return }
+            
+            var screen = try JSONDecoder().decode(Screen.self, from: data)
+            
+            if Screen.all.contains(where: { $0.name == screen.name }) {
+                screen.name = "\(screen.name) 2"
+            }
+            
+            Screen.screens.append(screen)
+            listViewModel.screens = Screen.screens
+            
+            if url.pathExtension == Constants.marqueeFileExtension {
+                UserDefaults.standard.set(screen.name, forKey: Constants.autoLoadKey)
+                deepLink = screen
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func handleDeeplink(_ url: URL) {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             print("Invalid URL")
             return
@@ -67,6 +112,6 @@ struct AppAppApp: App {
     }
     
     private func screen(named name: String) -> Screen? {
-        (Screen.screens + Screen.defaults).first(where: { $0.name == name })
+        Screen.all.first(where: { $0.name == name })
     }
 }

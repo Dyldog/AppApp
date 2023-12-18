@@ -11,8 +11,13 @@ import Armstrong
 
 class ScreenListViewModel: ObservableObject {
     var screens: [Screen] {
-        get { Screen.screens }
-        set{ Screen.screens = newValue }
+        get {
+            Screen.screens
+        }
+        set {
+            objectWillChange.send()
+            Screen.screens = newValue
+        }
     }
     
     var defaultScreens: [Screen] {
@@ -25,7 +30,9 @@ class ScreenListViewModel: ObservableObject {
 }
 
 struct ScreenListView: View {
-    @StateObject var viewModel: ScreenListViewModel = .init()
+    @ObservedObject var viewModel: ScreenListViewModel
+    @State var showExport: Bool = false
+    @State var exportScreen: Screen?
     
     func onUpdate(_ screen: Screen, index: Int?) -> ((Screen) -> Void)? {
         if let index = index {
@@ -49,6 +56,17 @@ struct ScreenListView: View {
             Text(screen.name).font(.largeTitle)
         }
     }
+    
+    func exportButton(for screen: Screen) -> some View {
+        Button {
+            exportScreen = screen
+            showExport = true
+        } label: {
+            Label("Favorite", systemImage: "bookmark.fill")
+        }
+        .tint(.yellow)
+    }
+    
     var body: some View {
         List {
             if !viewModel.screens.isEmpty {
@@ -56,12 +74,7 @@ struct ScreenListView: View {
                     ForEach(enumerated: viewModel.screens) { (index, screen) in
                         screenView(screen, index: index)
                         .swipeActions {
-                            Button {
-                                viewModel.addBookmark(for: index)
-                            } label: {
-                                Label("Favorite", systemImage: "bookmark.fill")
-                            }
-                            .tint(.yellow)
+                            exportButton(for: screen)
                 
                             Button {
                                 viewModel.screens.remove(atOffsets: [index])
@@ -78,9 +91,20 @@ struct ScreenListView: View {
             Section("Defaults") {
                 ForEach(viewModel.defaultScreens) { screen in
                         screenView(screen, index: nil)
+                        .swipeActions {
+                            exportButton(for: screen)
+                        }
                 }
             }
         }
+        .fileExporter(
+            isPresented: $showExport,
+            document: exportScreen.map { ScreenDocument(screen: $0) },
+            contentType: .screen,
+            defaultFilename: exportScreen?.name,
+            onCompletion: { _ in
+                //
+            })
         .navigationTitle("Screens")
         .toolbar {
             ToolbarItem(placement: .navigation) {

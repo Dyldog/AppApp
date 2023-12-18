@@ -18,6 +18,7 @@
 		FC18BAFD2B177199007838AA /* SetVarStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAFC2B177199007838AA /* SetVarStep.swift */; };
 		FC57898C2B302736006D6D37 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC57898B2B302736006D6D37 /* Settings.bundle */; };
 		FC57898F2B302966006D6D37 /* Greg in Frameworks */ = {isa = PBXBuildFile; productRef = FC57898E2B302966006D6D37 /* Greg */; };
+		FC5789912B302E3E006D6D37 /* ScreenDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5789902B302E3E006D6D37 /* ScreenDocument.swift */; };
 		FCA175E42B256D42002AC37B /* Alexandria in Frameworks */ = {isa = PBXBuildFile; productRef = FCA175E32B256D42002AC37B /* Alexandria */; };
 		FCA175EA2B25A461002AC37B /* ScreenListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA175E92B25A461002AC37B /* ScreenListView.swift */; };
 		FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B1E82B0B584B0054371B /* AppAppApp.swift */; };
@@ -59,6 +60,7 @@
 		FC18BAF62B1752C7007838AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FC18BAFC2B177199007838AA /* SetVarStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVarStep.swift; sourceTree = "<group>"; };
 		FC57898B2B302736006D6D37 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		FC5789902B302E3E006D6D37 /* ScreenDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDocument.swift; sourceTree = "<group>"; };
 		FCA175E92B25A461002AC37B /* ScreenListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenListView.swift; sourceTree = "<group>"; };
 		FCD3B1E52B0B584B0054371B /* AppApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD3B1E82B0B584B0054371B /* AppAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppApp.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				FCD3B1E82B0B584B0054371B /* AppAppApp.swift */,
 				FC062FA12B187C18009ECA24 /* Style.swift */,
 				FC0BE62E2B1C7A380087EE00 /* Screen+Defaults.swift */,
+				FC5789902B302E3E006D6D37 /* ScreenDocument.swift */,
 				FCA175E72B25A415002AC37B /* Screens */,
 				FCD3B2582B0C960D0054371B /* Helpers */,
 				FCD3B1EC2B0B584D0054371B /* Assets.xcassets */,
@@ -446,6 +449,7 @@
 				FC0BE62F2B1C7A380087EE00 /* Screen+Defaults.swift in Sources */,
 				FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */,
 				FCA175EA2B25A461002AC37B /* ScreenListView.swift in Sources */,
+				FC5789912B302E3E006D6D37 /* ScreenDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

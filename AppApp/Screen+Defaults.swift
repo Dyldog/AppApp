@@ -12,6 +12,10 @@ import Alexandria
 extension Screen {
     static let defaults: [Screen] = [.appNotes, .internetDictionary, .countingButton, .currencyConverter, .mappyBoy]
     
+    static var all: [Screen] {
+        Screen.screens + Screen.defaults
+    }
+    
     private static let internetDictionary: Screen = .init(
         id: .init(),
         name: "Internet Dictionary",
