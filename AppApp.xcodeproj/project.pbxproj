@@ -16,6 +16,8 @@
 		FC0BE6462B1C95A20087EE00 /* DylKit in Frameworks */ = {isa = PBXBuildFile; productRef = FC0BE6452B1C95A20087EE00 /* DylKit */; };
 		FC0CF5962B25593800995F30 /* Armstrong in Frameworks */ = {isa = PBXBuildFile; productRef = FC0CF5952B25593800995F30 /* Armstrong */; };
 		FC18BAFD2B177199007838AA /* SetVarStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAFC2B177199007838AA /* SetVarStep.swift */; };
+		FC57898C2B302736006D6D37 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC57898B2B302736006D6D37 /* Settings.bundle */; };
+		FC57898F2B302966006D6D37 /* Greg in Frameworks */ = {isa = PBXBuildFile; productRef = FC57898E2B302966006D6D37 /* Greg */; };
 		FCA175E42B256D42002AC37B /* Alexandria in Frameworks */ = {isa = PBXBuildFile; productRef = FCA175E32B256D42002AC37B /* Alexandria */; };
 		FCA175EA2B25A461002AC37B /* ScreenListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA175E92B25A461002AC37B /* ScreenListView.swift */; };
 		FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3B1E82B0B584B0054371B /* AppAppApp.swift */; };
@@ -56,6 +58,7 @@
 		FC0BE63F2B1C93600087EE00 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FC18BAF62B1752C7007838AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FC18BAFC2B177199007838AA /* SetVarStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVarStep.swift; sourceTree = "<group>"; };
+		FC57898B2B302736006D6D37 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		FCA175E92B25A461002AC37B /* ScreenListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenListView.swift; sourceTree = "<group>"; };
 		FCD3B1E52B0B584B0054371B /* AppApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD3B1E82B0B584B0054371B /* AppAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppApp.swift; sourceTree = "<group>"; };
@@ -85,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC0CF5962B25593800995F30 /* Armstrong in Frameworks */,
+				FC57898F2B302966006D6D37 /* Greg in Frameworks */,
 				FCD3B21F2B0B67060054371B /* DylKit in Frameworks */,
 				FCA175E42B256D42002AC37B /* Alexandria in Frameworks */,
 			);
@@ -183,6 +187,7 @@
 		FCD3B1E72B0B584B0054371B /* AppApp */ = {
 			isa = PBXGroup;
 			children = (
+				FC57898B2B302736006D6D37 /* Settings.bundle */,
 				FC18BAF62B1752C7007838AA /* Info.plist */,
 				FCD3B1E82B0B584B0054371B /* AppAppApp.swift */,
 				FC062FA12B187C18009ECA24 /* Style.swift */,
@@ -290,6 +295,7 @@
 				FCD3B21E2B0B67060054371B /* DylKit */,
 				FC0CF5952B25593800995F30 /* Armstrong */,
 				FCA175E32B256D42002AC37B /* Alexandria */,
+				FC57898E2B302966006D6D37 /* Greg */,
 			);
 			productName = AppApp;
 			productReference = FCD3B1E52B0B584B0054371B /* AppApp.app */;
@@ -370,6 +376,7 @@
 				FCD3B21D2B0B67060054371B /* XCLocalSwiftPackageReference "../DylKit" */,
 				FC0CF5942B25593800995F30 /* XCLocalSwiftPackageReference "../Armstrong" */,
 				FCA175E22B256D42002AC37B /* XCLocalSwiftPackageReference "../Alexandria" */,
+				FC57898D2B302966006D6D37 /* XCLocalSwiftPackageReference "../Greg" */,
 			);
 			productRefGroup = FCD3B1E62B0B584B0054371B /* Products */;
 			projectDirPath = "";
@@ -398,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCD3B1F12B0B584D0054371B /* Preview Assets.xcassets in Resources */,
+				FC57898C2B302736006D6D37 /* Settings.bundle in Resources */,
 				FCD3B1ED2B0B584D0054371B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -889,6 +897,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Armstrong;
 		};
+		FC57898D2B302966006D6D37 /* XCLocalSwiftPackageReference "../Greg" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Greg;
+		};
 		FCA175E22B256D42002AC37B /* XCLocalSwiftPackageReference "../Alexandria" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Alexandria;
@@ -908,6 +920,10 @@
 		FC0CF5952B25593800995F30 /* Armstrong */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Armstrong;
+		};
+		FC57898E2B302966006D6D37 /* Greg */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Greg;
 		};
 		FC8CF6682B255A7A007E3793 /* DylKit */ = {
 			isa = XCSwiftPackageProductDependency;

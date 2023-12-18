@@ -10,6 +10,7 @@ import DylKit
 
 import Armstrong
 import Alexandria
+import Greg
 
 @main
 struct AppAppApp: App {
@@ -18,7 +19,8 @@ struct AppAppApp: App {
     
     var providers: [any AAProvider.Type] = [
         Armstrong.self,
-        Alexandria.self
+        Alexandria.self,
+        Greg.self
     ]
     
     init() {
@@ -27,7 +29,9 @@ struct AppAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if let deepLink = deepLink {
+            if let autoLoadScreenName = UserDefaults.standard.string(forKey: "auto_load_app"), let screen = screen(named: autoLoadScreenName) {
+                ViewMakerView(viewModel: .init(screen: screen, makeMode: false, onUpdate: nil))
+            } else if let deepLink = deepLink {
                 ViewMakerView(viewModel: .init(screen: deepLink, makeMode: false, onUpdate: nil))
             } else {
                 NavigationView {
@@ -59,6 +63,10 @@ struct AppAppApp: App {
             return
         }
         
-        deepLink = (Screen.screens + Screen.defaults).first(where: { $0.name == recipeName })
+        deepLink = screen(named: recipeName)
+    }
+    
+    private func screen(named name: String) -> Screen? {
+        (Screen.screens + Screen.defaults).first(where: { $0.name == name })
     }
 }
