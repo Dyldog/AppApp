@@ -20,13 +20,7 @@ class ScreenListViewModel: ObservableObject {
         }
     }
     
-    var defaultScreens: [Screen] {
-        Screen.defaults
-    }
-    
-    func addBookmark(for index: Int) {
-        
-    }
+    var defaultScreens: [Screen] { AALibrary.shared.demoScreens }
 }
 
 struct ScreenListView: View {
@@ -71,7 +65,7 @@ struct ScreenListView: View {
         List {
             if !viewModel.screens.isEmpty {
                 Section("User") {
-                    ForEach(enumerated: viewModel.screens) { (index, screen) in
+                    ForEach(viewModel.screens.enumeratedArray(), id: \.element.id) { (index, screen) in
                         screenView(screen, index: index)
                         .swipeActions {
                             exportButton(for: screen)
@@ -111,7 +105,8 @@ struct ScreenListView: View {
                 SwiftUI.Button {
                     viewModel.screens.append(Screen(
                         id: .init(),
-                        name: randomString(length: 5).uppercased(),
+                        name: randomString(length: 5).uppercased(), 
+                        initVariables: .makeDefault(),
                         initActions: .init(value: []),
                         content: .makeDefault()
                     ))

@@ -76,7 +76,7 @@ struct AppAppAppView: View {
             
             var screen = try JSONDecoder().decode(Screen.self, from: data)
             
-            if Screen.all.contains(where: { $0.name == screen.name }) {
+            if AALibrary.shared.allScreens.contains(where: { $0.name == screen.name }) {
                 screen.name = "\(screen.name) 2"
             }
             
@@ -112,6 +112,6 @@ struct AppAppAppView: View {
     }
     
     private func screen(named name: String) -> Screen? {
-        Screen.all.first(where: { $0.name == name })
+        AALibrary.shared.allScreens.first(where: { $0.name == name })
     }
 }

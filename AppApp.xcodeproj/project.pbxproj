@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		FC062FA22B187C18009ECA24 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC062FA12B187C18009ECA24 /* Style.swift */; };
-		FC0BE62F2B1C7A380087EE00 /* Screen+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0BE62E2B1C7A380087EE00 /* Screen+Defaults.swift */; };
 		FC0BE6392B1C935E0087EE00 /* AATestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0BE6382B1C935E0087EE00 /* AATestApp.swift */; };
 		FC0BE63B2B1C935E0087EE00 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0BE63A2B1C935E0087EE00 /* ContentView.swift */; };
 		FC0BE63D2B1C93600087EE00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC0BE63C2B1C93600087EE00 /* Assets.xcassets */; };
@@ -51,7 +50,6 @@
 
 /* Begin PBXFileReference section */
 		FC062FA12B187C18009ECA24 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
-		FC0BE62E2B1C7A380087EE00 /* Screen+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Screen+Defaults.swift"; sourceTree = "<group>"; };
 		FC0BE6362B1C935E0087EE00 /* AATest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AATest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC0BE6382B1C935E0087EE00 /* AATestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AATestApp.swift; sourceTree = "<group>"; };
 		FC0BE63A2B1C935E0087EE00 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 				FC18BAF62B1752C7007838AA /* Info.plist */,
 				FCD3B1E82B0B584B0054371B /* AppAppApp.swift */,
 				FC062FA12B187C18009ECA24 /* Style.swift */,
-				FC0BE62E2B1C7A380087EE00 /* Screen+Defaults.swift */,
 				FC5789902B302E3E006D6D37 /* ScreenDocument.swift */,
 				FCA175E72B25A415002AC37B /* Screens */,
 				FCD3B2582B0C960D0054371B /* Helpers */,
@@ -446,7 +443,6 @@
 				FCD3B25B2B0C96170054371B /* DoView.swift in Sources */,
 				FCD3B21C2B0B639F0054371B /* StepButton.swift in Sources */,
 				FC062FA22B187C18009ECA24 /* Style.swift in Sources */,
-				FC0BE62F2B1C7A380087EE00 /* Screen+Defaults.swift in Sources */,
 				FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */,
 				FCA175EA2B25A461002AC37B /* ScreenListView.swift in Sources */,
 				FC5789912B302E3E006D6D37 /* ScreenDocument.swift in Sources */,
