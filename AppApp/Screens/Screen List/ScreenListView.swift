@@ -56,7 +56,7 @@ struct ScreenListView: View {
             exportScreen = screen
             showExport = true
         } label: {
-            Label("Favorite", systemImage: "bookmark.fill")
+            Label("Favorite", systemImage: "square.and.arrow.up")
         }
         .tint(.yellow)
     }

@@ -11,7 +11,7 @@ import Armstrong
 
 extension UTType {
     static var screen: UTType { UTType(exportedAs: "com.dylan.AppAppScreen") }
-    static var marqueeScreen: UTType { UTType(exportedAs: "com.dylan.MarqueeAppAppScreen") }
+    static var marqueeScreen: UTType { UTType(exportedAs: "com.dylan.AppAppMarqueeScreen") }
 }
 
 struct ScreenDocument: FileDocument {
