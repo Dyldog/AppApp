@@ -47,9 +47,9 @@ struct AppAppAppView: View {
                 let autoLoadScreenName = UserDefaults.standard.string(forKey: Constants.autoLoadKey),
                 let screen = screen(named: autoLoadScreenName)
             {
-                ViewMakerView(viewModel: .init(screen: screen, makeMode: false, onUpdate: nil))
+                ViewMakerView(viewModel: .init(scope: nil, screen: screen, makeMode: false, onUpdate: nil))
             } else if let deepLink = deepLink {
-                ViewMakerView(viewModel: .init(screen: deepLink, makeMode: false, onUpdate: nil))
+                ViewMakerView(viewModel: .init(scope: nil, screen: deepLink, makeMode: false, onUpdate: nil))
             } else {
                 NavigationView {
                     ScreenListView(viewModel: listViewModel)

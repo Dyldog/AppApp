@@ -42,6 +42,7 @@ struct ScreenListView: View {
     func screenView(_ screen: Screen, index: Int?) -> some View {
         NavigationLink {
             ViewMakerView(viewModel: .init(
+                scope: .init(), 
                 screen: screen,
                 makeMode: false,
                 onUpdate: onUpdate(screen, index: index))
@@ -68,6 +69,13 @@ struct ScreenListView: View {
                     ForEach(viewModel.screens.enumeratedArray(), id: \.element.id) { (index, screen) in
                         screenView(screen, index: index)
                         .swipeActions {
+                            Button {
+                                UIPasteboard.general.copy(screen)
+                            } label: {
+                                Label("Copy", systemImage: "doc.on.clipboard")
+                            }
+                            .tint(.blue)
+                            
                             exportButton(for: screen)
                 
                             Button {
@@ -108,6 +116,7 @@ struct ScreenListView: View {
                         name: randomString(length: 5).uppercased(), 
                         initVariables: .makeDefault(),
                         initActions: .init(value: []),
+                        subscreens: [],
                         content: .makeDefault()
                     ))
                     viewModel.objectWillChange.send()
@@ -117,9 +126,4 @@ struct ScreenListView: View {
             }
         }
     }
-}
-
-func randomString(length: Int) -> String {
-  let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-  return String((0..<length).map{ _ in letters.randomElement()! })
 }
