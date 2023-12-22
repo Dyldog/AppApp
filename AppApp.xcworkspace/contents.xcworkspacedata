@@ -5,6 +5,9 @@
       location = "group:AppApp.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:AppAppKit">
+   </FileRef>
+   <FileRef
       location = "group:../Greg">
    </FileRef>
    <FileRef

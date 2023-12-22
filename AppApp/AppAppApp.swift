@@ -8,9 +8,8 @@
 import SwiftUI
 import DylKit
 
+import AppAppKit
 import Armstrong
-import Alexandria
-import Greg
 
 @main
 struct AppAppApp: App {
@@ -31,21 +30,14 @@ struct AppAppAppView: View {
     @State var deepLink: Screen? // = .mappyBoy
     @StateObject var listViewModel: ScreenListViewModel = .init()
     
-    var providers: [any AAProvider.Type] = [
-        Armstrong.self,
-        Alexandria.self,
-        Greg.self
-    ]
-    
     init() {
-        AALibrary.shared.addProviders(providers)
+        _ = AppAppKit.shared
     }
-    
     var body: some View {
         Group {
             if
-                let autoLoadScreenName = UserDefaults.standard.string(forKey: Constants.autoLoadKey),
-                let screen = screen(named: autoLoadScreenName)
+                let autoLoadScreenName = UserDefaults.appApp.string(forKey: Constants.autoLoadKey),
+                let screen = AppAppKit.shared.screen(named: autoLoadScreenName)
             {
                 ViewMakerView(viewModel: .init(scope: nil, screen: screen, makeMode: false, onUpdate: nil))
             } else if let deepLink = deepLink {
@@ -84,7 +76,7 @@ struct AppAppAppView: View {
             listViewModel.screens = Screen.screens
             
             if url.pathExtension == Constants.marqueeFileExtension {
-                UserDefaults.standard.set(screen.name, forKey: Constants.autoLoadKey)
+                UserDefaults.appApp.set(screen.name, forKey: Constants.autoLoadKey)
                 deepLink = screen
             }
         } catch {
@@ -108,10 +100,6 @@ struct AppAppAppView: View {
             return
         }
         
-        deepLink = screen(named: recipeName)
-    }
-    
-    private func screen(named name: String) -> Screen? {
-        AALibrary.shared.allScreens.first(where: { $0.name == name })
+        deepLink = AppAppKit.shared.screen(named: recipeName)
     }
 }
