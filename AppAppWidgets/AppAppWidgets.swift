@@ -39,7 +39,7 @@ struct AppAppWidgetsEntryView : View {
 
     var body: some View {
         if let screen {
-            ViewMakerView(viewModel: .init(scope: nil, screen: screen, makeMode: false, onUpdate: nil))
+            ViewMakerView(isWidget: true, viewModel: .init(scope: nil, screen: screen, makeMode: false, onUpdate: nil))
         } else {
             Text("ERROR: Couldn't find screen with name '\(entry.configuration.name ?? "")'")
         }
@@ -51,7 +51,10 @@ struct AppAppWidgets: Widget {
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ScreenIntent.self, provider: Provider()) { entry in
-            AppAppWidgetsEntryView(entry: entry)
+//            VStack {
+//                Text("Hello")
+                AppAppWidgetsEntryView(entry: entry)
+//            }
         }
     }
 }

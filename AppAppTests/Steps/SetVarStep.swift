@@ -16,12 +16,12 @@ final class SetVarStepTests: XCTestCase {
         step = .init(varName: `var`, value: value)
     }
     
-//    func testStep() async throws {
+//    func testStep() throws {
 //        configure(var: .string("VAR"), value: .string("HELLO"))
 //        let vars = Variables()
-//        try await step.run(with: vars)
+//        try step.run(with: vars)
 //        XCTAssertEqual(
-//            await vars.variables["VAR"]?.valueString,
+//             vars.variables["VAR"]?.valueString,
 //            AnyValue.string("HELLO").valueString
 //        )
 //    }

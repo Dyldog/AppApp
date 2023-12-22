@@ -8,6 +8,7 @@
 import SwiftUI
 import DylKit
 import Armstrong
+import WidgetKit
 
 class ScreenListViewModel: ObservableObject {
     var screens: [Screen] {
@@ -17,6 +18,7 @@ class ScreenListViewModel: ObservableObject {
         set {
             objectWillChange.send()
             Screen.screens = newValue
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
     

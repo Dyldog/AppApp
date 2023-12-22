@@ -35,7 +35,7 @@ typealias Alert = DylKit.Alert
 //    var body: some View {
 //        SwiftUI.Button(action: {
 //            do {
-//                try await step.run(with: $variables)
+//                try step.run(with: $variables)
 //            } catch {
 //                alert = .init(title: "Error", message: error.localizedDescription)
 //            }
