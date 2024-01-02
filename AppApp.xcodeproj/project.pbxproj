@@ -15,17 +15,22 @@
 		FC0BE6462B1C95A20087EE00 /* DylKit in Frameworks */ = {isa = PBXBuildFile; productRef = FC0BE6452B1C95A20087EE00 /* DylKit */; };
 		FC0CF5962B25593800995F30 /* Armstrong in Frameworks */ = {isa = PBXBuildFile; productRef = FC0CF5952B25593800995F30 /* Armstrong */; };
 		FC18BAFD2B177199007838AA /* SetVarStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC18BAFC2B177199007838AA /* SetVarStep.swift */; };
+		FC20C3B22B3FDAA800F2E2FF /* SimpleAppAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC20C3B12B3FDAA800F2E2FF /* SimpleAppAppApp.swift */; };
+		FC20C3B42B3FDAA800F2E2FF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC20C3B32B3FDAA800F2E2FF /* ContentView.swift */; };
+		FC20C3B62B3FDAAA00F2E2FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC20C3B52B3FDAAA00F2E2FF /* Assets.xcassets */; };
+		FC20C3B92B3FDAAA00F2E2FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC20C3B82B3FDAAA00F2E2FF /* Preview Assets.xcassets */; };
+		FC20C3BE2B3FDBA900F2E2FF /* Armstrong in Frameworks */ = {isa = PBXBuildFile; productRef = FC20C3BD2B3FDBA900F2E2FF /* Armstrong */; };
+		FC20C3C02B3FDBA900F2E2FF /* DylKit in Frameworks */ = {isa = PBXBuildFile; productRef = FC20C3BF2B3FDBA900F2E2FF /* DylKit */; };
+		FC20C3C22B3FF1AD00F2E2FF /* Alexandria in Frameworks */ = {isa = PBXBuildFile; productRef = FC20C3C12B3FF1AD00F2E2FF /* Alexandria */; };
 		FC57898C2B302736006D6D37 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC57898B2B302736006D6D37 /* Settings.bundle */; };
 		FC57898F2B302966006D6D37 /* Greg in Frameworks */ = {isa = PBXBuildFile; productRef = FC57898E2B302966006D6D37 /* Greg */; };
-		FC5789912B302E3E006D6D37 /* ScreenDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5789902B302E3E006D6D37 /* ScreenDocument.swift */; };
 		FCA175E42B256D42002AC37B /* Alexandria in Frameworks */ = {isa = PBXBuildFile; productRef = FCA175E32B256D42002AC37B /* Alexandria */; };
-		FCA175EA2B25A461002AC37B /* ScreenListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA175E92B25A461002AC37B /* ScreenListView.swift */; };
 		FCD1A4FA2B35401800E91BD7 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD1A4F92B35401800E91BD7 /* WidgetKit.framework */; };
 		FCD1A4FC2B35401800E91BD7 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD1A4FB2B35401800E91BD7 /* SwiftUI.framework */; };
 		FCD1A4FF2B35401800E91BD7 /* AppAppWidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1A4FE2B35401800E91BD7 /* AppAppWidgetsBundle.swift */; };
 		FCD1A5012B35401800E91BD7 /* AppAppWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1A5002B35401800E91BD7 /* AppAppWidgets.swift */; };
 		FCD1A5052B35401B00E91BD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD1A5042B35401B00E91BD7 /* Assets.xcassets */; };
-		FCD1A5092B35401B00E91BD7 /* AppAppWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FCD1A4F82B35401800E91BD7 /* AppAppWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FCD1A5092B35401B00E91BD7 /* AppAppWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FCD1A4F82B35401800E91BD7 /* AppAppWidgetsExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FCD1A50F2B35444100E91BD7 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = FCD1A50E2B35444100E91BD7 /* Intents.intentdefinition */; };
 		FCD1A5102B3545BE00E91BD7 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = FCD1A50E2B35444100E91BD7 /* Intents.intentdefinition */; };
 		FCD1A5122B354CB200E91BD7 /* AppAppKit in Frameworks */ = {isa = PBXBuildFile; productRef = FCD1A5112B354CB200E91BD7 /* AppAppKit */; };
@@ -89,9 +94,13 @@
 		FC0BE63F2B1C93600087EE00 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FC18BAF62B1752C7007838AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FC18BAFC2B177199007838AA /* SetVarStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetVarStep.swift; sourceTree = "<group>"; };
+		FC20C3AF2B3FDAA800F2E2FF /* SimpleAppApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleAppApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC20C3B12B3FDAA800F2E2FF /* SimpleAppAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAppAppApp.swift; sourceTree = "<group>"; };
+		FC20C3B32B3FDAA800F2E2FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FC20C3B52B3FDAAA00F2E2FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FC20C3B82B3FDAAA00F2E2FF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FC20C3C32B40016400F2E2FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FC57898B2B302736006D6D37 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		FC5789902B302E3E006D6D37 /* ScreenDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDocument.swift; sourceTree = "<group>"; };
-		FCA175E92B25A461002AC37B /* ScreenListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenListView.swift; sourceTree = "<group>"; };
 		FCD1A4F82B35401800E91BD7 /* AppAppWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AppAppWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD1A4F92B35401800E91BD7 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		FCD1A4FB2B35401800E91BD7 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -121,6 +130,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC0BE6462B1C95A20087EE00 /* DylKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC20C3AC2B3FDAA800F2E2FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC20C3BE2B3FDBA900F2E2FF /* Armstrong in Frameworks */,
+				FC20C3C02B3FDBA900F2E2FF /* DylKit in Frameworks */,
+				FC20C3C22B3FF1AD00F2E2FF /* Alexandria in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +219,26 @@
 			path = Steps;
 			sourceTree = "<group>";
 		};
+		FC20C3B02B3FDAA800F2E2FF /* SimpleAppApp */ = {
+			isa = PBXGroup;
+			children = (
+				FC20C3C32B40016400F2E2FF /* Info.plist */,
+				FC20C3B12B3FDAA800F2E2FF /* SimpleAppAppApp.swift */,
+				FC20C3B32B3FDAA800F2E2FF /* ContentView.swift */,
+				FC20C3B52B3FDAAA00F2E2FF /* Assets.xcassets */,
+				FC20C3B72B3FDAAA00F2E2FF /* Preview Content */,
+			);
+			path = SimpleAppApp;
+			sourceTree = "<group>";
+		};
+		FC20C3B72B3FDAAA00F2E2FF /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				FC20C3B82B3FDAAA00F2E2FF /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		FCA175E72B25A415002AC37B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,7 +250,6 @@
 		FCA175E82B25A44B002AC37B /* Screen List */ = {
 			isa = PBXGroup;
 			children = (
-				FCA175E92B25A461002AC37B /* ScreenListView.swift */,
 			);
 			path = "Screen List";
 			sourceTree = "<group>";
@@ -220,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				FCD1A4FE2B35401800E91BD7 /* AppAppWidgetsBundle.swift */,
+				FCD1A5172B354F2900E91BD7 /* AppAppWidgetsExtension.entitlements */,
 				FCD1A5002B35401800E91BD7 /* AppAppWidgets.swift */,
 				FCD1A50E2B35444100E91BD7 /* Intents.intentdefinition */,
 				FCD1A5042B35401B00E91BD7 /* Assets.xcassets */,
@@ -231,12 +270,12 @@
 		FCD3B1DC2B0B584B0054371B = {
 			isa = PBXGroup;
 			children = (
-				FCD1A5172B354F2900E91BD7 /* AppAppWidgetsExtension.entitlements */,
 				FCD3B1E72B0B584B0054371B /* AppApp */,
 				FCD3B1F92B0B584E0054371B /* AppAppTests */,
 				FCD3B2032B0B584E0054371B /* AppAppUITests */,
 				FC0BE6372B1C935E0087EE00 /* AATest */,
 				FCD1A4FD2B35401800E91BD7 /* AppAppWidgets */,
+				FC20C3B02B3FDAA800F2E2FF /* SimpleAppApp */,
 				FCD3B1E62B0B584B0054371B /* Products */,
 				FC0BE6442B1C95A20087EE00 /* Frameworks */,
 			);
@@ -250,6 +289,7 @@
 				FCD3B2002B0B584E0054371B /* AppAppUITests.xctest */,
 				FC0BE6362B1C935E0087EE00 /* AATest.app */,
 				FCD1A4F82B35401800E91BD7 /* AppAppWidgetsExtension.appex */,
+				FC20C3AF2B3FDAA800F2E2FF /* SimpleAppApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -261,7 +301,6 @@
 				FC18BAF62B1752C7007838AA /* Info.plist */,
 				FCD3B1E82B0B584B0054371B /* AppAppApp.swift */,
 				FC062FA12B187C18009ECA24 /* Style.swift */,
-				FC5789902B302E3E006D6D37 /* ScreenDocument.swift */,
 				FCA175E72B25A415002AC37B /* Screens */,
 				FCD3B2582B0C960D0054371B /* Helpers */,
 				FCD3B1EC2B0B584D0054371B /* Assets.xcassets */,
@@ -343,6 +382,28 @@
 			);
 			productName = AATest;
 			productReference = FC0BE6362B1C935E0087EE00 /* AATest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FC20C3AE2B3FDAA800F2E2FF /* SimpleAppApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC20C3BA2B3FDAAA00F2E2FF /* Build configuration list for PBXNativeTarget "SimpleAppApp" */;
+			buildPhases = (
+				FC20C3AB2B3FDAA800F2E2FF /* Sources */,
+				FC20C3AC2B3FDAA800F2E2FF /* Frameworks */,
+				FC20C3AD2B3FDAA800F2E2FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimpleAppApp;
+			packageProductDependencies = (
+				FC20C3BD2B3FDBA900F2E2FF /* Armstrong */,
+				FC20C3BF2B3FDBA900F2E2FF /* DylKit */,
+				FC20C3C12B3FF1AD00F2E2FF /* Alexandria */,
+			);
+			productName = SimpleAppApp;
+			productReference = FC20C3AF2B3FDAA800F2E2FF /* SimpleAppApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FCD1A4F72B35401800E91BD7 /* AppAppWidgetsExtension */ = {
@@ -444,6 +505,9 @@
 					FC0BE6352B1C935E0087EE00 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
+					FC20C3AE2B3FDAA800F2E2FF = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
 					FCD1A4F72B35401800E91BD7 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -484,6 +548,7 @@
 				FCD3B1FF2B0B584E0054371B /* AppAppUITests */,
 				FC0BE6352B1C935E0087EE00 /* AATest */,
 				FCD1A4F72B35401800E91BD7 /* AppAppWidgetsExtension */,
+				FC20C3AE2B3FDAA800F2E2FF /* SimpleAppApp */,
 			);
 		};
 /* End PBXProject section */
@@ -495,6 +560,15 @@
 			files = (
 				FC0BE6402B1C93600087EE00 /* Preview Assets.xcassets in Resources */,
 				FC0BE63D2B1C93600087EE00 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC20C3AD2B3FDAA800F2E2FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC20C3B92B3FDAAA00F2E2FF /* Preview Assets.xcassets in Resources */,
+				FC20C3B62B3FDAAA00F2E2FF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +616,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FC20C3AB2B3FDAA800F2E2FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC20C3B42B3FDAA800F2E2FF /* ContentView.swift in Sources */,
+				FC20C3B22B3FDAA800F2E2FF /* SimpleAppAppApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FCD1A4F42B35401800E91BD7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -561,8 +644,6 @@
 				FCD3B21C2B0B639F0054371B /* StepButton.swift in Sources */,
 				FC062FA22B187C18009ECA24 /* Style.swift in Sources */,
 				FCD3B1E92B0B584B0054371B /* AppAppApp.swift in Sources */,
-				FCA175EA2B25A461002AC37B /* ScreenListView.swift in Sources */,
-				FC5789912B302E3E006D6D37 /* ScreenDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,6 +682,7 @@
 		};
 		FCD1A5082B35401B00E91BD7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = FCD1A4F72B35401800E91BD7 /* AppAppWidgetsExtension */;
 			targetProxy = FCD1A5072B35401B00E91BD7 /* PBXContainerItemProxy */;
 		};
@@ -682,12 +764,79 @@
 			};
 			name = Release;
 		};
+		FC20C3BB2B3FDAAA00F2E2FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SimpleAppApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 6CW3378X23;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SimpleAppApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dylan.SimpleAppApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FC20C3BC2B3FDAAA00F2E2FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SimpleAppApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 6CW3378X23;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SimpleAppApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dylan.SimpleAppApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		FCD1A50B2B35401B00E91BD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = AppAppWidgetsExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = AppAppWidgets/AppAppWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6CW3378X23;
@@ -718,7 +867,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = AppAppWidgetsExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = AppAppWidgets/AppAppWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6CW3378X23;
@@ -1041,6 +1190,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		FC20C3BA2B3FDAAA00F2E2FF /* Build configuration list for PBXNativeTarget "SimpleAppApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC20C3BB2B3FDAAA00F2E2FF /* Debug */,
+				FC20C3BC2B3FDAAA00F2E2FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FCD1A50A2B35401B00E91BD7 /* Build configuration list for PBXNativeTarget "AppAppWidgetsExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1116,6 +1274,18 @@
 		FC0CF5952B25593800995F30 /* Armstrong */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Armstrong;
+		};
+		FC20C3BD2B3FDBA900F2E2FF /* Armstrong */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Armstrong;
+		};
+		FC20C3BF2B3FDBA900F2E2FF /* DylKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DylKit;
+		};
+		FC20C3C12B3FF1AD00F2E2FF /* Alexandria */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Alexandria;
 		};
 		FC57898E2B302966006D6D37 /* Greg */ = {
 			isa = XCSwiftPackageProductDependency;
