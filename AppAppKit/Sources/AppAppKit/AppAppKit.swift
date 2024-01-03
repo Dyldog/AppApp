@@ -4,6 +4,8 @@
 import Armstrong
 import Alexandria
 import Greg
+import Obscura
+import Viticci
 
 public struct AppAppKit {
     public static let shared: AppAppKit = .init()
@@ -11,7 +13,9 @@ public struct AppAppKit {
     var providers: [any AAProvider.Type] = [
         Armstrong.self,
         Alexandria.self,
-        Greg.self
+        Greg.self,
+        Obscura.self,
+        Viticci.self
     ]
     
     init() {

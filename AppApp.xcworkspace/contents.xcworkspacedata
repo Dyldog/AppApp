@@ -8,6 +8,15 @@
       location = "group:AppAppKit">
    </FileRef>
    <FileRef
+      location = "group:../SFBrowser">
+   </FileRef>
+   <FileRef
+      location = "group:../Viticci">
+   </FileRef>
+   <FileRef
+      location = "group:../Obscura">
+   </FileRef>
+   <FileRef
       location = "group:../Greg">
    </FileRef>
    <FileRef

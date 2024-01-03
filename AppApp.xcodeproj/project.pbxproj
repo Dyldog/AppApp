@@ -23,8 +23,6 @@
 		FC20C3C02B3FDBA900F2E2FF /* DylKit in Frameworks */ = {isa = PBXBuildFile; productRef = FC20C3BF2B3FDBA900F2E2FF /* DylKit */; };
 		FC20C3C22B3FF1AD00F2E2FF /* Alexandria in Frameworks */ = {isa = PBXBuildFile; productRef = FC20C3C12B3FF1AD00F2E2FF /* Alexandria */; };
 		FC57898C2B302736006D6D37 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC57898B2B302736006D6D37 /* Settings.bundle */; };
-		FC57898F2B302966006D6D37 /* Greg in Frameworks */ = {isa = PBXBuildFile; productRef = FC57898E2B302966006D6D37 /* Greg */; };
-		FCA175E42B256D42002AC37B /* Alexandria in Frameworks */ = {isa = PBXBuildFile; productRef = FCA175E32B256D42002AC37B /* Alexandria */; };
 		FCD1A4FA2B35401800E91BD7 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD1A4F92B35401800E91BD7 /* WidgetKit.framework */; };
 		FCD1A4FC2B35401800E91BD7 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD1A4FB2B35401800E91BD7 /* SwiftUI.framework */; };
 		FCD1A4FF2B35401800E91BD7 /* AppAppWidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD1A4FE2B35401800E91BD7 /* AppAppWidgetsBundle.swift */; };
@@ -159,9 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC0CF5962B25593800995F30 /* Armstrong in Frameworks */,
-				FC57898F2B302966006D6D37 /* Greg in Frameworks */,
 				FCD3B21F2B0B67060054371B /* DylKit in Frameworks */,
-				FCA175E42B256D42002AC37B /* Alexandria in Frameworks */,
 				FCD1A5122B354CB200E91BD7 /* AppAppKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -448,8 +444,6 @@
 			packageProductDependencies = (
 				FCD3B21E2B0B67060054371B /* DylKit */,
 				FC0CF5952B25593800995F30 /* Armstrong */,
-				FCA175E32B256D42002AC37B /* Alexandria */,
-				FC57898E2B302966006D6D37 /* Greg */,
 				FCD1A5112B354CB200E91BD7 /* AppAppKit */,
 			);
 			productName = AppApp;
@@ -1287,10 +1281,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Alexandria;
 		};
-		FC57898E2B302966006D6D37 /* Greg */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Greg;
-		};
 		FC8CF6682B255A7A007E3793 /* DylKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FCD3B21D2B0B67060054371B /* XCLocalSwiftPackageReference "../DylKit" */;
@@ -1300,10 +1290,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FC0CF5942B25593800995F30 /* XCLocalSwiftPackageReference "../Armstrong" */;
 			productName = Armstrong;
-		};
-		FCA175E32B256D42002AC37B /* Alexandria */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Alexandria;
 		};
 		FCA175E52B256DC2002AC37B /* Alexandria */ = {
 			isa = XCSwiftPackageProductDependency;
