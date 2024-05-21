@@ -26,7 +26,7 @@ struct AppAppAppView: View {
         static let marqueeFileExtension = "marqueescreen"
     }
     
-    @State var alert: Alert?
+	@State var alert: DylKit.Alert?
     @State var deepLink: Screen? // = .mappyBoy
     @StateObject var listViewModel: ScreenListViewModel = .init()
     
