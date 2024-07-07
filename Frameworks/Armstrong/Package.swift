@@ -17,7 +17,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "../DylKit", branch: "master"),
+        .package(url: "~/Code/My Apps/DylKit", branch: "master"),
         .package(url: "https://github.com/krzysztofzablocki/Sourcery.git", from: "2.0.0"),
     ],
     targets: [
