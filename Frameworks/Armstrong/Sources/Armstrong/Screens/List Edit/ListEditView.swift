@@ -41,11 +41,7 @@ struct ListEditView: View {
                 onAdd: { index in
                     guard let type = value.type.editableType else { return }
                     let view = type.makeDefault()
-                    if index <= value.elements.count {
-                        value.elements.append(view)
-                    } else {
-                        value.elements[index] = view
-                    }
+                    value.elements.insert(view, at: index)
 
                     onUpdate(value)
                 },
