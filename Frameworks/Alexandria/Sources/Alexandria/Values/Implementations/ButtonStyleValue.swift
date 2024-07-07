@@ -5,19 +5,19 @@
 //  Created by Dylan Elliott on 29/11/2023.
 //
 
-import SwiftUI
 import Armstrong
+import SwiftUI
 
 // sourcery: categories = ".layout"
 public enum ButtonStyle: String, PickableValue {
     case plain
     case borderedProminent
     case bordered
-    
+
     public static var defaultValue: ButtonStyle = .plain
-    
+
     public var title: String { rawValue }
-    
+
     public var codeRepresentation: String {
         switch self {
         case .plain: return ".plain"

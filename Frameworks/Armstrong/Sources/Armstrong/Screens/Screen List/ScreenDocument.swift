@@ -14,7 +14,6 @@ extension UTType {
 }
 
 struct ScreenDocument: FileDocument {
-    
     static var readableContentTypes: [UTType] { [.screen, .marqueeScreen] }
 
     var screen: Screen
@@ -28,12 +27,11 @@ struct ScreenDocument: FileDocument {
         else {
             throw CocoaError(.fileReadCorruptFile)
         }
-        
+
         screen = try JSONDecoder().decode(Screen.self, from: data)
     }
 
-    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        return FileWrapper(regularFileWithContents: try JSONEncoder().encode(screen))
+    func fileWrapper(configuration _: WriteConfiguration) throws -> FileWrapper {
+        return try FileWrapper(regularFileWithContents: JSONEncoder().encode(screen))
     }
-    
 }

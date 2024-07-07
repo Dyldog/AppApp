@@ -5,53 +5,54 @@
 //  Created by Dylan Elliott on 28/11/2023.
 //
 
-import SwiftUI
 import Armstrong
 import DylKit
+import SwiftUI
 
 public final class MakeableToggle: MakeableView {
     public static let categories: [ValueCategory] = [.views]
     public static var type: VariableType { .toggle }
-    
+
     public let id: UUID
-    
+
     public var isOn: TemporaryValue
     public var onToggleUpdate: StepArray
     public var padding: IntValue
-    
+
     public var protoString: String { isOn.protoString }
     public var valueString: String { isOn.valueString }
-    
+
     public init(id: UUID, isOn: TemporaryValue, onToggleUpdate: StepArray, padding: IntValue) {
         self.id = id
         self.isOn = isOn
         self.onToggleUpdate = onToggleUpdate
         self.padding = padding
     }
-    
+
     public static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .isOn: return TemporaryValue(
-            initial: .init(value: BoolValue(value: false)),
-            output: .init(value: StringValue(value: "SWITCHON").any))
+                initial: .init(value: BoolValue(value: false)),
+                output: .init(value: StringValue(value: "SWITCHON").any)
+            )
         case .onToggleUpdate: return StepArray(value: [])
         case .padding: return IntValue(value: 5)
         }
     }
-    
-    public func value(with variables: Variables, and scope: Scope) throws -> VariableValue {
+
+    public func value(with _: Variables, and _: Scope) throws -> VariableValue {
         self
     }
-    
+
     public func insertValues(into variables: Variables, with scope: Scope) throws {
         let outputVarName = try isOn.output.value.value(with: variables, and: scope)
         let outputValue = try isOn.value(with: variables, and: scope)
-         variables.set(outputValue, for: outputVarName.valueString)
-        
+        variables.set(outputValue, for: outputVarName.valueString)
+
         try onToggleUpdate.run(with: variables, and: scope)
     }
-    
-    public func add(_ other: VariableValue) throws -> VariableValue {
+
+    public func add(_: VariableValue) throws -> VariableValue {
         fatalError()
     }
 }
@@ -65,9 +66,9 @@ struct MakeableToggleView: View {
     let onRuntimeUpdate: (@escaping Block) -> Void
     @EnvironmentObject var variables: Variables
     @Binding var error: VariableValueError?
-    
+
     @State var isOn: Bool = false
-    
+
     var body: some View {
         VStack {
             Toggle("", isOn: .init(get: {
@@ -88,13 +89,13 @@ struct MakeableToggleView: View {
 //            }
 //        }
     }
-    
+
     func onUpdate(_ value: Bool) {
-        self.isOn = value
-        
+        isOn = value
+
         do {
             if isRunning {
-              let outputVar = try toggle.isOn.output.value.value(with: variables, and: scope)
+                let outputVar = try toggle.isOn.output.value.value(with: variables, and: scope)
                 variables.set(AnyValue(value: BoolValue(value: value)), for: outputVar.valueString)
                 try toggle.onToggleUpdate.run(with: variables, and: scope)
             }
@@ -103,8 +104,8 @@ struct MakeableToggleView: View {
         } catch {
             fatalError(error.localizedDescription)
         }
-        
-        onRuntimeUpdate { }
+
+        onRuntimeUpdate {}
     }
 }
 

@@ -21,7 +21,7 @@ extension View {
             .buttonStyle(.plain)
             .any
         } else {
-            self.any
+            any
         }
     }
 }

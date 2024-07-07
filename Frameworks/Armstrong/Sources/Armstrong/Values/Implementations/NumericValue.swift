@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  NumericValue.swift
 //  AppApp
 //
 //  Created by Dylan Elliott on 30/11/2023.
@@ -13,15 +13,15 @@ public protocol NumericValue: EditableVariableValue, Codable {
     init(value: NValue)
 }
 
-extension NumericValue {
-    public func perform(operation: NumericalOperationType, with other: any NumericValue) throws -> Self {
+public extension NumericValue {
+    func perform(operation: NumericalOperationType, with other: any NumericValue) throws -> Self {
         guard let other = other as? Self else {
             throw VariableValueError.wrongTypeForOperation
         }
-        
-        return .init(value: operation.func()(self.value, other.value))
+
+        return .init(value: operation.func()(value, other.value))
     }
 }
 
 // sourcery: categories = ".numbers"
-extension NumericType: PickableValue { }
+extension NumericType: PickableValue {}

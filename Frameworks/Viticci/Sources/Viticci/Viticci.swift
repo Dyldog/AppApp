@@ -1,13 +1,13 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
-import Armstrong
 import Alexandria
+import Armstrong
 
-extension Viticci {
-    public static var demoScreens: [Screen] { [openURLDemo] }
-    
-    public static var openURLDemo = Screen(
+public extension Viticci {
+    static var demoScreens: [Screen] { [openURLDemo] }
+
+    static var openURLDemo = Screen(
         id: .init(),
         name: "Open URL",
         initVariables: .init(elements: [:]),
@@ -21,8 +21,10 @@ extension Viticci {
                 action: .init(
                     arguments: .value(.init(elements: [:])),
                     body: .value(.init(value: [
-                        OpenURLStep.makeDefault()
-                    ])))
-            )
-        ]))
+                        OpenURLStep.makeDefault(),
+                    ]))
+                )
+            ),
+        ])
+    )
 }

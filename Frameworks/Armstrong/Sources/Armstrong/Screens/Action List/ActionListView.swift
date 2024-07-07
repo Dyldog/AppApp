@@ -5,8 +5,8 @@
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import SwiftUI
 import DylKit
+import SwiftUI
 
 struct ActionListView: View {
     let scope: Scope
@@ -15,7 +15,7 @@ struct ActionListView: View {
     @State var steps: [any StepType]
     let onUpdate: ([any StepType]) -> Void
     let padSteps: Bool
-    
+
     init(
         scope: Scope,
         title: String,
@@ -29,12 +29,12 @@ struct ActionListView: View {
         self.steps = steps
         self.onUpdate = onUpdate
     }
-    
+
     var body: some View {
         VStack {
             addButton(index: 0)
-            
-            ForEach(enumerated: steps) { (index, element) in
+
+            ForEach(enumerated: steps) { index, element in
                 VStack(spacing: 0) {
                     HStack {
                         Text(type(of: element).title)
@@ -44,13 +44,13 @@ struct ActionListView: View {
                                 DylKit.Pasteboard.general.copy(element)
                             }
                             .padding(.bottom)
-                        
+
                         ElementDeleteButton(color: scope.next.color) {
                             steps = steps.removing(at: index)
                             onUpdate(steps)
                         }
                     }
-                    
+
                     element.editView(scope: scope.next.next, title: title) { value in
                         onUpdate(steps.replacing(value, at: index))
                     }
@@ -59,7 +59,7 @@ struct ActionListView: View {
                 .if(padSteps) { $0.padding() }
                 .background(RoundedRectangle(cornerRadius: 12).foregroundStyle(.white))
                 .frame(maxWidth: .infinity)
-                
+
                 addButton(index: index + 1)
             }
         }
@@ -71,7 +71,7 @@ struct ActionListView: View {
             }
         }
     }
-    
+
     func addButton(index: Int) -> some View {
         LongPressButton {
             showAddIndex = index
@@ -91,33 +91,32 @@ import AudioToolbox
 
 public extension DylKit.Pasteboard {
     func copy(_ value: any EditableVariableValue) {
-        self.string = CodableVariableValue(value: value).encoded().string
-        AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {   }
+        string = CodableVariableValue(value: value).encoded().string
+        AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
+    }
 
-    }
-    
     func copy(_ screen: Screen) {
-        self.string = screen.encoded().string
-        AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {   }
+        string = screen.encoded().string
+        AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
     }
-    
+
     func pasteValue() -> (any EditableVariableValue)? {
-        guard let data = self.string?.data(using: .utf8), let value = try? JSONDecoder().decode(CodableVariableValue.self, from: data) else {
+        guard let data = string?.data(using: .utf8), let value = try? JSONDecoder().decode(CodableVariableValue.self, from: data) else {
             return nil
         }
-        
-        AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {   }
-        
+
+        AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
+
         return value.value
     }
-    
+
     func pasteScreen() -> Screen? {
-        guard let data = self.string?.data(using: .utf8), let value = try? JSONDecoder().decode(Screen.self, from: data) else {
+        guard let data = string?.data(using: .utf8), let value = try? JSONDecoder().decode(Screen.self, from: data) else {
             return nil
         }
-        
-        AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {   }
-        
+
+        AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) {}
+
         return value
     }
 }

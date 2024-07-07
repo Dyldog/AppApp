@@ -5,9 +5,9 @@
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import SwiftUI
 import Armstrong
 import DylKit
+import SwiftUI
 import TextView
 
 struct MakeableFieldView: View {
@@ -20,11 +20,11 @@ struct MakeableFieldView: View {
     @EnvironmentObject var variables: Variables
     @Binding var error: VariableValueError?
     @State var text: String = "LOADING"
-    
+
     @ViewBuilder
     private var fieldView: some View {
         let variables = variables.copy()
-        
+
         let binding: Binding<String> = .init(get: {
             do {
                 return try field.text.value(with: variables, and: scope).valueString
@@ -35,7 +35,7 @@ struct MakeableFieldView: View {
         }, set: {
             onTextUpdate($0)
         })
-        
+
         if isWidget {
             Text(binding.wrappedValue)
         } else if field.isMultiline.value {
@@ -44,13 +44,13 @@ struct MakeableFieldView: View {
             TextField("", text: binding)
         }
     }
-    
+
     var body: some View {
         VStack {
             if isRunning {
                 fieldView
-                .multilineTextAlignment(field.alignment.value)
-                .font(.system(size: CGFloat(field.fontSize.value)))
+                    .multilineTextAlignment(field.alignment.value)
+                    .font(.system(size: CGFloat(field.fontSize.value)))
             } else {
                 Text(field.protoString)
                     .font(.system(size: CGFloat(field.fontSize.value)))
@@ -58,11 +58,11 @@ struct MakeableFieldView: View {
             }
         }
     }
-    
+
     func onTextUpdate(_ string: String) {
-        guard self.text != string else { return }
-        self.text = string
-        
+        guard text != string else { return }
+        text = string
+
         do {
             if isRunning {
                 let outputVar = try field.text.output.value.value(with: variables, and: scope)
@@ -72,10 +72,10 @@ struct MakeableFieldView: View {
         } catch {
             handleError(error)
         }
-        
-        onRuntimeUpdate { }
+
+        onRuntimeUpdate {}
     }
-    
+
     private func handleError(_ error: Error) {
         if let error = error as? VariableValueError {
             self.error = error
@@ -88,7 +88,7 @@ struct MakeableFieldView: View {
 public final class MakeableField: MakeableView, Codable {
     public static let categories: [ValueCategory] = [.views]
     public static var type: VariableType { .field }
-    
+
     public let id: UUID
     public var text: TemporaryValue
     public var fontSize: IntValue
@@ -96,7 +96,7 @@ public final class MakeableField: MakeableView, Codable {
     public var padding: IntValue
     public var alignment: TextAlignmentValue
     public var isMultiline: BoolValue
-    
+
     public init(id: UUID, text: TemporaryValue, fontSize: IntValue, onTextUpdate: StepArray, padding: IntValue, alignment: TextAlignmentValue, isMultiline: BoolValue) {
         self.id = id
         self.text = text
@@ -106,7 +106,7 @@ public final class MakeableField: MakeableView, Codable {
         self.alignment = alignment
         self.isMultiline = isMultiline
     }
-    
+
     public static func defaultValue(for property: Properties) -> any EditableVariableValue {
         switch property {
         case .text: return TemporaryValue.makeDefault()
@@ -117,14 +117,14 @@ public final class MakeableField: MakeableView, Codable {
         case .isMultiline: return BoolValue.false
         }
     }
-    
+
     public var protoString: String { text.protoString }
     public var valueString: String { text.valueString }
-    
-    public func add(_ other: VariableValue) throws -> VariableValue {
+
+    public func add(_: VariableValue) throws -> VariableValue {
         fatalError()
     }
-    
+
     public func value(with variables: Variables, and scope: Scope) throws -> VariableValue {
 //        self
         try MakeableField(
@@ -140,11 +140,11 @@ public final class MakeableField: MakeableView, Codable {
             isMultiline: isMultiline.value(with: variables, and: scope)
         )
     }
-    
+
     public func insertValues(into variables: Variables, with scope: Scope) throws {
         let outputVarName = try text.output.value.value(with: variables, and: scope)
         let outputValue = try text.value(with: variables, and: scope)
-         variables.set(outputValue, for: outputVarName.valueString)
+        variables.set(outputValue, for: outputVarName.valueString)
         try onTextUpdate.run(with: variables, and: scope)
     }
 }

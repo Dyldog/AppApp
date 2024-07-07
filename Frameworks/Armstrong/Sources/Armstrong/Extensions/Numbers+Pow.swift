@@ -8,18 +8,18 @@
 import Foundation
 
 precedencegroup ExponentiationPrecedence {
-  associativity: right
-  higherThan: MultiplicationPrecedence
+    associativity: right
+    higherThan: MultiplicationPrecedence
 }
 
-infix operator ** : ExponentiationPrecedence
+infix operator **: ExponentiationPrecedence
 
 public func ** (_ base: Double, _ exp: Double) -> Double {
-  return pow(base, exp)
+    return pow(base, exp)
 }
 
 public func ** (_ base: Float, _ exp: Float) -> Float {
-  return pow(base, exp)
+    return pow(base, exp)
 }
 
 public func ** (_ base: Int, _ exp: Int) -> Int {

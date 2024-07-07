@@ -11,14 +11,14 @@ import SwiftUI
 extension Font.Weight: PickableValue {
     public static let categories: [ValueCategory] = [.text]
     public static var defaultValue: Font.Weight { .regular }
-    
+
     public static var allCases: [Font.Weight] { [
         .regular,
         .bold,
         .semibold,
         .black, .heavy, .light, .ultraLight, .thin,
     ] }
-    
+
     public var title: String {
         switch self {
         case .black: return "Black"
@@ -33,7 +33,7 @@ extension Font.Weight: PickableValue {
         }
     }
 }
-    
+
 extension Font.Weight: Codable {
     public init(from decoder: Decoder) throws {
         let title = try decoder.singleValueContainer().decode(String.self)
@@ -42,7 +42,7 @@ extension Font.Weight: Codable {
         }
         self = value
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(title)

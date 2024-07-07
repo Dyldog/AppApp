@@ -1,5 +1,5 @@
-import XCTest
 @testable import Alexandria
+import XCTest
 
 final class AlexandriaTests: XCTestCase {
     func testExample() throws {

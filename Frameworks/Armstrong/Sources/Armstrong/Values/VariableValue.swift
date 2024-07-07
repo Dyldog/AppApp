@@ -19,10 +19,10 @@ public protocol VariableValue: Codable, Copying, CodeRepresentable {
 }
 
 public extension VariableValue {
-    func value<T>(with variables: Variables, and scope: Scope, of type: T.Type = T.self) throws -> T {
+    func value<T>(with variables: Variables, and scope: Scope, of _: T.Type = T.self) throws -> T {
         let value: VariableValue = try value(with: variables, and: scope)
         guard let castValue = value as? T else {
-             throw VariableValueError.wrongTypeForOperation
+            throw VariableValueError.wrongTypeForOperation
         }
         return castValue
     }

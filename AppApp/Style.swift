@@ -7,10 +7,8 @@
 
 import Foundation
 
-enum Style { }
+enum Style {}
 
 extension Style {
-    enum Title {
-        
-    }
+    enum Title {}
 }

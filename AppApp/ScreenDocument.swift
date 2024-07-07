@@ -5,9 +5,9 @@
 //  Created by Dylan Elliott on 18/12/2023.
 //
 
+import Armstrong
 import SwiftUI
 import UniformTypeIdentifiers
-import Armstrong
 
 public extension UTType {
     static var screen: UTType { UTType(exportedAs: "com.dylan.AppAppScreen") }
@@ -15,7 +15,6 @@ public extension UTType {
 }
 
 public struct ScreenDocument: FileDocument {
-    
     public static var readableContentTypes: [UTType] { [.screen, .marqueeScreen] }
 
     public var screen: Screen
@@ -29,12 +28,11 @@ public struct ScreenDocument: FileDocument {
         else {
             throw CocoaError(.fileReadCorruptFile)
         }
-        
+
         screen = try JSONDecoder().decode(Screen.self, from: data)
     }
 
-    public func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        return FileWrapper(regularFileWithContents: try JSONEncoder().encode(screen))
+    public func fileWrapper(configuration _: WriteConfiguration) throws -> FileWrapper {
+        return try FileWrapper(regularFileWithContents: JSONEncoder().encode(screen))
     }
-    
 }

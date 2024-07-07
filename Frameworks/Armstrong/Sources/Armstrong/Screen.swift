@@ -5,14 +5,13 @@
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import Foundation
 import DylKit
+import Foundation
 import SwiftUI
 
 public struct Screen: Codable, Identifiable {
-    
     @UserDefaultable(key: "SCREENS", store: UserDefaults.appApp) public static var screens: [Screen] = []
-    
+
     enum CodingKeys: String, CodingKey {
         case initVariables
         case initActions
@@ -21,15 +20,15 @@ public struct Screen: Codable, Identifiable {
         case name
         case subscreens
     }
-    
+
     public let id: UUID
     public var name: String
-    
+
     public var initVariables: DictionaryValue
     public var initActions: StepArray
     public var content: MakeableStack
     public var subscreens: [Screen]
-    
+
     public init(id: UUID, name: String, initVariables: DictionaryValue, initActions: StepArray, subscreens: [Screen], content: MakeableStack) {
         self.name = name
         self.id = id
@@ -38,7 +37,7 @@ public struct Screen: Codable, Identifiable {
         self.content = content
         self.subscreens = subscreens
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(initVariables, forKey: .initVariables)
@@ -48,7 +47,7 @@ public struct Screen: Codable, Identifiable {
         try container.encode(name, forKey: .name)
         try container.encode(subscreens, forKey: .subscreens)
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         initVariables = (try? container.decode(DictionaryValue.self, forKey: .initVariables)) ?? .makeDefault()
@@ -62,7 +61,6 @@ public struct Screen: Codable, Identifiable {
 
 extension Screen {
     func initialise(with vars: Variables, and scope: Scope, useInputVarsForInit: Bool = false) throws {
-        
         if !useInputVarsForInit {
             try setInitVars(in: vars)
         }
@@ -71,11 +69,11 @@ extension Screen {
         try updateVariablesFromContent(vars: vars, and: scope)
 //         vars.removeReturnVariable()
     }
-    
+
     func setInitVars(in vars: Variables) throws {
-         vars.set(from: initVariables)
+        vars.set(from: initVariables)
     }
-    
+
     func runInitActions(with vars: Variables, and scope: Scope) throws {
         for action in initActions {
             do {
@@ -85,11 +83,11 @@ extension Screen {
             }
         }
     }
-    
+
     func updateVariablesFromContent(vars: Variables, and scope: Scope) throws {
         for element in content.content.value.constant?.elements ?? [] {
             guard let element = element as? (any MakeableView) else { return }
-            try?  element.insertValues(into: vars, with: scope)
+            try? element.insertValues(into: vars, with: scope)
         }
     }
 }

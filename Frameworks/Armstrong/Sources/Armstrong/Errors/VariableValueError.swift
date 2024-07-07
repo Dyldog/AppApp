@@ -14,7 +14,7 @@ public enum VariableValueError: LocalizedError, Identifiable, Equatable {
     case variableCannotPerformOperation(VariableType, String)
     case screenDoesNotExist(String)
     case emptyCollectionFound
-    
+
     var localizedDescription: String {
         switch self {
         case .wrongTypeForOperation:

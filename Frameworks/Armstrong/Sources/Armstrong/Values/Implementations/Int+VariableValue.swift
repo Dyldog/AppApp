@@ -10,18 +10,18 @@ import SwiftUI
 // sourcery: categories = ".numbers"
 extension Int: StringRepresentableValue, Numeric {
     public static var defaultValue: Int = 69
-    
+
     public var floatValue: Float { .init(self) }
 }
 
-extension IntValue {
-    public static func int(_ value: Int) -> IntValue {
+public extension IntValue {
+    static func int(_ value: Int) -> IntValue {
         .init(value: value)
     }
 }
 
-extension AnyValue {
-    public static func int(_ value: Int) -> AnyValue {
+public extension AnyValue {
+    static func int(_ value: Int) -> AnyValue {
         IntValue.int(value).any
     }
 }

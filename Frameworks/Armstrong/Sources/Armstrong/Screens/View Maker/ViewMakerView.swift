@@ -5,22 +5,22 @@
 //  Created by Dylan Elliott on 20/11/2023.
 //
 
-import SwiftUI
 import DylKit
+import SwiftUI
 
 public struct ViewMakerView: View {
     let isWidget: Bool
     @StateObject var viewModel: ViewMakerViewModel
     @State var showInitActions: Bool = false
-    
+
     public init(isWidget: Bool = false, viewModel: ViewMakerViewModel) {
         self.isWidget = isWidget
-        self._viewModel = .init(wrappedValue: viewModel)
+        _viewModel = .init(wrappedValue: viewModel)
     }
-    
+
     private var content: some View {
         CenterStack {
-            return MakeableStackView(
+            MakeableStackView(
                 isRunning: !viewModel.makeMode,
                 showEditControls: viewModel.makeMode,
                 scope: viewModel.scope,
@@ -35,7 +35,7 @@ public struct ViewMakerView: View {
         }
         .environmentObject(viewModel.variables)
     }
-    
+
     public var body: some View {
         if isWidget {
             content
@@ -82,7 +82,8 @@ public struct ViewMakerView: View {
                                         subscreens: viewModel.screen.subscreens,
                                         subscreensUpdate: {
                                             viewModel.updateSubscreens($0)
-                                        })
+                                        }
+                                    )
                                 }
                                 .background(.gray.opacity(0.1))
                                 .navigationTitle("Init Actions")
@@ -90,7 +91,7 @@ public struct ViewMakerView: View {
                         } onDismiss: {
                             //
                         }
-                        
+
                         VStack(spacing: 0) {
                             Text("Errors").font(.footnote)
                             Toggle("Errors", isOn: $viewModel.showErrors)
@@ -99,7 +100,7 @@ public struct ViewMakerView: View {
                                 .labelsHidden()
                         }
                     }
-                    
+
                     if viewModel.showEdit {
                         VStack(spacing: 0) {
                             Text("Edit").font(.footnote)

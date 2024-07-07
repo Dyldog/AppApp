@@ -5,21 +5,21 @@
 //  Created by Dylan Elliott on 22/12/2023.
 //
 
-import WidgetKit
-import SwiftUI
-import Armstrong
 import AppAppKit
+import Armstrong
+import SwiftUI
+import WidgetKit
 
 struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
+    func placeholder(in _: Context) -> SimpleEntry {
         .init(date: .now, configuration: .init())
     }
-    
-    func getSnapshot(for configuration: ScreenIntent, in context: Context, completion: @escaping (SimpleEntry) -> Void) {
+
+    func getSnapshot(for configuration: ScreenIntent, in _: Context, completion: @escaping (SimpleEntry) -> Void) {
         completion(.init(date: .init(), configuration: configuration))
     }
-    
-    func getTimeline(for configuration: ScreenIntent, in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> Void) {
+
+    func getTimeline(for configuration: ScreenIntent, in _: Context, completion: @escaping (Timeline<SimpleEntry>) -> Void) {
         let entry = SimpleEntry(date: Date(), configuration: configuration)
         completion(.init(entries: [entry], policy: .atEnd))
     }
@@ -30,7 +30,7 @@ struct SimpleEntry: TimelineEntry {
     let configuration: ScreenIntent
 }
 
-struct AppAppWidgetsEntryView : View {
+struct AppAppWidgetsEntryView: View {
     var entry: Provider.Entry
     var screen: Screen? {
         guard let name = entry.configuration.name else { return nil }
@@ -53,7 +53,7 @@ struct AppAppWidgets: Widget {
         IntentConfiguration(kind: kind, intent: ScreenIntent.self, provider: Provider()) { entry in
 //            VStack {
 //                Text("Hello")
-                AppAppWidgetsEntryView(entry: entry)
+            AppAppWidgetsEntryView(entry: entry)
 //            }
         }
     }

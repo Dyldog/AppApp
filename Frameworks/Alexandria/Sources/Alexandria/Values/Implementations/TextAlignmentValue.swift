@@ -5,14 +5,13 @@
 //  Created by Dylan Elliott on 1/12/2023.
 //
 
-import SwiftUI
 import Armstrong
+import SwiftUI
 
 // sourcery: categories = ".text"
 extension TextAlignment: PickableValue, Codable {
-    
     public static var defaultValue: TextAlignment = .center
-    
+
     public var title: String {
         switch self {
         case .center: return "Center"
@@ -20,11 +19,11 @@ extension TextAlignment: PickableValue, Codable {
         case .trailing: return "Trailing"
         }
     }
-    
+
     public func hash(into hasher: inout Hasher) {
         hasher.combine(title)
     }
-    
+
     public var codeRepresentation: String {
         switch self {
         case .center: return ".center"

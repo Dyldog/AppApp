@@ -11,28 +11,27 @@ import SwiftUI
 public final class NilValue: EditableVariableValue {
     public static let categories: [ValueCategory] = [.helperValues]
     public static var type: VariableType { .nil }
-    
+
     private var DUMMYVALUE = "DUMMY"
-    
+
     public var protoString: String { "NIL" }
     public var valueString: String { protoString }
-    
-    public init() {
-    }
-    
+
+    public init() {}
+
     public static func makeDefault() -> NilValue {
         .init()
     }
-    
-    public func editView(scope: Scope, title: String, onUpdate: @escaping (NilValue) -> Void) -> AnyView {
+
+    public func editView(scope _: Scope, title _: String, onUpdate _: @escaping (NilValue) -> Void) -> AnyView {
         EmptyView().any
     }
-    
-    public func add(_ other: VariableValue) throws -> VariableValue {
+
+    public func add(_: VariableValue) throws -> VariableValue {
         throw VariableValueError.variableCannotPerformOperation(.nil, "add")
     }
-    
-    public func value(with variables: Variables, and scope: Scope) throws -> VariableValue {
+
+    public func value(with _: Variables, and _: Scope) throws -> VariableValue {
         self
     }
 }

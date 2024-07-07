@@ -5,8 +5,8 @@
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import SwiftUI
 import DylKit
+import SwiftUI
 
 public protocol MakeableView: CompositeEditableVariableValue, Codable, CodeRepresentable, ObservableObject, Identifiable where ID == UUID {
     func insertValues(into variables: Variables, with scope: Scope) throws

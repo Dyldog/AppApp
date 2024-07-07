@@ -11,37 +11,37 @@ import SwiftUI
 public final class BoolValue: EditableVariableValue, Codable {
     public static let categories: [ValueCategory] = [.logic]
     public static var type: VariableType { .boolean }
-    
+
     public var value: Bool
-    
+
     public init(value: Bool) {
         self.value = value
     }
-    
+
     public static var `true`: BoolValue {
         .init(value: true)
     }
-    
+
     public static var `false`: BoolValue {
         .init(value: false)
     }
-    
+
     public static func makeDefault() -> BoolValue {
         .init(value: false)
     }
-    
-    public func add(_ other: VariableValue) throws -> VariableValue {
+
+    public func add(_: VariableValue) throws -> VariableValue {
         throw VariableValueError.variableCannotPerformOperation(.boolean, "add")
     }
-    
+
     public var protoString: String { valueString }
-    
-    public var valueString: String { self.value ? "true" : "false" }
-    
-    public func value(with variables: Variables, and scope: Scope) throws -> VariableValue {
+
+    public var valueString: String { value ? "true" : "false" }
+
+    public func value(with _: Variables, and _: Scope) throws -> VariableValue {
         self
     }
-    
+
     public func editView(scope: Scope, title: String, onUpdate: @escaping (BoolValue) -> Void) -> AnyView {
         HStack {
             Text(title).bold().scope(scope)

@@ -1,5 +1,5 @@
-import XCTest
 @testable import Obscura
+import XCTest
 
 final class ObscuraTests: XCTestCase {
     func testExample() throws {

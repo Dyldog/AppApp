@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  ScopeColor.swift
+//
 //
 //  Created by Dylan Elliott on 15/12/2023.
 //

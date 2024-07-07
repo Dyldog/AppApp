@@ -1,40 +1,39 @@
 //
-//  File.swift
-//  
+//  VariableTypeValue.swift
+//
 //
 //  Created by Dylan Elliott on 14/12/2023.
 //
 
-import SwiftUI
 import DylKit
+import SwiftUI
 
 // sourcery: variableTypeName = "type"
 public final class VariableTypeValue: PrimitiveEditableVariableValue {
-    
     public static let categories: [ValueCategory] = [.helperValues]
     public static var type: VariableType { .type }
     public var value: VariableType
-    
+
     public var protoString: String { value.protoString }
-    
+
     public var valueString: String { value.valueString }
-    
+
     public init(value: VariableType) {
         self.value = value
     }
-    
+
     public static func makeDefault() -> VariableTypeValue {
         .init(value: .string)
     }
-    
-    public func value(with variables: Variables, and scope: Scope) throws -> VariableValue {
+
+    public func value(with _: Variables, and _: Scope) throws -> VariableValue {
         self
     }
-    
-    public func add(_ other: VariableValue) throws -> VariableValue {
+
+    public func add(_: VariableValue) throws -> VariableValue {
         fatalError()
     }
-    
+
     public func editView(scope: Scope, title: String, onUpdate: @escaping (VariableTypeValue) -> Void) -> AnyView {
         value.editView(scope: scope, title: title) { [weak self] in
             guard let self = self else { return }
@@ -42,19 +41,18 @@ public final class VariableTypeValue: PrimitiveEditableVariableValue {
             onUpdate(self)
         }
     }
-    
 }
-extension VariableType {
 
-    public var valueString: String { protoString }
-    
-    public func editView(scope: Scope, title: String, onUpdate: @escaping (VariableType) -> Void) -> AnyView {
+public extension VariableType {
+    var valueString: String { protoString }
+
+    func editView(scope: Scope, title _: String, onUpdate: @escaping (VariableType) -> Void) -> AnyView {
         TypePickerButton(valueString: valueString, elements: AALibrary.shared.values) {
             onUpdate($0.type)
         }
         .scope(scope)
         .any
-        
+
 //        Picker("", selection: .init(get: {
 //            self
 //        }, set: { new in
@@ -72,14 +70,13 @@ extension VariableType {
 typealias CategoryValue = EditableVariableValue.Type
 
 extension ValueCategoryGroup {
-    
     func categoryLineage(child: CategoryPickerItem<CategoryValue>?) -> CategoryPickerItem<CategoryValue> {
         switch parent {
         case .none: return categoryItem(child: child)
         case let .some(parent): return parent.categoryLineage(child: categoryItem(child: child))
         }
     }
-    
+
     func categoryItem(child: CategoryPickerItem<CategoryValue>?) -> CategoryPickerItem<CategoryValue> {
         if let child, child.title == title {
             return child
@@ -107,20 +104,20 @@ extension ValueCategory {
                         title: type.type.title,
                         image: nil,
                         value: .value(type)
-                    )
+                    ),
                 ])
             )
         )
     }
 }
+
 extension Array where Element == CategoryValue {
-    
     private func combine(tree: CategoryPickerItem<CategoryValue>, with branch: CategoryPickerItem<CategoryValue>) -> CategoryPickerItem<CategoryValue>? {
-        guard 
+        guard
             branch.id.hasPrefix(tree.id), case let .children(array) = tree.value,
             case let .children(branchChildren) = branch.value, branchChildren.count == 1, let nextBranch = branchChildren.first
-        else {  return nil }
-           
+        else { return nil }
+
         func makeReplacement(newChildren: [CategoryPickerItem<CategoryValue>]) -> CategoryPickerItem<CategoryValue> {
             .init(
                 id: tree.id,
@@ -129,35 +126,35 @@ extension Array where Element == CategoryValue {
                 value: .children(newChildren)
             )
         }
-        
+
         for (index, child) in array.enumerated() {
             if let combined = combine(tree: child, with: nextBranch) {
                 return makeReplacement(newChildren: array.replacing(combined, at: index))
             }
         }
-        
+
         switch branch.value {
         case let .children(branchChildren): return makeReplacement(newChildren: array + branchChildren)
         case .value: return makeReplacement(newChildren: array + [branch])
         }
     }
-    
+
     var categoryTree: [CategoryPickerItem<CategoryValue>] {
         var tree: CategoryPickerItem<CategoryValue> = ValueCategoryGroup.root.categoryLineage(child: nil)
-        
+
         forEach { element in
-            element.categories.forEach { category in
+            for category in element.categories {
                 guard let newTree = combine(
                     tree: tree,
                     with: category.categoryLineage(with: element)
                 ) else {
                     fatalError()
                 }
-                                
+
                 tree = newTree
             }
         }
-        
+
         guard case let .children(array) = tree.value else { fatalError() }
         return array
     }
@@ -168,7 +165,7 @@ struct TypePickerButton: View {
     var valueString: String
     let elements: [any EditableVariableValue.Type]
     let onUpdate: (any EditableVariableValue.Type) -> Void
-    
+
     var body: some View {
         SheetButton(showSheet: $showSheet, title: { Text(valueString) }) {
             NavigationStack {

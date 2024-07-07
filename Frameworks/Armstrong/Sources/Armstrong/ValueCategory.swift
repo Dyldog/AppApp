@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  ValueCategory.swift
+//
 //
 //  Created by Dylan Elliott on 30/12/2023.
 //
@@ -12,13 +12,13 @@ public struct ValueCategoryGroup {
     var iconName: String
     var title: String
     var icon: Image { .init(systemName: iconName) }
-    
+
     var id: String { "\(parent.id)-\(title.sluggified)" }
-    
+
     public indirect enum Parent {
         case none
         case some(ValueCategoryGroup)
-        
+
         var id: String {
             switch self {
             case .none: return "-"
@@ -26,7 +26,7 @@ public struct ValueCategoryGroup {
             }
         }
     }
-    
+
     public init(parent: Parent, iconName: String, title: String) {
         self.parent = parent
         self.iconName = iconName
@@ -34,16 +34,16 @@ public struct ValueCategoryGroup {
     }
 }
 
-extension ValueCategoryGroup {
-    public var topLevel: ValueCategory {
+public extension ValueCategoryGroup {
+    var topLevel: ValueCategory {
         .init(
             parent: self,
             iconName: iconName,
             title: title
         )
     }
-    
-    public var helpers: ValueCategory {
+
+    var helpers: ValueCategory {
         .init(
             parent: self,
             iconName: "hand.raised",
@@ -56,11 +56,11 @@ public struct ValueCategory {
     let parent: ValueCategoryGroup
     let iconName: String
     let title: String
-    
+
     var id: String { "\(parent.id)-\(title.sluggified)" }
-    
+
     var icon: Image { .init(systemName: iconName) }
-    
+
     public init(parent: ValueCategoryGroup, iconName: String, title: String) {
         self.parent = parent
         self.iconName = iconName

@@ -1,37 +1,37 @@
 //
-//  File.swift
-//  
+//  MakeableScreen.swift
+//
 //
 //  Created by Dylan Elliott on 18/12/2023.
 //
 
-import SwiftUI
 import DylKit
+import SwiftUI
 
 public struct MakeableScreenView: View {
     let isRunning: Bool
     let showEditControls: Bool
     let scope: Scope
     let screen: ScreenValue
-    
+
     let onContentUpdate: (ScreenValue) -> Void
     let onRuntimeUpdate: (@escaping Block) -> Void
-    
+
     @EnvironmentObject var variables: Variables
     @Binding var error: VariableValueError?
-    
+
 //    @State var content: MakeableStack?
-    
+
     public init(isRunning: Bool, showEditControls: Bool, scope: Scope, screen: ScreenValue, onContentUpdate: @escaping (ScreenValue) -> Void, onRuntimeUpdate: @escaping (@escaping Block) -> Void, error: Binding<VariableValueError?>) {
         self.isRunning = isRunning
         self.showEditControls = showEditControls
         self.screen = screen
         self.onContentUpdate = onContentUpdate
         self.onRuntimeUpdate = onRuntimeUpdate
-        self._error = error
+        _error = error
         self.scope = scope
     }
-    
+
     private var content: MakeableStack {
         do {
             if isRunning {
@@ -49,11 +49,11 @@ public struct MakeableScreenView: View {
             return .init([MakeableLabel.withText("LOADING!")])
         }
     }
-    
+
     public var body: some View {
         MakeableWrapperView(
             isRunning: isRunning,
-            showEditControls: showEditControls, 
+            showEditControls: showEditControls,
             scope: scope,
             view: content,
             onContentUpdate: { _ in

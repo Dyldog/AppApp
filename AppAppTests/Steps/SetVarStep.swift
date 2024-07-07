@@ -1,21 +1,21 @@
 //
-//  File.swift
+//  SetVarStep.swift
 //  AppAppTests
 //
 //  Created by Dylan Elliott on 30/11/2023.
 //
 
+@testable import AppApp
 import Foundation
 import XCTest
-@testable import AppApp
 
 final class SetVarStepTests: XCTestCase {
     var step: SetVarStep!
-    
+
     private func configure(`var`: AnyValue, value: AnyValue) {
         step = .init(varName: `var`, value: value)
     }
-    
+
 //    func testStep() throws {
 //        configure(var: .string("VAR"), value: .string("HELLO"))
 //        let vars = Variables()

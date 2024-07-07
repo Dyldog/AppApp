@@ -5,8 +5,8 @@
 //  Created by Dylan Elliott on 22/11/2023.
 //
 
-import SwiftUI
 import DylKit
+import SwiftUI
 import WidgetKit
 
 public class ScreenListViewModel: ObservableObject {
@@ -20,10 +20,10 @@ public class ScreenListViewModel: ObservableObject {
             WidgetCenter.shared.reloadAllTimelines()
         }
     }
-    
+
     var defaultScreens: [Screen] { AALibrary.shared.demoScreens }
-    
-    public init() { }
+
+    public init() {}
 }
 
 public struct ScreenListView: View {
@@ -31,13 +31,13 @@ public struct ScreenListView: View {
     @State var selectedScreen: (Screen, Int?)?
     @State var showExport: Bool = false
     @State var exportScreen: Screen?
-	@State var showCopySheet: Bool = false
-    
+    @State var showCopySheet: Bool = false
+
     public init(viewModel: ScreenListViewModel) {
         self.viewModel = viewModel
     }
-    
-    func onUpdate(_ screen: Screen, index: Int?) -> ((Screen) -> Void)? {
+
+    func onUpdate(_: Screen, index: Int?) -> ((Screen) -> Void)? {
         if let index = index {
             return {
                 viewModel.objectWillChange.send()
@@ -47,7 +47,7 @@ public struct ScreenListView: View {
             return { _ in }
         }
     }
-    
+
     func screenView(_ screen: Screen, index: Int?) -> some View {
         Button {
             selectedScreen = (screen, index)
@@ -56,7 +56,7 @@ public struct ScreenListView: View {
         }
         .buttonStyle(.plain)
     }
-    
+
     func exportButton(for screen: Screen) -> some View {
         Button {
             exportScreen = screen
@@ -66,56 +66,57 @@ public struct ScreenListView: View {
         }
         .tint(.yellow)
     }
-	
-	func copyButton(for screen: Screen) -> some View {
-		Button {
+
+    func copyButton(for screen: Screen) -> some View {
+        Button {
             DylKit.Pasteboard.general.copy(screen)
-		} label: {
-			Label("Copy", systemImage: "doc.on.clipboard")
-		}
-		.tint(.blue)
-	}
-	
-	func codeButton(for screen: Screen) -> some View {
-		Button {
+        } label: {
+            Label("Copy", systemImage: "doc.on.clipboard")
+        }
+        .tint(.blue)
+    }
+
+    func codeButton(for screen: Screen) -> some View {
+        Button {
             DylKit.Pasteboard.general.string = screen.codeRepresentation
-		} label: {
-			Label("Copy Code", systemImage: "swift")
-		}
-		.tint(.orange)
-	}
-	func deleteButton(forScreenAt index: Int) -> some View {
-		Button {
-			viewModel.screens.remove(atOffsets: [index])
-			viewModel.objectWillChange.send()
-		} label: {
-			Label("Delete", systemImage: "trash")
-		}
-		.tint(.red)
-	}
-    
+        } label: {
+            Label("Copy Code", systemImage: "swift")
+        }
+        .tint(.orange)
+    }
+
+    func deleteButton(forScreenAt index: Int) -> some View {
+        Button {
+            viewModel.screens.remove(atOffsets: [index])
+            viewModel.objectWillChange.send()
+        } label: {
+            Label("Delete", systemImage: "trash")
+        }
+        .tint(.red)
+    }
+
     public var body: some View {
         List {
             if !viewModel.screens.isEmpty {
                 Section("User") {
-                    ForEach(viewModel.screens.enumeratedArray(), id: \.element.id) { (index, screen) in
+                    ForEach(viewModel.screens.enumeratedArray(), id: \.element.id) { index, screen in
                         screenView(screen, index: index)
-                        .swipeActions {
-                            copyButton(for: screen)
-							codeButton(for: screen)
-                            exportButton(for: screen)
-							deleteButton(forScreenAt: index)
-                        }
+                            .swipeActions {
+                                copyButton(for: screen)
+                                codeButton(for: screen)
+                                exportButton(for: screen)
+                                deleteButton(forScreenAt: index)
+                            }
                     }
                 }
             }
-            
+
             Section("Defaults") {
                 ForEach(viewModel.defaultScreens) { screen in
-                        screenView(screen, index: nil)
+                    screenView(screen, index: nil)
                         .swipeActions {
-							copyButton(for: screen)
-							codeButton(for: screen)
+                            copyButton(for: screen)
+                            codeButton(for: screen)
                             exportButton(for: screen)
                         }
                 }
@@ -128,14 +129,16 @@ public struct ScreenListView: View {
             defaultFilename: exportScreen?.name,
             onCompletion: { _ in
                 //
-            })
+            }
+        )
         .navigationTitle("Screens")
-        .navigationDestination(for: $selectedScreen, destination: { (screen, index) in
+        .navigationDestination(for: $selectedScreen, destination: { screen, index in
             ViewMakerView(viewModel: .init(
                 scope: .init(),
                 screen: screen,
                 makeMode: false,
-                onUpdate: onUpdate(screen, index: index))
+                onUpdate: onUpdate(screen, index: index)
+            )
             )
         })
         .toolbar {
@@ -178,7 +181,7 @@ public extension View {
         for binding: Binding<Item?>,
         @ViewBuilder destination: @escaping (Item) -> Destination
     ) -> some View {
-        self.modifier(NavigationStackModifier(item: binding, destination: destination))
+        modifier(NavigationStackModifier(item: binding, destination: destination))
     }
 }
 
@@ -199,8 +202,8 @@ public extension Binding where Value == Bool {
     }
 }
 
-extension Binding {
-    public func mappedToBool<Wrapped>() -> Binding<Bool> where Value == Wrapped? {
+public extension Binding {
+    func mappedToBool<Wrapped>() -> Binding<Bool> where Value == Wrapped? {
         return Binding<Bool>(bindingOptional: self)
     }
 }

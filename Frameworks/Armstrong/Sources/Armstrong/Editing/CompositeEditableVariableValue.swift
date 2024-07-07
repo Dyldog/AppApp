@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  CompositeEditableVariableValue.swift
+//
 //
 //  Created by Dylan Elliott on 10/12/2023.
 //
@@ -11,7 +11,7 @@ public typealias VariableUpdater = (any EditableVariableValue) -> Void
 
 public protocol CompositeEditableVariableValue: EditableVariableValue {
     func propertyRows(onUpdate: @escaping (Self) -> Void) -> [(String, any EditableVariableValue, VariableUpdater)]
-    
+
     associatedtype Properties: ViewProperty
     static func make(factory: (Properties) -> any EditableVariableValue) -> Self
     func value(for property: Properties) -> any EditableVariableValue

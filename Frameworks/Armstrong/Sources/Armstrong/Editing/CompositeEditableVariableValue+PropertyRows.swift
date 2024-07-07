@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  CompositeEditableVariableValue+PropertyRows.swift
+//
 //
 //  Created by Dylan Elliott on 10/12/2023.
 //
@@ -11,7 +11,7 @@ public extension CompositeEditableVariableValue {
     func propertyRows(
         onUpdate: @escaping (Self) -> Void
     ) -> [(String, any EditableVariableValue, VariableUpdater)] {
-        properties.flatMap { (key, value) in
+        properties.flatMap { key, value in
 //            if let composite = value as? any CompositeEditableVariableValue {
 //                return composite.propertyRows(onUpdate: { value in
 //                    self.set(value, for: key)
@@ -23,10 +23,10 @@ public extension CompositeEditableVariableValue {
 //                    onUpdate(self)
 //                })]
 //            } else {
-                return [(key.rawValue, value, {
-                    self.set($0, for: key)
-                    onUpdate(self)
-                })]
+            [(key.rawValue, value, {
+                self.set($0, for: key)
+                onUpdate(self)
+            })]
 //            }
         }.sorted(by: { $0.0 < $1.0 })
     }
@@ -35,7 +35,6 @@ public extension CompositeEditableVariableValue {
 import SwiftUI
 
 struct ExpandableValueView<T: EditableVariableValue>: View {
-    
     let scope: Scope
     let title: String
     let value: T

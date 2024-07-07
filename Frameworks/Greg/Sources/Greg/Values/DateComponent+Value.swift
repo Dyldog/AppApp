@@ -1,16 +1,16 @@
 //
-//  File.swift
-//  
+//  DateComponent+Value.swift
+//
 //
 //  Created by Dylan Elliott on 18/12/2023.
 //
 
-import Foundation
 import Armstrong
+import Foundation
 
 extension Calendar.Component: PickableValue {
     public static var defaultValue: Calendar.Component { .weekOfYear }
-    
+
     public static var allCases: [Calendar.Component] { [
         .era,
         .year,
@@ -29,7 +29,7 @@ extension Calendar.Component: PickableValue {
         .calendar,
         .timeZone,
     ] }
-    
+
     public var title: String {
         switch self {
         case .era: return "era"
@@ -52,10 +52,8 @@ extension Calendar.Component: PickableValue {
         @unknown default: return "UNKNOWN!"
         }
     }
-    
+
     public var codeRepresentation: String {
         "Calendar.Component.\(title)"
     }
-    
-    
 }

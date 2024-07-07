@@ -11,7 +11,7 @@ public enum TypedValueOptionType: Int, CaseIterable, Hashable {
     case variable
     case constant
     case result
-    
+
     public func makeDefault<T: EditableVariableValue>() -> TypedValueOption<T> {
         switch self {
         case .variable: return .variable(.makeDefault())
@@ -19,7 +19,7 @@ public enum TypedValueOptionType: Int, CaseIterable, Hashable {
         case .result: return .result(ResultValue.makeDefault())
         }
     }
-    
+
     public var title: String {
         switch self {
         case .variable: return "VAR"
@@ -27,7 +27,7 @@ public enum TypedValueOptionType: Int, CaseIterable, Hashable {
         case .result: return "RESULT"
         }
     }
-    
+
     public var valueTitle: String {
         switch self {
         case .variable: return "Name"
@@ -41,44 +41,44 @@ public enum TypedValueOption<T: TypeableValue>: Codable {
     case variable(Variable)
     case constant(T)
     case result(ResultValue)
-    
+
     public var title: String {
         type.title
     }
-    
+
     public var variable: Variable? {
         switch self {
-        case .variable(let variable): return variable
+        case let .variable(variable): return variable
         case .constant, .result: return nil
         }
     }
-    
+
     public var constant: T? {
         switch self {
         case .variable, .result: return nil
-        case .constant(let constant): return constant
+        case let .constant(constant): return constant
         }
     }
-    
+
     public var result: ResultValue? {
         switch self {
         case .variable, .constant: return nil
-        case .result(let result): return result
+        case let .result(result): return result
         }
     }
-    
+
     public var value: any EditableVariableValue {
         switch self {
-        case .variable(let variable): return variable
-        case .constant(let constant): return constant
-        case .result(let result): return result
+        case let .variable(variable): return variable
+        case let .constant(constant): return constant
+        case let .result(result): return result
         }
     }
-    
+
     public func value(with variables: Variables, and scope: Scope) throws -> T {
         return try value.value(with: variables, and: scope)
     }
-    
+
     public var type: TypedValueOptionType {
         switch self {
         case .variable: return .variable
@@ -89,49 +89,48 @@ public enum TypedValueOption<T: TypeableValue>: Codable {
 }
 
 // sourcery: skipCopying, skipVariableType, skipCodable
-public typealias TypeableValue = EditableVariableValue & Codable
-
+public typealias TypeableValue = Codable & EditableVariableValue
 
 // sourcery: variableTypeName = "typedValue", skipVariableType
 public final class TypedValue<T: TypeableValue>: EditableVariableValue, Codable, ObservableObject {
     public static var categories: [ValueCategory] { fatalError() }
     public static var type: VariableType { fatalError() }
-    
+
     public var type: VariableType { T.type }
-    
+
     public var value: TypedValueOption<T> { didSet { objectWillChange.send() } }
-    
+
     public init(value: TypedValueOption<T>) {
         self.value = value
     }
-    
+
     public static func variable(_ variable: Variable) -> TypedValue {
         .init(value: .variable(variable))
     }
-    
+
     public static func value(_ value: T) -> TypedValue {
         .init(value: .constant(value))
     }
-    
+
     public static func result(_ result: ResultValue) -> TypedValue {
         .init(value: .result(result))
     }
-    
+
     public static func makeDefault() -> TypedValue<T> {
         .init(value: .constant(T.makeDefault()))
     }
-    
+
     public func add(_ other: VariableValue) throws -> VariableValue {
         return try value.value.add(other)
     }
-    
+
     public var protoString: String { "\(value.title): \(value.value.protoString)" }
     public var valueString: String { "\(value.title): \(value.value.valueString)" }
-    
+
     public func value(with variables: Variables, and scope: Scope) throws -> VariableValue {
         try value.value.value(with: variables, and: scope)
     }
-    
+
     public func editView(scope: Scope, title: String, onUpdate: @escaping (TypedValue<T>) -> Void) -> AnyView {
         return ExpandableStack(scope: scope, title: title) { [weak self] in
             HStack {
@@ -156,7 +155,7 @@ public final class TypedValue<T: TypeableValue>: EditableVariableValue, Codable,
                     .pickerScope(scope.next)
                     .any
                 }
-                
+
                 self.value.value.editView(scope: scope.next, title: self.value.type.valueTitle) { [weak self] in
                     guard let self else { return }
                     switch self.value.type {

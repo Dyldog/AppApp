@@ -5,50 +5,50 @@
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import SwiftUI
 import DylKit
+import SwiftUI
 
 // sourcery: variableTypeName = "list", skipCodable
 public final class ArrayValue: EditableVariableValue, ObservableObject {
     public static let categories: [ValueCategory] = [.containers]
     public static var type: VariableType { .list }
-    
+
     public var type: VariableType { didSet { objectWillChange.send() } }
     public var elements: [any EditableVariableValue] { didSet { objectWillChange.send() } }
-    
+
     public var protoString: String { """
     [
     \(elements.map { "\t• " + $0.protoString }.joined(separator: ",\n"))
     ]
     """ }
-    
+
     public init(type: VariableType, elements: [any EditableVariableValue]) {
         self.type = type
         self.elements = elements
     }
-    
+
     public static func makeDefault() -> ArrayValue {
         .init(
             type: VariableType.string,
             elements: [any EditableVariableValue]()
         )
     }
-    
+
     public var valueString: String {
         return "[\(elements.map { $0.valueString }.joined(separator: ", "))]"
     }
-    
+
     public func value(with variables: Variables, and scope: Scope) throws -> VariableValue {
         var mapped: [any EditableVariableValue] = []
         for element in elements {
-            mapped.append(try element.value(with: variables, and: scope))
+            try mapped.append(element.value(with: variables, and: scope))
         }
         return ArrayValue(
             type: type,
             elements: mapped
         )
     }
-    
+
     public func add(_ other: VariableValue) throws -> VariableValue {
         if let otherArray = other as? ArrayValue, otherArray.type == type {
             elements += otherArray.elements
@@ -58,20 +58,20 @@ public final class ArrayValue: EditableVariableValue, ObservableObject {
             return self
         }
     }
-    
+
     public func editView(scope: Scope, title: String, onUpdate: @escaping (ArrayValue) -> Void) -> AnyView {
         ExpandableStack(scope: scope, title: title) { [weak self] in
-                ProtoText(text: self?.protoString ?? "")
-            } content: {
-                ListEditView(scope: scope.next, title: title, value: .init(get: { [weak self] in
-                    self ?? .init(type: .int, elements: [IntValue(value: 666)])
-                }, set: {
-                    self.elements = $0.elements
-                }), onUpdate: {
-                    self.elements = $0.elements
-                    onUpdate(self)
-                })
-            }
+            ProtoText(text: self?.protoString ?? "")
+        } content: {
+            ListEditView(scope: scope.next, title: title, value: .init(get: { [weak self] in
+                self ?? .init(type: .int, elements: [IntValue(value: 666)])
+            }, set: {
+                self.elements = $0.elements
+            }), onUpdate: {
+                self.elements = $0.elements
+                onUpdate(self)
+            })
+        }
         .any
     }
 }
@@ -80,7 +80,7 @@ public extension ArrayValue {
     static func from(_ array: [Any]) -> ArrayValue {
         let type: VariableType
         let elements: [any EditableVariableValue]
-        
+
         switch array {
         case let strings as [String]:
             type = .string
@@ -100,24 +100,25 @@ public extension ArrayValue {
         default:
             fatalError()
         }
-        
+
         return ArrayValue(type: type, elements: elements)
     }
 }
+
 extension ArrayValue: Codable {
     enum CodingKeys: String, CodingKey {
         case type
         case elements
     }
-    
+
     public convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.init(
-            type: try container.decode(VariableType.self, forKey: .type),
-            elements: try container.decode(CodableVariableList.self, forKey: .elements).values
+        try self.init(
+            type: container.decode(VariableType.self, forKey: .type),
+            elements: container.decode(CodableVariableList.self, forKey: .elements).values
         )
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(CodableVariableList(variables: elements), forKey: .elements)
@@ -160,15 +161,15 @@ extension View {
 
 public struct ProtoText: View {
     let text: String
-    
+
     public init(_ text: String) {
         self.text = text
     }
-    
+
     public init(text: String) {
         self.text = text
     }
-    
+
     public var body: some View {
         Text(text)
             .font(.system(size: 12))
@@ -177,5 +178,5 @@ public struct ProtoText: View {
 }
 
 extension String {
-    var lines: [String] { components(separatedBy: .newlines)}
+    var lines: [String] { components(separatedBy: .newlines) }
 }

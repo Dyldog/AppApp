@@ -10,4 +10,3 @@ import Foundation
 public protocol Copying {
     func copy() -> Self
 }
-

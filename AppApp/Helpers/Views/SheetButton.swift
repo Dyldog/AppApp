@@ -9,11 +9,11 @@ import SwiftUI
 
 struct SheetButton<Title: View, Content: View>: View {
     @State var showSheet: Bool = false
-    
+
     let title: () -> Title
     @ViewBuilder var content: Content
     let onDismiss: () -> Void
-    
+
     var body: some View {
         SwiftUI.Button {
             showSheet = true
@@ -24,5 +24,4 @@ struct SheetButton<Title: View, Content: View>: View {
             content
         })
     }
-    
 }

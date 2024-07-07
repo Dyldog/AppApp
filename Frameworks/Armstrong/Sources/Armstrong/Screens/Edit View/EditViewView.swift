@@ -5,8 +5,8 @@
 //  Created by Dylan Elliott on 20/11/2023.
 //
 
-import SwiftUI
 import DylKit
+import SwiftUI
 
 struct EditViewView: View {
     let title: String
@@ -19,15 +19,15 @@ struct EditViewView: View {
     init(title: String, scope: Scope, viewModel: EditViewViewModel, padSteps: Bool = true) {
         self.title = title
         self.scope = scope
-        self._viewModel = .init(wrappedValue: viewModel)
+        _viewModel = .init(wrappedValue: viewModel)
         self.padSteps = padSteps
     }
-    
+
     var body: some View {
         VStack {
             MakeableWrapperView(
                 isRunning: false,
-                showEditControls: false, 
+                showEditControls: false,
                 scope: scope,
                 view: viewModel.editable,
                 onContentUpdate: { _ in },
@@ -43,7 +43,7 @@ struct EditViewView: View {
             .padding()
 //            .frame(maxWidth: geometry.size.width)
             .any
-            
+
             ScrollView {
                 viewModel.editable.editView(scope: scope, title: "Edit View") {
                     viewModel.editable = $0
@@ -52,11 +52,9 @@ struct EditViewView: View {
                 .if(padSteps, modified: { $0.padding() })
             }
             .navigationTitle("Edit View")
-            
         }
         .onDisappear {
             viewModel.onUpdate(viewModel.editable)
         }
     }
-    
 }

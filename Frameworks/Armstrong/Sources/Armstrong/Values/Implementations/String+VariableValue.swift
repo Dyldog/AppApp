@@ -12,24 +12,24 @@ public final class StringValue: EditableVariableValue {
     public static let categories: [ValueCategory] = [.text]
     public static var type: VariableType { .string }
     public var value: String
-    
+
     public init(value: String) {
         self.value = value
     }
-    
+
     public static func makeDefault() -> StringValue {
         .init(value: "TEXT")
     }
-    
+
     public func add(_ other: VariableValue) throws -> VariableValue {
         value = value + other.valueString
         return self
     }
-    
+
     public var protoString: String { value }
     public var valueString: String { value }
-    public func value(with variables: Variables, and scope: Scope) throws -> VariableValue { self }
-    
+    public func value(with _: Variables, and _: Scope) throws -> VariableValue { self }
+
     public func editView(scope: Scope, title: String, onUpdate: @escaping (StringValue) -> Void) -> AnyView {
         HStack {
             Text(title).bold()
@@ -47,7 +47,7 @@ public final class StringValue: EditableVariableValue {
         .foregroundStyle(scope.color)
         .any
     }
-    
+
     public static func == (lhs: StringValue, rhs: StringValue) -> Bool {
         return lhs.value == rhs.value
     }
@@ -57,12 +57,12 @@ extension StringValue: Codable {
     enum CodingKeys: String, CodingKey {
         case value
     }
-    
-    convenience public init(from decoder: Decoder) throws {
+
+    public convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.init(value: try container.decode(String.self, forKey: .value))
+        try self.init(value: container.decode(String.self, forKey: .value))
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(value, forKey: .value)
@@ -75,8 +75,8 @@ extension StringValue: CodeRepresentable {
     }
 }
 
-extension AnyValue {
-    public static func string(_ value: String) -> AnyValue {
+public extension AnyValue {
+    static func string(_ value: String) -> AnyValue {
         StringValue(value: value).any
     }
 }

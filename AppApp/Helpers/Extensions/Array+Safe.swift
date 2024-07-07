@@ -10,7 +10,7 @@ import Foundation
 extension Array {
     subscript(safe index: Index) -> Element? {
         get {
-            if self.indices.contains(index) {
+            if indices.contains(index) {
                 return self[index]
             } else {
                 return nil
@@ -18,7 +18,7 @@ extension Array {
         }
         set {
             if index <= endIndex, let newValue = newValue {
-                self.insert(newValue, at: index)
+                insert(newValue, at: index)
             }
         }
     }

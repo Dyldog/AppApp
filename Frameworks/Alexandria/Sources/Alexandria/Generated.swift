@@ -1,121 +1,117 @@
 // Generated using Sourcery 2.0.2 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
-
-
 public class Alexandria: AAProvider {
     public static var steps: [any StepType.Type] {
-    [
-        APIValueStep.self,
-        AddToVarStep.self,
-        ArrayValueStep.self,
-        DecodeArrayStep.self,
-        DecodeDictionaryStep.self,
-        DictionaryKeysStep.self,
-        DictionaryValueForKeyStep.self,
-        ForEachStep.self,
-        FunctionStep.self,
-        GetNumberStep.self,
-        GetSavedDataStep.self,
-        IfStep.self,
-        MakeRangeStep.self,
-        MapStep.self,
-        PrintVarStep.self,
-        RandomElementStep.self,
-        SaveDataStep.self,
-        StaticValueStep.self,
-        URLEncodeStep.self,
-        VariableStep.self
-    ]
+        [
+            APIValueStep.self,
+            AddToVarStep.self,
+            ArrayValueStep.self,
+            DecodeArrayStep.self,
+            DecodeDictionaryStep.self,
+            DictionaryKeysStep.self,
+            DictionaryValueForKeyStep.self,
+            ForEachStep.self,
+            FunctionStep.self,
+            GetNumberStep.self,
+            GetSavedDataStep.self,
+            IfStep.self,
+            MakeRangeStep.self,
+            MapStep.self,
+            PrintVarStep.self,
+            RandomElementStep.self,
+            SaveDataStep.self,
+            StaticValueStep.self,
+            URLEncodeStep.self,
+            VariableStep.self,
+        ]
     }
+
     public static var values: [any EditableVariableValue.Type] {
-    [
-    APIValueStep.self,
-    AddToVarStep.self,
-    ArrayValueStep.self,
-    ComparisonTypeValue.self,
-    ComparisonValue.self,
-    ConditionalActionValue.self,
-    DecodeArrayStep.self,
-    DecodeDictionaryStep.self,
-    DictionaryKeysStep.self,
-    DictionaryValueForKeyStep.self,
-    ForEachStep.self,
-    FunctionStep.self,
-    FunctionValue.self,
-    GetNumberStep.self,
-    GetSavedDataStep.self,
-    IfStep.self,
-    LocationValue.self,
-    MakeRangeStep.self,
-    MakeableButton.self,
-    MakeableField.self,
-    MakeableList.self,
-    MakeableMap.self,
-    MakeableToggle.self,
-    MapStep.self,
-    OptionalValue.self,
-    PrintVarStep.self,
-    RandomElementStep.self,
-    SaveDataStep.self,
-    StaticValueStep.self,
-    TemporaryValue.self,
-    URLEncodeStep.self,
-    VariableStep.self,
-    ButtonStyleValue.self,
-    TextAlignmentValue.self
-    ]
+        [
+            APIValueStep.self,
+            AddToVarStep.self,
+            ArrayValueStep.self,
+            ComparisonTypeValue.self,
+            ComparisonValue.self,
+            ConditionalActionValue.self,
+            DecodeArrayStep.self,
+            DecodeDictionaryStep.self,
+            DictionaryKeysStep.self,
+            DictionaryValueForKeyStep.self,
+            ForEachStep.self,
+            FunctionStep.self,
+            FunctionValue.self,
+            GetNumberStep.self,
+            GetSavedDataStep.self,
+            IfStep.self,
+            LocationValue.self,
+            MakeRangeStep.self,
+            MakeableButton.self,
+            MakeableField.self,
+            MakeableList.self,
+            MakeableMap.self,
+            MakeableToggle.self,
+            MapStep.self,
+            OptionalValue.self,
+            PrintVarStep.self,
+            RandomElementStep.self,
+            SaveDataStep.self,
+            StaticValueStep.self,
+            TemporaryValue.self,
+            URLEncodeStep.self,
+            VariableStep.self,
+            ButtonStyleValue.self,
+            TextAlignmentValue.self,
+        ]
     }
+
     public static var views: [any MakeableView.Type] {
-    [
-    MakeableButton.self,
-    MakeableField.self,
-    MakeableList.self,
-    MakeableMap.self,
-    MakeableToggle.self
-    ]
+        [
+            MakeableButton.self,
+            MakeableField.self,
+            MakeableList.self,
+            MakeableMap.self,
+            MakeableToggle.self,
+        ]
     }
 }
 
 import Armstrong
 import DylKit
 
-
-
-
-import SwiftUI
 import DylKit
+import SwiftUI
 
-
-
-extension MakeableButton {
-    public func make(isRunning: Bool, showEditControls: Bool, scope: Scope, onContentUpdate: @escaping (any MakeableView) -> Void, onRuntimeUpdate: @escaping (@escaping Block) -> Void, error: Binding<VariableValueError?>) -> AnyView {
+public extension MakeableButton {
+    func make(isRunning: Bool, showEditControls: Bool, scope: Scope, onContentUpdate: @escaping (any MakeableView) -> Void, onRuntimeUpdate: @escaping (@escaping Block) -> Void, error: Binding<VariableValueError?>) -> AnyView {
         MakeableButtonView(isRunning: isRunning, showEditControls: showEditControls, scope: scope, button: self, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: error).any
     }
 }
-extension MakeableField {
-    public func make(isRunning: Bool, showEditControls: Bool, scope: Scope, onContentUpdate: @escaping (any MakeableView) -> Void, onRuntimeUpdate: @escaping (@escaping Block) -> Void, error: Binding<VariableValueError?>) -> AnyView {
+
+public extension MakeableField {
+    func make(isRunning: Bool, showEditControls: Bool, scope: Scope, onContentUpdate: @escaping (any MakeableView) -> Void, onRuntimeUpdate: @escaping (@escaping Block) -> Void, error: Binding<VariableValueError?>) -> AnyView {
         MakeableFieldView(isRunning: isRunning, showEditControls: showEditControls, scope: scope, field: self, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: error).any
     }
 }
-extension MakeableList {
-    public func make(isRunning: Bool, showEditControls: Bool, scope: Scope, onContentUpdate: @escaping (any MakeableView) -> Void, onRuntimeUpdate: @escaping (@escaping Block) -> Void, error: Binding<VariableValueError?>) -> AnyView {
+
+public extension MakeableList {
+    func make(isRunning: Bool, showEditControls: Bool, scope: Scope, onContentUpdate: @escaping (any MakeableView) -> Void, onRuntimeUpdate: @escaping (@escaping Block) -> Void, error: Binding<VariableValueError?>) -> AnyView {
         MakeableListView(isRunning: isRunning, showEditControls: showEditControls, scope: scope, listView: self, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: error).any
     }
 }
-extension MakeableMap {
-    public func make(isRunning: Bool, showEditControls: Bool, scope: Scope, onContentUpdate: @escaping (any MakeableView) -> Void, onRuntimeUpdate: @escaping (@escaping Block) -> Void, error: Binding<VariableValueError?>) -> AnyView {
+
+public extension MakeableMap {
+    func make(isRunning: Bool, showEditControls: Bool, scope: Scope, onContentUpdate: @escaping (any MakeableView) -> Void, onRuntimeUpdate: @escaping (@escaping Block) -> Void, error: Binding<VariableValueError?>) -> AnyView {
         MakeableMapView(isRunning: isRunning, showEditControls: showEditControls, scope: scope, map: self, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: error).any
     }
 }
-extension MakeableToggle {
-    public func make(isRunning: Bool, showEditControls: Bool, scope: Scope, onContentUpdate: @escaping (any MakeableView) -> Void, onRuntimeUpdate: @escaping (@escaping Block) -> Void, error: Binding<VariableValueError?>) -> AnyView {
+
+public extension MakeableToggle {
+    func make(isRunning: Bool, showEditControls: Bool, scope: Scope, onContentUpdate: @escaping (any MakeableView) -> Void, onRuntimeUpdate: @escaping (@escaping Block) -> Void, error: Binding<VariableValueError?>) -> AnyView {
         MakeableToggleView(isRunning: isRunning, showEditControls: showEditControls, scope: scope, toggle: self, onContentUpdate: onContentUpdate, onRuntimeUpdate: onRuntimeUpdate, error: error).any
     }
 }
-
-
-
 
 public final class ButtonStyleValue: PrimitiveEditableVariableValue, Codable, Copying {
     public static let categories: [ValueCategory] = [.layout]
@@ -125,17 +121,21 @@ public final class ButtonStyleValue: PrimitiveEditableVariableValue, Codable, Co
     public init(value: ButtonStyle) {
         self.value = value
     }
+
     public static func makeDefault() -> ButtonStyleValue {
         .init(value: defaultValue)
     }
-    public func add(_ other: VariableValue) throws -> VariableValue {
+
+    public func add(_: VariableValue) throws -> VariableValue {
         throw VariableValueError.variableCannotPerformOperation(Self.type, "add")
     }
+
     public var protoString: String { "\(value.title)" }
     public var valueString: String { protoString }
-    public func value(with variables: Variables, and scope: Scope) throws -> VariableValue {
+    public func value(with _: Variables, and _: Scope) throws -> VariableValue {
         self
     }
+
     public func copy() -> ButtonStyleValue {
         .init(
             value: value
@@ -155,8 +155,8 @@ extension ButtonStyle: Copying {
     }
 }
 
-extension VariableType {
-    public static var buttonStyle: VariableType { .init(title: "ButtonStyle") } // ButtonStyle
+public extension VariableType {
+    static var buttonStyle: VariableType { .init(title: "ButtonStyle") } // ButtonStyle
 }
 
 public final class TextAlignmentValue: PrimitiveEditableVariableValue, Codable, Copying {
@@ -167,17 +167,21 @@ public final class TextAlignmentValue: PrimitiveEditableVariableValue, Codable, 
     public init(value: TextAlignment) {
         self.value = value
     }
+
     public static func makeDefault() -> TextAlignmentValue {
         .init(value: defaultValue)
     }
-    public func add(_ other: VariableValue) throws -> VariableValue {
+
+    public func add(_: VariableValue) throws -> VariableValue {
         throw VariableValueError.variableCannotPerformOperation(Self.type, "add")
     }
+
     public var protoString: String { "\(value.title)" }
     public var valueString: String { protoString }
-    public func value(with variables: Variables, and scope: Scope) throws -> VariableValue {
+    public func value(with _: Variables, and _: Scope) throws -> VariableValue {
         self
     }
+
     public func copy() -> TextAlignmentValue {
         .init(
             value: value
@@ -197,29 +201,22 @@ extension TextAlignment: Copying {
     }
 }
 
-extension VariableType {
-    public static var textAlignment: VariableType { .init(title: "TextAlignment") } // TextAlignment
+public extension VariableType {
+    static var textAlignment: VariableType { .init(title: "TextAlignment") } // TextAlignment
 }
-
-
-
-
-
-
-
 
 // APIValueStep
 
 extension APIValueStep: Copying {
     public func copy() -> APIValueStep {
         return APIValueStep(
-                    url: url
+            url: url
         )
     }
 }
 
-extension APIValueStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension APIValueStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case url
         public var defaultValue: any EditableVariableValue {
             switch self {
@@ -227,46 +224,49 @@ extension APIValueStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             url: factory(.url) as! AnyValue
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             url: Properties.url.defaultValue as! AnyValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .url: return url
+        case .url: return url
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .url: self.url = value as! AnyValue
+        case .url: url = value as! AnyValue
         }
     }
 }
 
-extension VariableType {
-    public static var aPIStep: VariableType { .init(title: "APIStep") } // APIValueStep
+public extension VariableType {
+    static var aPIStep: VariableType { .init(title: "APIStep") } // APIValueStep
 }
 
-extension APIValueStep {
-    enum CodingKeys: String, CodingKey {
+public extension APIValueStep {
+    internal enum CodingKeys: String, CodingKey {
         case url
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             url: (try? valueContainer.decode(AnyValue.self, forKey: .url)) ?? Properties.url.defaultValue as! AnyValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(url, forKey: .url)
     }
@@ -277,14 +277,14 @@ extension APIValueStep {
 extension AddToVarStep: Copying {
     public func copy() -> AddToVarStep {
         return AddToVarStep(
-                    varName: varName,
-                    value: value
+            varName: varName,
+            value: value
         )
     }
 }
 
-extension AddToVarStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension AddToVarStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case varName
         case value
         public var defaultValue: any EditableVariableValue {
@@ -294,52 +294,55 @@ extension AddToVarStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             varName: factory(.varName) as! AnyValue,
             value: factory(.value) as! AnyValue
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             varName: Properties.varName.defaultValue as! AnyValue,
             value: Properties.value.defaultValue as! AnyValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .varName: return varName
-            case .value: return value
+        case .varName: return varName
+        case .value: return value
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .varName: self.varName = value as! AnyValue
-            case .value: self.value = value as! AnyValue
+        case .varName: varName = value as! AnyValue
+        case .value: self.value = value as! AnyValue
         }
     }
 }
 
-extension VariableType {
-    public static var addToVarStep: VariableType { .init(title: "AddToVarStep") } // AddToVarStep
+public extension VariableType {
+    static var addToVarStep: VariableType { .init(title: "AddToVarStep") } // AddToVarStep
 }
 
-extension AddToVarStep {
-    enum CodingKeys: String, CodingKey {
+public extension AddToVarStep {
+    internal enum CodingKeys: String, CodingKey {
         case varName
         case value
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             varName: (try? valueContainer.decode(AnyValue.self, forKey: .varName)) ?? Properties.varName.defaultValue as! AnyValue,
             value: (try? valueContainer.decode(AnyValue.self, forKey: .value)) ?? Properties.value.defaultValue as! AnyValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(varName, forKey: .varName)
         try container.encode(value, forKey: .value)
@@ -351,14 +354,14 @@ extension AddToVarStep {
 extension ArrayValueStep: Copying {
     public func copy() -> ArrayValueStep {
         return ArrayValueStep(
-                    array: array,
-                    index: index
+            array: array,
+            index: index
         )
     }
 }
 
-extension ArrayValueStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension ArrayValueStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case array
         case index
         public var defaultValue: any EditableVariableValue {
@@ -368,52 +371,55 @@ extension ArrayValueStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             array: factory(.array) as! AnyValue,
             index: factory(.index) as! AnyValue
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             array: Properties.array.defaultValue as! AnyValue,
             index: Properties.index.defaultValue as! AnyValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .array: return array
-            case .index: return index
+        case .array: return array
+        case .index: return index
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .array: self.array = value as! AnyValue
-            case .index: self.index = value as! AnyValue
+        case .array: array = value as! AnyValue
+        case .index: index = value as! AnyValue
         }
     }
 }
 
-extension VariableType {
-    public static var arrayStep: VariableType { .init(title: "ArrayStep") } // ArrayValueStep
+public extension VariableType {
+    static var arrayStep: VariableType { .init(title: "ArrayStep") } // ArrayValueStep
 }
 
-extension ArrayValueStep {
-    enum CodingKeys: String, CodingKey {
+public extension ArrayValueStep {
+    internal enum CodingKeys: String, CodingKey {
         case array
         case index
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             array: (try? valueContainer.decode(AnyValue.self, forKey: .array)) ?? Properties.array.defaultValue as! AnyValue,
             index: (try? valueContainer.decode(AnyValue.self, forKey: .index)) ?? Properties.index.defaultValue as! AnyValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(array, forKey: .array)
         try container.encode(index, forKey: .index)
@@ -425,28 +431,28 @@ extension ArrayValueStep {
 extension ComparisonTypeValue: Copying {
     public func copy() -> ComparisonTypeValue {
         return ComparisonTypeValue(
-                    value: value
+            value: value
         )
     }
 }
 
-
-extension VariableType {
-    public static var comparisonType: VariableType { .init(title: "ComparisonType") } // ComparisonTypeValue
+public extension VariableType {
+    static var comparisonType: VariableType { .init(title: "ComparisonType") } // ComparisonTypeValue
 }
 
-extension ComparisonTypeValue {
-    enum CodingKeys: String, CodingKey {
+public extension ComparisonTypeValue {
+    internal enum CodingKeys: String, CodingKey {
         case value
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             value: (try? valueContainer.decode(ComparisonType.self, forKey: .value)) ?? Self.makeDefault().value
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(value, forKey: .value)
     }
@@ -457,15 +463,15 @@ extension ComparisonTypeValue {
 extension ComparisonValue: Copying {
     public func copy() -> ComparisonValue {
         return ComparisonValue(
-                    lhs: lhs,
-                    rhs: rhs,
-                    comparison: comparison.copy()
+            lhs: lhs,
+            rhs: rhs,
+            comparison: comparison.copy()
         )
     }
 }
 
-extension ComparisonValue {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension ComparisonValue {
+    enum Properties: String, ViewProperty, CaseIterable {
         case lhs
         case rhs
         case comparison
@@ -477,7 +483,8 @@ extension ComparisonValue {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             lhs: factory(.lhs) as! AnyValue,
             rhs: factory(.rhs) as! AnyValue,
@@ -485,42 +492,43 @@ extension ComparisonValue {
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             lhs: Properties.lhs.defaultValue as! AnyValue,
             rhs: Properties.rhs.defaultValue as! AnyValue,
             comparison: Properties.comparison.defaultValue as! ComparisonTypeValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .lhs: return lhs
-            case .rhs: return rhs
-            case .comparison: return comparison
+        case .lhs: return lhs
+        case .rhs: return rhs
+        case .comparison: return comparison
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .lhs: self.lhs = value as! AnyValue
-            case .rhs: self.rhs = value as! AnyValue
-            case .comparison: self.comparison = value as! ComparisonTypeValue
+        case .lhs: lhs = value as! AnyValue
+        case .rhs: rhs = value as! AnyValue
+        case .comparison: comparison = value as! ComparisonTypeValue
         }
     }
 }
 
-extension VariableType {
-    public static var comparison: VariableType { .init(title: "Comparison") } // ComparisonValue
+public extension VariableType {
+    static var comparison: VariableType { .init(title: "Comparison") } // ComparisonValue
 }
 
-extension ComparisonValue {
-    enum CodingKeys: String, CodingKey {
+public extension ComparisonValue {
+    internal enum CodingKeys: String, CodingKey {
         case lhs
         case rhs
         case comparison
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             lhs: (try? valueContainer.decode(AnyValue.self, forKey: .lhs)) ?? Properties.lhs.defaultValue as! AnyValue,
@@ -528,7 +536,8 @@ extension ComparisonValue {
             comparison: (try? valueContainer.decode(ComparisonTypeValue.self, forKey: .comparison)) ?? Properties.comparison.defaultValue as! ComparisonTypeValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(lhs, forKey: .lhs)
         try container.encode(rhs, forKey: .rhs)
@@ -541,14 +550,14 @@ extension ComparisonValue {
 extension ConditionalActionValue: Copying {
     public func copy() -> ConditionalActionValue {
         return ConditionalActionValue(
-                    ifCondition: ifCondition.copy(),
-                    ifSteps: ifSteps
+            ifCondition: ifCondition.copy(),
+            ifSteps: ifSteps
         )
     }
 }
 
-extension ConditionalActionValue {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension ConditionalActionValue {
+    enum Properties: String, ViewProperty, CaseIterable {
         case ifCondition
         case ifSteps
         public var defaultValue: any EditableVariableValue {
@@ -558,52 +567,55 @@ extension ConditionalActionValue {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             ifCondition: factory(.ifCondition) as! ComparisonValue,
             ifSteps: factory(.ifSteps) as! StepArray
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             ifCondition: Properties.ifCondition.defaultValue as! ComparisonValue,
             ifSteps: Properties.ifSteps.defaultValue as! StepArray
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .ifCondition: return ifCondition
-            case .ifSteps: return ifSteps
+        case .ifCondition: return ifCondition
+        case .ifSteps: return ifSteps
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .ifCondition: self.ifCondition = value as! ComparisonValue
-            case .ifSteps: self.ifSteps = value as! StepArray
+        case .ifCondition: ifCondition = value as! ComparisonValue
+        case .ifSteps: ifSteps = value as! StepArray
         }
     }
 }
 
-extension VariableType {
-    public static var conditionalAction: VariableType { .init(title: "ConditionalAction") } // ConditionalActionValue
+public extension VariableType {
+    static var conditionalAction: VariableType { .init(title: "ConditionalAction") } // ConditionalActionValue
 }
 
-extension ConditionalActionValue {
-    enum CodingKeys: String, CodingKey {
+public extension ConditionalActionValue {
+    internal enum CodingKeys: String, CodingKey {
         case ifCondition
         case ifSteps
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             ifCondition: (try? valueContainer.decode(ComparisonValue.self, forKey: .ifCondition)) ?? Properties.ifCondition.defaultValue as! ComparisonValue,
             ifSteps: (try? valueContainer.decode(StepArray.self, forKey: .ifSteps)) ?? Properties.ifSteps.defaultValue as! StepArray
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(ifCondition, forKey: .ifCondition)
         try container.encode(ifSteps, forKey: .ifSteps)
@@ -615,13 +627,13 @@ extension ConditionalActionValue {
 extension DecodeArrayStep: Copying {
     public func copy() -> DecodeArrayStep {
         return DecodeArrayStep(
-                    value: value
+            value: value
         )
     }
 }
 
-extension DecodeArrayStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension DecodeArrayStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case value
         public var defaultValue: any EditableVariableValue {
             switch self {
@@ -629,46 +641,49 @@ extension DecodeArrayStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             value: factory(.value) as! TypedValue<IntValue>
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             value: Properties.value.defaultValue as! TypedValue<IntValue>
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .value: return value
+        case .value: return value
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .value: self.value = value as! TypedValue<IntValue>
+        case .value: self.value = value as! TypedValue<IntValue>
         }
     }
 }
 
-extension VariableType {
-    public static var decodeArrayStep: VariableType { .init(title: "DecodeArrayStep") } // DecodeArrayStep
+public extension VariableType {
+    static var decodeArrayStep: VariableType { .init(title: "DecodeArrayStep") } // DecodeArrayStep
 }
 
-extension DecodeArrayStep {
-    enum CodingKeys: String, CodingKey {
+public extension DecodeArrayStep {
+    internal enum CodingKeys: String, CodingKey {
         case value
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             value: (try? valueContainer.decode(TypedValue<IntValue>.self, forKey: .value)) ?? Properties.value.defaultValue as! TypedValue<IntValue>
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(value, forKey: .value)
     }
@@ -679,13 +694,13 @@ extension DecodeArrayStep {
 extension DecodeDictionaryStep: Copying {
     public func copy() -> DecodeDictionaryStep {
         return DecodeDictionaryStep(
-                    value: value
+            value: value
         )
     }
 }
 
-extension DecodeDictionaryStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension DecodeDictionaryStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case value
         public var defaultValue: any EditableVariableValue {
             switch self {
@@ -693,46 +708,49 @@ extension DecodeDictionaryStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             value: factory(.value) as! AnyValue
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             value: Properties.value.defaultValue as! AnyValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .value: return value
+        case .value: return value
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .value: self.value = value as! AnyValue
+        case .value: self.value = value as! AnyValue
         }
     }
 }
 
-extension VariableType {
-    public static var decodeDictionaryStep: VariableType { .init(title: "DecodeDictionaryStep") } // DecodeDictionaryStep
+public extension VariableType {
+    static var decodeDictionaryStep: VariableType { .init(title: "DecodeDictionaryStep") } // DecodeDictionaryStep
 }
 
-extension DecodeDictionaryStep {
-    enum CodingKeys: String, CodingKey {
+public extension DecodeDictionaryStep {
+    internal enum CodingKeys: String, CodingKey {
         case value
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             value: (try? valueContainer.decode(AnyValue.self, forKey: .value)) ?? Properties.value.defaultValue as! AnyValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(value, forKey: .value)
     }
@@ -743,13 +761,13 @@ extension DecodeDictionaryStep {
 extension DictionaryKeysStep: Copying {
     public func copy() -> DictionaryKeysStep {
         return DictionaryKeysStep(
-                    dictionary: dictionary
+            dictionary: dictionary
         )
     }
 }
 
-extension DictionaryKeysStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension DictionaryKeysStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case dictionary
         public var defaultValue: any EditableVariableValue {
             switch self {
@@ -757,46 +775,49 @@ extension DictionaryKeysStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             dictionary: factory(.dictionary) as! TypedValue<DictionaryValue>
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             dictionary: Properties.dictionary.defaultValue as! TypedValue<DictionaryValue>
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .dictionary: return dictionary
+        case .dictionary: return dictionary
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .dictionary: self.dictionary = value as! TypedValue<DictionaryValue>
+        case .dictionary: dictionary = value as! TypedValue<DictionaryValue>
         }
     }
 }
 
-extension VariableType {
-    public static var dictionaryKeysStep: VariableType { .init(title: "DictionaryKeysStep") } // DictionaryKeysStep
+public extension VariableType {
+    static var dictionaryKeysStep: VariableType { .init(title: "DictionaryKeysStep") } // DictionaryKeysStep
 }
 
-extension DictionaryKeysStep {
-    enum CodingKeys: String, CodingKey {
+public extension DictionaryKeysStep {
+    internal enum CodingKeys: String, CodingKey {
         case dictionary
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             dictionary: (try? valueContainer.decode(TypedValue<DictionaryValue>.self, forKey: .dictionary)) ?? Properties.dictionary.defaultValue as! TypedValue<DictionaryValue>
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(dictionary, forKey: .dictionary)
     }
@@ -807,15 +828,15 @@ extension DictionaryKeysStep {
 extension DictionaryValueForKeyStep: Copying {
     public func copy() -> DictionaryValueForKeyStep {
         return DictionaryValueForKeyStep(
-                    dictionary: dictionary,
-                    key: key,
-                    errorIfNotFound: errorIfNotFound
+            dictionary: dictionary,
+            key: key,
+            errorIfNotFound: errorIfNotFound
         )
     }
 }
 
-extension DictionaryValueForKeyStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension DictionaryValueForKeyStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case dictionary
         case key
         case errorIfNotFound
@@ -827,7 +848,8 @@ extension DictionaryValueForKeyStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             dictionary: factory(.dictionary) as! TypedValue<DictionaryValue>,
             key: factory(.key) as! AnyValue,
@@ -835,42 +857,43 @@ extension DictionaryValueForKeyStep {
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             dictionary: Properties.dictionary.defaultValue as! TypedValue<DictionaryValue>,
             key: Properties.key.defaultValue as! AnyValue,
             errorIfNotFound: Properties.errorIfNotFound.defaultValue as! BoolValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .dictionary: return dictionary
-            case .key: return key
-            case .errorIfNotFound: return errorIfNotFound
+        case .dictionary: return dictionary
+        case .key: return key
+        case .errorIfNotFound: return errorIfNotFound
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .dictionary: self.dictionary = value as! TypedValue<DictionaryValue>
-            case .key: self.key = value as! AnyValue
-            case .errorIfNotFound: self.errorIfNotFound = value as! BoolValue
+        case .dictionary: dictionary = value as! TypedValue<DictionaryValue>
+        case .key: key = value as! AnyValue
+        case .errorIfNotFound: errorIfNotFound = value as! BoolValue
         }
     }
 }
 
-extension VariableType {
-    public static var dictionaryForKeyStep: VariableType { .init(title: "DictionaryForKeyStep") } // DictionaryValueForKeyStep
+public extension VariableType {
+    static var dictionaryForKeyStep: VariableType { .init(title: "DictionaryForKeyStep") } // DictionaryValueForKeyStep
 }
 
-extension DictionaryValueForKeyStep {
-    enum CodingKeys: String, CodingKey {
+public extension DictionaryValueForKeyStep {
+    internal enum CodingKeys: String, CodingKey {
         case dictionary
         case key
         case errorIfNotFound
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             dictionary: (try? valueContainer.decode(TypedValue<DictionaryValue>.self, forKey: .dictionary)) ?? Properties.dictionary.defaultValue as! TypedValue<DictionaryValue>,
@@ -878,7 +901,8 @@ extension DictionaryValueForKeyStep {
             errorIfNotFound: (try? valueContainer.decode(BoolValue.self, forKey: .errorIfNotFound)) ?? Properties.errorIfNotFound.defaultValue as! BoolValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(dictionary, forKey: .dictionary)
         try container.encode(key, forKey: .key)
@@ -891,14 +915,14 @@ extension DictionaryValueForKeyStep {
 extension ForEachStep: Copying {
     public func copy() -> ForEachStep {
         return ForEachStep(
-                    values: values,
-                    loop: loop
+            values: values,
+            loop: loop
         )
     }
 }
 
-extension ForEachStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension ForEachStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case values
         case loop
         public var defaultValue: any EditableVariableValue {
@@ -908,52 +932,55 @@ extension ForEachStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             values: factory(.values) as! TypedValue<ArrayValue>,
             loop: factory(.loop) as! StepArray
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             values: Properties.values.defaultValue as! TypedValue<ArrayValue>,
             loop: Properties.loop.defaultValue as! StepArray
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .values: return values
-            case .loop: return loop
+        case .values: return values
+        case .loop: return loop
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .values: self.values = value as! TypedValue<ArrayValue>
-            case .loop: self.loop = value as! StepArray
+        case .values: values = value as! TypedValue<ArrayValue>
+        case .loop: loop = value as! StepArray
         }
     }
 }
 
-extension VariableType {
-    public static var forEachStep: VariableType { .init(title: "ForEachStep") } // ForEachStep
+public extension VariableType {
+    static var forEachStep: VariableType { .init(title: "ForEachStep") } // ForEachStep
 }
 
-extension ForEachStep {
-    enum CodingKeys: String, CodingKey {
+public extension ForEachStep {
+    internal enum CodingKeys: String, CodingKey {
         case values
         case loop
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             values: (try? valueContainer.decode(TypedValue<ArrayValue>.self, forKey: .values)) ?? Properties.values.defaultValue as! TypedValue<ArrayValue>,
             loop: (try? valueContainer.decode(StepArray.self, forKey: .loop)) ?? Properties.loop.defaultValue as! StepArray
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(values, forKey: .values)
         try container.encode(loop, forKey: .loop)
@@ -965,13 +992,13 @@ extension ForEachStep {
 extension FunctionStep: Copying {
     public func copy() -> FunctionStep {
         return FunctionStep(
-                    functionName: functionName
+            functionName: functionName
         )
     }
 }
 
-extension FunctionStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension FunctionStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case functionName
         public var defaultValue: any EditableVariableValue {
             switch self {
@@ -979,46 +1006,49 @@ extension FunctionStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             functionName: factory(.functionName) as! AnyValue
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             functionName: Properties.functionName.defaultValue as! AnyValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .functionName: return functionName
+        case .functionName: return functionName
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .functionName: self.functionName = value as! AnyValue
+        case .functionName: functionName = value as! AnyValue
         }
     }
 }
 
-extension VariableType {
-    public static var functionStep: VariableType { .init(title: "FunctionStep") } // FunctionStep
+public extension VariableType {
+    static var functionStep: VariableType { .init(title: "FunctionStep") } // FunctionStep
 }
 
-extension FunctionStep {
-    enum CodingKeys: String, CodingKey {
+public extension FunctionStep {
+    internal enum CodingKeys: String, CodingKey {
         case functionName
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             functionName: (try? valueContainer.decode(AnyValue.self, forKey: .functionName)) ?? Properties.functionName.defaultValue as! AnyValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(functionName, forKey: .functionName)
     }
@@ -1029,14 +1059,14 @@ extension FunctionStep {
 extension FunctionValue: Copying {
     public func copy() -> FunctionValue {
         return FunctionValue(
-                    arguments: arguments,
-                    body: body
+            arguments: arguments,
+            body: body
         )
     }
 }
 
-extension FunctionValue {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension FunctionValue {
+    enum Properties: String, ViewProperty, CaseIterable {
         case arguments
         case body
         public var defaultValue: any EditableVariableValue {
@@ -1046,52 +1076,55 @@ extension FunctionValue {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             arguments: factory(.arguments) as! TypedValue<DictionaryValue>,
             body: factory(.body) as! TypedValue<StepArray>
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             arguments: Properties.arguments.defaultValue as! TypedValue<DictionaryValue>,
             body: Properties.body.defaultValue as! TypedValue<StepArray>
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .arguments: return arguments
-            case .body: return body
+        case .arguments: return arguments
+        case .body: return body
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .arguments: self.arguments = value as! TypedValue<DictionaryValue>
-            case .body: self.body = value as! TypedValue<StepArray>
+        case .arguments: arguments = value as! TypedValue<DictionaryValue>
+        case .body: body = value as! TypedValue<StepArray>
         }
     }
 }
 
-extension VariableType {
-    public static var function: VariableType { .init(title: "Function") } // FunctionValue
+public extension VariableType {
+    static var function: VariableType { .init(title: "Function") } // FunctionValue
 }
 
-extension FunctionValue {
-    enum CodingKeys: String, CodingKey {
+public extension FunctionValue {
+    internal enum CodingKeys: String, CodingKey {
         case arguments
         case body
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             arguments: (try? valueContainer.decode(TypedValue<DictionaryValue>.self, forKey: .arguments)) ?? Properties.arguments.defaultValue as! TypedValue<DictionaryValue>,
             body: (try? valueContainer.decode(TypedValue<StepArray>.self, forKey: .body)) ?? Properties.body.defaultValue as! TypedValue<StepArray>
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(arguments, forKey: .arguments)
         try container.encode(body, forKey: .body)
@@ -1103,14 +1136,14 @@ extension FunctionValue {
 extension GetNumberStep: Copying {
     public func copy() -> GetNumberStep {
         return GetNumberStep(
-                    value: value,
-                    numberType: numberType
+            value: value,
+            numberType: numberType
         )
     }
 }
 
-extension GetNumberStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension GetNumberStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case value
         case numberType
         public var defaultValue: any EditableVariableValue {
@@ -1120,52 +1153,55 @@ extension GetNumberStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             value: factory(.value) as! AnyValue,
             numberType: factory(.numberType) as! NumericTypeValue
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             value: Properties.value.defaultValue as! AnyValue,
             numberType: Properties.numberType.defaultValue as! NumericTypeValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .value: return value
-            case .numberType: return numberType
+        case .value: return value
+        case .numberType: return numberType
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .value: self.value = value as! AnyValue
-            case .numberType: self.numberType = value as! NumericTypeValue
+        case .value: self.value = value as! AnyValue
+        case .numberType: numberType = value as! NumericTypeValue
         }
     }
 }
 
-extension VariableType {
-    public static var getNumberStep: VariableType { .init(title: "GetNumberStep") } // GetNumberStep
+public extension VariableType {
+    static var getNumberStep: VariableType { .init(title: "GetNumberStep") } // GetNumberStep
 }
 
-extension GetNumberStep {
-    enum CodingKeys: String, CodingKey {
+public extension GetNumberStep {
+    internal enum CodingKeys: String, CodingKey {
         case value
         case numberType
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             value: (try? valueContainer.decode(AnyValue.self, forKey: .value)) ?? Properties.value.defaultValue as! AnyValue,
             numberType: (try? valueContainer.decode(NumericTypeValue.self, forKey: .numberType)) ?? Properties.numberType.defaultValue as! NumericTypeValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(value, forKey: .value)
         try container.encode(numberType, forKey: .numberType)
@@ -1177,13 +1213,13 @@ extension GetNumberStep {
 extension GetSavedDataStep: Copying {
     public func copy() -> GetSavedDataStep {
         return GetSavedDataStep(
-                    key: key
+            key: key
         )
     }
 }
 
-extension GetSavedDataStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension GetSavedDataStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case key
         public var defaultValue: any EditableVariableValue {
             switch self {
@@ -1191,46 +1227,49 @@ extension GetSavedDataStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             key: factory(.key) as! TypedValue<StringValue>
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             key: Properties.key.defaultValue as! TypedValue<StringValue>
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .key: return key
+        case .key: return key
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .key: self.key = value as! TypedValue<StringValue>
+        case .key: key = value as! TypedValue<StringValue>
         }
     }
 }
 
-extension VariableType {
-    public static var getSavedDataStep: VariableType { .init(title: "GetSavedDataStep") } // GetSavedDataStep
+public extension VariableType {
+    static var getSavedDataStep: VariableType { .init(title: "GetSavedDataStep") } // GetSavedDataStep
 }
 
-extension GetSavedDataStep {
-    enum CodingKeys: String, CodingKey {
+public extension GetSavedDataStep {
+    internal enum CodingKeys: String, CodingKey {
         case key
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             key: (try? valueContainer.decode(TypedValue<StringValue>.self, forKey: .key)) ?? Properties.key.defaultValue as! TypedValue<StringValue>
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(key, forKey: .key)
     }
@@ -1241,14 +1280,14 @@ extension GetSavedDataStep {
 extension IfStep: Copying {
     public func copy() -> IfStep {
         return IfStep(
-                    ifAction: ifAction.copy(),
-                    elseAction: elseAction
+            ifAction: ifAction.copy(),
+            elseAction: elseAction
         )
     }
 }
 
-extension IfStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension IfStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case ifAction
         case elseAction
         public var defaultValue: any EditableVariableValue {
@@ -1258,52 +1297,55 @@ extension IfStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             ifAction: factory(.ifAction) as! ConditionalActionValue,
             elseAction: factory(.elseAction) as! StepArray
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             ifAction: Properties.ifAction.defaultValue as! ConditionalActionValue,
             elseAction: Properties.elseAction.defaultValue as! StepArray
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .ifAction: return ifAction
-            case .elseAction: return elseAction
+        case .ifAction: return ifAction
+        case .elseAction: return elseAction
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .ifAction: self.ifAction = value as! ConditionalActionValue
-            case .elseAction: self.elseAction = value as! StepArray
+        case .ifAction: ifAction = value as! ConditionalActionValue
+        case .elseAction: elseAction = value as! StepArray
         }
     }
 }
 
-extension VariableType {
-    public static var ifStep: VariableType { .init(title: "IfStep") } // IfStep
+public extension VariableType {
+    static var ifStep: VariableType { .init(title: "IfStep") } // IfStep
 }
 
-extension IfStep {
-    enum CodingKeys: String, CodingKey {
+public extension IfStep {
+    internal enum CodingKeys: String, CodingKey {
         case ifAction
         case elseAction
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             ifAction: (try? valueContainer.decode(ConditionalActionValue.self, forKey: .ifAction)) ?? Properties.ifAction.defaultValue as! ConditionalActionValue,
             elseAction: (try? valueContainer.decode(StepArray.self, forKey: .elseAction)) ?? Properties.elseAction.defaultValue as! StepArray
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(ifAction, forKey: .ifAction)
         try container.encode(elseAction, forKey: .elseAction)
@@ -1315,15 +1357,15 @@ extension IfStep {
 extension LocationValue: Copying {
     public func copy() -> LocationValue {
         return LocationValue(
-                    name: name,
-                    latitude: latitude,
-                    longitude: longitude
+            name: name,
+            latitude: latitude,
+            longitude: longitude
         )
     }
 }
 
-extension LocationValue {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension LocationValue {
+    enum Properties: String, ViewProperty, CaseIterable {
         case name
         case latitude
         case longitude
@@ -1335,7 +1377,8 @@ extension LocationValue {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             name: factory(.name) as! TypedValue<StringValue>,
             latitude: factory(.latitude) as! TypedValue<FloatValue>,
@@ -1343,42 +1386,43 @@ extension LocationValue {
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             name: Properties.name.defaultValue as! TypedValue<StringValue>,
             latitude: Properties.latitude.defaultValue as! TypedValue<FloatValue>,
             longitude: Properties.longitude.defaultValue as! TypedValue<FloatValue>
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .name: return name
-            case .latitude: return latitude
-            case .longitude: return longitude
+        case .name: return name
+        case .latitude: return latitude
+        case .longitude: return longitude
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .name: self.name = value as! TypedValue<StringValue>
-            case .latitude: self.latitude = value as! TypedValue<FloatValue>
-            case .longitude: self.longitude = value as! TypedValue<FloatValue>
+        case .name: name = value as! TypedValue<StringValue>
+        case .latitude: latitude = value as! TypedValue<FloatValue>
+        case .longitude: longitude = value as! TypedValue<FloatValue>
         }
     }
 }
 
-extension VariableType {
-    public static var location: VariableType { .init(title: "Location") } // LocationValue
+public extension VariableType {
+    static var location: VariableType { .init(title: "Location") } // LocationValue
 }
 
-extension LocationValue {
-    enum CodingKeys: String, CodingKey {
+public extension LocationValue {
+    internal enum CodingKeys: String, CodingKey {
         case name
         case latitude
         case longitude
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             name: (try? valueContainer.decode(TypedValue<StringValue>.self, forKey: .name)) ?? Properties.name.defaultValue as! TypedValue<StringValue>,
@@ -1386,7 +1430,8 @@ extension LocationValue {
             longitude: (try? valueContainer.decode(TypedValue<FloatValue>.self, forKey: .longitude)) ?? Properties.longitude.defaultValue as! TypedValue<FloatValue>
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(latitude, forKey: .latitude)
@@ -1399,15 +1444,15 @@ extension LocationValue {
 extension MakeRangeStep: Copying {
     public func copy() -> MakeRangeStep {
         return MakeRangeStep(
-                    start: start,
-                    end: end,
-                    step: step
+            start: start,
+            end: end,
+            step: step
         )
     }
 }
 
-extension MakeRangeStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension MakeRangeStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case start
         case end
         case step
@@ -1419,7 +1464,8 @@ extension MakeRangeStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             start: factory(.start) as! any NumericValue,
             end: factory(.end) as! any NumericValue,
@@ -1427,50 +1473,50 @@ extension MakeRangeStep {
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             start: Properties.start.defaultValue as! any NumericValue,
             end: Properties.end.defaultValue as! any NumericValue,
             step: Properties.step.defaultValue as! any NumericValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .start: return start
-            case .end: return end
-            case .step: return step
+        case .start: return start
+        case .end: return end
+        case .step: return step
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .start: self.start = value as! any NumericValue
-            case .end: self.end = value as! any NumericValue
-            case .step: self.step = value as! any NumericValue
+        case .start: start = value as! any NumericValue
+        case .end: end = value as! any NumericValue
+        case .step: step = value as! any NumericValue
         }
     }
 }
 
-extension VariableType {
-    public static var makeRangeStep: VariableType { .init(title: "MakeRangeStep") } // MakeRangeStep
+public extension VariableType {
+    static var makeRangeStep: VariableType { .init(title: "MakeRangeStep") } // MakeRangeStep
 }
-
 
 // MakeableButton
 
 extension MakeableButton: Copying {
     public func copy() -> MakeableButton {
         return MakeableButton(
-                    id: id,
-                    title: title,
-                    style: style,
-                    action: action.copy()
+            id: id,
+            title: title,
+            style: style,
+            action: action.copy()
         )
     }
 }
 
-extension MakeableButton {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension MakeableButton {
+    enum Properties: String, ViewProperty, CaseIterable {
         case title
         case style
         case action
@@ -1482,7 +1528,8 @@ extension MakeableButton {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             id: UUID(),
             title: factory(.title) as! AnyMakeableView,
@@ -1491,7 +1538,7 @@ extension MakeableButton {
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             id: UUID(),
             title: Properties.title.defaultValue as! AnyMakeableView,
@@ -1499,36 +1546,37 @@ extension MakeableButton {
             action: Properties.action.defaultValue as! FunctionValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .title: return title
-            case .style: return style
-            case .action: return action
+        case .title: return title
+        case .style: return style
+        case .action: return action
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .title: self.title = value as! AnyMakeableView
-            case .style: self.style = value as! ButtonStyleValue
-            case .action: self.action = value as! FunctionValue
+        case .title: title = value as! AnyMakeableView
+        case .style: style = value as! ButtonStyleValue
+        case .action: action = value as! FunctionValue
         }
     }
 }
 
-extension VariableType {
-    public static var button: VariableType { .init(title: "Button") } // MakeableButton
+public extension VariableType {
+    static var button: VariableType { .init(title: "Button") } // MakeableButton
 }
 
-extension MakeableButton {
-    enum CodingKeys: String, CodingKey {
+public extension MakeableButton {
+    internal enum CodingKeys: String, CodingKey {
         case id
         case title
         case style
         case action
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             id: (try? valueContainer.decode(UUID.self, forKey: .id)) ?? UUID(),
@@ -1537,7 +1585,8 @@ extension MakeableButton {
             action: (try? valueContainer.decode(FunctionValue.self, forKey: .action)) ?? Properties.action.defaultValue as! FunctionValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(title, forKey: .title)
@@ -1551,19 +1600,19 @@ extension MakeableButton {
 extension MakeableField: Copying {
     public func copy() -> MakeableField {
         return MakeableField(
-                    id: id,
-                    text: text.copy(),
-                    fontSize: fontSize,
-                    onTextUpdate: onTextUpdate,
-                    padding: padding,
-                    alignment: alignment,
-                    isMultiline: isMultiline
+            id: id,
+            text: text.copy(),
+            fontSize: fontSize,
+            onTextUpdate: onTextUpdate,
+            padding: padding,
+            alignment: alignment,
+            isMultiline: isMultiline
         )
     }
 }
 
-extension MakeableField {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension MakeableField {
+    enum Properties: String, ViewProperty, CaseIterable {
         case text
         case fontSize
         case onTextUpdate
@@ -1581,7 +1630,8 @@ extension MakeableField {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             id: UUID(),
             text: factory(.text) as! TemporaryValue,
@@ -1593,7 +1643,7 @@ extension MakeableField {
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             id: UUID(),
             text: Properties.text.defaultValue as! TemporaryValue,
@@ -1604,35 +1654,36 @@ extension MakeableField {
             isMultiline: Properties.isMultiline.defaultValue as! BoolValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .text: return text
-            case .fontSize: return fontSize
-            case .onTextUpdate: return onTextUpdate
-            case .padding: return padding
-            case .alignment: return alignment
-            case .isMultiline: return isMultiline
+        case .text: return text
+        case .fontSize: return fontSize
+        case .onTextUpdate: return onTextUpdate
+        case .padding: return padding
+        case .alignment: return alignment
+        case .isMultiline: return isMultiline
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .text: self.text = value as! TemporaryValue
-            case .fontSize: self.fontSize = value as! IntValue
-            case .onTextUpdate: self.onTextUpdate = value as! StepArray
-            case .padding: self.padding = value as! IntValue
-            case .alignment: self.alignment = value as! TextAlignmentValue
-            case .isMultiline: self.isMultiline = value as! BoolValue
+        case .text: text = value as! TemporaryValue
+        case .fontSize: fontSize = value as! IntValue
+        case .onTextUpdate: onTextUpdate = value as! StepArray
+        case .padding: padding = value as! IntValue
+        case .alignment: alignment = value as! TextAlignmentValue
+        case .isMultiline: isMultiline = value as! BoolValue
         }
     }
 }
 
-extension VariableType {
-    public static var field: VariableType { .init(title: "Field") } // MakeableField
+public extension VariableType {
+    static var field: VariableType { .init(title: "Field") } // MakeableField
 }
 
-extension MakeableField {
-    enum CodingKeys: String, CodingKey {
+public extension MakeableField {
+    internal enum CodingKeys: String, CodingKey {
         case id
         case text
         case fontSize
@@ -1642,7 +1693,7 @@ extension MakeableField {
         case isMultiline
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             id: (try? valueContainer.decode(UUID.self, forKey: .id)) ?? UUID(),
@@ -1654,7 +1705,8 @@ extension MakeableField {
             isMultiline: (try? valueContainer.decode(BoolValue.self, forKey: .isMultiline)) ?? Properties.isMultiline.defaultValue as! BoolValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(text, forKey: .text)
@@ -1671,15 +1723,15 @@ extension MakeableField {
 extension MakeableList: Copying {
     public func copy() -> MakeableList {
         return MakeableList(
-                    id: id,
-                    data: data,
-                    view: view
+            id: id,
+            data: data,
+            view: view
         )
     }
 }
 
-extension MakeableList {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension MakeableList {
+    enum Properties: String, ViewProperty, CaseIterable {
         case data
         case view
         public var defaultValue: any EditableVariableValue {
@@ -1689,7 +1741,8 @@ extension MakeableList {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             id: UUID(),
             data: factory(.data) as! TypedValue<ArrayValue>,
@@ -1697,40 +1750,41 @@ extension MakeableList {
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             id: UUID(),
             data: Properties.data.defaultValue as! TypedValue<ArrayValue>,
             view: Properties.view.defaultValue as! AnyMakeableView
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .data: return data
-            case .view: return view
+        case .data: return data
+        case .view: return view
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .data: self.data = value as! TypedValue<ArrayValue>
-            case .view: self.view = value as! AnyMakeableView
+        case .data: data = value as! TypedValue<ArrayValue>
+        case .view: view = value as! AnyMakeableView
         }
     }
 }
 
-extension VariableType {
-    public static var listView: VariableType { .init(title: "listView") } // MakeableList
+public extension VariableType {
+    static var listView: VariableType { .init(title: "listView") } // MakeableList
 }
 
-extension MakeableList {
-    enum CodingKeys: String, CodingKey {
+public extension MakeableList {
+    internal enum CodingKeys: String, CodingKey {
         case id
         case data
         case view
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             id: (try? valueContainer.decode(UUID.self, forKey: .id)) ?? UUID(),
@@ -1738,7 +1792,8 @@ extension MakeableList {
             view: (try? valueContainer.decode(AnyMakeableView.self, forKey: .view)) ?? Properties.view.defaultValue as! AnyMakeableView
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(data, forKey: .data)
@@ -1748,24 +1803,20 @@ extension MakeableList {
 
 // MakeableListRow
 
-
-
-
-
 // MakeableMap
 
 extension MakeableMap: Copying {
     public func copy() -> MakeableMap {
         return MakeableMap(
-                    id: id,
-                    locations: locations,
-                    zoomFollowsNewAnnotations: zoomFollowsNewAnnotations
+            id: id,
+            locations: locations,
+            zoomFollowsNewAnnotations: zoomFollowsNewAnnotations
         )
     }
 }
 
-extension MakeableMap {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension MakeableMap {
+    enum Properties: String, ViewProperty, CaseIterable {
         case locations
         case zoomFollowsNewAnnotations
         public var defaultValue: any EditableVariableValue {
@@ -1775,7 +1826,8 @@ extension MakeableMap {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             id: UUID(),
             locations: factory(.locations) as! TypedValue<ArrayValue>,
@@ -1783,40 +1835,41 @@ extension MakeableMap {
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             id: UUID(),
             locations: Properties.locations.defaultValue as! TypedValue<ArrayValue>,
             zoomFollowsNewAnnotations: Properties.zoomFollowsNewAnnotations.defaultValue as! BoolValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .locations: return locations
-            case .zoomFollowsNewAnnotations: return zoomFollowsNewAnnotations
+        case .locations: return locations
+        case .zoomFollowsNewAnnotations: return zoomFollowsNewAnnotations
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .locations: self.locations = value as! TypedValue<ArrayValue>
-            case .zoomFollowsNewAnnotations: self.zoomFollowsNewAnnotations = value as! BoolValue
+        case .locations: locations = value as! TypedValue<ArrayValue>
+        case .zoomFollowsNewAnnotations: zoomFollowsNewAnnotations = value as! BoolValue
         }
     }
 }
 
-extension VariableType {
-    public static var map: VariableType { .init(title: "Map") } // MakeableMap
+public extension VariableType {
+    static var map: VariableType { .init(title: "Map") } // MakeableMap
 }
 
-extension MakeableMap {
-    enum CodingKeys: String, CodingKey {
+public extension MakeableMap {
+    internal enum CodingKeys: String, CodingKey {
         case id
         case locations
         case zoomFollowsNewAnnotations
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             id: (try? valueContainer.decode(UUID.self, forKey: .id)) ?? UUID(),
@@ -1824,7 +1877,8 @@ extension MakeableMap {
             zoomFollowsNewAnnotations: (try? valueContainer.decode(BoolValue.self, forKey: .zoomFollowsNewAnnotations)) ?? Properties.zoomFollowsNewAnnotations.defaultValue as! BoolValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(locations, forKey: .locations)
@@ -1837,16 +1891,16 @@ extension MakeableMap {
 extension MakeableToggle: Copying {
     public func copy() -> MakeableToggle {
         return MakeableToggle(
-                    id: id,
-                    isOn: isOn.copy(),
-                    onToggleUpdate: onToggleUpdate,
-                    padding: padding
+            id: id,
+            isOn: isOn.copy(),
+            onToggleUpdate: onToggleUpdate,
+            padding: padding
         )
     }
 }
 
-extension MakeableToggle {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension MakeableToggle {
+    enum Properties: String, ViewProperty, CaseIterable {
         case isOn
         case onToggleUpdate
         case padding
@@ -1858,7 +1912,8 @@ extension MakeableToggle {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             id: UUID(),
             isOn: factory(.isOn) as! TemporaryValue,
@@ -1867,7 +1922,7 @@ extension MakeableToggle {
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             id: UUID(),
             isOn: Properties.isOn.defaultValue as! TemporaryValue,
@@ -1875,36 +1930,37 @@ extension MakeableToggle {
             padding: Properties.padding.defaultValue as! IntValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .isOn: return isOn
-            case .onToggleUpdate: return onToggleUpdate
-            case .padding: return padding
+        case .isOn: return isOn
+        case .onToggleUpdate: return onToggleUpdate
+        case .padding: return padding
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .isOn: self.isOn = value as! TemporaryValue
-            case .onToggleUpdate: self.onToggleUpdate = value as! StepArray
-            case .padding: self.padding = value as! IntValue
+        case .isOn: isOn = value as! TemporaryValue
+        case .onToggleUpdate: onToggleUpdate = value as! StepArray
+        case .padding: padding = value as! IntValue
         }
     }
 }
 
-extension VariableType {
-    public static var toggle: VariableType { .init(title: "Toggle") } // MakeableToggle
+public extension VariableType {
+    static var toggle: VariableType { .init(title: "Toggle") } // MakeableToggle
 }
 
-extension MakeableToggle {
-    enum CodingKeys: String, CodingKey {
+public extension MakeableToggle {
+    internal enum CodingKeys: String, CodingKey {
         case id
         case isOn
         case onToggleUpdate
         case padding
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             id: (try? valueContainer.decode(UUID.self, forKey: .id)) ?? UUID(),
@@ -1913,7 +1969,8 @@ extension MakeableToggle {
             padding: (try? valueContainer.decode(IntValue.self, forKey: .padding)) ?? Properties.padding.defaultValue as! IntValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(isOn, forKey: .isOn)
@@ -1927,14 +1984,14 @@ extension MakeableToggle {
 extension MapStep: Copying {
     public func copy() -> MapStep {
         return MapStep(
-                    value: value,
-                    mapper: mapper
+            value: value,
+            mapper: mapper
         )
     }
 }
 
-extension MapStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension MapStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case value
         case mapper
         public var defaultValue: any EditableVariableValue {
@@ -1944,52 +2001,55 @@ extension MapStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             value: factory(.value) as! TypedValue<ArrayValue>,
             mapper: factory(.mapper) as! StepArray
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             value: Properties.value.defaultValue as! TypedValue<ArrayValue>,
             mapper: Properties.mapper.defaultValue as! StepArray
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .value: return value
-            case .mapper: return mapper
+        case .value: return value
+        case .mapper: return mapper
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .value: self.value = value as! TypedValue<ArrayValue>
-            case .mapper: self.mapper = value as! StepArray
+        case .value: self.value = value as! TypedValue<ArrayValue>
+        case .mapper: mapper = value as! StepArray
         }
     }
 }
 
-extension VariableType {
-    public static var mapStep: VariableType { .init(title: "MapStep") } // MapStep
+public extension VariableType {
+    static var mapStep: VariableType { .init(title: "MapStep") } // MapStep
 }
 
-extension MapStep {
-    enum CodingKeys: String, CodingKey {
+public extension MapStep {
+    internal enum CodingKeys: String, CodingKey {
         case value
         case mapper
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             value: (try? valueContainer.decode(TypedValue<ArrayValue>.self, forKey: .value)) ?? Properties.value.defaultValue as! TypedValue<ArrayValue>,
             mapper: (try? valueContainer.decode(StepArray.self, forKey: .mapper)) ?? Properties.mapper.defaultValue as! StepArray
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(value, forKey: .value)
         try container.encode(mapper, forKey: .mapper)
@@ -2001,28 +2061,28 @@ extension MapStep {
 extension OptionalValue: Copying {
     public func copy() -> OptionalValue {
         return OptionalValue(
-                    value: value
+            value: value
         )
     }
 }
 
-
-extension VariableType {
-    public static var optional: VariableType { .init(title: "Optional") } // OptionalValue
+public extension VariableType {
+    static var optional: VariableType { .init(title: "Optional") } // OptionalValue
 }
 
-extension OptionalValue {
-    enum CodingKeys: String, CodingKey {
+public extension OptionalValue {
+    internal enum CodingKeys: String, CodingKey {
         case value
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             value: (try? valueContainer.decode(AnyValue.self, forKey: .value)) ?? Self.makeDefault().value
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(value, forKey: .value)
     }
@@ -2033,13 +2093,13 @@ extension OptionalValue {
 extension PrintVarStep: Copying {
     public func copy() -> PrintVarStep {
         return PrintVarStep(
-                    varName: varName
+            varName: varName
         )
     }
 }
 
-extension PrintVarStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension PrintVarStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case varName
         public var defaultValue: any EditableVariableValue {
             switch self {
@@ -2047,46 +2107,49 @@ extension PrintVarStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             varName: factory(.varName) as! AnyValue
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             varName: Properties.varName.defaultValue as! AnyValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .varName: return varName
+        case .varName: return varName
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .varName: self.varName = value as! AnyValue
+        case .varName: varName = value as! AnyValue
         }
     }
 }
 
-extension VariableType {
-    public static var printVarStep: VariableType { .init(title: "PrintVarStep") } // PrintVarStep
+public extension VariableType {
+    static var printVarStep: VariableType { .init(title: "PrintVarStep") } // PrintVarStep
 }
 
-extension PrintVarStep {
-    enum CodingKeys: String, CodingKey {
+public extension PrintVarStep {
+    internal enum CodingKeys: String, CodingKey {
         case varName
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             varName: (try? valueContainer.decode(AnyValue.self, forKey: .varName)) ?? Properties.varName.defaultValue as! AnyValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(varName, forKey: .varName)
     }
@@ -2097,13 +2160,13 @@ extension PrintVarStep {
 extension RandomElementStep: Copying {
     public func copy() -> RandomElementStep {
         return RandomElementStep(
-                    array: array
+            array: array
         )
     }
 }
 
-extension RandomElementStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension RandomElementStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case array
         public var defaultValue: any EditableVariableValue {
             switch self {
@@ -2111,46 +2174,49 @@ extension RandomElementStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             array: factory(.array) as! TypedValue<ArrayValue>
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             array: Properties.array.defaultValue as! TypedValue<ArrayValue>
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .array: return array
+        case .array: return array
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .array: self.array = value as! TypedValue<ArrayValue>
+        case .array: array = value as! TypedValue<ArrayValue>
         }
     }
 }
 
-extension VariableType {
-    public static var randomElementStep: VariableType { .init(title: "RandomElementStep") } // RandomElementStep
+public extension VariableType {
+    static var randomElementStep: VariableType { .init(title: "RandomElementStep") } // RandomElementStep
 }
 
-extension RandomElementStep {
-    enum CodingKeys: String, CodingKey {
+public extension RandomElementStep {
+    internal enum CodingKeys: String, CodingKey {
         case array
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             array: (try? valueContainer.decode(TypedValue<ArrayValue>.self, forKey: .array)) ?? Properties.array.defaultValue as! TypedValue<ArrayValue>
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(array, forKey: .array)
     }
@@ -2161,14 +2227,14 @@ extension RandomElementStep {
 extension SaveDataStep: Copying {
     public func copy() -> SaveDataStep {
         return SaveDataStep(
-                    key: key,
-                    data: data
+            key: key,
+            data: data
         )
     }
 }
 
-extension SaveDataStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension SaveDataStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case key
         case data
         public var defaultValue: any EditableVariableValue {
@@ -2178,52 +2244,55 @@ extension SaveDataStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             key: factory(.key) as! TypedValue<StringValue>,
             data: factory(.data) as! AnyValue
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             key: Properties.key.defaultValue as! TypedValue<StringValue>,
             data: Properties.data.defaultValue as! AnyValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .key: return key
-            case .data: return data
+        case .key: return key
+        case .data: return data
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .key: self.key = value as! TypedValue<StringValue>
-            case .data: self.data = value as! AnyValue
+        case .key: key = value as! TypedValue<StringValue>
+        case .data: data = value as! AnyValue
         }
     }
 }
 
-extension VariableType {
-    public static var saveDataStep: VariableType { .init(title: "SaveDataStep") } // SaveDataStep
+public extension VariableType {
+    static var saveDataStep: VariableType { .init(title: "SaveDataStep") } // SaveDataStep
 }
 
-extension SaveDataStep {
-    enum CodingKeys: String, CodingKey {
+public extension SaveDataStep {
+    internal enum CodingKeys: String, CodingKey {
         case key
         case data
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             key: (try? valueContainer.decode(TypedValue<StringValue>.self, forKey: .key)) ?? Properties.key.defaultValue as! TypedValue<StringValue>,
             data: (try? valueContainer.decode(AnyValue.self, forKey: .data)) ?? Properties.data.defaultValue as! AnyValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(key, forKey: .key)
         try container.encode(data, forKey: .data)
@@ -2235,13 +2304,13 @@ extension SaveDataStep {
 extension StaticValueStep: Copying {
     public func copy() -> StaticValueStep {
         return StaticValueStep(
-                    value: value
+            value: value
         )
     }
 }
 
-extension StaticValueStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension StaticValueStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case value
         public var defaultValue: any EditableVariableValue {
             switch self {
@@ -2249,46 +2318,49 @@ extension StaticValueStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             value: factory(.value) as! AnyValue
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             value: Properties.value.defaultValue as! AnyValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .value: return value
+        case .value: return value
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .value: self.value = value as! AnyValue
+        case .value: self.value = value as! AnyValue
         }
     }
 }
 
-extension VariableType {
-    public static var staticStep: VariableType { .init(title: "StaticStep") } // StaticValueStep
+public extension VariableType {
+    static var staticStep: VariableType { .init(title: "StaticStep") } // StaticValueStep
 }
 
-extension StaticValueStep {
-    enum CodingKeys: String, CodingKey {
+public extension StaticValueStep {
+    internal enum CodingKeys: String, CodingKey {
         case value
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             value: (try? valueContainer.decode(AnyValue.self, forKey: .value)) ?? Properties.value.defaultValue as! AnyValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(value, forKey: .value)
     }
@@ -2299,14 +2371,14 @@ extension StaticValueStep {
 extension TemporaryValue: Copying {
     public func copy() -> TemporaryValue {
         return TemporaryValue(
-                    initial: initial,
-                    output: output
+            initial: initial,
+            output: output
         )
     }
 }
 
-extension TemporaryValue {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension TemporaryValue {
+    enum Properties: String, ViewProperty, CaseIterable {
         case initial
         case output
         public var defaultValue: any EditableVariableValue {
@@ -2316,51 +2388,52 @@ extension TemporaryValue {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             initial: factory(.initial) as! AnyValue,
             output: factory(.output) as! Variable
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             initial: Properties.initial.defaultValue as! AnyValue,
             output: Properties.output.defaultValue as! Variable
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .initial: return initial
-            case .output: return output
+        case .initial: return initial
+        case .output: return output
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .initial: self.initial = value as! AnyValue
-            case .output: self.output = value as! Variable
+        case .initial: initial = value as! AnyValue
+        case .output: output = value as! Variable
         }
     }
 }
 
-extension VariableType {
-    public static var temporary: VariableType { .init(title: "Temporary") } // TemporaryValue
+public extension VariableType {
+    static var temporary: VariableType { .init(title: "Temporary") } // TemporaryValue
 }
-
 
 // URLEncodeStep
 
 extension URLEncodeStep: Copying {
     public func copy() -> URLEncodeStep {
         return URLEncodeStep(
-                    value: value
+            value: value
         )
     }
 }
 
-extension URLEncodeStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension URLEncodeStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case value
         public var defaultValue: any EditableVariableValue {
             switch self {
@@ -2368,46 +2441,49 @@ extension URLEncodeStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             value: factory(.value) as! AnyValue
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             value: Properties.value.defaultValue as! AnyValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .value: return value
+        case .value: return value
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .value: self.value = value as! AnyValue
+        case .value: self.value = value as! AnyValue
         }
     }
 }
 
-extension VariableType {
-    public static var uRLEncodeStep: VariableType { .init(title: "URLEncodeStep") } // URLEncodeStep
+public extension VariableType {
+    static var uRLEncodeStep: VariableType { .init(title: "URLEncodeStep") } // URLEncodeStep
 }
 
-extension URLEncodeStep {
-    enum CodingKeys: String, CodingKey {
+public extension URLEncodeStep {
+    internal enum CodingKeys: String, CodingKey {
         case value
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             value: (try? valueContainer.decode(AnyValue.self, forKey: .value)) ?? Properties.value.defaultValue as! AnyValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(value, forKey: .value)
     }
@@ -2418,14 +2494,14 @@ extension URLEncodeStep {
 extension VariableStep: Copying {
     public func copy() -> VariableStep {
         return VariableStep(
-                    varName: varName,
-                    type: type
+            varName: varName,
+            type: type
         )
     }
 }
 
-extension VariableStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension VariableStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case varName
         case type
         public var defaultValue: any EditableVariableValue {
@@ -2435,67 +2511,57 @@ extension VariableStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             varName: factory(.varName) as! AnyValue,
             type: factory(.type) as! VariableTypeValue
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             varName: Properties.varName.defaultValue as! AnyValue,
             type: Properties.type.defaultValue as! VariableTypeValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .varName: return varName
-            case .type: return type
+        case .varName: return varName
+        case .type: return type
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .varName: self.varName = value as! AnyValue
-            case .type: self.type = value as! VariableTypeValue
+        case .varName: varName = value as! AnyValue
+        case .type: type = value as! VariableTypeValue
         }
     }
 }
 
-extension VariableType {
-    public static var variableStep: VariableType { .init(title: "VariableStep") } // VariableStep
+public extension VariableType {
+    static var variableStep: VariableType { .init(title: "VariableStep") } // VariableStep
 }
 
-extension VariableStep {
-    enum CodingKeys: String, CodingKey {
+public extension VariableStep {
+    internal enum CodingKeys: String, CodingKey {
         case varName
         case type
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             varName: (try? valueContainer.decode(AnyValue.self, forKey: .varName)) ?? Properties.varName.defaultValue as! AnyValue,
             type: (try? valueContainer.decode(VariableTypeValue.self, forKey: .type)) ?? Properties.type.defaultValue as! VariableTypeValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(varName, forKey: .varName)
         try container.encode(type, forKey: .type)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

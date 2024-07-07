@@ -1,8 +1,8 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
-import Armstrong
 import Alexandria
+import Armstrong
 
 extension Greg {
     private static let binNight: Screen = .init(
@@ -24,13 +24,13 @@ extension Greg {
                         comparison: .init(value: .equals)
                     ),
                     ifSteps: .init(value: [
-                        SetVarStep(varName: .string("NIGHT"), value: .string("RECYCLING"))
+                        SetVarStep(varName: .string("NIGHT"), value: .string("RECYCLING")),
                     ])
                 ),
                 elseAction: .init(value: [
-                    SetVarStep(varName: .string("NIGHT"), value: .string("GREEN WASTE"))
+                    SetVarStep(varName: .string("NIGHT"), value: .string("GREEN WASTE")),
                 ])
-            )
+            ),
         ]),
         subscreens: [],
         content: .init([
@@ -43,8 +43,8 @@ extension Greg {
                 base: .makeDefault(),
                 textColor: .init(value: .black),
                 isMultiline: .false
-            )
-        ]))
+            ),
+        ])
+    )
     public static var demoScreens: [Screen] { [binNight] }
 }
-

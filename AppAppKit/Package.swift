@@ -7,13 +7,14 @@ let package = Package(
     name: "AppAppKit",
     platforms: [
         .iOS(.v15),
-        .macOS(.v13)
+        .macOS(.v13),
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "AppAppKit",
-            targets: ["AppAppKit"]),
+            targets: ["AppAppKit"]
+        ),
     ],
     dependencies: [
         .package(url: "../../DylKit", branch: "master"),
@@ -32,6 +33,7 @@ let package = Package(
         ),
         .testTarget(
             name: "AppAppKitTests",
-            dependencies: ["AppAppKit"]),
+            dependencies: ["AppAppKit"]
+        ),
     ]
 )

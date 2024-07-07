@@ -7,7 +7,7 @@ extension Alexandria {
     public static var demoScreens: [Screen] {
         [appNotes, internetDictionary, countingButton, currencyConverter, mappyBoy]
     }
-    
+
     private static let internetDictionary: Screen = .init(
         id: .init(),
         name: "Internet Dictionary",
@@ -23,7 +23,7 @@ extension Alexandria {
             DecodeDictionaryStep(value: .variable(named: "$0")),
             SetVarStep(varName: .string("LOCATION"), value: .variable(named: "$0")),
             DictionaryKeysStep(dictionary: .init(value: .variable(.named("$0")))),
-            SetVarStep(varName: .string("KEYS"), value: .variable(named: "$0"))
+            SetVarStep(varName: .string("KEYS"), value: .variable(named: "$0")),
         ]),
         subscreens: [],
         content: MakeableStack(id: .init(), content: .value(ArrayValue(type: .base, elements: [
@@ -46,29 +46,29 @@ extension Alexandria {
                             DictionaryValueForKeyStep(
                                 dictionary: .init(value: .variable(.named("LOCATION"))),
                                 key: .variable(named: "$0")
-                            )
-                        ])).any)
+                            ),
+                        ])).any),
                     ]))
                 ).any
-            )
-        ]
-    ))))
-    
+            ),
+        ])))
+    )
+
     private static let countingButton: Screen = .init(
         id: .init(),
         name: "Counting Button",
         initVariables: .makeDefault(),
         initActions: .init(value: [
-            SetVarStep(varName: .string("COUNT"), value: .int(0))
+            SetVarStep(varName: .string("COUNT"), value: .int(0)),
         ]),
         subscreens: [],
         content: MakeableStack(id: .init(), content: .value(ArrayValue(type: .base, elements: [
             MakeableButton(id: .init(), title: .text(.variable(named: "COUNT"), size: 120), style: .makeDefault(), action: .init(value: [
-                AddToVarStep(varName: .string("COUNT"), value: .int(1))
-            ]))
+                AddToVarStep(varName: .string("COUNT"), value: .int(1)),
+            ])),
         ])))
     )
-    
+
     private static let currencyConverter: Screen = .init(
         id: .init(),
         name: "Currency Converter",
@@ -79,8 +79,8 @@ extension Alexandria {
             DictionaryValueForKeyStep(
                 dictionary: .init(value: .variable(.named("$0"))), key: .string("rates")
             ),
-            SetVarStep(varName: .string("JSON"), value: .variable(named: "$0"))
-        ]), 
+            SetVarStep(varName: .string("JSON"), value: .variable(named: "$0")),
+        ]),
         subscreens: [],
         content: .init(axis: .horizontal, [
             MakeableStack([
@@ -92,10 +92,10 @@ extension Alexandria {
                     padding: .int(5),
                     alignment: .init(value: .center),
                     isMultiline: .false
-                )
+                ),
             ]),
             MakeableStack([
-                MakeableLabel.withText("=")
+                MakeableLabel.withText("="),
             ]),
             MakeableStack([
                 MakeableField(
@@ -111,17 +111,17 @@ extension Alexandria {
                         DictionaryValueForKeyStep(
                             dictionary: .init(value: .variable(.named("JSON"))),
                             key: .variable(named: "CURRENCY")
-                        )
+                        ),
                     ])).any,
                     rhs: ResultValue(steps: .init(value: [
-                        GetNumberStep(value: .variable(named: "AUD_VALUE"), numberType: .init(value: .float))
+                        GetNumberStep(value: .variable(named: "AUD_VALUE"), numberType: .init(value: .float)),
                     ])).any,
                     operation: .init(value: .mulitply)
-                ).any, size: 48, isMultiline: .true)
-            ])
+                ).any, size: 48, isMultiline: .true),
+            ]),
         ])
     )
-    
+
     static let mappyBoy: Screen = .init(
         id: .init(), name: "Mappy Boy",
         initVariables: .makeDefault(),
@@ -150,25 +150,25 @@ extension Alexandria {
                             name: .variable(.named("NAME")),
                             latitude: .variable(.named("LAT")),
                             longitude: .variable(.named("LNG"))
-                        )))
+                        ))),
                     ])),
-                    SetVarStep(varName: .string("LOCATIONS"), value: .variable(named: "$0"))
+                    SetVarStep(varName: .string("LOCATIONS"), value: .variable(named: "$0")),
                 ]),
                 padding: .init(value: 5),
                 alignment: .init(value: .center),
                 isMultiline: .false
             ),
-            MakeableMap(id: .init(), locations: .variable(.named("LOCATIONS")), zoomFollowsNewAnnotations: .true)
+            MakeableMap(id: .init(), locations: .variable(.named("LOCATIONS")), zoomFollowsNewAnnotations: .true),
         ])
     )
-    
+
     static let appNotes: Screen = .init(
         id: .init(),
         name: "App Notes",
         initVariables: .makeDefault(),
         initActions: .init(value: [
             GetSavedDataStep(key: .value(.init(value: "KEY"))),
-            SetVarStep(varName: .string("FIELDTEXT"), value: .variable(named: "$0"))
+            SetVarStep(varName: .string("FIELDTEXT"), value: .variable(named: "$0")),
         ]),
         subscreens: [],
         content: .init([
@@ -177,11 +177,12 @@ extension Alexandria {
                 id: .init(), text: .init(initial: .variable(named: "FIELDTEXT"), output: .named("FIELDTEXT")),
                 fontSize: .int(16),
                 onTextUpdate: .init(value: [
-                    SaveDataStep(key: .value(.init(value: "KEY")), data: .variable(named: "FIELDTEXT"))
+                    SaveDataStep(key: .value(.init(value: "KEY")), data: .variable(named: "FIELDTEXT")),
                 ]),
                 padding: .int(5),
                 alignment: .init(value: .leading),
                 isMultiline: .true
-            )
-        ]))
+            ),
+        ])
+    )
 }

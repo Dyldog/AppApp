@@ -1,5 +1,5 @@
-import XCTest
 @testable import Viticci
+import XCTest
 
 final class ViticciTests: XCTestCase {
     func testExample() throws {

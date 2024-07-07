@@ -1,12 +1,12 @@
 //
-//  File.swift
+//  EditVariableView.swift
 //  AppApp
 //
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import SwiftUI
 import DylKit
+import SwiftUI
 
 public struct EditVariableView: View {
     let scope: Scope
@@ -14,15 +14,15 @@ public struct EditVariableView: View {
     var selectedTypeIndex: Int
     @State var value: any EditableVariableValue
     let onUpdate: (any EditableVariableValue) -> Void
-    
+
     public init(scope: Scope, name: String, value: any EditableVariableValue, onUpdate: @escaping (any EditableVariableValue) -> Void) {
         self.scope = scope
-        self._value = .init(initialValue: value)
+        _value = .init(initialValue: value)
         self.onUpdate = onUpdate
-        self.selectedTypeIndex = AALibrary.shared.values.firstIndex { $0.type == type(of: value).type } ?? 0
+        selectedTypeIndex = AALibrary.shared.values.firstIndex { $0.type == type(of: value).type } ?? 0
         self.name = name
     }
-        
+
     public var body: some View {
         VStack {
             HStack {
@@ -34,7 +34,7 @@ public struct EditVariableView: View {
                 }
                 .scope(scope)
             }
-            
+
             value.editView(scope: scope, title: "Value", onUpdate: {
                 self.value = $0
                 onUpdate($0)

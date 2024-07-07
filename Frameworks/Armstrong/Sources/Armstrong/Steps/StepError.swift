@@ -7,6 +7,4 @@
 
 import Foundation
 
-public protocol StepError {
-    
-}
+public protocol StepError {}

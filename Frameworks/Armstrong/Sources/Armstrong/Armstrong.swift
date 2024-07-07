@@ -1,6 +1,6 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
-extension Armstrong {
-    public static var demoScreens: [Screen] { [] }
+public extension Armstrong {
+    static var demoScreens: [Screen] { [] }
 }

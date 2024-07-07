@@ -10,12 +10,12 @@ import SwiftUI
 public struct ElementDeleteButton: View {
     let action: () -> Void
     let color: Color
-    
+
     public init(color: Color = .gray, action: @escaping () -> Void) {
         self.color = color
         self.action = action
     }
-    
+
     public var body: some View {
         Button {
             action()
@@ -38,5 +38,5 @@ public struct ElementDeleteButton: View {
 }
 
 #Preview {
-    ElementDeleteButton(action: { })
+    ElementDeleteButton(action: {})
 }

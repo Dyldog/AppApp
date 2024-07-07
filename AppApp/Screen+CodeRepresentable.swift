@@ -1,21 +1,21 @@
 //
-//  Screen+CodaRepresentable.swift
+//  Screen+CodeRepresentable.swift
 //  AppApp
 //
 //  Created by Dylan Elliott on 3/12/2023.
 //
 
-import Foundation
 import Armstrong
+import Foundation
 
 extension Screen: CodeRepresentable {
     private var codeStructName: String { name.replacingOccurrences(of: " ", with: "") + "View" }
-    
+
     var codeRepresentation: String {
         return """
         struct \(codeStructName): View {
             \(initActions.setVariableSteps.map { $0.declarationCodeRepresentation }.joined(separator: "\n"))
-        
+
             init() {
             \(initActions.declarationCodeRepresentation)
             }

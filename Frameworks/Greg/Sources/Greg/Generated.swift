@@ -1,17 +1,10 @@
 // Generated using Sourcery 2.0.2 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
-import SwiftUI
 import DylKit
-
-
-
-
-
-
+import SwiftUI
 
 public final class CalendarComponentValue: PrimitiveEditableVariableValue, Codable, Copying {
-
     public static let categories: [ValueCategory] = [.dates]
     public static var type: VariableType { .calendarComponent }
     public static var defaultValue: Calendar.Component { .defaultValue }
@@ -19,17 +12,21 @@ public final class CalendarComponentValue: PrimitiveEditableVariableValue, Codab
     public init(value: Calendar.Component) {
         self.value = value
     }
+
     public static func makeDefault() -> CalendarComponentValue {
         .init(value: defaultValue)
     }
-    public func add(_ other: VariableValue) throws -> VariableValue {
+
+    public func add(_: VariableValue) throws -> VariableValue {
         throw VariableValueError.variableCannotPerformOperation(Self.type, "add")
     }
+
     public var protoString: String { "\(value.title)" }
     public var valueString: String { protoString }
-    public func value(with variables: Variables, and scope: Scope) throws -> VariableValue {
+    public func value(with _: Variables, and _: Scope) throws -> VariableValue {
         self
     }
+
     public func copy() -> CalendarComponentValue {
         .init(
             value: value
@@ -49,31 +46,24 @@ extension Calendar.Component: Copying {
     }
 }
 
-extension VariableType {
-    public static var calendarComponent: VariableType { .init(title: "CalendarComponent") } // Calendar.Component
+public extension VariableType {
+    static var calendarComponent: VariableType { .init(title: "CalendarComponent") } // Calendar.Component
 }
-
-
-
-
-
-
-
 
 // AddDateComponentStep
 
 extension AddDateComponentStep: Copying {
     public func copy() -> AddDateComponentStep {
         return AddDateComponentStep(
-                    date: date,
-                    component: component,
-                    value: value
+            date: date,
+            component: component,
+            value: value
         )
     }
 }
 
-extension AddDateComponentStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension AddDateComponentStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case date
         case component
         case value
@@ -85,7 +75,8 @@ extension AddDateComponentStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             date: factory(.date) as! TypedValue<DateValue>,
             component: factory(.component) as! CalendarComponentValue,
@@ -93,42 +84,43 @@ extension AddDateComponentStep {
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             date: Properties.date.defaultValue as! TypedValue<DateValue>,
             component: Properties.component.defaultValue as! CalendarComponentValue,
             value: Properties.value.defaultValue as! IntValue
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .date: return date
-            case .component: return component
-            case .value: return value
+        case .date: return date
+        case .component: return component
+        case .value: return value
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .date: self.date = value as! TypedValue<DateValue>
-            case .component: self.component = value as! CalendarComponentValue
-            case .value: self.value = value as! IntValue
+        case .date: date = value as! TypedValue<DateValue>
+        case .component: component = value as! CalendarComponentValue
+        case .value: self.value = value as! IntValue
         }
     }
 }
 
-extension VariableType {
-    public static var addDateComponentStep: VariableType { .init(title: "AddDateComponentStep") } // AddDateComponentStep
+public extension VariableType {
+    static var addDateComponentStep: VariableType { .init(title: "AddDateComponentStep") } // AddDateComponentStep
 }
 
-extension AddDateComponentStep {
-    enum CodingKeys: String, CodingKey {
+public extension AddDateComponentStep {
+    internal enum CodingKeys: String, CodingKey {
         case date
         case component
         case value
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             date: (try? valueContainer.decode(TypedValue<DateValue>.self, forKey: .date)) ?? Properties.date.defaultValue as! TypedValue<DateValue>,
@@ -136,7 +128,8 @@ extension AddDateComponentStep {
             value: (try? valueContainer.decode(IntValue.self, forKey: .value)) ?? Properties.value.defaultValue as! IntValue
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(date, forKey: .date)
         try container.encode(component, forKey: .component)
@@ -149,28 +142,28 @@ extension AddDateComponentStep {
 extension DateValue: Copying {
     public func copy() -> DateValue {
         return DateValue(
-                    value: value
+            value: value
         )
     }
 }
 
-
-extension VariableType {
-    public static var date: VariableType { .init(title: "Date") } // DateValue
+public extension VariableType {
+    static var date: VariableType { .init(title: "Date") } // DateValue
 }
 
-extension DateValue {
-    enum CodingKeys: String, CodingKey {
+public extension DateValue {
+    internal enum CodingKeys: String, CodingKey {
         case value
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             value: (try? valueContainer.decode(Date.self, forKey: .value)) ?? Self.makeDefault().value
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(value, forKey: .value)
     }
@@ -185,42 +178,43 @@ extension GetCurrentDateStep: Copying {
     }
 }
 
-extension GetCurrentDateStep {
-    public enum Properties: ViewProperty, CaseIterable {
+public extension GetCurrentDateStep {
+    enum Properties: ViewProperty, CaseIterable {
         public var defaultValue: any EditableVariableValue { fatalError() }
         public var rawValue: String { fatalError() }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory _: (Properties) -> any EditableVariableValue) -> Self {
         .init(
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
-    }
 
-    public func set(_ value: Any, for property: Properties) {
-    }
+    func value(for _: Properties) -> any EditableVariableValue {}
+
+    func set(_: Any, for _: Properties) {}
 }
 
-extension VariableType {
-    public static var getCurrentDateStep: VariableType { .init(title: "GetCurrentDateStep") } // GetCurrentDateStep
+public extension VariableType {
+    static var getCurrentDateStep: VariableType { .init(title: "GetCurrentDateStep") } // GetCurrentDateStep
 }
 
-extension GetCurrentDateStep {
-    enum CodingKeys: String, CodingKey {
+public extension GetCurrentDateStep {
+    internal enum CodingKeys: String, CodingKey {
         case dummyKey
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
     }
 }
@@ -230,14 +224,14 @@ extension GetCurrentDateStep {
 extension GetDateComponentStep: Copying {
     public func copy() -> GetDateComponentStep {
         return GetDateComponentStep(
-                    component: component,
-                    date: date
+            component: component,
+            date: date
         )
     }
 }
 
-extension GetDateComponentStep {
-     public enum Properties: String, ViewProperty, CaseIterable {
+public extension GetDateComponentStep {
+    enum Properties: String, ViewProperty, CaseIterable {
         case component
         case date
         public var defaultValue: any EditableVariableValue {
@@ -247,98 +241,85 @@ extension GetDateComponentStep {
             }
         }
     }
-    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+
+    static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
         .init(
             component: factory(.component) as! CalendarComponentValue,
             date: factory(.date) as! TypedValue<DateValue>
         )
     }
 
-    public static func makeDefault() -> Self {
+    static func makeDefault() -> Self {
         .init(
             component: Properties.component.defaultValue as! CalendarComponentValue,
             date: Properties.date.defaultValue as! TypedValue<DateValue>
         )
     }
-    public func value(for property: Properties) -> any EditableVariableValue {
+
+    func value(for property: Properties) -> any EditableVariableValue {
         switch property {
-            case .component: return component
-            case .date: return date
+        case .component: return component
+        case .date: return date
         }
     }
 
-    public func set(_ value: Any, for property: Properties) {
+    func set(_ value: Any, for property: Properties) {
         switch property {
-            case .component: self.component = value as! CalendarComponentValue
-            case .date: self.date = value as! TypedValue<DateValue>
+        case .component: component = value as! CalendarComponentValue
+        case .date: date = value as! TypedValue<DateValue>
         }
     }
 }
 
-extension VariableType {
-    public static var getDateComponentStep: VariableType { .init(title: "GetDateComponentStep") } // GetDateComponentStep
+public extension VariableType {
+    static var getDateComponentStep: VariableType { .init(title: "GetDateComponentStep") } // GetDateComponentStep
 }
 
-extension GetDateComponentStep {
-    enum CodingKeys: String, CodingKey {
+public extension GetDateComponentStep {
+    internal enum CodingKeys: String, CodingKey {
         case component
         case date
     }
 
-    public convenience init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.init(
             component: (try? valueContainer.decode(CalendarComponentValue.self, forKey: .component)) ?? Properties.component.defaultValue as! CalendarComponentValue,
             date: (try? valueContainer.decode(TypedValue<DateValue>.self, forKey: .date)) ?? Properties.date.defaultValue as! TypedValue<DateValue>
         )
     }
-    public func encode(to encoder: Encoder) throws {
+
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(component, forKey: .component)
         try container.encode(date, forKey: .date)
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 public class Greg: AAProvider {
     public static var steps: [any StepType.Type] {
-    [
-        AddDateComponentStep.self,
-        GetCurrentDateStep.self,
-        GetDateComponentStep.self
-    ]
+        [
+            AddDateComponentStep.self,
+            GetCurrentDateStep.self,
+            GetDateComponentStep.self,
+        ]
     }
+
     public static var values: [any EditableVariableValue.Type] {
-    [
-    AddDateComponentStep.self,
-    DateValue.self,
-    GetCurrentDateStep.self,
-    GetDateComponentStep.self,
-    CalendarComponentValue.self
-    ]
+        [
+            AddDateComponentStep.self,
+            DateValue.self,
+            GetCurrentDateStep.self,
+            GetDateComponentStep.self,
+            CalendarComponentValue.self,
+        ]
     }
+
     public static var views: [any MakeableView.Type] {
-    [
-    ]
+        [
+        ]
     }
 }
 
 import Armstrong
 import DylKit
-
-
-

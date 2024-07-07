@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  Greg+ValueCategories.swift
+//
 //
 //  Created by Dylan Elliott on 30/12/2023.
 //
@@ -13,8 +13,6 @@ public extension ValueCategoryGroup {
 
 public extension ValueCategory {
     static let dates: ValueCategory = ValueCategoryGroup.dates.topLevel
-    
-    
+
     static let dateSteps: ValueCategory = .init(parent: .dates, iconName: "timeline.selection", title: "Steps")
-    
 }

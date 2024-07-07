@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  EditableVariableValue.swift
+//
 //
 //  Created by Dylan Elliott on 10/12/2023.
 //

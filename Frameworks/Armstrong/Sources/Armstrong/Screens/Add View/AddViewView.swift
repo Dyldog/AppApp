@@ -5,16 +5,16 @@
 //  Created by Dylan Elliott on 20/11/2023.
 //
 
-import SwiftUI
 import DylKit
+import SwiftUI
 
 public struct AddViewView: View {
     let onSelect: (any MakeableView) -> Void
-    
+
     public init(onSelect: @escaping (any MakeableView) -> Void) {
         self.onSelect = onSelect
     }
-    
+
     public var body: some View {
         NavigationStack {
             CategoryPicker(title: "Select View", elements: (AALibrary.shared.views as [any EditableVariableValue.Type]).categoryTree) {

@@ -12,14 +12,13 @@ public protocol StepType: ViewEditable, CompositeEditableVariableValue {
 }
 
 public extension StepType {
-        
 //    var valueString: String { protoString }
-    
-    func value(with variables: Variables, and scope: Scope) throws -> VariableValue {
+
+    func value(with _: Variables, and _: Scope) throws -> VariableValue {
         self
     }
-    
-    func add(_ other: VariableValue) throws -> VariableValue {
+
+    func add(_: VariableValue) throws -> VariableValue {
         fatalError()
     }
 }

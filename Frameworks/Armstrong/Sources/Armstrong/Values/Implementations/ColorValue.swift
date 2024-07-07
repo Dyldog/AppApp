@@ -10,20 +10,20 @@ import SwiftUI
 public final class ColorValue: EditableVariableValue {
     public static let categories: [ValueCategory] = [.visual]
     public static var type: VariableType { .color }
-    
+
     public var value: Color
-    
+
     public var protoString: String { "\(value)" }
     public var valueString: String { protoString }
-    
+
     public init(value: Color) {
         self.value = value
     }
-    
+
     public static func makeDefault() -> ColorValue {
         .init(value: .blue)
     }
-    
+
     public func editView(scope: Scope, title: String, onUpdate: @escaping (ColorValue) -> Void) -> AnyView {
         HStack {
             Text(title).bold().scope(scope)
@@ -37,12 +37,12 @@ public final class ColorValue: EditableVariableValue {
             })).labelsHidden()
         }.any
     }
-    
-    public func add(_ other: VariableValue) throws -> VariableValue {
+
+    public func add(_: VariableValue) throws -> VariableValue {
         throw VariableValueError.variableCannotPerformOperation(.color, "add")
     }
-    
-    public func value(with variables: Variables, and scope: Scope) throws -> VariableValue {
+
+    public func value(with _: Variables, and _: Scope) throws -> VariableValue {
         self
     }
 }
@@ -52,4 +52,3 @@ extension ColorValue: CodeRepresentable {
         "Color(hex: \"\(value.toHex!)\")"
     }
 }
-

@@ -8,11 +8,10 @@
 import SwiftUI
 
 extension Binding {
-    static func `nil`<T>() -> Self where Value == Optional<T> {
+    static func `nil`<T>() -> Self where Value == T? {
         .init {
             nil
         } set: { _ in
-            
         }
     }
 }

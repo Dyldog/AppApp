@@ -5,22 +5,22 @@
 //  Created by Dylan Elliott on 21/11/2023.
 //
 
-import SwiftUI
 import DylKit
+import SwiftUI
 
 struct ListEditView: View {
     let scope: Scope
     let title: String
     @Binding var value: ArrayValue
     let onUpdate: (ArrayValue) -> Void
-    
+
     var body: some View {
         VStack {
             HStack {
                 Text("Type")
                     .bold()
                     .scope(scope)
-                
+
                 Spacer()
                 value.type.editView(scope: scope, title: "\(title)[type]", onUpdate: {
                     value.type = $0
@@ -28,7 +28,7 @@ struct ListEditView: View {
                     onUpdate(value)
                 })
             }
-            
+
             EditableListView(
                 scope: scope,
                 elements: value.elements,
@@ -46,7 +46,7 @@ struct ListEditView: View {
                     } else {
                         value.elements[index] = view
                     }
-                    
+
                     onUpdate(value)
                 },
                 onRemove: { index in
@@ -59,14 +59,13 @@ struct ListEditView: View {
 }
 
 struct EditableListView<T, C: View>: View {
-    
     let scope: Scope
     let elements: [T]
     let content: (Int, T) -> C
     let onAdd: (Int) -> Void
     let onAddLongPress: (Int) -> Void
     let onRemove: (Int) -> Void
-    
+
     init(scope: Scope, elements: [T], content: @escaping (Int, T) -> C, onAdd: @escaping (Int) -> Void, onAddLongPress: @escaping (Int) -> Void = { _ in }, onRemove: @escaping (Int) -> Void) {
         self.scope = scope
         self.elements = elements
@@ -75,26 +74,26 @@ struct EditableListView<T, C: View>: View {
         self.onAddLongPress = onAddLongPress
         self.onRemove = onRemove
     }
-    
+
     var body: some View {
         VStack {
             addButton(index: 0)
-            
-            ForEach(enumerated: elements) { (index, element) in
+
+            ForEach(enumerated: elements) { index, element in
                 HStack {
                     content(index, element)
-                    
+
                     ElementDeleteButton(color: scope.next.color) {
                         onRemove(index)
                     }
                 }
-                
+
                 addButton(index: index + 1)
             }
             .multilineTextAlignment(.center)
         }
     }
-    
+
     func addButton(index: Int) -> some View {
         AddButton(
             action: {
@@ -111,13 +110,13 @@ struct AddButton: View {
     let action: Block
     let longPress: Block
     let scope: Scope
-    
+
     init(action: @escaping Block, longPress: @escaping Block = {}, scope: Scope) {
         self.action = action
         self.longPress = longPress
         self.scope = scope
     }
-    
+
     var body: some View {
         LongPressButton {
             action()

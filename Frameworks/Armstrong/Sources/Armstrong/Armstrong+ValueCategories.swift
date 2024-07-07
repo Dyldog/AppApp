@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  Armstrong+ValueCategories.swift
+//
 //
 //  Created by Dylan Elliott on 30/12/2023.
 //
@@ -33,6 +33,7 @@ public extension ValueCategory {
 public extension ValueCategoryGroup {
     static let logic: ValueCategoryGroup = .init(parent: .some(root), iconName: Images.logic, title: "Logic")
 }
+
 public extension ValueCategory {
     static let logic: ValueCategory = ValueCategoryGroup.logic.topLevel
     static let logicHelpers: ValueCategory = ValueCategoryGroup.logic.helpers
@@ -94,20 +95,18 @@ public extension ValueCategoryGroup {
 
 public extension ValueCategory {
     static let variables: ValueCategory = .init(parent: .steps, iconName: "character.textbox", title: "Variables")
-    
+
     static let network: ValueCategory = .init(parent: .steps, iconName: "globe", title: "Network")
-    
+
     static let containerSteps: ValueCategory = .init(parent: .steps, iconName: Images.container, title: "Containers")
-    
+
     static let dataProcessing: ValueCategory = .init(parent: .steps, iconName: "antenna.radiowaves.left.and.right", title: "Data")
-    
+
     static let looping: ValueCategory = .init(parent: .steps, iconName: "clock.arrow.2.circlepath", title: "Looping")
-    
+
     static let logicSteps: ValueCategory = .init(parent: .steps, iconName: Images.logic, title: "Logic")
-    
+
     static let numberSteps: ValueCategory = .init(parent: .steps, iconName: Images.numbers, title: "Numbers")
-    
+
     static let visualSteps: ValueCategory = .init(parent: .steps, iconName: Images.visual, title: "Visual")
 }
-
-
