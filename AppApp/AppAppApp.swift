@@ -43,7 +43,7 @@ struct AppAppAppView: View {
             } else if let deepLink = deepLink {
                 ViewMakerView(viewModel: .init(scope: nil, screen: deepLink, makeMode: false, onUpdate: nil))
             } else {
-                NavigationView {
+                NavigationStack {
                     ScreenListView(viewModel: listViewModel)
                 }.onOpenURL { incomingURL in
                     print("App was opened via URL: \(incomingURL)")
