@@ -1,1 +1,3 @@
 xcuserdata
+.nvim/xcodebuild/settings.json
+buildServer.json
