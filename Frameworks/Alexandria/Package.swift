@@ -18,6 +18,7 @@ let package = Package(
     dependencies: [
         .package(url: "../DylKit", branch: "master"),
         .package(path: "../Armstrong"),
+        .package(url: "https://github.com/0x0001SUI/TextView.git", .upToNextMajor(from: "1.1.0")),
         .package(url: "https://github.com/krzysztofzablocki/Sourcery.git", from: "2.0.0")
     ],
     targets: [
@@ -25,7 +26,7 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "Alexandria",
-            dependencies: ["DylKit", "Armstrong"]
+            dependencies: ["DylKit", "Armstrong", "TextView"]
         ),
         .testTarget(
             name: "AlexandriaTests",

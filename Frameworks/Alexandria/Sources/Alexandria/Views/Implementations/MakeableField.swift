@@ -8,6 +8,7 @@
 import SwiftUI
 import Armstrong
 import DylKit
+import TextView
 
 struct MakeableFieldView: View {
     let isRunning: Bool
@@ -20,6 +21,7 @@ struct MakeableFieldView: View {
     @Binding var error: VariableValueError?
     @State var text: String = "LOADING"
     
+    @ViewBuilder
     private var fieldView: some View {
         let variables = variables.copy()
         
@@ -35,11 +37,11 @@ struct MakeableFieldView: View {
         })
         
         if isWidget {
-            return Text(binding.wrappedValue).any
+            Text(binding.wrappedValue)
         } else if field.isMultiline.value {
-            return TextEditor(text: binding).any
+            TextView(text: binding)
         } else {
-            return TextField("", text: binding).any
+            TextField("", text: binding)
         }
     }
     
