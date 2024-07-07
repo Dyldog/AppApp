@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "AppAppKit",
+    name: "Viticci",
     platforms: [
         .iOS(.v15),
         .macOS(.v13)
@@ -12,26 +12,24 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "AppAppKit",
-            targets: ["AppAppKit"]),
+            name: "Viticci",
+            targets: ["Viticci"]),
     ],
     dependencies: [
-        .package(url: "../../DylKit", branch: "master"),
-        .package(path: "../Frameworks/Armstrong"),
-        .package(path: "../Frameworks/Alexandria"),
-        .package(path: "../Frameworks/Greg"),
-        .package(path: "../Frameworks/Obscura"),
-        .package(path: "../Frameworks/Viticci"),
+        .package(url: "../DylKit", branch: "master"),
+        .package(path: "../Armstrong"),
+        .package(path: "../Alexandria"),
+        .package(url: "https://github.com/krzysztofzablocki/Sourcery.git", from: "2.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "AppAppKit",
-            dependencies: ["DylKit", "Armstrong", "Alexandria", "Greg", "Obscura", "Viticci"]
+            name: "Viticci",
+            dependencies: ["DylKit", "Armstrong", "Alexandria"]
         ),
         .testTarget(
-            name: "AppAppKitTests",
-            dependencies: ["AppAppKit"]),
+            name: "ViticciTests",
+            dependencies: ["Viticci"]),
     ]
 )

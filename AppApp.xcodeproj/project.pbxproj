@@ -483,9 +483,8 @@
 			mainGroup = FCD3B1DC2B0B584B0054371B;
 			packageReferences = (
 				FCD3B21D2B0B67060054371B /* XCLocalSwiftPackageReference "../DylKit" */,
-				FC0CF5942B25593800995F30 /* XCLocalSwiftPackageReference "../Armstrong" */,
-				FCA175E22B256D42002AC37B /* XCLocalSwiftPackageReference "../Alexandria" */,
-				FC57898D2B302966006D6D37 /* XCLocalSwiftPackageReference "../Greg" */,
+				FC0CF5942B25593800995F30 /* XCLocalSwiftPackageReference "Frameworks/Armstrong" */,
+				FCA175E22B256D42002AC37B /* XCLocalSwiftPackageReference "Frameworks/Alexandria" */,
 			);
 			productRefGroup = FCD3B1E62B0B584B0054371B /* Products */;
 			projectDirPath = "";
@@ -1193,17 +1192,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		FC0CF5942B25593800995F30 /* XCLocalSwiftPackageReference "../Armstrong" */ = {
+		FC0CF5942B25593800995F30 /* XCLocalSwiftPackageReference "Frameworks/Armstrong" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Armstrong;
+			relativePath = Frameworks/Armstrong;
 		};
-		FC57898D2B302966006D6D37 /* XCLocalSwiftPackageReference "../Greg" */ = {
+		FCA175E22B256D42002AC37B /* XCLocalSwiftPackageReference "Frameworks/Alexandria" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Greg;
-		};
-		FCA175E22B256D42002AC37B /* XCLocalSwiftPackageReference "../Alexandria" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Alexandria;
+			relativePath = Frameworks/Alexandria;
 		};
 		FCD3B21D2B0B67060054371B /* XCLocalSwiftPackageReference "../DylKit" */ = {
 			isa = XCLocalSwiftPackageReference;
@@ -1240,12 +1235,12 @@
 		};
 		FC8CF66A2B255A7A007E3793 /* Armstrong */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FC0CF5942B25593800995F30 /* XCLocalSwiftPackageReference "../Armstrong" */;
+			package = FC0CF5942B25593800995F30 /* XCLocalSwiftPackageReference "Frameworks/Armstrong" */;
 			productName = Armstrong;
 		};
 		FCA175E52B256DC2002AC37B /* Alexandria */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FCA175E22B256D42002AC37B /* XCLocalSwiftPackageReference "../Alexandria" */;
+			package = FCA175E22B256D42002AC37B /* XCLocalSwiftPackageReference "Frameworks/Alexandria" */;
 			productName = Alexandria;
 		};
 		FCD1A5112B354CB200E91BD7 /* AppAppKit */ = {

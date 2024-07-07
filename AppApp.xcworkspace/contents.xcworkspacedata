@@ -8,22 +8,22 @@
       location = "group:AppAppKit">
    </FileRef>
    <FileRef
+      location = "group:Frameworks/Alexandria">
+   </FileRef>
+   <FileRef
+      location = "group:Frameworks/Armstrong">
+   </FileRef>
+   <FileRef
+      location = "group:Frameworks/Greg">
+   </FileRef>
+   <FileRef
+      location = "group:Frameworks/Obscura">
+   </FileRef>
+   <FileRef
+      location = "group:Frameworks/Viticci">
+   </FileRef>
+   <FileRef
       location = "group:../SFBrowser">
-   </FileRef>
-   <FileRef
-      location = "group:../Viticci">
-   </FileRef>
-   <FileRef
-      location = "group:../Obscura">
-   </FileRef>
-   <FileRef
-      location = "group:../Greg">
-   </FileRef>
-   <FileRef
-      location = "group:../Alexandria">
-   </FileRef>
-   <FileRef
-      location = "group:../Armstrong">
    </FileRef>
    <FileRef
       location = "group:../DylKit">

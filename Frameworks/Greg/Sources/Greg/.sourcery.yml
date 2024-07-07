@@ -1,0 +1,19 @@
+sources:
+  include:
+    - .
+    - ../../../Armstrong/Sources
+    - ../../../Alexandria/Sources
+  exclude:
+    - ../../../Armstrong/Sources/Armstrong/Values/Implementations
+    - ../../../Armstrong/Sources/Armstrong/Views/Implementations
+    - ../../../Armstrong/Sources/Armstrong/Steps/Implementations
+    - ../../../Armstrong/Sources/Armstrong/Generated.swift
+    - ../../../Alexandria/Sources/Alexandria/Values/Implementations
+    - ../../../Alexandria/Sources/Alexandria/Views/Implementations
+    - ../../../Alexandria/Sources/Alexandria/Steps/Implementations
+    - ../../../Alexandria/Sources/Alexandria/Generated.swift
+templates:
+  - ../../Templates
+  - ../../../Armstrong/Templates/Shared
+  # - ../../../Alexandria/Templates/Shared
+output: Generated.swift

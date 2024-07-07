@@ -1,0 +1,89 @@
+
+{% macro EditableProperties type %}
+extension {{ type.name }} {
+    {% if type.storedVariables.count > 0 %}
+     public enum Properties: String, ViewProperty, CaseIterable {
+        {% for property in type.storedVariables %}
+            {% if not property.defaultValue %}
+            {% if property.name != "id" %}
+        case {{ property.name }}
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+        
+        public var defaultValue: any EditableVariableValue {
+            switch self {
+        {% for property in type.storedVariables %}
+            {% if not property.defaultValue %}
+            {% if property.name != "id" %}
+            case .{{ property.name }}: return {{ type.name }}.defaultValue{% if type.implements.CompositeEditableVariableValue %}(for: .{{ property.name }}){% endif %}
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+            }
+        }
+    }
+    {% else %}
+    public enum Properties: ViewProperty, CaseIterable {
+        public var defaultValue: any EditableVariableValue { fatalError() }
+        public var rawValue: String { fatalError() }
+    }
+    {% endif %}
+     
+    public static func make(factory: (Properties) -> any EditableVariableValue) -> Self {
+        .init(
+    {% for property in type.storedVariables %}
+        {% if not property.defaultValue %}
+        {% if property.name == "id" %}
+            id: UUID(),
+        {% else %}
+            {{ property.name }}: factory(.{{ property.name }}) as! {{ property.typeName }}{{ ',' if not forloop.last }}
+        {% endif %}
+        {% endif %}
+    {% endfor %}
+        )
+    }
+
+    public static func makeDefault() -> Self {
+        .init(
+    {% for property in type.storedVariables %}
+        {% if not property.defaultValue %}
+        {% if property.name == "id" %}
+            id: UUID(),
+        {% else %}
+            {{ property.name }}: Properties.{{ property.name }}.defaultValue as! {{ property.typeName }}{{ ',' if not forloop.last }}
+        {% endif %}
+        {% endif %}
+    {% endfor %}
+        )
+    }
+    
+    public func value(for property: Properties) -> any EditableVariableValue {
+    {% for property in type.storedVariables where not property.defaultValue %}
+        {% if forloop.first %}
+        switch property {
+        {% endif %}
+        {% if property.name != "id" %}
+            case .{{ property.name }}: return {{ property.name }}
+        {% endif %}
+        {% if forloop.last %}
+        }
+        {% endif %}
+    {% endfor %}
+    }
+
+    public func set(_ value: Any, for property: Properties) {
+    {% for property in type.storedVariables where not property.defaultValue %}
+        {% if forloop.first %}
+        switch property {
+        {% endif %}
+        {% if property.name != "id" %}
+            case .{{ property.name }}: self.{{ property.name }} = value as! {{ property.typeName }}
+        {% endif %}
+        {% if forloop.last %}
+        }
+        {% endif %}
+    {% endfor %}
+    }
+}
+{% endmacro %}
