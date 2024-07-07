@@ -18,8 +18,20 @@ public final class MakeableList: MakeableView {
     public static var type: VariableType { .listView }
     
     public let id: UUID
-    public var protoString: String { data.protoString }
-    public var valueString: String { data.valueString }
+    public var protoString: String {
+        """
+        List {
+            \(data.protoString)
+        }
+        """
+    }
+    public var valueString: String {
+        """
+        List {
+            \(data.valueString)
+        }
+        """
+    }
         
     public var data: TypedValue<ArrayValue>
     public var view: AnyMakeableView
