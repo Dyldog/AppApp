@@ -100,6 +100,15 @@
       }
     },
     {
+      "identity" : "textview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/0x0001SUI/TextView.git",
+      "state" : {
+        "revision" : "39ac9fd9c87f33caaa1e991657dc9b5761be996b",
+        "version" : "1.1.0"
+      }
+    },
+    {
       "identity" : "xcodeproj",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/tuist/XcodeProj.git",
