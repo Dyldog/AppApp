@@ -81,14 +81,22 @@ public struct MakeableStackView: View {
             } else {
                 ForEach(enumerated: elements) { index, element in
                     HStack {
-                        MakeableWrapperView(isRunning: isRunning, showEditControls: false, scope: scope, view: element as! (any MakeableView), onContentUpdate: {
-                            self.onUpdate(at: index, with: $0)
-                        }, onRuntimeUpdate: onRuntimeUpdate, error: $error)
-                            .editable(showEditControls, onEdit: {
-                                self.showEditIndex = index
-                            }, onLongPress: {
-                                DylKit.Pasteboard.general.copy(element)
-                            })
+                        MakeableWrapperView(
+                            isRunning: isRunning,
+                            showEditControls: false,
+                            scope: scope,
+                            view: element as! (any MakeableView),
+                            onContentUpdate: {
+                                self.onUpdate(at: index, with: $0)
+                            },
+                            onRuntimeUpdate: onRuntimeUpdate,
+                            error: $error
+                        )
+                        .editable(showEditControls, onEdit: {
+                            self.showEditIndex = index
+                        }, onLongPress: {
+                            DylKit.Pasteboard.general.copy(element)
+                        })
 
                         if showEditControls {
                             ElementDeleteButton { onRemove(at: index) }
